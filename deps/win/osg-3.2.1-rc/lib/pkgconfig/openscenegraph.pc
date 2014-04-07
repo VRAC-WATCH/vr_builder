@@ -1,0 +1,28 @@
+# pkg-config source file
+
+prefix=C:/Users/trevorr/Development/libs/osg-3.2.1-rc
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: openscenegraph
+Description: 3D scenegraph
+Version: 3.2.1
+Requires: openthreads
+Conflicts:
+Libs: -L${libdir} -losg \
+                  -losgDB \
+                  -losgFX \
+                  -losgGA \
+                  -losgParticle \
+                  -losgSim \
+                  -losgText \
+                  -losgUtil \
+                  -losgTerrain \
+                  -losgManipulator \
+                  -losgViewer \
+                  -losgWidget \
+                  -losgShadow \
+                  -losgAnimation \
+                  -losgVolume
+Cflags: -I${includedir}

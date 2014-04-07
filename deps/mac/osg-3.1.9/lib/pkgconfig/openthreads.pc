@@ -1,0 +1,14 @@
+# pkg-config source file
+
+prefix=/Users/josephholub/Code/Libraries/osg-3.1.9
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: openthreads
+Description: Object-Oriented (OO) thread interface for C++ programmers
+Version: 2.6.0
+Requires:
+Conflicts:
+Libs: -L${libdir} -lOpenThreads
+Cflags: -I${includedir}

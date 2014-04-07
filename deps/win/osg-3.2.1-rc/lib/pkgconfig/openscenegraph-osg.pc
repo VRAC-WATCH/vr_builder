@@ -1,0 +1,14 @@
+# pkg-config source file
+
+prefix=C:/Users/trevorr/Development/libs/osg-3.2.1-rc
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: openscenegraph-osg
+Description: 3D scenegraph
+Version: 3.2.1
+Requires: openthreads
+Conflicts:
+Libs: -L${libdir} -losg
+Cflags: -I${includedir}

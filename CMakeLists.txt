@@ -1,0 +1,197 @@
+CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+PROJECT (VRBuilder)
+
+
+################################################################################
+# Set the desired build type.
+#
+#	- DEBUG_BUILD turns on console and sets the Log level to DEBUG_LVL
+#	- RELEASE_BUILD turns on the console and sets the Log level to WARNING_LVL
+#	- DEPLOYMENT_BUILD turns off the console and sets the Log level to ERROR_LVL
+#
+################################################################################
+SET (BUILD_TYPE "DEBUG_BUILD")
+
+# Handle specifics for each build type
+IF (${BUILD_TYPE} STREQUAL "RELEASE_BUILD")
+	ADD_DEFINITIONS(-DRELEASE_BUILD)
+ELSEIF(${BUILD_TYPE} STREQUAL "DEPLOYMENT_BUILD")
+	ADD_DEFINITIONS(-DDEPLOYMENT_BUILD)
+	# Specify that we are building a non-console app
+	IF(WIN32)
+		SET(REQUIRE_WINMAIN_FLAG 1)
+	ENDIF(WIN32)
+ELSE()
+	ADD_DEFINITIONS(-DDEBUG_BUILD)
+ENDIF()
+
+################################################################################
+# Add OS specific paths for finding dependencies to the project
+################################################################################
+IF(WIN32)
+	# Qt5 GL requires for converting bindings into windows native format
+	SET(CMAKE_PREFIX_PATH "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64")
+	SET(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/boost-1.54.0)
+	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/osg-3.2.1-rc)
+	SET(GLUT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/glut-3.7)
+ELSEIF(APPLE)
+	SET(CMAKE_XCODE_ATTRIBUTE_SDKROOT macosx10.9)
+	SET(CMAKE_XCODE_ATTRIBUTE_ARCHS "$(ARCHS_STANDARD_64_BIT)")
+	SET(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/deps/mac/boost-1.54.0)
+	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/mac/osg-3.1.9)
+ELSE(WIN32)
+	# Linux specific commands
+	SET(BOOST_ROOT /home/vr/Applications/watch-libs/rhel6/boost-1.54.0)
+	SET(OSG_DIR /home/vr/Applications/watch-libs/rhel6/openscenegraph-3.2.1-rc1)
+ENDIF(WIN32)
+
+
+
+################################################################################
+# Set the dependency paths not set with the FindPackage command
+################################################################################
+SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+
+# Find VRJuggler
+find_package( VRJuggler-OpenGL REQUIRED )
+include_directories( ${VRJUGGLER_INCLUDE_DIRS} )
+add_definitions( ${VRJUGGLER_DEFINITIONS} ) # <-- this is important on Windows, since it pulls in /DBOOST_ALL_DYN_LINK
+
+# Find Boost
+IF(WIN32)
+	SET(Boost_COMPILER -vc110)	# People may have to change this if they are not using Visual Studio 2012 compiler
+	SET(Boost_USE_STATIC_LIBS	  OFF)
+	ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB )
+ELSE(WIN32)
+	SET(Boost_USE_STATIC_LIBS	  ON)
+ENDIF(WIN32)
+SET(Boost_USE_MULTITHREAD	  ON)
+SET(Boost_USE_STATIC_RUNTIME OFF)
+SET(Boost_NO_SYSTEM_PATHS ON)
+SET(Boost_ADDITIONAL_VERSIONS "1.54.0")
+FIND_PACKAGE(Boost 1.54.0 COMPONENTS atomic chrono context date_time filesystem graph iostreams locale random regex serialization signals system thread timer REQUIRED)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${Boost_INCLUDE_DIRS})
+
+# Find OpenGL
+FIND_PACKAGE(OpenGL REQUIRED)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OPENGL_INCLUDE_DIR})
+FIND_PACKAGE(GLUT REQUIRED)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GLUT_INCLUDE_DIR})
+
+# Find the OpenSceneGraph Libs	
+FIND_PACKAGE(OpenSceneGraph REQUIRED osgAnimation osgDB osgFX osgGA osgManipulator osgParticle osgPresentation osgQt osgShadow osgSim osgTerrain osgText osgUtil osgViewer osgVolume osgWidget)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSG_INCLUDE_DIR})
+
+
+################################################################################
+# Sets the variables for the source and header files to use in the program
+################################################################################
+# Common
+SET(COMMON_SOURCES ) 	#src/common/Settings.cpp)				
+SET(COMMON_HEADERS )	#include/common/Enums.h
+# 					include/common/Settings.h
+# 					include/common/UIState.h)
+
+# Core
+SET(CORE_SOURCES src/mainGlut.cpp)				
+SET(CORE_HEADERS )#include/ApplicationManager.h)
+											 
+ # UI
+SET(UI_SOURCES 	src/VRBuilderApp.cpp)
+SET(UI_HEADERS 	include/CameraController.h
+				include/VRBuilderApp.h)
+
+# Wrap all source and header files into single var
+SET(VR_BUILDER_SOURCES 	${COMMON_SOURCES}
+						${CORE_SOURCES} 
+						${UI_SOURCES})
+SET(VR_BUILDER_HEADERS	${COMMON_HEADERS}
+						${CORE_HEADERS} 
+						${UI_HEADERS})
+
+
+################################################################################
+# Header search paths for the project
+# These should not have to be changed, make changes above to
+# in the OS specific area to add includes and other settings
+################################################################################
+INCLUDE_DIRECTORIES(${CMAKE_INCLUDE_PATH})
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include
+					${CMAKE_BINARY_DIR})
+SET(CMAKE_XCODE_ATTRIBUTE_USER_HEADER_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+################################################################################
+# Put the source files into folders for the Xcode project. Done for cleaness only.
+################################################################################
+
+# Setup the common source and header files
+SOURCE_GROUP("src\\common" FILES ${COMMON_SOURCES} ${COMMON_HEADERS})
+
+# Setup the core source and header files
+SOURCE_GROUP("src\\core" FILES ${CORE_SOURCES} ${CORE_HEADERS})
+
+# Setup the input/output source and header files
+SOURCE_GROUP("src\\io" FILES ${IO_SOURCES} ${IO_HEADERS})
+
+# Setup UI group file structure
+SOURCE_GROUP("src\\ui" FILES ${UI_HEADERS} ${UI_SOURCES})
+
+		
+################################################################################
+# This is the place to add any source files to the project
+# Headers, cpp files, etc. 
+# For a mac app bundle, add MACOSX_BUNDLE between the project name and
+# the source files being added to the project
+################################################################################
+IF(APPLE)
+	SET(MACOSX_BUNDLE_ICON_FILE "") # example: somviz_icon_mac.icns
+	SET(ICON_FILE )#${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/${MACOSX_BUNDLE_ICON_FILE})
+	ADD_EXECUTABLE(VR_BUILDER MACOSX_BUNDLE ${VR_BUILDER_HEADERS}
+											${VR_BUILDER_SOURCES} 
+											${ICON_FILE})
+	SET_SOURCE_FILES_PROPERTIES(
+		${FONTS}
+		${MODELS}
+		${ICON_FILE}
+		PROPERTIES
+		MACOSX_PACKAGE_LOCATION Resources
+	)
+ELSE(APPLE)
+	ADD_EXECUTABLE(VR_BUILDER	${VR_BUILDER_HEADERS}
+								${VR_BUILDER_SOURCES})
+ENDIF(APPLE)
+
+################################################################################
+# Need to add the bump/String header to all the files to fix a weird linker error
+# this will need to be investigated and fixed in the future.
+################################################################################
+IF (WIN32)
+	SET_TARGET_PROPERTIES(VR_BUILDER PROPERTIES COMPILE_FLAGS "/MP")
+ENDIF()
+
+################################################################################
+# Set all lib files or frameworks here that you want to link to
+# the project.
+################################################################################
+SET(LINK_LIBRARIES 	${Boost_LIBRARIES}
+					${OPENGL_LIBRARIES}
+					${GLUT_LIBRARIES}
+					${OPENSCENEGRAPH_LIBRARIES}
+					${VRJUGGLER-OPENGL_LIBRARIES})
+
+################################################################################
+# Updates the starting point in the program to WinMain instead of main
+# if we are only wanting the application and no cmd line
+################################################################################
+IF(REQUIRE_WINMAIN_FLAG)
+	IF(MSVC)
+		SET_TARGET_PROPERTIES(VR_BUILDER PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+		GET_TARGET_PROPERTY(FLAGS VR_BUILDER COMPILE_FLAGS)
+		SET_TARGET_PROPERTIES(VR_BUILDER PROPERTIES COMPILE_FLAGS "${FLAGS} \"/GL\" \"/Ox\" \"/Ot\"")
+	ENDIF()
+ENDIF()
+			
+################################################################################
+# This actually links the libs and frameworks to the project
+################################################################################		
+TARGET_LINK_LIBRARIES(VR_BUILDER ${LINK_LIBRARIES})
