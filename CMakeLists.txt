@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 PROJECT (VRBuilder)
 
 
@@ -42,7 +42,7 @@ ELSEIF(APPLE)
 ELSE(WIN32)
 	# Linux specific commands
 	SET(BOOST_ROOT /home/vr/Applications/watch-libs/rhel6/boost-1.54.0)
-	SET(OSG_DIR /home/vr/Applications/watch-libs/rhel6/openscenegraph-3.2.1-rc1)
+	SET(OSG_DIR /home/vr/Applications/watch-libs/rhel6/openscenegraph-3.0.1)
 ENDIF(WIN32)
 
 
@@ -93,7 +93,7 @@ SET(COMMON_HEADERS )	#include/common/Enums.h
 # 					include/common/UIState.h)
 
 # Core
-SET(CORE_SOURCES src/mainGlut.cpp)				
+SET(CORE_SOURCES src/mainGLUT.cpp)				
 SET(CORE_HEADERS )#include/ApplicationManager.h)
 											 
  # UI

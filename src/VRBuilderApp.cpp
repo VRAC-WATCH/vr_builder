@@ -113,9 +113,9 @@ void VRBuilderApp::setWandMatrix(osg::Matrixf mat)
 void drawStringOnScreen(int x, int y, const char* format, ...)
 {
 	char stringData[2024];
-	va_list args;
-	va_start(args, format);
-	vsnprintf(stringData, 2024, format, args);
+	//va_list args;
+	//va_start(args, format);
+	//vsnprintf(stringData, 2024, format, args);
 	
 	//find the viewport size so we can properly size everything
 	int vport[4];
