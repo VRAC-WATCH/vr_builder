@@ -53,9 +53,9 @@ ENDIF(WIN32)
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 # Find VRJuggler
-find_package( VRJuggler-OpenGL REQUIRED )
-include_directories( ${VRJUGGLER_INCLUDE_DIRS} )
-add_definitions( ${VRJUGGLER_DEFINITIONS} ) # <-- this is important on Windows, since it pulls in /DBOOST_ALL_DYN_LINK
+# find_package( VRJuggler-OpenGL REQUIRED )
+# include_directories( ${VRJUGGLER_INCLUDE_DIRS} )
+# add_definitions( ${VRJUGGLER_DEFINITIONS} ) # <-- this is important on Windows, since it pulls in /DBOOST_ALL_DYN_LINK
 
 # Find Boost
 IF(WIN32)
@@ -176,8 +176,8 @@ ENDIF()
 SET(LINK_LIBRARIES 	${Boost_LIBRARIES}
 					${OPENGL_LIBRARIES}
 					${GLUT_LIBRARIES}
-					${OPENSCENEGRAPH_LIBRARIES}
-					${VRJUGGLER-OPENGL_LIBRARIES})
+					${OPENSCENEGRAPH_LIBRARIES})
+					#${VRJUGGLER-OPENGL_LIBRARIES})
 
 ################################################################################
 # Updates the starting point in the program to WinMain instead of main
