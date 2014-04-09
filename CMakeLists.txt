@@ -29,19 +29,15 @@ ENDIF()
 # Add OS specific paths for finding dependencies to the project
 ################################################################################
 IF(WIN32)
-	# Qt5 GL requires for converting bindings into windows native format
 	SET(CMAKE_PREFIX_PATH "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64")
-	SET(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/boost-1.54.0)
 	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/osg-3.2.1-rc)
 	SET(GLUT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/glut-3.7)
 ELSEIF(APPLE)
 	SET(CMAKE_XCODE_ATTRIBUTE_SDKROOT macosx10.9)
 	SET(CMAKE_XCODE_ATTRIBUTE_ARCHS "$(ARCHS_STANDARD_64_BIT)")
-	# SET(BOOST_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/deps/mac/boost-1.54.0)
 	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/mac/osg-3.1.9)
 ELSE(WIN32)
 	# Linux specific commands
-	SET(BOOST_ROOT /home/vr/Applications/watch-libs/rhel6/boost-1.54.0)
 	SET(OSG_DIR /home/vr/Applications/watch-libs/rhel6/openscenegraph-3.0.1)
 ENDIF(WIN32)
 
@@ -51,26 +47,6 @@ ENDIF(WIN32)
 # Set the dependency paths not set with the FindPackage command
 ################################################################################
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
-
-# Find VRJuggler
-# find_package( VRJuggler-OpenGL REQUIRED )
-# include_directories( ${VRJUGGLER_INCLUDE_DIRS} )
-# add_definitions( ${VRJUGGLER_DEFINITIONS} ) # <-- this is important on Windows, since it pulls in /DBOOST_ALL_DYN_LINK
-
-# Find Boost
-# IF(WIN32)
-# 	SET(Boost_COMPILER -vc110)	# People may have to change this if they are not using Visual Studio 2012 compiler
-# 	SET(Boost_USE_STATIC_LIBS	  OFF)
-# 	ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB )
-# ELSE(WIN32)
-# 	SET(Boost_USE_STATIC_LIBS	  ON)
-# ENDIF(WIN32)
-# SET(Boost_USE_MULTITHREAD	  ON)
-# SET(Boost_USE_STATIC_RUNTIME OFF)
-# SET(Boost_NO_SYSTEM_PATHS ON)
-# SET(Boost_ADDITIONAL_VERSIONS "1.54.0")
-# FIND_PACKAGE(Boost 1.54.0 COMPONENTS atomic chrono context date_time filesystem graph iostreams locale random regex serialization signals system thread timer REQUIRED)
-# SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${Boost_INCLUDE_DIRS})
 
 # Find OpenGL
 FIND_PACKAGE(OpenGL REQUIRED)
