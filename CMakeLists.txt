@@ -55,7 +55,7 @@ FIND_PACKAGE(GLUT REQUIRED)
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GLUT_INCLUDE_DIR})
 
 # Find the OpenSceneGraph Libs	
-FIND_PACKAGE(OpenSceneGraph REQUIRED osgAnimation osgDB osgFX osgGA osgManipulator osgParticle osgPresentation osgQt osgShadow osgSim osgTerrain osgText osgUtil osgViewer osgVolume osgWidget)
+FIND_PACKAGE(OpenSceneGraph REQUIRED osgAnimation osgDB osgFX osgGA osgManipulator osgParticle osgPresentation osgShadow osgSim osgTerrain osgText osgUtil osgViewer osgVolume osgWidget)
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSG_INCLUDE_DIR})
 
 
