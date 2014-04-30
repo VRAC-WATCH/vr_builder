@@ -73,12 +73,14 @@ SET(CORE_SOURCES src/mainGLUT.cpp)
 SET(CORE_HEADERS )#include/ApplicationManager.h)
 											 
  # UI
-SET(UI_SOURCES 	src/VRBuilderApp.cpp
-				src/GridElement.cpp
-				src/GridStructure2D.cpp)
+SET(UI_SOURCES 	src/VRBuilderApp.cpp)
+				# src/GridElement.cpp
+				# src/GridStructure2D.cpp
+				# src/Scenegraph.cpp)
 SET(UI_HEADERS 	include/CameraController.h
-				include/GridElement.h
-				include/GridStructure2D.h
+				# include/GridElement.h
+				# include/GridStructure2D.h
+				# include/Scenegraph.h
 				include/VRBuilderApp.h)
 
 # Wrap all source and header files into single var
