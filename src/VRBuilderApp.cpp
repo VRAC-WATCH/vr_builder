@@ -6,12 +6,12 @@
  *  Updated by Trevor Richardson on 4/4/2014.
  *
  */
-
+#include <stdlib.h>
 // GL headers
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
 #else
-#  include <GL/glut.h>
+#include <glut.h>
 #endif
 
 // OSG headers
@@ -23,6 +23,7 @@
 #include "VRBuilderApp.h"
 #include "XML/XML.h"
 #include "Util.h"
+#include "Builder.h"
 
 void VRBuilderApp::init()
 {
@@ -53,6 +54,11 @@ void VRBuilderApp::init()
 
 	mWandXForm = new osg::MatrixTransform;
 	mModelGroup->addChild(mWandXForm);
+
+	//Added to test
+	Builder::instance().init();
+	mRoot->addChild(Builder::instance().createFloor(10,10,osg::Vec3(0,0,0)));
+	mRoot->addChild(Builder::instance().createBlock(osg::Vec3(0,5,0)));
 }
 
 
@@ -86,7 +92,7 @@ void VRBuilderApp::update(float dt)
 	
 		deToggleButtons();			//it's important that this be called every frame
 	}
-	
+	Builder::instance().update(dt);
 //	PROFILER.endCycle();		//needed for time profiling
 }
 

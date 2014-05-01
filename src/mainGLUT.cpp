@@ -1,6 +1,7 @@
 // System headers
 #include <stdarg.h>
 #include <iostream>
+#include <stdlib.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -9,7 +10,7 @@
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
 #else
-#  include <GL/glut.h>
+#include <glut.h>
 #endif
 
 // OSG headers
