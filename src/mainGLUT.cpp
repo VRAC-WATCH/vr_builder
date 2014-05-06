@@ -19,6 +19,7 @@
 // Local headers
 #include "CameraController.h"
 #include "VRBuilderApp.h"
+#include "KeyboardInput.h"
 
 int screenWidth = 1024;
 int screenHeight = 768;
@@ -457,6 +458,10 @@ int main( int argc, char **argv )
     viewer->realize();
 	glutTimerFunc(100, timer, 0);
 	atexit(quitApp);
+
+	KeyboardInput x = KeyboardInput();
+	glutKeyboardFunc(x.keyboardDown_ptr());
+	glutKeyboardUpFunc(x.keyboardUp_ptr());
 	
     glutMainLoop();
     

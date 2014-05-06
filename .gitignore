@@ -1,12 +1,13 @@
 # Build files
 /build.mac/
 /build.win/
+/build/
 
 # DS_Store files
 *.DS_Store
 
 # Deps
-/deps/
+deps/
 
 
 ########################################

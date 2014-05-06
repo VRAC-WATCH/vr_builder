@@ -9,6 +9,10 @@
 #ifndef VRBuilder_SceneCommand_h
 #define VRBuilder_SceneCommand_h
 
+#include <osg/Array>
+
+typedef osg::Vec3 v3;
+
 /**
  * The SceneCommand structure will be used to communicate
  * any input from the user to the system and eventually
@@ -21,13 +25,13 @@ struct SceneCommand {
 		ADD_BLOCK,
 		MODE_CHANGE,
 		SET_CURSOR_POS
-	}
+	};
 	
 	/** Enumeration of game modes possible. */
 	enum GameMode {
 		CREATION,
 		PHYSICS
-	}
+	};
 	
 	/** Possible command arguments. */
 	v3 position;

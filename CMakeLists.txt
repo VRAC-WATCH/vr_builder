@@ -73,7 +73,9 @@ SET(CORE_SOURCES src/mainGLUT.cpp)
 SET(CORE_HEADERS )#include/ApplicationManager.h)
 											 
  # UI
-SET(UI_SOURCES 	src/VRBuilderApp.cpp)
+SET(UI_SOURCES 	src/VRBuilderApp.cpp
+				src/KeyboardInput.cpp
+				src/InteractionManager.cpp)
 				# src/GridElement.cpp
 				# src/GridStructure2D.cpp
 				# src/Scenegraph.cpp)
@@ -81,7 +83,10 @@ SET(UI_HEADERS 	include/CameraController.h
 				# include/GridElement.h
 				# include/GridStructure2D.h
 				# include/Scenegraph.h
-				include/VRBuilderApp.h)
+				include/VRBuilderApp.h
+				include/KeyboardInput.h
+				include/InteractionManager.h
+				include/SceneCommand.h)
 
 # Wrap all source and header files into single var
 SET(VR_BUILDER_SOURCES 	${COMMON_SOURCES}
