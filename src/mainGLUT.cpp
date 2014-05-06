@@ -18,8 +18,8 @@
 
 // Local headers
 #include "CameraController.h"
+#include "InteractionManager.h"
 #include "VRBuilderApp.h"
-#include "KeyboardInput.h"
 
 int screenWidth = 1024;
 int screenHeight = 768;
@@ -434,8 +434,7 @@ void quitApp()
 
 int main( int argc, char **argv )
 {
-    glutInit(&argc, argv);
-
+	glutInit(&argc, argv);
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_ALPHA );
     glutInitWindowPosition( 100, 100 );
     glutInitWindowSize( 800, 600 );
@@ -449,7 +448,13 @@ int main( int argc, char **argv )
 	glutKeyboardUpFunc(keyboardUp);
 	glutSpecialFunc(keySpecial);
 	glutKeyboardUpFunc(keyUpBoard);
-    // create the view of the scene.
+ 
+	// Setup glut input
+	InteractionManager interaction_manager(InteractionManager::GLUT_INTERFACE);
+//	glutKeyboardFunc(x.keyboardDown_ptr());
+//	glutKeyboardUpFunc(x.keyboardUp_ptr());
+	
+	// create the view of the scene.
     viewer = new osgViewer::Viewer;
     window = viewer->setUpViewerAsEmbeddedInWindow(100,100,800,600);
 	VRBuilderApp::instance().init();
@@ -458,10 +463,6 @@ int main( int argc, char **argv )
     viewer->realize();
 	glutTimerFunc(100, timer, 0);
 	atexit(quitApp);
-
-	KeyboardInput x = KeyboardInput();
-	glutKeyboardFunc(x.keyboardDown_ptr());
-	glutKeyboardUpFunc(x.keyboardUp_ptr());
 	
     glutMainLoop();
     
