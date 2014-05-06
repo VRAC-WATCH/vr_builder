@@ -1,15 +1,29 @@
+// System headers
+#include <iostream>
+
+// GL headers
+#ifdef __APPLE__
+#  include <GLUT/glut.h>
+#else
+#  include <GL/glut.h>
+#endif
+
+// Local headers
 #include "KeyboardInput.h"
 
 
-KeyboardInput::KeyboardInput() {
-
+KeyboardInput::KeyboardInput()
+{
+	std::cout << "Input Constructor" << std::endl;
 }
 
-void KeyboardInput::update() {
-
+void KeyboardInput::update()
+{
+	std::cout << "Input Destructor" << std::endl;
 }
 
-void KeyboardInput::keyboardDown(unsigned char key, int x, int y) {
+void KeyboardInput::keyboardDown(unsigned char key, int x, int y)
+{
 	switch(key)
 	{
 		//handle key input
@@ -82,10 +96,10 @@ void KeyboardInput::keyboardUp(unsigned char key, int x, int y) {
 	glutPostRedisplay();
 }
 
-KeyboardInput::fptr KeyboardInput::keyboardDown_ptr() {
+KeyboardInput::func_ptr KeyboardInput::keyboardDown_ptr() {
 	return KeyboardInput::keyboardDown;
 }
 
-KeyboardInput::fptr KeyboardInput::keyboardUp_ptr() {
+KeyboardInput::func_ptr KeyboardInput::keyboardUp_ptr() {
 	return KeyboardInput::keyboardUp;
 }
