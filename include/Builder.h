@@ -66,7 +66,7 @@ public:
 	//Create the block
 	osg::Node* createBlock(SceneCommand sc);
 	//Create a projectile
-	//osg::Node* throwProjectile();
+	osg::Node* throwProjectile(osg::Vec3,osg::Vec3);
 	//Update the simulation
 	void update(double);
 };

@@ -57,11 +57,11 @@ void VRBuilderApp::init()
 
 	//Added to test
 	Builder::instance().init();
-	mRoot->addChild(Builder::instance().createFloor(10,10,osg::Vec3(0,0,0)));
+	mRoot->addChild(Builder::instance().createFloor(20,20,osg::Vec3(0,0,0)));
 	SceneCommand scenecommand;
 	scenecommand.blockSize=osg::Vec3(1,1,1);
 	scenecommand.color=osg::Vec4(1,0,0,1);
-	scenecommand.position=osg::Vec3(0,5,-2.5);
+	scenecommand.position=osg::Vec3(0,5,-7.5);
 	scenecommand.command=SceneCommand::CommandType::ADD_BLOCK;
 	scenecommand.textureFileName="../resources/Metalic_texture.bmp";
 	mRoot->addChild(Builder::instance().createBlock(scenecommand));
@@ -95,7 +95,12 @@ void VRBuilderApp::update(float dt)
 			osg::Vec3 direction(mWandMatrix.ptr()[8], mWandMatrix.ptr()[9],mWandMatrix.ptr()[10]);
 			mNavigation->setMatrix(mNavigation->getMatrix() * osg::Matrix::translate(direction * dt * 4.0));
 		}
-	
+		//process shooting
+		if(mButtons[1] == ON){
+			std::cout<<"Button 1 Pressed"<<std::endl;
+			mRoot->addChild(Builder::instance().throwProjectile(osg::Vec3(0,1,0),osg::Vec3(0,0,-0.5)));
+			mButtons[1] = OFF;
+		}
 		deToggleButtons();			//it's important that this be called every frame
 	}
 	Builder::instance().update(dt);
