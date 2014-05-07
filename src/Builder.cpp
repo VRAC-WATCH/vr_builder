@@ -86,42 +86,80 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center)
     return( ground );
 }
 
-osg::MatrixTransform* Builder::makeBlock(blockproperty prop, btDynamicsWorld* bw )
+void Builder::setColor(osg::Node*& node,osg::Vec4 color=osg::Vec4(1,1,1,1)){
+	osg::ShapeDrawable* shape= dynamic_cast<osg::ShapeDrawable*>(node->asTransform()->getChild(0)->asGeode()->getDrawable(0));
+	shape->setColor(color);
+}
+
+void Builder::setTexture(osg::Node*& node, std::string textureFileName=""){
+	if(textureFileName.length()==0)
+		return;
+	//Check for valid texture and load it
+	osg::Texture2D* texture = new osg::Texture2D;
+	texture->setDataVariance(osg::Object::DYNAMIC); 
+	osg::Image* image = osgDB::readImageFile(textureFileName);
+	if (!image)
+	{
+		std::cout << " couldn't find texture setting default color" << std::endl;
+		setColor(node);
+		return;
+	}
+	texture->setImage(image);
+
+	osg::StateSet* ss=node->asTransform()->getChild(0)->asGeode()->getOrCreateStateSet();
+	ss->setTextureAttributeAndModes(0,texture,osg::StateAttribute::ON);
+	node->asTransform()->getChild(0)->asGeode()->setStateSet(ss);
+	return;
+}
+osg::MatrixTransform* Builder::makeBlock(SceneCommand sc, btDynamicsWorld* bw )
 {
 	osg::MatrixTransform* root = new osg::MatrixTransform;
 	const std::string fileName( "dice.osg" );
-	osg::Node* node = osgDB::readNodeFile( fileName );
+	osg::Node* node = createOSGBox(sc.blockSize);
 	if( node == NULL )
 	{
 		osg::notify( osg::FATAL ) << "Can't find \"" << fileName << "\". Make sure OSG_FILE_PATH includes the osgBullet data directory." << std::endl;
 		exit( 0 );
 	}
+	setColor(node,sc.color);
+	setTexture(node,sc.textureFileName);
 	root->addChild( node );
 
-	btCollisionShape* cs = osgbCollision::btBoxCollisionShapeFromOSG( node );
+	//Place in the Physics world
+	if(sc.command==SceneCommand::CommandType::ADD_BLOCK){
+		btCollisionShape* cs = osgbCollision::btBoxCollisionShapeFromOSG( node );
 
-	osg::ref_ptr< osgbDynamics::CreationRecord > cr = new osgbDynamics::CreationRecord;
-	cr->_sceneGraph = root;
-	cr->_shapeType = BOX_SHAPE_PROXYTYPE;
-	cr->_mass = 1.f;
-	cr->_restitution = 1.f;
-	btRigidBody* body = osgbDynamics::createRigidBody( cr.get(), cs );
+		osg::ref_ptr< osgbDynamics::CreationRecord > cr = new osgbDynamics::CreationRecord;
+		cr->_sceneGraph = root;
+		cr->_shapeType = BOX_SHAPE_PROXYTYPE;
+		cr->_mass = 1.f;
+		cr->_restitution = 1.f;
+		btRigidBody* body = osgbDynamics::createRigidBody( cr.get(), cs );
 	
-	//Move block to correct position in the physics world
-	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-    osg::Matrix m( osg::Matrix::translate( prop.pos ) );
-    motion->setParentTransform( m );
-    body->setWorldTransform( osgbCollision::asBtTransform( m ) );
+		//Move block to correct position in the physics world
+		osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
+		osg::Matrix m( osg::Matrix::translate( sc.position ) );
+		motion->setParentTransform( m );
+		body->setWorldTransform( osgbCollision::asBtTransform( m ) );
 
-	bw->addRigidBody( body );
-
+		bw->addRigidBody( body );
+	}
 	return( root );
 }
 
-osg::Node* Builder::createBlock(osg::Vec3 pos){ 
-	blockproperty p;
-	p.pos=pos;
-	return makeBlock(p,bulletWorld);
+osg::Node* Builder::createBlock(SceneCommand sc){ 
+	/*blockproperty p;
+	p.pos=sc.position;
+	switch(sc.command){
+	case(SceneCommand::CommandType::ADD_BLOCK):
+		return makeBlock(sc,bulletWorld);
+		break;
+	case(SceneCommand::CommandType::TRANSPARENT_BLOCK):
+		return ;
+		break;
+	}*/
+	return makeBlock(sc,bulletWorld);
+	//return NULL;
 }
 
 //osg::Node* Builder::throwProjectile(){

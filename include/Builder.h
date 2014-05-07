@@ -19,6 +19,7 @@
 #include <osg/ShapeDrawable>
 #include <osg/Geode>
 #include <osg/io_utils>
+#include <osg/Texture2D>
 
 //OSGBULLET Header
 #include <osgbDynamics/MotionState.h>
@@ -32,14 +33,21 @@
 //STL Headers
 #include <string>
 
+//Scene Command Header
+#include "SceneCommand.h"
+
 struct blockproperty{
 	osg::Vec3 pos;
 };
 
 class Builder{
 private:
-	//function to create the block within the physics world
-	osg::MatrixTransform* makeBlock(blockproperty, btDynamicsWorld* bw );
+	//Create the block
+	osg::MatrixTransform* makeBlock(SceneCommand sc, btDynamicsWorld* bw );
+	//Set the color of the block
+	void setColor(osg::Node* &,osg::Vec4);
+	//Set the texture of the block
+	void setTexture(osg::Node* &,std::string);
 
 	//Member variables
 	btDynamicsWorld* bulletWorld; //The physics world
@@ -56,7 +64,7 @@ public:
 	//Create the floor
 	osg::Node* createFloor( float w, float h, const osg::Vec3& center);
 	//Create the block
-	osg::Node* createBlock(osg::Vec3 pos);
+	osg::Node* createBlock(SceneCommand sc);
 	//Create a projectile
 	//osg::Node* throwProjectile();
 	//Update the simulation

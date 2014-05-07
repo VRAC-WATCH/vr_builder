@@ -58,7 +58,13 @@ void VRBuilderApp::init()
 	//Added to test
 	Builder::instance().init();
 	mRoot->addChild(Builder::instance().createFloor(10,10,osg::Vec3(0,0,0)));
-	mRoot->addChild(Builder::instance().createBlock(osg::Vec3(0,5,0)));
+	SceneCommand scenecommand;
+	scenecommand.blockSize=osg::Vec3(1,1,1);
+	scenecommand.color=osg::Vec4(1,0,0,1);
+	scenecommand.position=osg::Vec3(0,5,-2.5);
+	scenecommand.command=SceneCommand::CommandType::ADD_BLOCK;
+	scenecommand.textureFileName="../resources/Metalic_texture.bmp";
+	mRoot->addChild(Builder::instance().createBlock(scenecommand));
 }
 
 
