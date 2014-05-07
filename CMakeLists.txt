@@ -73,11 +73,13 @@ SET(CORE_SOURCES src/mainGLUT.cpp)
 SET(CORE_HEADERS )#include/ApplicationManager.h)
 											 
  # UI
-SET(UI_SOURCES 	src/VRBuilderApp.cpp)
+SET(UI_SOURCES 	src/VRBuilderApp.cpp
+				src/SceneMgr.cpp)
 				# src/GridElement.cpp
 				# src/GridStructure2D.cpp
 				# src/Scenegraph.cpp)
 SET(UI_HEADERS 	include/CameraController.h
+				include/SceneMgr.h
 				# include/GridElement.h
 				# include/GridStructure2D.h
 				# include/Scenegraph.h
