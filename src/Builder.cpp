@@ -126,7 +126,7 @@ osg::MatrixTransform* Builder::makeBlock(SceneCommand sc, btDynamicsWorld* bw )
 	root->addChild( node );
 
 	//Place in the Physics world
-	if(sc.command==SceneCommand::CommandType::ADD_BLOCK){
+	if(sc.command==SceneCommand::ADD_BLOCK){
 		btCollisionShape* cs = osgbCollision::btBoxCollisionShapeFromOSG( node );
 
 		osg::ref_ptr< osgbDynamics::CreationRecord > cr = new osgbDynamics::CreationRecord;

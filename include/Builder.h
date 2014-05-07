@@ -34,7 +34,7 @@
 #include <string>
 
 //Scene Command Header
-#include "SceneCommand.h"
+#include <SceneCommand.h>
 
 struct blockproperty{
 	osg::Vec3 pos;

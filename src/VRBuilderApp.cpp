@@ -9,9 +9,10 @@
 #include <stdlib.h>
 // GL headers
 #ifdef __APPLE__
-#  include <GLUT/glut.h>
-#else
-#include <glut.h>
+	#include <GLUT/glut.h>
+#endif
+#ifdef __WIN32__
+	#include <glut.h>
 #endif
 
 // OSG headers
@@ -39,6 +40,7 @@ void VRBuilderApp::init()
 	mRoot = new osg::Group;
 	mNavigation = new osg::MatrixTransform;
 	mRoot->addChild(mNavigation.get());
+	mNavigation->setMatrix(osg::Matrix::translate(osg::Vec3(0,0,0)));
 	mRoot->getOrCreateStateSet()->setMode(GL_NORMALIZE, true);
 	mLightSource = new osg::LightSource;
 	mNavigation->addChild(mLightSource.get());
@@ -57,14 +59,14 @@ void VRBuilderApp::init()
 
 	//Added to test
 	Builder::instance().init();
-	mRoot->addChild(Builder::instance().createFloor(20,20,osg::Vec3(0,0,0)));
+	mModelGroup->addChild(Builder::instance().createFloor(20,20,osg::Vec3(0,0,0)));
 	SceneCommand scenecommand;
 	scenecommand.blockSize=osg::Vec3(1,1,1);
 	scenecommand.color=osg::Vec4(1,0,0,1);
 	scenecommand.position=osg::Vec3(0,5,-7.5);
-	scenecommand.command=SceneCommand::CommandType::ADD_BLOCK;
+	scenecommand.command=SceneCommand::ADD_BLOCK;
 	scenecommand.textureFileName="../resources/Metalic_texture.bmp";
-	mRoot->addChild(Builder::instance().createBlock(scenecommand));
+	mModelGroup->addChild(Builder::instance().createBlock(scenecommand));
 }
 
 
@@ -98,7 +100,7 @@ void VRBuilderApp::update(float dt)
 		//process shooting
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
-			mRoot->addChild(Builder::instance().throwProjectile(osg::Vec3(0,1,0),osg::Vec3(0,0,-0.5)));
+			mModelGroup->addChild(Builder::instance().throwProjectile(osg::Vec3(0,1,0),osg::Vec3(0,0,-0.5)));
 			mButtons[1] = OFF;
 		}
 		deToggleButtons();			//it's important that this be called every frame
@@ -126,7 +128,10 @@ void VRBuilderApp::setWandMatrix(osg::Matrixf mat)
 	mWandMatrix = mat*mNavigation->getInverseMatrix();
 	mWandXForm->setMatrix(osg::Matrixf::scale(0.25, 0.125, 1.0)*mWandMatrix);
 }
-
+void VRBuilderApp::setNavigationMatrix(osg::Matrixf matrix)
+{
+	mNavigation->setMatrix(matrix);
+}
 void drawStringOnScreen(int x, int y, const char* format, ...)
 {
 	char stringData[2024];
@@ -152,7 +157,7 @@ void drawStringOnScreen(int x, int y, const char* format, ...)
 			
 			for(int i=0; i<2024 && stringData[i] != 0; i++ )
 			{
-				glutBitmapCharacter( GLUT_BITMAP_HELVETICA_12, stringData[i] );
+				//glutBitmapCharacter( GLUT_BITMAP_HELVETICA_12, stringData[i] );
 			}
 		glPopMatrix();
 		glMatrixMode(GL_MODELVIEW);

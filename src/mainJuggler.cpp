@@ -10,7 +10,7 @@
 
 // Local
 #include "JugglerInterface.h"
-#include "SceneManager.h"
+//#include <SceneManager.h>
 
 using namespace vrj;
 int main(int argc, char* argv[])
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	SceneManager::instance().handleArguments(&argc, argv);
+//	SceneManager::instance().handleArguments(&argc, argv);
 	// Figure out if this node is the slave or master
 	// so that master can handle any information needing
 	// synced across all nodes.

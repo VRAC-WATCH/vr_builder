@@ -27,8 +27,10 @@ public:
 	void init();
 	void setHeadMatrix(osg::Matrixf m);
 	void setWandMatrix(osg::Matrixf m);
+	void setNavigationMatrix(osg::Matrixf matrix);
 	osg::Matrixf getHeadMatrix()		{return mHeadMatrix;}
 	osg::Matrixf getWandMatrix()		{return mWandMatrix;}
+	osg::Matrixf getNavigationMatrix()	{return mNavigation->getMatrix();}
 	void update(float dt);										//timestep update
 	osg::Group* getRoot() {return mRoot.get();}			//get our root scene node
 	osg::Group* getModelGroup()	{return mModelGroup.get();}
