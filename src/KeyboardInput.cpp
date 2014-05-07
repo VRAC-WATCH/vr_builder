@@ -17,9 +17,21 @@ KeyboardInput::KeyboardInput()
 	std::cout << "Input Constructor" << std::endl;
 }
 
-void KeyboardInput::update()
+KeyboardInput::~KeyboardInput()
 {
 	std::cout << "Input Destructor" << std::endl;
+}
+
+void KeyboardInput::update()
+{
+	std::cout << "KeyboardInput::update() called" << std::endl;
+}
+
+void KeyboardInput::populateSceneCommand(std::vector<SceneCommand>& commandList)
+{
+	// Append all of our latest scene commands to the list requested then clear it
+	commandList.insert(commandList.end(), _sceneCommandList.begin(), _sceneCommandList.end());
+	_sceneCommandList.clear();
 }
 
 void KeyboardInput::keyboardDown(unsigned char key, int x, int y)

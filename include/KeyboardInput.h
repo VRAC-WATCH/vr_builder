@@ -12,6 +12,9 @@ public:
 	/** Destructor. */
 	~KeyboardInput();
 	
+	/** Add any commands we have stored to the list passed in. */
+	void populateSceneCommand(std::vector<SceneCommand>& commandList);
+	
 	typedef void (*func_ptr)(unsigned char, int, int);
 	
 	void update();
