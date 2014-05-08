@@ -12,6 +12,14 @@
 
 //declarations
 
+
+
+/*sceneMGR has instance of scene
+only talking with builder, scene, and appMGR
+look at functions in each - they tell the sceneMGR what to do
+example: appMGR tells sceneMGR to build a block at a location.  sceneMGR takes info
+and tells builder to create a block OSG node, then passes this node to the scene.*/
+
 class sceneManager
 {
     //private members
@@ -22,7 +30,7 @@ class sceneManager
     public:
     
     //reads in an input from the Application Manager
-    void listenAppManger(std::string);
+    void receiveAppManger(std::string);
     
     //sends an update from builder to the scene
     std::string builderToScene(void);//using strings for now
@@ -38,7 +46,7 @@ class sceneManager
 //definitions
 
 
-    void sceneManager::listenAppManger(std::string command)
+    void sceneManager::receiveAppManger(std::string command)
     {
         //"directions from the app manager" = command;
     };
