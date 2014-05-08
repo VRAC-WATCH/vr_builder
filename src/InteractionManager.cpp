@@ -28,6 +28,22 @@ InteractionManager::~InteractionManager()
 	}
 }
 
+Input* InteractionManager::inputForType(Input::InputType type)
+{
+	// Look through the current list of inputs and return
+	// it if we find a match
+	for (unsigned int i=0; i<_inputs.size(); ++i) {
+		if(_inputs.at(i)->inputType() == type) {
+			return _inputs.at(i);
+		}
+	}
+	
+	// If we made it here, we didn't find a match so inform
+	std::cout << "No input for the requested type." << std::endl;
+	
+	return NULL;
+}
+
 void InteractionManager::update()
 {
 	std::cout << "Updating InteractionManager" << std::endl;

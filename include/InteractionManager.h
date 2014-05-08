@@ -24,8 +24,7 @@ public:
 	~InteractionManager();
 	
 	/** Accessors for the specified input type. */
-	Input* input();
-		
+	Input* inputForType(Input::InputType type);
 	
 	/** 
 	 * Builds a list of commands that have been executed from any input. 
