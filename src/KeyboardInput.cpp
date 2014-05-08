@@ -12,7 +12,7 @@
 #include "KeyboardInput.h"
 
 
-KeyboardInput::KeyboardInput()
+KeyboardInput::KeyboardInput() : Input(Input::KEYBOARD)
 {
 	std::cout << "Input Constructor" << std::endl;
 }
