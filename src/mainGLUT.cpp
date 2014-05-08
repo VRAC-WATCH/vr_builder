@@ -19,6 +19,7 @@
 // Local headers
 #include "CameraController.h"
 #include "InteractionManager.h"
+#include "GlutKeyboardInput.h"
 #include "VRBuilderApp.h"
 
 int screenWidth = 1024;
@@ -451,8 +452,11 @@ int main( int argc, char **argv )
  
 	// Setup glut input
 	InteractionManager interaction_manager(InteractionManager::GLUT_INTERFACE);
-//	glutKeyboardFunc(x.keyboardDown_ptr());
-//	glutKeyboardUpFunc(x.keyboardUp_ptr());
+	Input* keyboard_input = interaction_manager.inputForType(Input::KEYBOARD);
+	if (keyboard_input) {
+		GlutKeyboardInput* input = dynamic_cast<GlutKeyboardInput*>(keyboard_input);
+		glutKeyboardFunc(input->keyboardDown_ptr());
+	}
 	
 	// create the view of the scene.
     viewer = new osgViewer::Viewer;

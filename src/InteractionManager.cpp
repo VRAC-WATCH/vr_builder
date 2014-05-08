@@ -3,7 +3,7 @@
 
 // Local headers
 #include "InteractionManager.h"
-#include "KeyboardInput.h"
+#include "GlutKeyboardInput.h"
 #include "SceneCommand.h"
 
 InteractionManager::InteractionManager()
@@ -61,7 +61,7 @@ void InteractionManager::_setupGlutInputs()
 	std::cout << "Setting up glut input" << std::endl;
 	
 	// Setup the keyboard
-	Input* keyboard = new KeyboardInput;
+	Input* keyboard = new GlutKeyboardInput;
 	_inputs.push_back(keyboard);
 	
 	// Setup the mouse

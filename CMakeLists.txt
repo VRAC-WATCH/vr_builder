@@ -72,11 +72,11 @@ SET(COMMON_HEADERS )	#include/common/Enums.h
 SET(CORE_SOURCES 	src/mainGLUT.cpp
 					src/Input.cpp
 					src/InteractionManager.cpp
-					src/KeyboardInput.cpp
+					src/GlutKeyboardInput.cpp
 					src/VRBuilderApp.cpp)				
 SET(CORE_HEADERS 	include/Input.h
 					include/VRBuilderApp.h
-					include/KeyboardInput.h
+					include/GlutKeyboardInput.h
 					include/InteractionManager.h)
 											 
  # UI

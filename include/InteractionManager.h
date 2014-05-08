@@ -1,8 +1,9 @@
 // System headers
 #include <vector>
 
-// Forward declarations
-class Input;
+// Local headers
+#include "Input.h"
+
 
 class InteractionManager
 {
