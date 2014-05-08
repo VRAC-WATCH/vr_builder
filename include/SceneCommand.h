@@ -34,9 +34,11 @@ struct SceneCommand {
 	};
 	
 	/** Possible command arguments. */
-	v3 position;
-	v3 blockSize;
-	GameMode currentGameMode;
+//	v3 position;
+	v3				blockSize;
+	CommandType		commandType;
+	GameMode		currentGameMode;
+	v3				magnitude;
 };
 
 typedef osg::Vec3 v3;
