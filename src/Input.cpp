@@ -12,7 +12,7 @@
 // Local headers
 #include "Input.h"
 
-Input::Input()
+Input::Input(InputType inputType) : _inputType(inputType)
 {
 	std::cout << "Input Constructor" << std::endl;
 }
