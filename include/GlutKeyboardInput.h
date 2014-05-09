@@ -16,17 +16,14 @@ public:
 	void populateSceneCommand(std::vector<SceneCommand>& commandList);
 	
 	/** Accessors for glut function pointers. */
-	typedef void (*func_ptr)(unsigned char, int, int);
+	typedef void (*func_ptr)(int, int, int);
 	func_ptr keyboardDown_ptr();
-	func_ptr keyboardUp_ptr();
+	
 	
 protected:
 	
 	/** Glut keyboardDownFunc. */
-	static void _keyboardDown(unsigned char key, int x, int y);
-	
-	/** Glut keyboardUpFunc. */
-	static void _keyboardUp(unsigned char key, int x, int y);
+	static void _keyboardDown(int key, int x, int y);
 };
 
 
