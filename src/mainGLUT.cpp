@@ -42,6 +42,10 @@ CameraController gCamera;
 osg::ref_ptr<osgViewer::Viewer> viewer;
 osg::observer_ptr<osgViewer::GraphicsWindow> window;
 
+
+/** TODO: Change when we add the AppManager. */
+InteractionManager interaction_manager(InteractionManager::GLUT_INTERFACE);
+
 void drawStringOnScreen(int x, int y, const char* format, ...);
 void drawStatus()
 {
@@ -220,6 +224,10 @@ void setLight(float x, float y, float z)
 
 void display(void)
 {
+	// Update the interactions every frame
+	interaction_manager.update();
+	std::cout << "SceneCommands: " << interaction_manager.sceneCommands().size() << std::endl;
+	
     // update and render the scene graph
 	osg::Camera* currentCam = viewer->getCamera();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -451,11 +459,10 @@ int main( int argc, char **argv )
 	glutKeyboardUpFunc(keyUpBoard);
  
 	// Setup glut input
-	InteractionManager interaction_manager(InteractionManager::GLUT_INTERFACE);
 	Input* keyboard_input = interaction_manager.inputForType(Input::KEYBOARD);
 	if (keyboard_input) {
 		GlutKeyboardInput* input = dynamic_cast<GlutKeyboardInput*>(keyboard_input);
-		glutKeyboardFunc(input->keyboardDown_ptr());
+		glutSpecialFunc(input->keyboardDown_ptr());
 	}
 	
 	// create the view of the scene.
