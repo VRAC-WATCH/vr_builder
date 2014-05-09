@@ -33,6 +33,13 @@ public:
 	 */
 	void update();
 	
+	/** 
+	 * Accessor for the current scene commands. 
+	 * Currently, for this to have any data, you must call update()
+	 * in order to populate the _sceneCommandList with commands.
+	 */
+	const std::vector<SceneCommand>& sceneCommands() const { return _sceneCommandList; }
+	
 	
 protected:
 	
@@ -43,6 +50,7 @@ protected:
 	void _setupJugglerInputs();
 	
 	/** iVars. */
-	std::vector<Input*>		_inputs;
-	InterfaceType			_interfaceType;
+	std::vector<Input*>			_inputs;
+	InterfaceType				_interfaceType;
+	std::vector<SceneCommand>	_sceneCommandList;
 };
