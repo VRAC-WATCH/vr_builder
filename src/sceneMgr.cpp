@@ -7,11 +7,16 @@
 //
 
 #include "sceneMgr.h"
+//#include "builder.h"
+//include "SceneCommand.h"
 //#include "scene.h" //uncomment when scene is available
-//
+
+
 
 //declarations
 
+
+//These will eventually go in the .h, I'm just keeping them here for simplicity!
 class sceneManager
 {
     //private members
@@ -22,7 +27,7 @@ class sceneManager
     public:
     
     //reads in an input from the Application Manager
-    void listenAppManger(std::string);
+    void listenAppManger(const struct SceneCommand&);
     
     //sends an update from builder to the scene
     std::string builderToScene(void);//using strings for now
@@ -34,20 +39,34 @@ class sceneManager
     void sceneInstance(void);
 };
 
+//Intended to store the location of the blocks in the scene in progress
+//may end up moving somewhere else
+
+class currentScene
+{
+    void storeBlock(const struct SceneCommand&);
+};
 
 //definitions
 
+//commented temporarily
 
-    void sceneManager::listenAppManger(std::string command)
+/*    void sceneManager::listenAppManger(const struct scenecommand&)
     {
-        //"directions from the app manager" = command;
+        //SceneCommand scenecommand;
+        //mModelGroup->addChild(Builder::instance().createBlock(scenecommand));
     };
+*/
 
-    std::string BuilderToScene(void)
+///////////////////
+//I don't think builder will be passing info back to scenemanager, correct?
+
+    /*std::string BuilderToScene(void)
     {
         //return "directions to the scene"
         return ("hello");
-    };
+    };*/
+///////////////////
 
     void sceneManager::listenScene(std::string command)
     {
@@ -58,3 +77,9 @@ class sceneManager
     {
      //   Scene instanceScene = new Scene();
     }
+
+
+    void currentScene::storeBlock(const struct scenecommand&)
+    {
+    
+    };
