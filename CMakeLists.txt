@@ -83,6 +83,7 @@ SET(UI_HEADERS 	include/CameraController.h
 				# include/GridElement.h
 				# include/GridStructure2D.h
 				# include/Scenegraph.h
+			      include/SceneCommand.h
 				include/VRBuilderApp.h)
 
 # Wrap all source and header files into single var
