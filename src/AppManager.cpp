@@ -8,9 +8,14 @@
 
 #include "AppManager.h"
 
+/* pull data will need to be called inside of one of the main loops */
 void AppManager::pullData (void)
 {
-    //std::vector</*list*/> _interaction =
+    /*The sceneCommandList is populated*/
+    _interactionManager->update();
+    _sceneCommandList = _interactionManager->sceneCommands();
+    
+    pushData();
 }
 
 void AppManager::pushData(void)
