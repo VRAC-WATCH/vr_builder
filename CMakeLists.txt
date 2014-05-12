@@ -69,8 +69,17 @@ SET(COMMON_HEADERS )	#include/common/Enums.h
 # 					include/common/UIState.h)
 
 # Core
-SET(CORE_SOURCES src/mainGLUT.cpp)				
-SET(CORE_HEADERS )#include/ApplicationManager.h)
+SET(CORE_SOURCES 	src/mainGLUT.cpp
+					src/Input.cpp
+					src/InteractionManager.cpp
+					src/GlutKeyboardInput.cpp
+					src/VRBuilderApp.cpp
+					src/AppManager.cpp)				
+SET(CORE_HEADERS 	include/Input.h
+					include/VRBuilderApp.h
+					include/GlutKeyboardInput.h
+					include/InteractionManager.h
+					include/AppManager.h)
 											 
  # UI
 SET(UI_SOURCES 	src/VRBuilderApp.cpp
