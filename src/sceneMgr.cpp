@@ -8,7 +8,6 @@
 
 #include "sceneMgr.h"
 //#include "builder.h"
-#include "SceneCommand.h"
 //#include "scene.h" //uncomment when scene is available
 
     
@@ -16,7 +15,7 @@
     std::string instanceScene;
     
     //reads in an input from the Application Manager
-    void sceneManager::listenAppManger(const SceneCommand scenecommand&)
+    void sceneManager::listenAppManger (const SceneCommand scenecommand&)
     {
     //SceneCommand scenecommand;
     //mModelGroup->addChild(Builder::instance().createBlock(scenecommand));

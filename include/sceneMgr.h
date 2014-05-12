@@ -10,8 +10,14 @@
 #define __VRBuilder__sceneMgr__
 
 #include <iostream>
-
-
+#include "SceneCommand.h"
+#include <osgDB/ReadFile>
+#include <osgViewer/Viewer>
+#include <osg/MatrixTransform>
+#include <osg/ShapeDrawable>
+#include <osg/Geode>
+#include <osg/io_utils>
+#include <osg/Texture2D>
 
 //Own the scene
 //Use the builder - send updates
