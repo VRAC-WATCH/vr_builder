@@ -48,7 +48,7 @@ public:
     
     //Intended to store the location of the blocks in the scene in progress
     //may end up moving somewhere else
-    void storeBock(const struct SceneCommand&)
+    void storeBock(const struct SceneCommand&);
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */
