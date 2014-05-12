@@ -80,26 +80,18 @@ SET(CORE_HEADERS 	include/Input.h
 					include/InteractionManager.h)
 											 
  # UI
-<<<<<<< HEAD
 SET(UI_SOURCES 	src/VRBuilderApp.cpp
-				src/SceneMgr.cpp)
-=======
-SET(UI_SOURCES 	)
->>>>>>> origin/master
-				# src/GridElement.cpp
-				# src/GridStructure2D.cpp
-				# src/Scenegraph.cpp)
+#		 src/GridElement.cpp
+#		 src/GridStructure2D.cpp
+#		 src/Scenegraph.cpp
+		src/SceneMgr.cpp)
 SET(UI_HEADERS 	include/CameraController.h
 				include/SceneMgr.h
 				# include/GridElement.h
 				# include/GridStructure2D.h
 				# include/Scenegraph.h
-<<<<<<< HEAD
-			      include/SceneCommand.h
+			      	include/SceneCommand.h
 				include/VRBuilderApp.h)
-=======
-				include/SceneCommand.h)
->>>>>>> origin/master
 
 # Wrap all source and header files into single var
 SET(VR_BUILDER_SOURCES 	${COMMON_SOURCES}

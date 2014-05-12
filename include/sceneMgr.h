@@ -35,7 +35,7 @@ class sceneManager
 public:
     
     //reads in an input from the Application Manager
-    void listenAppManger(const struct SceneCommand&);
+    void listenAppManger(const SceneCommand& commands);
     
     //sends an update from builder to the scene
     std::string builderToScene(void);//using strings for now
@@ -48,7 +48,7 @@ public:
     
     //Intended to store the location of the blocks in the scene in progress
     //may end up moving somewhere else
-    void storeBock(const struct SceneCommand&);
+    void storeBlock(const SceneCommand& commands);
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */
