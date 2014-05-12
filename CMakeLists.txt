@@ -69,12 +69,23 @@ SET(COMMON_HEADERS )	#include/common/Enums.h
 # 					include/common/UIState.h)
 
 # Core
-SET(CORE_SOURCES src/mainGLUT.cpp)				
-SET(CORE_HEADERS )#include/ApplicationManager.h)
+SET(CORE_SOURCES 	src/mainGLUT.cpp
+					src/Input.cpp
+					src/InteractionManager.cpp
+					src/GlutKeyboardInput.cpp
+					src/VRBuilderApp.cpp)				
+SET(CORE_HEADERS 	include/Input.h
+					include/VRBuilderApp.h
+					include/GlutKeyboardInput.h
+					include/InteractionManager.h)
 											 
  # UI
+<<<<<<< HEAD
 SET(UI_SOURCES 	src/VRBuilderApp.cpp
 				src/SceneMgr.cpp)
+=======
+SET(UI_SOURCES 	)
+>>>>>>> origin/master
 				# src/GridElement.cpp
 				# src/GridStructure2D.cpp
 				# src/Scenegraph.cpp)
@@ -83,8 +94,12 @@ SET(UI_HEADERS 	include/CameraController.h
 				# include/GridElement.h
 				# include/GridStructure2D.h
 				# include/Scenegraph.h
+<<<<<<< HEAD
 			      include/SceneCommand.h
 				include/VRBuilderApp.h)
+=======
+				include/SceneCommand.h)
+>>>>>>> origin/master
 
 # Wrap all source and header files into single var
 SET(VR_BUILDER_SOURCES 	${COMMON_SOURCES}
