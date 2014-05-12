@@ -10,14 +10,18 @@
 #define ____AppManager__
 
 #include "InteractionManager.h"
-#include <vector>
-/*Include Interaction header*/
+/*Include Ui Header header*/
 
 class AppManager {
     
 public:
     
+    /* pullData retreives the necessary data from the Interaction Manager and UiViewer*/
+    
     void pullData(void);
+    
+    /*pushData sends data to update the scene manager*/
+    
     void pushData(void);
 
 protected:
