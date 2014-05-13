@@ -24,6 +24,11 @@ Scene::Scene(int GridSize){
 		_grid[i]=new int[_gridsize];
 }
 
+Scene::~Scene()
+{
+	std::cout << "Scene destructor called" << std::endl;
+}
+
 void Scene::set_navigation_matrix(osg::Matrix mat){
 	_navigation_matrix->setMatrix(mat);
 }
