@@ -31,12 +31,16 @@
 #include <gmtl/Output.h>
 #include <gmtl/Generate.h>
 
+// Local headers
 #include "VRBuilderApp.h"
 #include "nav.h"
 #include "myType.h"
 
 // Cluster data object to check for the master
 extern cluster::UserData< vpr::SerializableObjectMixin<myType> > mMyData;
+
+// Forward declarations
+class AppManager;
 
 class JugglerInterface : public vrj::osg::App
 {
@@ -49,7 +53,7 @@ class JugglerInterface : public vrj::osg::App
 
 public:
 	// Constructor/Destructor
-    JugglerInterface(vrj::Kernel* kern, int & argc, char** argv);
+    JugglerInterface(vrj::Kernel* kern, int & argc, char** argv, AppManager* appMan);
     virtual ~JugglerInterface();
 
 	// Juggler draw loop methods
@@ -66,7 +70,13 @@ public:
 	
 	virtual osg::Group* getScene();
 
+protected:
+	
+	/** Weak ref of application manager so that we can update it every frame. */
+	AppManager*	_appManager;
+
   private:
+
 	osg::ref_ptr<osg::FrameStamp> _frameStamp;
 	gadget::PositionInterface  _wand;    /**< Positional interface for Wand position */
 	gadget::PositionInterface  _head;    /**< Positional interface for Head position */
@@ -99,8 +109,8 @@ public:
 	double	_previousFrameTime;
 	int		_frameCount;
 	float 	_fadeInTime;
-	float 	_fadeOutTime;
-	
+	float 	_fadeOutTime;	
+
 	// Controls the navigation type
 	NAVIGATION_TYPE _navType;
 

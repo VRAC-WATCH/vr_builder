@@ -80,7 +80,15 @@ SET(CORE_HEADERS 	include/AppManager.h
 					include/VRBuilderApp.h)
 											 
  # UI
+<<<<<<< HEAD
 SET(UI_HEADERS 	include/CameraController.h
+=======
+SET(UI_SOURCES 	src/Builder.cpp
+				src/Scene.cpp)
+SET(UI_HEADERS 	include/CameraController.h
+				include/Builder.h
+				include/SceneCommand.h)
+>>>>>>> builder
 
 # Wrap all source and header files into single var
 SET(VR_BUILDER_SOURCES	${CORE_SOURCES} 

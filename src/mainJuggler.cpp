@@ -9,6 +9,7 @@
 #include <vrj/Kernel/Kernel.h>
 
 // Local
+#include "AppManager.h"
 #include "JugglerInterface.h"
 //#include <SceneManager.h>
 
@@ -18,7 +19,9 @@ int main(int argc, char* argv[])
 	// Allocate the kernel object and the application object
 	Kernel* kernel = Kernel::instance();
 
-	JugglerInterface* application = new JugglerInterface(kernel, argc, argv);			 // Instantiate an instance of the app
+	// Setup the application manager and Juggler interface
+	AppManager* app_man = new AppManager();
+	JugglerInterface* application = new JugglerInterface(kernel, argc, argv, app_man);			 // Instantiate an instance of the app
 
 	// If no args passed to the program
 	// Display usage information and exit

@@ -64,7 +64,7 @@ void VRBuilderApp::init()
 	scenecommand.blockSize=osg::Vec3(1,1,1);
 	scenecommand.color=osg::Vec4(1,0,0,1);
 	scenecommand.position=osg::Vec3(0,5,-7.5);
-	scenecommand.command=SceneCommand::ADD_BLOCK;
+	scenecommand.commandType=SceneCommand::ADD_BLOCK;
 	scenecommand.textureFileName="../resources/Metalic_texture.bmp";
 	mModelGroup->addChild(Builder::instance().createBlock(scenecommand));
 }

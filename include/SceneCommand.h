@@ -9,9 +9,11 @@
 #ifndef VRBuilder_SceneCommand_h
 #define VRBuilder_SceneCommand_h
 
+// OSG headers
 #include <osg/Vec3>
 
 typedef osg::Vec3 v3;
+
 /**
  * The SceneCommand structure will be used to communicate
  * any input from the user to the system and eventually
@@ -23,8 +25,8 @@ struct SceneCommand {
 	enum CommandType {
 		ADD_BLOCK,
 		MODE_CHANGE,
-		SET_CURSOR_POS,
-		TRANSPARENT_BLOCK
+		TRANSPARENT_BLOCK,
+		SET_CURSOR_POS
 	};
 	
 	/** Enumeration of game modes possible. */
@@ -33,13 +35,14 @@ struct SceneCommand {
 		PHYSICS
 	};
 	
-	/** Possible command arguments. */
-	v3 position;
-	v3 blockSize;
-	osg::Vec4 color;
-	std::string textureFileName;
-	GameMode currentGameMode;
-	CommandType command;
+	/** Possible command arguments. */	
+	v3				blockSize;
+	osg::Vec4 		color;
+	CommandType		commandType;
+	GameMode		currentGameMode;
+	v3				magnitude;
+	v3 				position;
+	std::string 	textureFileName;
 };
 
 #endif

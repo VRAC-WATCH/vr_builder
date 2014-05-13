@@ -15,13 +15,20 @@
 class AppManager {
     
 public:
+
+	/** Default Constructor. */
+	AppManager();
+
+	/** Destructor. */
+	~AppManager();
     
     /* pullData retreives the necessary data from the Interaction Manager and UiViewer*/
-    void pullData(void);
+    void update(void);
     
     /*Declares the wether GLUT or JUGGLER type*/
-    void interactionType(enum type);
-    
+    //void interactionType(enum type);
+
+
 protected:
     
     InteractionManager*    _interactionManager;
