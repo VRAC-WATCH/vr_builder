@@ -21,18 +21,22 @@ class Scene;
 class SceneManager
 {
 public:
+	
+	/** Default constructor. */
+	SceneManager();
+	
+	/** Destructor. */
+	~SceneManager();
     
-    //reads in an input from the Application Manager
-    void listenAppManger(const SceneCommand& commands);
-    
-    //Intended to store the location of the blocks in the scene in progress
-    //may end up moving somewhere else
-    void storeBlock(const SceneCommand& commands);
+    // Takes updates in the form of SceneCommands and
+	// turns them into something visualized in the scene
+    void update(const std::vector<SceneCommand> &commands);
+
 
 private:
 	
 	/** iVars. */
-	osg::ref_ptr<SceneCommand> _scene;
+	Scene*	_scene;
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */
