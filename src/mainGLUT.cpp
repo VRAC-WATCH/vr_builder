@@ -1,6 +1,7 @@
 // System headers
 #include <stdarg.h>
 #include <iostream>
+#include <stdlib.h>
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -9,7 +10,7 @@
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
 #else
-#  include <GL/glut.h>
+#include <glut.h>
 #endif
 
 // OSG headers
@@ -431,6 +432,7 @@ void keyUpBoard(unsigned char key, int x, int y)
 		case 'x': gCamera.setRaise(false);		break;
 		
 		case ' ':	VRBuilderApp::instance().buttonInput(0, false);	break;		//space bar controls the main wand button
+		case 'h':	VRBuilderApp::instance().buttonInput(1,true); break;
 	}
 
 	glutPostRedisplay();
