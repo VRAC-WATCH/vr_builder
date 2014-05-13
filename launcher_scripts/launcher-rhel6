@@ -1,0 +1,578 @@
+#!/bin/sh
+#
+# Script by: Glen Galvin <galvin@iastate.edu> 
+# Copyright: Virtual Reality Applications Center at Iowa State University
+#
+
+# Setup umask so any files a user creates (like a state file) can be deleted by the next user. 
+umask 0000
+
+# Setup tmp file location that is accessible to all nodes. Could use scp if not available.
+TMPDIR=${HOME}/.cluster
+TMPFILE=${TMPDIR}/$$
+if [ ! -d ${TMPDIR} ] ; then		# If directory tmpdir does not exist then create it.
+   mkdir ${TMPDIR}
+fi
+
+# 
+# SSH - Add following line to end of file /etc/ssh/ssh_config: 
+#       UserKnownHostsFile /etc/ssh/ssh_known_hosts
+#     This keeps users from having to add known hosts to their personal files. 
+SSH_KNOWN_HOSTS_LOCAL=~/.ssh/known_hosts
+SSH_KNOWN_HOSTS_GLOBAL=/etc/ssh/ssh_known_hosts
+
+
+# Print out all the stuff on how to use this script
+function usage ()
+{
+	echo ""
+	echo ""
+	echo "#########################################################################################"
+	echo "Usage: 	"
+	echo "   launcher-rhel6 [-aud,-aud-mosaic,-c1, -c6,-conf,-dev, -metal, -mirage,-sa] [-k,-unblank] [carrier,asds,universe]"
+	echo "	"
+	echo " To stop an application:"
+	echo "   launcher-rhel6 -mirage -k [carrier,asds,universe]"
+	echo ""
+	echo "Available options"
+	echo "   -aud        Launches the application in the Auditorium"
+	echo "   -aud-mosaic Launches the application in the Auditorium Mosic mode"
+	echo "   -c1         Launches the application on backwall of the C6"
+	echo "   -c6         Launches the application in the C6"
+	echo "   -conf       Launches the application in the Conference Room"
+	echo "   -dev        Launches the application in the devel cluster"
+	echo "   -metal      Launches the application in the METaL lab"
+	echo "   -mirage     Launches the application in the Mirage/Veldt"
+	echo "   -sa         Launches the application in Standalone mode"
+	echo ""
+	echo "   asds        ASDS Immersive Viewer demo"
+	echo "   asdsdev     ASDS Dev version Immersive Viewer demo"
+	echo "   carrier     Carrier walkaround demo with only F/A-18 Hornet models"
+	echo "   boeing      Carrier walkaround demo with only FA-XX models"
+	echo "   vipre      Medical Imaging Application"
+	echo "   universe    Virtual Universe demo"
+	echo "   battlespace Battlespace - UAV demo"
+	echo ""
+        echo "Available service options"
+	echo "   gfx         Render nodes - restarts graphics"
+	echo "   reboot      Render nodes - reboot nodes"
+	echo ""
+	echo "Example: to run the carrier application in the auditorium"
+	echo "   launcher-rhel6 -aud carrier"
+	echo ""
+	echo "Example: to stop the carrier application in the auditorium"
+	echo "   launcher-rhel6 -aud -k carrier"
+	echo "#########################################################################################"
+	echo ""
+	echo ""
+}
+
+#######################################################################################################
+
+
+function check_ssh ()
+{
+   # Verify SSH is setup for password-less authentication. Lots of assumptions here. 
+   # SSH file locations
+   PUBKEYFILE=~/.ssh/id_rsa.pub
+   AUTHKEYFILE=~/.ssh/authorized_keys2
+   #
+   # Check if pub key file exists, if it does not then create new public key (passwordless)
+   if [ ! -e $PUBKEYFILE ] ; then
+      echo "$WARNING $PUBKEYFILE is missing $NULL"
+      echo "$INFO Generating RSA keys. $NULL"
+      /usr/bin/ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -C '' -N ''
+   fi
+   #
+   # Get contents of keyfile - foolishly assuming only 1 key in file
+   PUBKEY=`cat $PUBKEYFILE`
+   #
+   # Check if an authorized host file exists, if not then create a new one with our pub key
+   if [ ! -e $AUTHKEYFILE ] ; then
+      echo "$WARNING $AUTHKEYFILE is missing $NULL"
+      echo "$INFO Creating authorized key file $NULL"
+      cp $PUBKEYFILE $AUTHKEYFILE
+   fi
+   #
+   # Check if our pub key exists in our auth host key file, if not then append it
+   if [ ! "`grep "${PUBKEY}" ${AUTHKEYFILE}`" ] ; then
+      echo "$WARNING Public key missing from authorized key file - adding it $NULL"
+      echo $PUBKEY >> $AUTHKEYFILE
+   fi
+   # 
+   # SSH is assumed ready now
+}
+
+function kill_app ()
+{
+   if [ -z "$1" ] ; then echo "ERROR: kill_app function is missing an argument!" ; 
+   else 
+
+      case "$1" in
+         "-reboot") 
+               shift
+               echo "Initiating reboot of nodes"
+               for node in $nodelist ; do
+                  ssh -4 -f ${node} -C "$1" > /dev/null 2>&1 &
+               done;;
+         "-gfx") 
+               shift
+               echo "Initiating graphic reset of nodes"
+               for node in $nodelist ; do
+                  ssh -4 -f ${node} -C "$1" > /dev/null 2>&1 &
+               done;;
+         *)    
+               for node in $nodelist ; do
+                  echo "Killing app $1 on node ${node}"
+                  ssh -4 -f ${node} -C "killall notification-daemon $1 ; echo killing $1 on ${node} ; killall -9 $1" > /dev/null 2>&1 &
+               done ;;
+      esac
+   fi
+}
+
+function start_app () 
+{
+   blanking off
+   for node in $nodelist ; do
+      echo "Launching $* to node $node"
+      case "$node" in
+        # We want to define some master and slave combinations
+        aud-master|discovery|discovery.vrac.iastate.edu) 
+              #framelock on
+              $* | tee ~/.cluster/${node}.out & 
+              sleep 2 ;;
+        aud-*) ssh $node "$*" >  ~/.cluster/${node}.out & ;;
+
+        metal.vrac.iastate.edu|metal) 
+              #framelock on
+              $* | tee ~/.cluster/${node}.out & 
+              sleep 2 ;;
+        metal-render) ssh $node "$*" >  ~/.cluster/${node}.out & ;;
+
+        mirage-master|clinton.vrac.iastate.edu) 
+              #framelock on
+              $* | tee ~/.cluster/${node}.out & 
+              sleep 2 ;;
+        mirage-?) ssh $node "$*" >  ~/.cluster/${node}.out & ;;
+
+        zion.vrac.iastate.edu|zion) 
+              framelock on ; 
+              $* | tee ~/.cluster/${node}.out & 
+              sleep 2 ;;
+        zion-*)  sleep 0.1; ssh -4 ${node}-vlan "$*" >  ~/.cluster/${node}.out & ;;
+
+        *) echo "ERROR: Nodes not defined"; exit;; 
+      esac
+   done 
+}
+
+function blanking()
+{
+   echo -e "Unblanking display : \c"
+   for node in $nodelist  ; do 
+      echo -e "${node}\c"
+      /usr/bin/xset -display ${node}:0.0 s 0
+      /usr/bin/xset -display ${node}:0.0 s reset
+      /usr/bin/xset -display ${node}:0.0 -dpms
+      echo -e ".\c"
+   done
+   echo 
+}
+
+#######################################################################################################
+
+
+function asds()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app asdsViewer
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/asdsViewer-v3.1.0/app-rhel6/launch_asdsViewer_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         c1)                    start_app  "/home/vr/apps/ASDS/demos/asdsViewer-v3.1.0/app-rhel5/launch_asdsViewer_c1_framelocked" ;;
+         #c6)                    start_app  "/home/vr/apps/ASDS/demos/asdsViewer-v3.1.0/app-rhel5/launch_asdsViewer_c6_framelocked" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+         conference_room)       start_app  "${shortcut}conference_room" ;;
+         dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         metal)                 start_app  "${shortcut}metal" ;;
+         mirage)                start_app  "${shortcut}mirage" ;;
+         standalone)            start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+function asdsdev()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app asdsViewer
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/asdsViewer/app-rhel6/launch_asdsViewer_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+#         c1)                    start_app  "/home/vr/apps/ASDS/demos/asdsViewer-v3.1.0/app-rhel5/launch_asdsViewer_c1_framelocked" ;;
+         c6)                    start_app  "/home/users/vkk2/RESEARCH/asds/asdsViewer/applications/launch_asdsViewer_rhel6_c6" ;;
+#         c6)                    start_app  "/home/vr/Applications/watch-apps/rhel6/asdsViewer/applications/launch_asdsViewer_c6" ;;
+         conference_room)       start_app  "${shortcut}conference_room" ;;
+         dev|dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         metal)                 start_app  "${shortcut}metal" ;;
+         mirage)                start_app  "${shortcut}mirage" ;;
+         #standalone)            start_app  "${shortcut}standalone" ;;
+#         standalone)            start_app  "/home/users/vkk2/RESEARCH/asds/asdsViewer/applications/launch_asdsViewer_rhel6_standalone" ;;
+         standalone)            start_app  "/home/users/vkk2/RESEARCH/asds/asdsViewer/applications/launch_asdsViewer_rhel6_Samsung55" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+function boeing()
+{
+   if [ $1 = "stop" ] ; then 
+      kill_app boeing
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/boeing-1.1/app-rhel6/launch_boeing_"
+      case $facility in
+         auditorium) 		start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic) 	start_app  "${shortcut}auditorium_mosaic" ;;
+#         c1) 			start_app  "/home/users/cnoon15/source/vrac/boeing/scripts/launch_carrier_c1_framelocked" ;;
+         #c6) 			start_app  "/home/users/cnoon15/source/vrac/boeing/scripts/launch_boeing_c6_framelocked" ;;
+         c6) 			start_app  "${shortcut}c6" ;;
+         conference_room) 	start_app  "${shortcut}conference_room" ;;
+         dev|dev-cluster) 		start_app  "${shortcut}dev_cluster" ;;
+         metal) 		start_app  "${shortcut}metal" ;;
+         mirage) 		start_app  "${shortcut}mirage" ;;
+         standalone) 		start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+
+function carrier()
+{
+   if [ $1 = "stop" ] ; then 
+      kill_app carrier
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/carrier-1.1/app-rhel6/launch_carrier_"
+      case $facility in
+         auditorium) 		start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic) 	start_app  "${shortcut}auditorium_mosaic" ;;
+         #c1) 			start_app  "/home/users/cnoon15/source/vrac/boeing/scripts/launch_carrier_c1_framelocked" ;;
+         #c6) 			start_app  "/home/users/cnoon15/source/vrac/boeing/scripts/launch_carrier_c6_framelocked" ;;
+         c6) 			start_app  "${shortcut}c6" ;;
+         conference_room) 	start_app  "${shortcut}conference_room" ;;
+         dev|dev-cluster) 		start_app  "${shortcut}dev_cluster" ;;
+         metal) 		start_app  "${shortcut}metal" ;;
+         mirage) 		start_app  "${shortcut}mirage" ;;
+         standalone) 		start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+
+function vipre()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app vipre
+   else # assume all else means start
+      shortcut="/home/vr/Applications/watch-apps/rhel6/vipre-0.1/app-rhel6/launch_vipre_"
+      case $facility in
+         #auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         #c1)                    start_app  "/home/vr/Applications/watch-apps/rhel5/isis-0.4/applications/launch_isisvr_c1" ;;
+         #c6)                    start_app  "/home/vr/Applications/watch-apps/rhel5/isis-0.4/applications/launch_isisvr_c6_framelocked" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+         #conference_room)       start_app  "${shortcut}conference_room" ;;
+         #dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         #metal)                 start_app  "${shortcut}metal" ;;
+         #mirage)                start_app  "${shortcut}mirage" ;;
+         #standalone)            start_app  "/home/vr/Applications/watch-apps/rhel5/isis-0.4/applications/launch_isisvr_standalone" ;;
+         *)                     echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+
+function gfx()
+{
+      shortcut="/home/vr/apps/launcher/scripts/gfx_"
+      case $facility in
+         #auditorium)            start_app  "${shortcut}auditorium" ;;
+         #auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         c1)                     kill_app  -gfx "${shortcut}${facility}" ;;
+         c6)                     kill_app  -gfx "${shortcut}${facility}" ;;
+         #c6)                    start_app  "sudo /usr/local/bin/gfxrestart" ;;
+         #conference_room)       start_app  "${shortcut}conference_room" ;;
+         #dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         #metal)                 start_app  "${shortcut}metal" ;;
+         #mirage)                start_app  "${shortcut}mirage" ;;
+         #standalone)            start_app  "${shortcut}standalone" ;;
+         *)                     echo "ERROR: No gfx script found for ${facility}"
+      esac
+}
+
+function reboot()
+{
+      shortcut="/home/vr/apps/launcher/scripts/reboot_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}${facility}" ;;
+         auditorium_mosaic)     start_app  "${shortcut}${facility}" ;;
+         c1)			kill_app -reboot "${shortcut}${facility}";;
+         c6)			kill_app -reboot "${shortcut}${facility}";;
+         #conference_room)       start_app  "${shortcut}${facility}" ;;
+         dev|dev-cluster)           start_app  "${shortcut}${facility}" ;;
+         metal)                 start_app  "${shortcut}${facility}" ;;
+         mirage)                start_app  "${shortcut}${facility}" ;;
+         #standalone)            start_app  "${shortcut}" ;;
+         *)                     echo "ERROR: No reboot script found for ${facility}"
+      esac
+}
+
+function TestPhysics()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app TestPhysics
+      #kill_app OSGSampleVRJ
+   else # assume all else means start
+      shortcut="/home/users/bhaskarb/osgBullet_03_00_00/Test/launcher_scripts/launch_TestPhysics_"
+		#shortcut="/home/vr/apps/WATCH/SourceCode/JugglerCar/launcher/launch_JugglerCar_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         c1)                    start_app  "/home/vr/apps/ASDS/demos/asdsViewer-v3.1.0/app-rhel5/launch_asdsViewer_c1_framelocked" ;;
+         #c6)                    start_app  "/home/vr/apps/ASDS/demos/asdsViewer-v3.1.0/app-rhel5/launch_asdsViewer_c6_framelocked" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+         conference_room)       start_app  "${shortcut}conference_room" ;;
+         dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         metal)                 start_app  "${shortcut}metal" ;;
+         mirage)                start_app  "${shortcut}mirage" ;;
+         standalone)            start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+
+function universe()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app virtualUniverse
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/virtualUniverse-1.3/app-rhel6/launch_virtualUniverse_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         #c1)                    start_app  "/mnt/morpheus/vr/Applications/watch-apps/rhel6/virtualUniverse-1.3/app-rhel6/launch_virtualUniverse_c1" ;;
+         #c1)                    start_app  "/mnt/morpheus/vr/Applications/watch-apps/rhel6/virtualUniverse-1.3/app-rhel6/launch_virtualUniverse_c6" ;;
+         c1)                    start_app  "${shortcut}c1" ;;
+         #c6)                    start_app  "/home/users/cnoon15/source/vrac/universe/scripts/launch_universe_c6_framelocked" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+         conference_room)       start_app  "${shortcut}conference_room" ;;
+         dev|dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+         metal)                 start_app  "${shortcut}metal" ;;
+         mirage)                start_app  "${shortcut}mirage" ;;
+         standalone)            start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+function vrviewer()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app vrViewer
+   else # assume all else means start
+      shortcut="/home/users/vkk2/PROJECTS/vrViewerRevival/vrViewer/build/launch_vrViewer_"
+      case $facility in
+         auditorium)            start_app  "${shortcut}auditorium" ;;
+         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+#         c1)                    start_app  "/mnt/morpheus/vr/Applications/watch-apps/rhel6/virtualUniverse-1.3/app-rhel6/launch_virtualUniverse_c1" ;;
+#         c1)                    start_app  "/mnt/morpheus/vr/Applications/watch-apps/rhel6/virtualUniverse-1.3/app-rhel6/launch_virtualUniverse_c6" ;;
+#         c1)                    start_app  "${shortcut}c1" ;;
+#         c6)                    start_app  "/home/users/cnoon15/source/vrac/universe/scripts/launch_universe_c6_framelocked" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+         conference_room)       start_app  "${shortcut}conference_room" ;;
+         dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+#         metal)                 start_app  "${shortcut}metal" ;;
+         mirage)                start_app  "${shortcut}mirage" ;;
+         standalone)            start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+function battlespace()
+{
+   if [ $1 = "stop" ] ; then
+      kill_app vrViewer
+   else # assume all else means start
+      shortcut="/home/vr/apps/watch-apps/rhel6/battlespace/app-rhel6/launch_battlespace_"
+      case $facility in
+#         auditorium)            start_app  "${shortcut}auditorium" ;;
+#         auditorium_mosaic)     start_app  "${shortcut}auditorium_mosaic" ;;
+         c6)                    start_app  "${shortcut}c6" ;;
+#         conference_room)       start_app  "${shortcut}conference_room" ;;
+#         dev-cluster)           start_app  "${shortcut}dev_cluster" ;;
+#         mirage)                start_app  "${shortcut}mirage" ;;
+#         standalone)            start_app  "${shortcut}standalone" ;;
+         *) 			echo "ERROR: No script found at ${shortcut}${facility}"
+      esac
+   fi
+}
+
+###############################################################################################################
+
+# Set the nodelist according the firsts commandline option
+kill="false"
+usageCalled="false"
+faculity=""
+
+case $1 in  # Parse first element passed for facility
+	-h|--help|"")
+		usage
+                exit ;;
+	-aud|-auditorium)
+		facility="auditorium"
+		nodelist="discovery aud-left aud-right" ;;
+	-aud-mosaic|-auditorium-mosaic)
+		facility="auditorium_mosaic"
+		nodelist="discovery aud-left aud-right" ;;
+	-dev|-dev-cluster)
+		facility="standalone" ;;
+	-c1|-C1)
+		facility="c1"
+		nodelist="zion" 
+		nodelist="$nodelist zion-1-vlan zion-2-vlan zion-3-vlan  zion-4-vlan  zion-5-vlan zion-6-vlan  zion-7-vlan  zion-8-vlan" 
+	#	nodelist="$nodelist zion-9-vlan  zion-10-vlan zion-11-vlan zion-12-vlan zion-13-vlan zion-14-vlan zion-15-vlan zion-16-vlan "
+		#nodelist="$nodelist zion-17-vlan zion-18-vlan zion-19-vlan zion-20-vlan zion-21-vlan zion-22-vlan zion-23-vlan zion-24-vlan "
+		#nodelist="$nodelist zion-25-vlan zion-26-vlan zion-27-vlan zion-28-vlan zion-29-vlan zion-30-vlan zion-31-vlan zion-32-vlan "
+		#nodelist="$nodelist zion-33-vlan zion-34-vlan zion-35-vlan zion-36-vlan zion-37-vlan zion-38-vlan zion-39-vlan zion-40-vlan "
+		#nodelist="$nodelist zion-41-vlan zion-42-vlan zion-43-vlan zion-44-vlan zion-45-vlan zion-46-vlan zion-47-vlan zion-48-vlan "
+		;;
+	-c6|-C6)
+		facility="c6"
+		nodelist="zion              zion-1  zion-2  zion-3  zion-4  zion-5  zion-6  zion-7  zion-8  zion-9"
+		#nodelist="zion              zion-1  zion-2  zion-3  zion-4  zion-5  zion-6  zion-7    zion-9"
+		nodelist="$nodelist zion-10 zion-11 zion-12 zion-13 zion-14 zion-15 zion-16 zion-17 zion-18 zion-19"
+		nodelist="$nodelist zion-20 zion-21 zion-22 zion-23 zion-24 zion-25 zion-26 zion-27 zion-28 zion-29"
+		nodelist="$nodelist zion-30 zion-31 zion-32 zion-33 zion-34 zion-35 zion-36 zion-37 zion-38 zion-39"
+		nodelist="$nodelist zion-40 zion-41 zion-42 zion-43 zion-44 zion-45 zion-46 zion-47 zion-48 " ;;
+        -metal)
+                facility="metal"
+                nodelist="metal metal-render" ;;
+        -mirage|-Mirage)
+                facility="mirage"
+                nodelist="mirage-master mirage-1 mirage-2 mirage-3 mirage-4 mirage-5 mirage-6" ;;
+	-sa|-standalone)
+		nodelist="`hostname`"
+		facility="standalone" ;;
+	-k)
+ 		echo "ERROR - You must specify a system on which to execute this command!"
+                exit ;;
+	*)
+		usage
+                exit
+		usageCalled="true" ;;
+esac
+shift # Move onto second element
+
+# Parse second element to see if unblank or kill command
+case $1 in 
+   -k) kill="true" ; shift ;;
+   -unblank) blanking off; exit ;;
+esac
+      
+# Check that SSH is setup for password-less authentication
+check_ssh
+
+# Parse application element
+case $1 in
+	asds)
+		if ($kill = "true") ; then
+			asds stop 
+		else
+			asds start
+		fi
+	;;
+	asdsdev)
+		if ($kill = "true") ; then
+			asdsdev stop 
+		else
+			asdsdev start
+		fi
+	;;
+	carrier)
+                #shift 
+		if ($kill = "true") ; then
+			carrier stop
+		else
+			carrier start
+		fi
+	;;
+	boeing)
+                #shift 
+		if ($kill = "true") ; then
+			boeing stop
+		else
+			boeing start
+		fi
+	;;
+    	gfx)
+	        gfx;;	
+        vipre)
+                #shift 
+                if ($kill = "true") ; then
+                        vipre stop
+                else
+                        vipre start
+                fi
+        ;;
+
+    	reboot)
+	        reboot;;
+
+	testphysics)
+		if ($kill = "true") ; then
+			TestPhysics stop
+		else
+			TestPhysics start
+		fi
+	;;
+		
+	universe)
+		if ($kill = "true") ; then
+			universe stop
+		else
+			universe start
+		fi
+	;;
+
+	vrviewer)
+		if ($kill = "true") ; then
+			vrviewer stop
+		else
+			vrviewer start
+		fi
+	;;
+
+	battlespace)
+		if ($kill = "true") ; then
+			battlespace stop
+		else
+			battlespace start
+		fi
+	;;
+
+
+	*)
+		if ($kill = "true") ; then
+			kill_app $1
+		else
+			start_app $1
+		fi
+	;;
+esac
