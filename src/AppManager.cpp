@@ -13,12 +13,13 @@ void AppManager::pullData (void)
 {
     /*The sceneCommandList is populated*/
     _interactionManager->update();
-    _sceneCommandList = _interactionManager->sceneCommands();
+    std::vector<SceneCommand> _sceneCommandList = _interactionManager->sceneCommands();
     
-    pushData();
+    /*The sceneCommandList is pushed to the SceneManager*/
+    _sceneManager->update(_sceneCommandList);
 }
 
-void AppManager::pushData(void)
+void AppManager::interactionType(enum type)
 {
-    
+    _interactionGLUTManager = _interactionManager->InteractionManager(InterfaceType type);
 }
