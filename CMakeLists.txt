@@ -64,50 +64,34 @@ SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSG_INCLUDE_DIR})
 ################################################################################
 # Sets the variables for the source and header files to use in the program
 ################################################################################
-# Common
-SET(COMMON_SOURCES ) 	#src/common/Settings.cpp)				
-SET(COMMON_HEADERS )	#include/common/Enums.h
-# 					include/common/Settings.h
-# 					include/common/UIState.h)
 
 # Core
-SET(CORE_SOURCES 	src/mainGLUT.cpp
+SET(CORE_SOURCES 	src/AppManager.cpp
+					src/mainGLUT.cpp
+					src/GlutKeyboardInput.cpp
 					src/Input.cpp
 					src/InteractionManager.cpp
-					src/GlutKeyboardInput.cpp
-					src/VRBuilderApp.cpp)				
-SET(CORE_HEADERS 	include/Input.h
-					include/VRBuilderApp.h
+					src/SceneManager.cpp
+					src/VRBuilderApp.cpp)
+					
+SET(CORE_HEADERS 	include/AppManager.h
 					include/GlutKeyboardInput.h
-					include/InteractionManager.h)
+					include/Input.h
+					include/InteractionManager.h
+					include/SceneManager.h
+					include/VRBuilderApp.h)
 											 
  # UI
-<<<<<<< HEAD
-SET(UI_SOURCES 	src/VRBuilderApp.cpp
-=======
-SET(UI_SOURCES 	)
->>>>>>> master
-				# src/GridElement.cpp
-				# src/GridStructure2D.cpp
-				# src/Scenegraph.cpp
-				  src/Builder.cpp)
+SET(UI_SOURCES 	src/Builder.cpp
+				src/Scene.cpp)
 SET(UI_HEADERS 	include/CameraController.h
-				# include/GridElement.h
-				# include/GridStructure2D.h
-				# include/Scenegraph.h
-<<<<<<< HEAD
-				include/VRBuilderApp.h
-				include/Builder.h)
-=======
+				include/Builder.h
 				include/SceneCommand.h)
->>>>>>> master
 
 # Wrap all source and header files into single var
-SET(VR_BUILDER_SOURCES 	${COMMON_SOURCES}
-						${CORE_SOURCES} 
+SET(VR_BUILDER_SOURCES	${CORE_SOURCES} 
 						${UI_SOURCES})
-SET(VR_BUILDER_HEADERS	${COMMON_HEADERS}
-						${CORE_HEADERS} 
+SET(VR_BUILDER_HEADERS	${CORE_HEADERS} 
 						${UI_HEADERS})
 
 

@@ -21,6 +21,7 @@
 #include "CameraController.h"
 #include "InteractionManager.h"
 #include "GlutKeyboardInput.h"
+#include "SceneManager.h"
 #include "VRBuilderApp.h"
 
 int screenWidth = 1024;

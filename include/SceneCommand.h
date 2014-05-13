@@ -14,6 +14,7 @@
 
 typedef osg::Vec3 v3;
 
+
 /**
  * The SceneCommand structure will be used to communicate
  * any input from the user to the system and eventually
