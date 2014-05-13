@@ -7,6 +7,8 @@
  *
  */
 
+// Local headers
+#include "AppManager.h"
 #include "JugglerInterface.h"
 
 // Global variables
@@ -14,7 +16,7 @@ float _navSpeed = 1.0;
 float _rotSpeed = 100.0;
 cluster::UserData< vpr::SerializableObjectMixin<myType> > mMyData;
 
-JugglerInterface::JugglerInterface(vrj::Kernel* kern, int& argc, char** argv) : vrj::OsgApp(kern)
+JugglerInterface::JugglerInterface(vrj::Kernel* kern, int& argc, char** argv, AppManager* appMan) : vrj::OsgApp(kern)
 { 
 	_initialTime = 0.0;
 	_previousFrameTime = 0.0;
@@ -27,7 +29,7 @@ JugglerInterface::JugglerInterface(vrj::Kernel* kern, int& argc, char** argv) : 
 	_fadeInTime = 0.0;
 	_fadeOutTime = 8.0;
 
-	
+	_appManager = appMan;
 }
 
 JugglerInterface::~JugglerInterface()
@@ -263,11 +265,11 @@ void JugglerInterface::preFrame()
 
 void JugglerInterface::latePreFrame()
 {
-
 	static double tLast = _head->getTimeStamp().secd();
 	double tNow = _head->getTimeStamp().secd();
 	double dt = tNow - tLast;
 	tLast = tNow;
+	
 	// Pass changes in button state on to the app
 	for (int i = 0; i < 10; i++)
 	{
@@ -312,6 +314,9 @@ void JugglerInterface::latePreFrame()
 
 	// Actually push out the new matrix
 	VRBuilderApp::instance().setNavigationMatrix(osg_current_matrix);
+
+	// Tell the app manager to update itself
+	_appManager->update();
 
 	// Finish updating the scene graph.
 	vrj::osg::App::latePreFrame();

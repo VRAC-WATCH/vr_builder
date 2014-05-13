@@ -15,12 +15,16 @@
 class AppManager {
     
 public:
+
+	/** Default Constructor. */
+	AppManager();
+
+	/** Destructor. */
+	~AppManager();
     
     /* pullData retreives the necessary data from the Interaction Manager and UiViewer*/
-    void pullData(void);
+    void update(void);
     
-    /*pushData sends data to update the scene manager*/
-    void pushData(void);
 
 protected:
     
