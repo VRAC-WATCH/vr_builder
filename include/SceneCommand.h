@@ -46,6 +46,7 @@ struct SceneCommand {
 	GameMode currentGameMode;
 	CommandType command;
 	CursorMovement cursormovement;
+	osg::Vec3 position;
 };
 
 #endif

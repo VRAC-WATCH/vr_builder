@@ -25,7 +25,12 @@
 //BULLET Headers
 #include <btBulletDynamicsCommon.h>
 
+//STD HEADERS
+#include <vector>
+using namespace std;
+
 #include "SceneCommand.h"
+#include "Builder.h"
 
 #define BLINK_SPEED 20
 
@@ -46,7 +51,7 @@ class Scene{
 	osg::ref_ptr<osg::LightSource> _lightsource;
 
 	int _gridsize,_gridblocksize;
-	int** _grid;
+	vector<vector<vector<SceneCommand> > > _grid;
 
 	SceneCommand::GameMode _gamemode;
 
@@ -63,9 +68,13 @@ class Scene{
 	
 	/*Move the cursor*/
 	void set_cursor_position(osg::Matrix);
-	
+
+	/*Check cursor position according to the grid*/
+	void check_cursor_position();
 	/*Check cursor bounds*/
 	bool check_cursor_bounds(osg::Vec3);
+	/*Throw projectiles*/
+	osg::Node* throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse);
 public:
 	/*Constructor  
 		GridSize - Input the size of the grid (assumed square)
@@ -92,7 +101,7 @@ public:
 		Future Work -  it will provide a node id which later can be used to remove the ids etc.
 
 	*/
-	int add_model_node(osg::Node* model);
+	int add_model_node(SceneCommand sc);
 
 	/*Remove the model node based on id - does nothing now*/
 	void remove_model_node(int);
@@ -110,5 +119,7 @@ public:
 	void movecursor_right();
 	void movecursor_up();
 	void movecursor_down();
-    
+
+	/*Change the mode*/
+	void changemode();
 };

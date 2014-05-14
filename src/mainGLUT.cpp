@@ -426,6 +426,8 @@ void keyUpBoard(unsigned char key, int x, int y)
 		
 		case ' ':	VRBuilderApp::instance().buttonInput(0, false);	break;		//space bar controls the main wand button
 		case 'h':	VRBuilderApp::instance().buttonInput(1,true); break;
+		case 'j':	VRBuilderApp::instance().buttonInput(2,true); break;
+		case 'k':	VRBuilderApp::instance().buttonInput(3,true); break;
 	}
 
 	glutPostRedisplay();

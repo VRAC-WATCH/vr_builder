@@ -40,6 +40,8 @@ void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 			_scene->movecursor_down();
 			break;
 		}
+		if(commands[i].command == SceneCommand::ADD_BLOCK)
+			_scene->add_model_node(commands[i]);
 	}
 	_scene->update(t);
 }

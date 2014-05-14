@@ -26,7 +26,7 @@ void AppManager::update(void)
     std::vector<SceneCommand> _sceneCommandList = _interactionManager->sceneCommands();
     
     /*The sceneCommandList is pushed to the SceneManager*/
-    _sceneManager->update(_sceneCommandList);
+    //_sceneManager->update(_sceneCommandList);
 
 	std::cout << "Updating app manager" << std::endl;
 }
