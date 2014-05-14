@@ -44,10 +44,6 @@ CameraController gCamera;
 osg::ref_ptr<osgViewer::Viewer> viewer;
 osg::observer_ptr<osgViewer::GraphicsWindow> window;
 
-
-/** TODO: Change when we add the AppManager. */
-InteractionManager interaction_manager(InteractionManager::GLUT_INTERFACE);
-
 void drawStringOnScreen(int x, int y, const char* format, ...);
 void drawStatus()
 {
@@ -226,9 +222,6 @@ void setLight(float x, float y, float z)
 
 void display(void)
 {
-	// Update the interactions every frame
-	interaction_manager.update();
-	std::cout << "SceneCommands: " << interaction_manager.sceneCommands().size() << std::endl;
 	
     // update and render the scene graph
 	osg::Camera* currentCam = viewer->getCamera();
@@ -461,12 +454,6 @@ int main( int argc, char **argv )
 	glutSpecialFunc(keySpecial);
 	glutKeyboardUpFunc(keyUpBoard);
  
-	// Setup glut input
-	Input* keyboard_input = interaction_manager.inputForType(Input::KEYBOARD);
-	if (keyboard_input) {
-		GlutKeyboardInput* input = dynamic_cast<GlutKeyboardInput*>(keyboard_input);
-		glutSpecialFunc(input->keyboardDown_ptr());
-	}
 	
 	// create the view of the scene.
     viewer = new osgViewer::Viewer;
@@ -477,6 +464,14 @@ int main( int argc, char **argv )
     viewer->realize();
 	glutTimerFunc(100, timer, 0);
 	atexit(quitApp);
+
+	// Setup glut input
+	Input* keyboard_input = VRBuilderApp::instance().pass_keyboard_input();
+	if (keyboard_input) {
+		GlutKeyboardInput* input = dynamic_cast<GlutKeyboardInput*>(keyboard_input);
+		glutSpecialFunc(input->keyboardDown_ptr());
+	}
+	
 	
     glutMainLoop();
     

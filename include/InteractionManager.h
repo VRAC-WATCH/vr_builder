@@ -1,3 +1,6 @@
+
+#pragma once
+
 // System headers
 #include <vector>
 
@@ -5,8 +8,7 @@
 #include "Input.h"
 
 
-class InteractionManager
-{
+class InteractionManager{
 public:
 	
 	/** Enum for declaring the Interface type. */

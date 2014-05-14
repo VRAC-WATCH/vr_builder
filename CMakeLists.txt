@@ -28,25 +28,27 @@ ENDIF()
 ################################################################################
 # Add OS specific paths for finding dependencies to the project
 ################################################################################
-IF(WIN32)
-	SET(CMAKE_PREFIX_PATH "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64")
-	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/osg-3.2.1-rc)
-	SET(GLUT_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/deps/win/glut-3.7)
-ELSEIF(APPLE)
-	SET(CMAKE_XCODE_ATTRIBUTE_SDKROOT macosx10.9)
-	SET(CMAKE_XCODE_ATTRIBUTE_ARCHS "$(ARCHS_STANDARD_64_BIT)")
-	SET(OSG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/mac/osg-3.1.9)
-ELSE(WIN32)
-	# Linux specific commands
-	SET(OSG_DIR /home/vr/Applications/watch-libs/rhel6/openscenegraph-3.0.1)
-ENDIF(WIN32)
 
-
+#Removed it for my benefit *Bhaskar*
 
 ################################################################################
 # Set the dependency paths not set with the FindPackage command
 ################################################################################
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+
+MESSAGE(${CMAKE_MODULE_PATH})
+
+#Add Bullet
+FIND_PACKAGE(Bullet)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BULLET_INCLUDE_DIRS})
+
+#Add OSGWORKS
+FIND_PACKAGE(osgWorks)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGWORKS_INCLUDE_DIRS})
+
+#Add OSGBULLET
+FIND_PACKAGE(osgBullet)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGBULLET_INCLUDE_DIRS})
 
 # Find OpenGL
 FIND_PACKAGE(OpenGL REQUIRED)
@@ -70,17 +72,22 @@ SET(CORE_SOURCES 	src/AppManager.cpp
 					src/Input.cpp
 					src/InteractionManager.cpp
 					src/SceneManager.cpp
-					src/VRBuilderApp.cpp)
+					src/VRBuilderApp.cpp
+					src/Builder.cpp
+					src/Scene.cpp)
 					
 SET(CORE_HEADERS 	include/AppManager.h
 					include/GlutKeyboardInput.h
 					include/Input.h
 					include/InteractionManager.h
 					include/SceneManager.h
-					include/VRBuilderApp.h)
+					include/VRBuilderApp.h
+					include/Builder.h
+					include/Scene.h
+					include/SceneCommand.h)
 											 
  # UI
-SET(UI_HEADERS 	include/CameraController.h
+SET(UI_HEADERS 	include/CameraController.h)
 
 # Wrap all source and header files into single var
 SET(VR_BUILDER_SOURCES	${CORE_SOURCES} 

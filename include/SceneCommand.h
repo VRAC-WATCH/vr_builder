@@ -9,7 +9,7 @@
 #ifndef VRBuilder_SceneCommand_h
 #define VRBuilder_SceneCommand_h
 
-#include <osg/Vec3>
+#include <osg\Array>
 
 typedef osg::Vec3 v3;
 /**
@@ -22,9 +22,16 @@ struct SceneCommand {
 	/** Enumeration of commands possible from the user. */
 	enum CommandType {
 		ADD_BLOCK,
-		MODE_CHANGE,
-		SET_CURSOR_POS,
-		TRANSPARENT_BLOCK
+		MODE_CHANGE
+	};
+
+	/** Enumeration of possible cursor movements */
+
+	enum CursorMovement {
+		CURSOR_UP,
+		CURSOR_DOWN,
+		CURSOR_LEFT,
+		CURSOR_RIGHT
 	};
 	
 	/** Enumeration of game modes possible. */
@@ -34,12 +41,11 @@ struct SceneCommand {
 	};
 	
 	/** Possible command arguments. */
-	v3 position;
-	v3 blockSize;
 	osg::Vec4 color;
 	std::string textureFileName;
 	GameMode currentGameMode;
 	CommandType command;
+	CursorMovement cursormovement;
 };
 
 #endif

@@ -14,12 +14,16 @@
 
 // Local headers
 #include "SceneCommand.h"
+#include "Scene.h"
 
-// Forward declarations
-class Scene;
 
 class SceneManager
 {
+
+private:
+	
+	/** iVars. */
+	Scene*	_scene;
 public:
 	
 	/** Default constructor. */
@@ -30,13 +34,10 @@ public:
     
     // Takes updates in the form of SceneCommands and
 	// turns them into something visualized in the scene
-    void update(const std::vector<SceneCommand> &commands);
+    void update(double t,const std::vector<SceneCommand> &commands);
 
-
-private:
-	
-	/** iVars. */
-	Scene*	_scene;
+	//Return root
+	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */

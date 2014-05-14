@@ -59,7 +59,7 @@ void InteractionManager::update()
 	_sceneCommandList = command_list;
 }
 
-#pragma mark Class Setup
+//#pragma mark Class Setup
 
 void InteractionManager::_setupGlutInputs()
 {

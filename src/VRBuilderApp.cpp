@@ -25,6 +25,7 @@
 #include "XML/XML.h"
 #include "Util.h"
 #include "Builder.h"
+#include "SceneManager.h"
 
 void VRBuilderApp::init()
 {
@@ -32,14 +33,9 @@ void VRBuilderApp::init()
 //	__FUNCTION_HEADER__
 
 	//set up our OSGDB search paths
-	osgDB::getDataFilePathList().push_back("data");
-	osgDB::getDataFilePathList().push_back("data/models");
-	osgDB::getDataFilePathList().push_back("data/shaders");
-	
-	mTotalTime = 0;
 	mRoot = new osg::Group;
 	mNavigation = new osg::MatrixTransform;
-	mRoot->addChild(mNavigation.get());
+	//mRoot->addChild(mNavigation.get());
 	mNavigation->setMatrix(osg::Matrix::translate(osg::Vec3(0,0,0)));
 	mRoot->getOrCreateStateSet()->setMode(GL_NORMALIZE, true);
 	mLightSource = new osg::LightSource;
@@ -58,18 +54,25 @@ void VRBuilderApp::init()
 	mModelGroup->addChild(mWandXForm);
 
 	//Added to test
+	//Builder::instance().init();
+	//mModelGroup->addChild(Builder::instance().createFloor(20,20,osg::Vec3(0,0,0)));
+	//SceneCommand scenecommand;
+	//scenecommand.blockSize=osg::Vec3(1,1,1);
+	//scenecommand.color=osg::Vec4(1,0,0,1);
+	//scenecommand.position=osg::Vec3(0,5,-7.5);
+	//scenecommand.command=SceneCommand::ADD_BLOCK;
+	//scenecommand.textureFileName="../resources/Metalic_texture.bmp";
+	//mModelGroup->addChild(Builder::instance().createBlock(scenecommand));
+
 	Builder::instance().init();
-	mModelGroup->addChild(Builder::instance().createFloor(20,20,osg::Vec3(0,0,0)));
-	SceneCommand scenecommand;
-	scenecommand.blockSize=osg::Vec3(1,1,1);
-	scenecommand.color=osg::Vec4(1,0,0,1);
-	scenecommand.position=osg::Vec3(0,5,-7.5);
-	scenecommand.command=SceneCommand::ADD_BLOCK;
-	scenecommand.textureFileName="../resources/Metalic_texture.bmp";
-	mModelGroup->addChild(Builder::instance().createBlock(scenecommand));
+	_scenemanager = new SceneManager;
+	mRoot->addChild(_scenemanager->getRoot());
+	interaction_manager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
 }
 
-
+Input* VRBuilderApp::pass_keyboard_input(){
+	return interaction_manager->inputForType(Input::KEYBOARD);
+}
 void VRBuilderApp::buttonInput(unsigned int button, bool pressed)
 {
 //	__FUNCTION_HEADER__
@@ -105,7 +108,9 @@ void VRBuilderApp::update(float dt)
 		}
 		deToggleButtons();			//it's important that this be called every frame
 	}
-	Builder::instance().update(dt);
+
+	interaction_manager->update();
+	_scenemanager->update(dt,interaction_manager->sceneCommands());
 //	PROFILER.endCycle();		//needed for time profiling
 }
 

@@ -16,6 +16,19 @@
 #include <osg/io_utils>
 #include <osg/Texture2D>
 
+//OSGBULLET Header
+#include <osgbDynamics/MotionState.h>
+#include <osgbCollision/CollisionShapes.h>
+#include <osgbDynamics/RigidBody.h>
+#include <osgbCollision/Utils.h>
+
+//BULLET Headers
+#include <btBulletDynamicsCommon.h>
+
+#include "SceneCommand.h"
+
+#define BLINK_SPEED 20
+
 /*
 	This is the Scene class
 	It will contain hooks to add and maybe remove nodes from the 
@@ -29,16 +42,37 @@ class Scene{
 	osg::ref_ptr<osg::MatrixTransform> _navigation_matrix;
 	osg::ref_ptr<osg::MatrixTransform> _model_matrix;
 	osg::ref_ptr<osg::MatrixTransform> _cursor_matrix;
+	osg::ref_ptr<osg::Switch> _cursor_switch;
+	osg::ref_ptr<osg::LightSource> _lightsource;
 
-	int _gridsize;
+	int _gridsize,_gridblocksize;
 	int** _grid;
+
+	SceneCommand::GameMode _gamemode;
+
+	btDynamicsWorld* bulletWorld; //The physics world
+	osgbDynamics::MotionState* _motion; //State of the object
+
+	/* Make cursor blink using this parameter*/
+	int blink;
+	//private functions
+	/*Create the floor with grid lines*/
+	osg::Node* createFloor( float w, float h, const osg::Vec3& center);
+	/* Setup the cursor*/
+	void set_cursor(osg::Node*);
+	
+	/*Move the cursor*/
+	void set_cursor_position(osg::Matrix);
+	
+	/*Check cursor bounds*/
+	bool check_cursor_bounds(osg::Vec3);
 public:
 	/*Constructor  
 		GridSize - Input the size of the grid (assumed square)
 		e.g. if the grid is 20X20, GridSize = 20
 	
 	*/
-    Scene(int GridSize);
+    Scene(int GridSize,float GridBlockSize);
 
 	/* Destructor */
 	~Scene();
@@ -49,11 +83,6 @@ public:
 	/* Set and get the navigation matrix*/
 	void set_navigation_matrix(osg::Matrix);
 	osg::Matrix get_navigation_matrix(){_navigation_matrix->getMatrix();}
-
-	/* Setup the cursor*/
-	void set_cursor(osg::Node*);
-	/*Move the cursor*/
-	void set_cursor_position(osg::Matrix);
 
 	/*Add model node
 	
@@ -75,5 +104,11 @@ public:
 
 	*/
 	void update(double);
+
+	/* Move the cursor*/
+	void movecursor_left();
+	void movecursor_right();
+	void movecursor_up();
+	void movecursor_down();
     
 };

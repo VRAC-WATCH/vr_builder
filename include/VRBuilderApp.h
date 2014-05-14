@@ -16,9 +16,11 @@
 #include <osg/LightSource>
 #include <osg/MatrixTransform>
 
+#include "SceneManager.h"
+#include "InteractionManager.h"
+
 /** Class description here. */
-class VRBuilderApp
-{
+class VRBuilderApp{
 	
 public:
 	
@@ -66,6 +68,7 @@ protected:
 	int mButtons[NUMBUTTONS];
 
 	osg::MatrixTransform* mWandXForm;
+	SceneManager* _scenemanager;
 
 	//timekeeping
 	float mTargetTime;
@@ -75,6 +78,12 @@ protected:
 
 	//needed for clusteredness
 	bool mIsMaster;										//is this the master node of the cluster?
+
+	/** TODO: Change when we add the AppManager. */
+	InteractionManager* interaction_manager;
+
+public:
+	Input* pass_keyboard_input();
 };
 
 #endif /** End of VR_BUILDER_APP_H. */
