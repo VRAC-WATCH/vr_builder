@@ -38,28 +38,27 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 MESSAGE(${CMAKE_MODULE_PATH})
 
+# Find the OpenSceneGraph Libs	
+FIND_PACKAGE(OpenSceneGraph REQUIRED osgAnimation osgDB osgFX osgGA osgManipulator osgParticle osgPresentation osgShadow osgSim osgTerrain osgText osgUtil osgViewer osgVolume osgWidget)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSG_INCLUDE_DIR})
+
 #Add Bullet
-FIND_PACKAGE(Bullet)
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BULLET_INCLUDE_DIRS})
+FIND_PACKAGE(Bullet REQUIRED)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BULLET_INCLUDE_DIR})
 
 #Add OSGWORKS
-FIND_PACKAGE(osgWorks)
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGWORKS_INCLUDE_DIRS})
+FIND_PACKAGE(osgWorks REQUIRED osgwTools)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGWORKS_INCLUDE_DIR})
 
 #Add OSGBULLET
-FIND_PACKAGE(osgBullet)
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGBULLET_INCLUDE_DIRS})
+FIND_PACKAGE(osgBullet REQUIRED osgbCollision osgbDynamics osgbInteraction)
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSGBULLET_INCLUDE_DIR})
 
 # Find OpenGL
 FIND_PACKAGE(OpenGL REQUIRED)
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OPENGL_INCLUDE_DIR})
 FIND_PACKAGE(GLUT REQUIRED)
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${GLUT_INCLUDE_DIR})
-
-# Find the OpenSceneGraph Libs	
-FIND_PACKAGE(OpenSceneGraph REQUIRED osgAnimation osgDB osgFX osgGA osgManipulator osgParticle osgPresentation osgShadow osgSim osgTerrain osgText osgUtil osgViewer osgVolume osgWidget)
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${OSG_INCLUDE_DIR})
-
 
 ################################################################################
 # Sets the variables for the source and header files to use in the program
@@ -162,8 +161,10 @@ ENDIF()
 SET(LINK_LIBRARIES 	${Boost_LIBRARIES}
 					${OPENGL_LIBRARIES}
 					${GLUT_LIBRARIES}
-					${OPENSCENEGRAPH_LIBRARIES})
-					#${VRJUGGLER-OPENGL_LIBRARIES})
+					${OPENSCENEGRAPH_LIBRARIES}
+					${BULLET_LIBRARIES}
+					${OSGBULLET_LIBRARIES}
+					${OSGWORKS_LIBRARIES})
 
 ################################################################################
 # Updates the starting point in the program to WinMain instead of main
