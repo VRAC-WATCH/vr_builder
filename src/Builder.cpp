@@ -30,7 +30,7 @@ void Builder::init(){
 
 }
 
-void Builder::setColor(osg::Node*& node,osg::Vec4 color=osg::Vec4(1,1,1,1)){
+void Builder::setColor(osg::Node*& node,osg::Vec4 color=osg::Vec4(0,1,0,1)){
 	osg::ShapeDrawable* shape= dynamic_cast<osg::ShapeDrawable*>(node->asTransform()->getChild(0)->asGeode()->getDrawable(0));
 	shape->setColor(color);
 }
@@ -83,38 +83,4 @@ osg::Node* Builder::createBlock(SceneCommand sc){
 	}*/
 	return makeBlock(sc);
 	//return NULL;
-}
-
-osg::Node* Builder::throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse){
-	osg::MatrixTransform* root = new osg::MatrixTransform;
-	osg::Sphere* ball = new osg::Sphere();
-    ball->setRadius(0.1);
-
-    osg::ShapeDrawable* shape = new osg::ShapeDrawable( ball );
-    shape->setColor( osg::Vec4( 1., 1., 1., 1. ) );
-    osg::Geode* geode = new osg::Geode();
-    geode->addDrawable( shape );
-
-    osg::MatrixTransform* mt = new osg::MatrixTransform();
-    mt->addChild( geode );
-	root->addChild(mt);
-
-	//btCollisionShape* cs = osgbCollision::btBoxCollisionShapeFromOSG( mt );
-
-	//osg::ref_ptr< osgbDynamics::CreationRecord > cr = new osgbDynamics::CreationRecord;
-	//cr->_sceneGraph = root;
-	//cr->_shapeType = SPHERE_SHAPE_PROXYTYPE;
-	//cr->_mass = 0.01f;
-	//cr->_restitution = 1.f;
-	//btRigidBody* body = osgbDynamics::createRigidBody( cr.get(), cs );
-	//
-	////Move block to correct position in the physics world
-	//osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	//osg::Matrix m( osg::Matrix::translate( initialposition ) );
-	//motion->setParentTransform( m );
-	//body->setWorldTransform( osgbCollision::asBtTransform( m ) );
-
-	//bulletWorld->addRigidBody( body );
-	//body->applyCentralImpulse(btVector3(impulse.x(),impulse.y(),impulse.z()));
-    return( root );
 }
