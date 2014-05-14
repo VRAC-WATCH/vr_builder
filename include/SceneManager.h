@@ -38,6 +38,9 @@ public:
 
 	//Return root
 	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
+
+	//Throw projectile in the right direction
+	void projectile_throw();
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */

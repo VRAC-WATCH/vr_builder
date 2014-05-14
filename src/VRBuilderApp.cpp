@@ -104,6 +104,7 @@ void VRBuilderApp::update(float dt)
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
 			//mModelGroup->addChild(Builder::instance().throwProjectile(osg::Vec3(0,1,0),osg::Vec3(0,0,-0.5)));
+			_scenemanager->projectile_throw();
 			mButtons[1] = OFF;
 		}
 

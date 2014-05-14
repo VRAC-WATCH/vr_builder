@@ -11,12 +11,15 @@
 //function to create the Geode
 osg::Transform* osgBox( osg::Vec3 blocksize )
 {
-	osg::Box* box = new osg::Box(osg::Vec3(0,0,0), blocksize.x(),blocksize.y(),blocksize.z() );
-	osg::ShapeDrawable* shape = new osg::ShapeDrawable( box );
-	shape->setColor( osg::Vec4( 1., 1., 1., 1. ) );
-	osg::Geode* geode = new osg::Geode();
-	geode->addDrawable( shape );
-	osg::MatrixTransform* mt = new osg::MatrixTransform();
+	osg::Box* box = new osg::Box();
+    box->setHalfLengths( blocksize/2 );
+
+    osg::ShapeDrawable* shape = new osg::ShapeDrawable( box );
+    shape->setColor( osg::Vec4( 1., 1., 1., 1. ) );
+    osg::Geode* geode = new osg::Geode();
+    geode->addDrawable( shape );
+
+    osg::MatrixTransform* mt = new osg::MatrixTransform();
     mt->addChild( geode );
 
     return( mt );

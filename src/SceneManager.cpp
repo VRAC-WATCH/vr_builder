@@ -24,7 +24,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 {
-	std::cout << "Updating: " << commands.size() << " elements" << std::endl;
+	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
 	for(int i=0;i<commands.size();i++){
 		switch(commands[i].cursormovement){
 		case(SceneCommand::CURSOR_LEFT):
@@ -41,7 +41,13 @@ void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 			break;
 		}
 		if(commands[i].command == SceneCommand::ADD_BLOCK)
-			_scene->add_model_node(commands[i]);
+			_scene->add_model_node(commands[i],false);
+		if(commands[i].command == SceneCommand::MODE_CHANGE)
+			_scene->changemode();
 	}
 	_scene->update(t);
+}
+
+void SceneManager::projectile_throw(){
+	_scene->projectile_throw(osg::Vec3(0,0,0),osg::Vec3(0,0,-0.5));
 }
