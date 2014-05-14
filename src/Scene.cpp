@@ -88,8 +88,9 @@ Scene::Scene(int GridSize,float GridBlockSize){
 	set_cursor(createOSGBox(osg::Vec3(_gridblocksize,_gridblocksize,_gridblocksize)));
 	set_cursor_position(osg::Matrix::translate(0,_gridblocksize,0));
 	blink=0;
+	
 	//default gamemode
-	_gamemode = SceneCommand::GameMode::CREATION;
+	_gamemode = SceneCommand::CREATION;
 }
 
 Scene::~Scene()

@@ -9,9 +9,10 @@
 #ifndef VRBuilder_SceneCommand_h
 #define VRBuilder_SceneCommand_h
 
-#include <osg\Array>
+#include <osg/Array>
 
 typedef osg::Vec3 v3;
+
 /**
  * The SceneCommand structure will be used to communicate
  * any input from the user to the system and eventually
