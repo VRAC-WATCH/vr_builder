@@ -14,10 +14,17 @@ SHELL = /bin/sh
 precompiled_header = osg.h.gch
 
 # Specify the objects to be generated from source files
-objects =	Builder.o\
-		VRBuilderApp.o \
-		JugglerInterface.o \
-		mainJuggler.o
+objects =	AppManager.o\
+			Builder.o\
+			GlutKeyboardInput.o\
+			Input.o\
+			InteractionManager.o\
+			JugglerInterface.o \
+			mainJuggler.o\
+			Scene.o\
+			SceneManager.o\
+			VRBuilderApp.o
+			
 
 # Specify the application binary
 application = vrBuilderApp
@@ -47,6 +54,7 @@ EXTRA_LIBS += -L$(OPENCV_ROOT)/lib -lopencv_core -lopencv_highgui -lopencv_imgpr
 EXTRA_LIBS += -L$(BULLET_ROOT)/lib -lBulletCollision -lBulletDynamics -lBulletSoftBody -LinearMath
 EXTRA_LIBS += -L$(OSGWORKS_ROOT)/lib64 -losgwControls -losgwMx -losgwTools -losgwQuery
 EXTRA_LIBS += -L$(OSGBULLET_ROOT)/lib -losgbCollision -losgbDynamics -losgbInteraction
+EXTRA_LIBS += -lglut
 
 # Generate the gch for the precompiled header
 $(precompiled_header): $(src_dir)/osg.h

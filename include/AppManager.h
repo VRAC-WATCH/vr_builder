@@ -10,24 +10,31 @@
 #define ____AppManager__
 
 #include "InteractionManager.h"
-//#include "SceneManager.h"
+#include "SceneManager.h"
 
 class AppManager {
     
 public:
+
+	/** Default Constructor. */
+	AppManager();
+
+	/** Destructor. */
+	~AppManager();
     
     /* pullData retreives the necessary data from the Interaction Manager and UiViewer*/
-    void pullData(void);
+    void update(void);
     
-    /*pushData sends data to update the scene manager*/
-    void pushData(void);
+    /*Declares the wether GLUT or JUGGLER type*/
+    //void interactionType(enum type);
+
 
 protected:
     
     InteractionManager*    _interactionManager;
+    InteractionManager*    _interactionGLUTManager;
+    SceneManager*          _sceneManager;
     
-    std::vector<SceneCommand> _sceneCommandList;
-
 };
 
 #endif /* defined(____AppManager__) */
