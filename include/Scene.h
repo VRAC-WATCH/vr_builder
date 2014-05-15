@@ -73,8 +73,7 @@ class Scene{
 	void check_cursor_position();
 	/*Check cursor bounds*/
 	bool check_cursor_bounds(osg::Vec3);
-	/*Throw projectiles*/
-	osg::Node* throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse);
+	
 public:
 	/*Constructor  
 		GridSize - Input the size of the grid (assumed square)
@@ -102,6 +101,9 @@ public:
 
 	*/
 	int add_model_node(SceneCommand sc);
+	
+	/*Throw projectiles*/
+	osg::Node* throwProjectile(osg::Vec3 impulse);
 
 	/*Remove the model node based on id - does nothing now*/
 	void remove_model_node(int);

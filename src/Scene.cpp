@@ -290,8 +290,9 @@ void Scene::changemode(){
 	}
 }
 
-osg::Node* Scene::throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse){
-	osg::MatrixTransform* root = new osg::MatrixTransform;
+osg::Node* Scene::throwProjectile(osg::Vec3 impulse){
+	
+	osg::ref_ptr<osg::MatrixTransform> root(_navigation_matrix);
 	osg::Sphere* ball = new osg::Sphere();
     ball->setRadius(0.1);
 
@@ -315,9 +316,8 @@ osg::Node* Scene::throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse){
 	
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	osg::Matrix m( osg::Matrix::translate( initialposition ) );
-	motion->setParentTransform( m );
-	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
+	motion->setParentTransform(root->getMatrix());
+	body->setWorldTransform( osgbCollision::asBtTransform(root->getMatrix()));
 
 	bulletWorld->addRigidBody( body );
 	body->applyCentralImpulse(btVector3(impulse.x(),impulse.y(),impulse.z()));
