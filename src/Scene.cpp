@@ -117,12 +117,12 @@ int Scene::add_model_node(SceneCommand cmd, bool remake){
 		return 0;
 
 	//Get the current cursor position
-	v3 cursor_position = _cursor_matrix->getMatrix().getTrans();
+	cmd.position = _cursor_matrix->getMatrix().getTrans();
 	
 	//Add to grid
 	if(!remake){
-		int gridx=(cursor_position.x()/_gridblocksize)+_gridsize/2;
-		int gridy=(cursor_position.z()/_gridblocksize)+_gridsize/2;
+		int gridx=(cmd.position.x()/_gridblocksize)+_gridsize/2;
+		int gridy=(cmd.position.z()/_gridblocksize)+_gridsize/2;
 		_grid[gridx][gridy].push_back(cmd);
 	}
 	//Create the block
@@ -141,7 +141,7 @@ int Scene::add_model_node(SceneCommand cmd, bool remake){
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
 
-	osg::Matrix m(osg::Matrix::translate(cursor_position) );
+	osg::Matrix m(osg::Matrix::translate(cmd.position) );
 
 	motion->setParentTransform( m );
 	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
