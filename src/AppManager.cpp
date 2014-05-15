@@ -6,11 +6,20 @@
 //
 //
 
+// System headers
+#include <memory>
+
+// Local headers
 #include "AppManager.h"
+#include "InteractionManager.h"
+#include "SceneManager.h"
 
 AppManager::AppManager()
 {
 	std::cout << "AppManager constructor called" << std::endl;
+	
+	_interactionManager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
+	_sceneManager = new SceneManager;
 }
 
 AppManager::~AppManager()
@@ -21,14 +30,14 @@ AppManager::~AppManager()
 /* pull data will need to be called inside of one of the main loops */
 void AppManager::update(void)
 {
-    // The sceneCommandList is populated
+//	std::cout << "Updating app manager" << std::endl;
+	
+    // Grab any interactions that have happened since the last update
     _interactionManager->update();
     std::vector<SceneCommand> _sceneCommandList = _interactionManager->sceneCommands();
     
-    /*The sceneCommandList is pushed to the SceneManager*/
+    // Pass along the updates to the scene so that we can see them visually
     _sceneManager->update(1, _sceneCommandList);
-
-	std::cout << "Updating app manager" << std::endl;
 }
 /*
 void AppManager::interactionType(enum type)

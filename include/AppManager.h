@@ -9,8 +9,9 @@
 #ifndef ____AppManager__
 #define ____AppManager__
 
-#include "InteractionManager.h"
-#include "SceneManager.h"
+// Forward declarations
+class InteractionManager;
+class SceneManager;
 
 class AppManager {
     
@@ -27,13 +28,19 @@ public:
     
     /*Declares the wether GLUT or JUGGLER type*/
     //void interactionType(enum type);
+	
+	/** Returns the interaction manager. */
+	inline InteractionManager* interactionManager() { return _interactionManager; }
+	
+	/** Returns the scene manager. */
+	inline SceneManager* sceneManager() { return _sceneManager; }
 
 
 protected:
     
-    InteractionManager*    _interactionManager;
-    InteractionManager*    _interactionGLUTManager;
-    SceneManager*          _sceneManager;
+	/** iVars. */
+    InteractionManager*		_interactionManager;
+    SceneManager*			_sceneManager;
     
 };
 

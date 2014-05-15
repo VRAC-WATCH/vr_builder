@@ -46,7 +46,7 @@ Input* InteractionManager::inputForType(Input::InputType type)
 
 void InteractionManager::update()
 {
-	//std::cout << "Updating InteractionManager" << std::endl;
+//	std::cout << "Updating InteractionManager" << std::endl;
 	
 	// Clear the previous scene commands
 	_sceneCommandList.clear();

@@ -18,6 +18,7 @@
 #include <osgViewer/ViewerEventHandlers>
 
 // Local headers
+#include "AppManager.h"
 #include "CameraController.h"
 #include "InteractionManager.h"
 #include "GlutKeyboardInput.h"
@@ -39,6 +40,7 @@ int gMouseX, gMouseY;
 bool gShowC6 = true;
 
 CameraController gCamera;
+AppManager app_manager;
 
 
 osg::ref_ptr<osgViewer::Viewer> viewer;
@@ -222,6 +224,8 @@ void setLight(float x, float y, float z)
 
 void display(void)
 {
+	// Update all of our input over the last frame
+	app_manager.update();
 	
     // update and render the scene graph
 	osg::Camera* currentCam = viewer->getCamera();
@@ -341,61 +345,6 @@ void passiveMotion(int x, int y)
 	gMouseY = y;
 }
 
-
-void keyboard(unsigned char key, int x, int y)
-{
-	switch(key)
-	{
-		//handle key input
-		case 'q': gCamera.setStrafeLeft(true);	break;
-		case 'w': gCamera.setUp(true);	break;
-		case 'e': gCamera.setStrafeRight(true);	break;
-		case 'a': gCamera.setLeft(true);	break;
-		case 's': gCamera.setDown(true);	break;
-		case 'd': gCamera.setRight(true);	break;
-		case 'z': gCamera.setLower(true);		break;
-		case 'x': gCamera.setRaise(true);		break;
-	
-		case 'c': gShowC6 = !gShowC6; break;
-		case ' ':	VRBuilderApp::instance().buttonInput(0, true);	break;		//space bar controls the main wand button
-	
-		case 'p':	gPaused = !gPaused;	break;		//pause/unpause
-		//switch input modes with tab
-		case '	':	gCamera.cycleViewMode();	break;
-		case 'f':
-			if(!gFullScreen)	glutFullScreen();
-			else glutReshapeWindow(1024, 768);
-			gFullScreen = !gFullScreen;
-			break;
-		case 27:	exit(1);	break;
-		default:
-            if (window.valid())
-            {
-                window->getEventQueue()->keyPress( (osgGA::GUIEventAdapter::KeySymbol) key );
-                window->getEventQueue()->keyRelease( (osgGA::GUIEventAdapter::KeySymbol) key );
-            }
-            break;
-    }
-	glutPostRedisplay();
-}
-
-void keyboardUp(unsigned char key, int x, int y)
-{
-	switch(key)
-	{
-	
-	}
-}
-
-void keySpecial(int key, int x, int y)
-{
-	switch(key)
-	{
-		default: break;
-
-	}
-}
-
 void timer(int bl)
 {
 	static int lastTime = glutGet(GLUT_ELAPSED_TIME);
@@ -451,9 +400,6 @@ int main( int argc, char **argv )
     glutMouseFunc( mousebutton );
     glutMotionFunc( mouseMotion);
     glutPassiveMotionFunc(passiveMotion);
-	glutKeyboardFunc( keyboard );
-	glutKeyboardUpFunc(keyboardUp);
-	glutSpecialFunc(keySpecial);
 	glutKeyboardUpFunc(keyUpBoard);
  
 	
@@ -468,12 +414,12 @@ int main( int argc, char **argv )
 	atexit(quitApp);
 
 	// Setup glut input
-	Input* keyboard_input = VRBuilderApp::instance().pass_keyboard_input();
+	Input* keyboard_input = app_manager.interactionManager()->inputForType(Input::KEYBOARD);
 	if (keyboard_input) {
 		GlutKeyboardInput* input = dynamic_cast<GlutKeyboardInput*>(keyboard_input);
-		glutSpecialFunc(input->keyboardDown_ptr());
+		glutSpecialFunc(input->keyboardSpecial_ptr());
+		glutKeyboardFunc(input->keyboardNormal_ptr());
 	}
-	
 	
     glutMainLoop();
     

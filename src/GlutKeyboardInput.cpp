@@ -39,38 +39,39 @@ void GlutKeyboardInput::populateSceneCommand(std::vector<SceneCommand>& commandL
 	s_keyboardSceneCommands.clear();
 }
 
-void GlutKeyboardInput::_keyboardDown(int key, int x, int y)
+void GlutKeyboardInput::_keyboardSpecial(int key, int x, int y)
 {
 	switch(key)
 	{
 		//handle key input
 		case GLUT_KEY_UP: {
 			SceneCommand cmd;
-			cmd.cursormovement = SceneCommand::CURSOR_UP;
+			cmd.commandType = SceneCommand::MOVE;
+			cmd.direction = v3(0,0,1);
 			s_keyboardSceneCommands.push_back(cmd);
 			break;
 		}
 		case GLUT_KEY_DOWN: {
 			SceneCommand cmd;
-			cmd.cursormovement = SceneCommand::CURSOR_DOWN;
+			cmd.commandType = SceneCommand::MOVE;
+			cmd.direction = v3(0,0,-1);
 			s_keyboardSceneCommands.push_back(cmd);
 			break;
 		}
 		case GLUT_KEY_LEFT: {
 			SceneCommand cmd;
-			cmd.cursormovement = SceneCommand::CURSOR_LEFT;
+			cmd.commandType = SceneCommand::MOVE;
+			cmd.direction = v3(-1,0,0);
 			s_keyboardSceneCommands.push_back(cmd);
 			break;
 		}
 		case GLUT_KEY_RIGHT: {
 			SceneCommand cmd;
-			cmd.cursormovement = SceneCommand::CURSOR_RIGHT;
+			cmd.commandType = SceneCommand::MOVE;
+			cmd.direction = v3(1,0,0);
 			s_keyboardSceneCommands.push_back(cmd);
 			break;
 		}
-		case 27:
-			exit(1);
-			break;
 		default:
 			printf("Unrecognized key.\n");
             break;
@@ -78,28 +79,33 @@ void GlutKeyboardInput::_keyboardDown(int key, int x, int y)
 	glutPostRedisplay();
 }
 
-void GlutKeyboardInput::_keyboardnormal(int key, int x, int y)
+void GlutKeyboardInput::_keyboardNormal(unsigned char key, int x, int y)
 {
 	switch(key)
 	{
 	case('t'):{
 		SceneCommand cmd;
-		cmd.command = SceneCommand::MODE_CHANGE;
+		cmd.commandType = SceneCommand::MODE_CHANGE;
+		s_keyboardSceneCommands.push_back(cmd);
+		break;
+	}
+	case ' ': {
+		SceneCommand cmd;
+		cmd.commandType = SceneCommand::THROW_BLOCK;
 		s_keyboardSceneCommands.push_back(cmd);
 		break;
 	}
 	default:
 		printf("Unrecognized key \n");
 		break;
-
 	}
 	glutPostRedisplay();
 }
 
-GlutKeyboardInput::func_ptr GlutKeyboardInput::keyboardDown_ptr() {
-	return &_keyboardDown;
+GlutKeyboardInput::special_func_ptr GlutKeyboardInput::keyboardSpecial_ptr() {
+	return &_keyboardSpecial;
 }
 
-GlutKeyboardInput::func_ptr GlutKeyboardInput::keyboardnormal_ptr() {
-	return &_keyboardnormal;
+GlutKeyboardInput::normal_func_ptr GlutKeyboardInput::keyboardNormal_ptr() {
+	return &_keyboardNormal;
 }

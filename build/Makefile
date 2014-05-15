@@ -43,14 +43,12 @@ include $(DZR_BASE_DIR)/ext/vrjuggler/dzr.vrjuggler.glapp.mk
 
 # Setup the OSG and FMOD includes and libs
 EXTRA_INCLUDES += -I$(OSG_HOME)/include $(VRJ_CXX_FLAGS) -I$(src_dir)
-EXTRA_INCLUDES += -I$(OPENCV_ROOT)/include
 EXTRA_INCLUDES += -I/home/vr/apps/watch-libs/rhel6/gmtl-0.6.1/include/gmtl-0.6.1
 EXTRA_INCLUDES += -I$(OSGBULLET_ROOT)/include
 EXTRA_INCLUDES += -I$(OSGWORKS_ROOT)/include
 EXTRA_INCLUDES += -I$(BULLET_ROOT)/include/bullet
 EXTRA_INCLUDES += -I../include
 EXTRA_LIBS += -L$(OSG_HOME)/lib64 -lOpenThreads -losgAnimation -losgDB -losgFX -losgGA -losgManipulator -losgParticle -losgShadow -losgSim -losg -losgTerrain -losgText -losgUtil -losgViewer -losgVolume -losgWidget
-EXTRA_LIBS += -L$(OPENCV_ROOT)/lib -lopencv_core -lopencv_highgui -lopencv_imgproc
 EXTRA_LIBS += -L$(BULLET_ROOT)/lib -lBulletCollision -lBulletDynamics -lBulletSoftBody -LinearMath
 EXTRA_LIBS += -L$(OSGWORKS_ROOT)/lib64 -losgwControls -losgwMx -losgwTools -losgwQuery
 EXTRA_LIBS += -L$(OSGBULLET_ROOT)/lib -losgbCollision -losgbDynamics -losgbInteraction

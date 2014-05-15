@@ -73,10 +73,10 @@ class Scene{
 	void check_cursor_position();
 	/*Check cursor bounds*/
 	bool check_cursor_bounds(osg::Vec3);
-	/*Throw projectiles*/
-	osg::Node* throwProjectile(osg::Vec3 initialposition, osg::Vec3 impulse);
+
 	/*Remake the whole scene as before*/
 	void remake_scene();
+
 public:
 	/*Constructor  
 		GridSize - Input the size of the grid (assumed square)
@@ -103,6 +103,10 @@ public:
 		Future Work -  it will provide a node id which later can be used to remove the ids etc.
 
 	*/
+
+	/*Throw projectiles*/
+	osg::Node* throwProjectile(osg::Vec3 impulse);
+
 	int add_model_node(SceneCommand sc,bool remake);
 
 	/*Remove the model node based on id - does nothing now*/
@@ -117,14 +121,14 @@ public:
 	void update(double);
 
 	/* Move the cursor*/
-	void movecursor_left();
-	void movecursor_right();
-	void movecursor_up();
-	void movecursor_down();
+	void moveCursor(v3 direction);
+	
+	/** Move the position of the head. */
+	void moveHead(v3 direction);
 
 	/*Change the mode*/
 	void changemode();
-
-	/*Throw the projectile*/
-	void projectile_throw(osg::Vec3 initialposition,osg::Vec3 impulse);
+	
+	/** Accessor for the current game mode. */
+	inline const SceneCommand::GameMode& gameMode() { return _gamemode; }
 };

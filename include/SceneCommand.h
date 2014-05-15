@@ -23,16 +23,9 @@ struct SceneCommand {
 	/** Enumeration of commands possible from the user. */
 	enum CommandType {
 		ADD_BLOCK,
-		MODE_CHANGE
-	};
-
-	/** Enumeration of possible cursor movements */
-
-	enum CursorMovement {
-		CURSOR_UP,
-		CURSOR_DOWN,
-		CURSOR_LEFT,
-		CURSOR_RIGHT
+		MODE_CHANGE,
+		MOVE,
+		THROW_BLOCK
 	};
 	
 	/** Enumeration of game modes possible. */
@@ -42,12 +35,12 @@ struct SceneCommand {
 	};
 	
 	/** Possible command arguments. */
-	osg::Vec4 color;
-	std::string textureFileName;
-	GameMode currentGameMode;
-	CommandType command;
-	CursorMovement cursormovement;
-	osg::Vec3 position;
+	osg::Vec4		color;
+	CommandType		commandType;
+	GameMode		currentGameMode;
+	osg::Vec3		direction;
+	v3				position;
+	std::string		textureFileName;
 };
 
 #endif
