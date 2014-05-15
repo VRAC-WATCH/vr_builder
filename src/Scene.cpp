@@ -115,14 +115,16 @@ void Scene::set_cursor_position(osg::Matrix pos){
 int Scene::add_model_node(SceneCommand cmd){
 
 	//Get the current cursor position
-	cmd.position=_cursor_matrix->getMatrix().getTrans();
+	v3 cursor_position = _cursor_matrix->getMatrix().getTrans();
+	
 	//Add to grid
-	int gridx=(cmd.position.x()/_gridblocksize)+_gridsize/2;
-	int gridy=(cmd.position.z()/_gridblocksize)+_gridsize/2;
+	int gridx=(cursor_position.x()/_gridblocksize)+_gridsize/2;
+	int gridy=(cursor_position.z()/_gridblocksize)+_gridsize/2;
 	_grid[gridx][gridy].push_back(cmd);
+	
 	//Create the block
 	osg::Node* model = Builder::instance().createBlock(cmd);
-	model->asTransform()->asMatrixTransform()->setMatrix(osg::Matrix::translate(cmd.position));
+	model->asTransform()->asMatrixTransform()->setMatrix(osg::Matrix::translate(cursor_position));
 	//Place in the Physics world
 	btCollisionShape* cs = osgbCollision::btBoxCollisionShapeFromOSG( model );
 
@@ -135,7 +137,7 @@ int Scene::add_model_node(SceneCommand cmd){
 	
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	osg::Matrix m(osg::Matrix::translate(cmd.position) );
+	osg::Matrix m(osg::Matrix::translate(cursor_position) );
 	motion->setParentTransform( m );
 	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
 
