@@ -48,6 +48,10 @@ void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 				_scene->throwProjectile(v3(0,0,-5));
 				break;
 			}
+			case SceneCommand::NAVIGATION: {
+				_scene->set_navigation_matrix(commands[i].navigationMatrix);
+				break;
+			}
 			default: {
 				std::cout << "SceneManager::update - Unhandled command type" << std::endl;
 			}

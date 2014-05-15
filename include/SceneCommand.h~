@@ -42,7 +42,6 @@ struct SceneCommand {
 	osg::Vec3		direction;
 	v3				position;
 	std::string		textureFileName;
-	osg::Matrix		navigationMatrix;
 };
 
 #endif

@@ -205,7 +205,7 @@ bool Scene::check_cursor_bounds(osg::Vec3 trans){
 
 void Scene::moveCursor(v3 direction){
 	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
-	trans.set(trans.x()-_gridblocksize,trans.y(),trans.z());
+	trans.set(trans.x()+direction.x()*_gridblocksize,trans.y()+direction.y()*_gridblocksize,trans.z()+direction.z()*_gridblocksize);
 	if(check_cursor_bounds(trans))
 		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
 }
@@ -304,8 +304,9 @@ void Scene::changemode(){
 }
 
 osg::Node* Scene::throwProjectile(osg::Vec3 impulse){
+	osg::Vec3 initialposition(0,_gridblocksize/2,0);	
 	osg::MatrixTransform* root = new osg::MatrixTransform;
-
+	
 	osg::Sphere* ball = new osg::Sphere();
     ball->setRadius(0.1);
 
@@ -329,7 +330,7 @@ osg::Node* Scene::throwProjectile(osg::Vec3 impulse){
 	
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	motion->setParentTransform(root->getMatrix());
+	motion->setParentTransform(osg::Matrix::translate(initialposition));
 	body->setWorldTransform( osgbCollision::asBtTransform(root->getMatrix()));
 
 	bulletWorld->addRigidBody( body );
