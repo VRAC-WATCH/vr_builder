@@ -94,12 +94,14 @@ void VRBuilderApp::update(float dt)
 	while(mTotalTime < mTargetTime)
 	{
 		mTotalTime += mTimeStep;
+
 		//process navigation, etc
 		if(mButtons[0] == ON)
 		{
 			osg::Vec3 direction(mWandMatrix.ptr()[8], mWandMatrix.ptr()[9],mWandMatrix.ptr()[10]);
 			mNavigation->setMatrix(mNavigation->getMatrix() * osg::Matrix::translate(direction * dt * 4.0));
 		}
+
 		//process shooting
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
@@ -107,6 +109,7 @@ void VRBuilderApp::update(float dt)
 			SceneCommand cmd;
 			cmd.commandType = SceneCommand::THROW_BLOCK;
 			mButtons[1] = OFF;
+			cmds.push_back(cmd);
 		}
 
 		//Check if add is done right

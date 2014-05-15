@@ -38,6 +38,11 @@ public:
 
 	//Return root
 	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
+
+protected:
+	
+	/** Calculates a navigation matrix and updates the scene. */
+	void _updateNavigation(SceneCommand navigationCommand);
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */

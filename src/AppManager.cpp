@@ -18,7 +18,7 @@ AppManager::AppManager()
 {
 	std::cout << "AppManager constructor called" << std::endl;
 	
-	_interactionManager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
+	_interactionManager = new InteractionManager(InteractionManager::JUGGLER_INTERFACE);
 	_sceneManager = new SceneManager;
 }
 

@@ -19,6 +19,7 @@ objects =	AppManager.o\
 			GlutKeyboardInput.o\
 			Input.o\
 			InteractionManager.o\
+			JugglerGamepadInput.o\
 			JugglerInterface.o \
 			mainJuggler.o\
 			Scene.o\
