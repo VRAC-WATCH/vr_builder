@@ -122,4 +122,7 @@ public:
 
 	/*Change the mode*/
 	void changemode();
+	
+	/** Accessor for the current game mode. */
+	inline const SceneCommand::GameMode& gameMode() { return _gamemode; }
 };
