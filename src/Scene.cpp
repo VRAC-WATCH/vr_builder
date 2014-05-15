@@ -193,32 +193,14 @@ bool Scene::check_cursor_bounds(osg::Vec3 trans){
 		return false;
 	return true;
 }
-void Scene::movecursor_left(){
+
+void Scene::moveCursor(v3 direction){
 	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
 	trans.set(trans.x()-_gridblocksize,trans.y(),trans.z());
 	if(check_cursor_bounds(trans))
 		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
 }
 
-void Scene::movecursor_right(){
-	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
-	trans.set(trans.x()+_gridblocksize,trans.y(),trans.z());
-	if(check_cursor_bounds(trans))
-		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
-}
-
-void Scene::movecursor_up(){
-	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
-	trans.set(trans.x(),trans.y(),trans.z()-_gridblocksize);
-	if(check_cursor_bounds(trans))
-		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
-}
-
-void Scene::movecursor_down(){
-	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
-	trans.set(trans.x(),trans.y(),trans.z()+_gridblocksize);
-	if(check_cursor_bounds(trans))
-		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
 void Scene::moveHead(v3 direction)
 {
 	std::cout << "Moving the head" << std::endl;

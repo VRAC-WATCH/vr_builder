@@ -117,10 +117,6 @@ public:
 	void update(double);
 
 	/* Move the cursor*/
-	void movecursor_left();
-	void movecursor_right();
-	void movecursor_up();
-	void movecursor_down();
 	void moveCursor(v3 direction);
 	
 	/** Move the position of the head. */
