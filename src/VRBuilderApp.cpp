@@ -103,7 +103,8 @@ void VRBuilderApp::update(float dt)
 		//process shooting
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
-			//mModelGroup->addChild(Builder::instance().throwProjectile(osg::Vec3(0,1,0),osg::Vec3(0,0,-0.5)));
+			SceneCommand cmd;
+			cmd.commandType = SceneCommand::THROW_BLOCK;
 			mButtons[1] = OFF;
 		}
 
@@ -111,7 +112,7 @@ void VRBuilderApp::update(float dt)
 		if(mButtons[2] == ON){
 			std::cout<<"Button 2 Pressed"<<std::endl;
 			SceneCommand cmd;
-			cmd.command = SceneCommand::ADD_BLOCK;
+			cmd.commandType = SceneCommand::ADD_BLOCK;
 			cmd.textureFileName = "../resources/Metalic_texture.bmp";
 			cmd.color=osg::Vec4(0,1,0,1);
 			cmds.push_back(cmd);
@@ -120,7 +121,7 @@ void VRBuilderApp::update(float dt)
 		if(mButtons[3] == ON){
 			std::cout<<"Button 3 Pressed"<<std::endl;
 			SceneCommand cmd;
-			cmd.command = SceneCommand::MODE_CHANGE;
+			cmd.commandType = SceneCommand::MODE_CHANGE;
 			cmds.push_back(cmd);
 			mButtons[3] = OFF;
 		}

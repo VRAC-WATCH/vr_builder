@@ -24,24 +24,32 @@ SceneManager::~SceneManager()
 
 void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 {
-	std::cout << "Updating: " << commands.size() << " elements" << std::endl;
 	for(int i=0;i<commands.size();i++){
-		switch(commands[i].cursormovement){
-		case(SceneCommand::CURSOR_LEFT):
-			_scene->movecursor_left();
-			break;
-		case(SceneCommand::CURSOR_RIGHT):
-			_scene->movecursor_right();
-			break;
-		case(SceneCommand::CURSOR_UP):
-			_scene->movecursor_up();
-			break;
-		case(SceneCommand::CURSOR_DOWN):
-			_scene->movecursor_down();
-			break;
+		switch(commands[i].commandType)
+		{
+			case SceneCommand::ADD_BLOCK: {
+				_scene->add_model_node(commands[i]);
+			}
+			case SceneCommand::MODE_CHANGE: {
+				;
+			}
+			case SceneCommand::MOVE: {
+				if (_scene->gameMode() == SceneCommand::PHYSICS) {
+					_scene->moveHead(commands[i].direction);
+				}
+				else {
+					_scene->moveCursor(commands[i].direction);
+				}
+				break;
+			}
+			case SceneCommand::THROW_BLOCK: {
+				_scene->throwProjectile(v3(0,0,-5));
+				break;
+			}
+			default: {
+				std::cout << "SceneManager::update - Unhandled command type" << std::endl;
+			}
 		}
-		if(commands[i].command == SceneCommand::ADD_BLOCK)
-			_scene->add_model_node(commands[i]);
 	}
 	_scene->update(t);
 }
