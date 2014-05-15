@@ -103,6 +103,7 @@ void VRBuilderApp::update(float dt)
 		//process shooting
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
+
 			SceneCommand cmd;
 			cmd.commandType = SceneCommand::THROW_BLOCK;
 			mButtons[1] = OFF;

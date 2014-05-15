@@ -39,6 +39,7 @@ struct SceneCommand {
 	CommandType		commandType;
 	GameMode		currentGameMode;
 	osg::Vec3		direction;
+	v3				position;
 	std::string		textureFileName;
 };
 

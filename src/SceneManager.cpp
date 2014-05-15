@@ -24,11 +24,13 @@ SceneManager::~SceneManager()
 
 void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 {
+	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
+
 	for(int i=0;i<commands.size();i++){
 		switch(commands[i].commandType)
 		{
 			case SceneCommand::ADD_BLOCK: {
-				_scene->add_model_node(commands[i]);
+//				_scene->add_model_node(commands[i]);
 			}
 			case SceneCommand::MODE_CHANGE: {
 				;
@@ -50,6 +52,11 @@ void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 				std::cout << "SceneManager::update - Unhandled command type" << std::endl;
 			}
 		}
+
+		if(commands[i].commandType == SceneCommand::ADD_BLOCK)
+			_scene->add_model_node(commands[i],false);
+		if(commands[i].commandType == SceneCommand::MODE_CHANGE)
+			_scene->changemode();
 	}
 	_scene->update(t);
 }
