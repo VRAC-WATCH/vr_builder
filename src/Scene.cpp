@@ -219,6 +219,11 @@ void Scene::movecursor_down(){
 	trans.set(trans.x(),trans.y(),trans.z()+_gridblocksize);
 	if(check_cursor_bounds(trans))
 		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
+void Scene::moveHead(v3 direction)
+{
+	std::cout << "Moving the head" << std::endl;
+	osg::MatrixTransform* head_mt = _navigation_matrix.get();
+	head_mt->postMult(osg::Matrix::translate(direction));
 }
 
 osg::Node* Scene::createFloor( float w, float h, const osg::Vec3& center)

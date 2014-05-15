@@ -121,6 +121,10 @@ public:
 	void movecursor_right();
 	void movecursor_up();
 	void movecursor_down();
+	void moveCursor(v3 direction);
+	
+	/** Move the position of the head. */
+	void moveHead(v3 direction);
 
 	/*Change the mode*/
 	void changemode();
