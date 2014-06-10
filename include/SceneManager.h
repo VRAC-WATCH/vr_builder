@@ -15,6 +15,10 @@
 // Local headers
 #include "SceneCommand.h"
 #include "Scene.h"
+#include "Builder.h"
+#include "Grid.h"
+#include "Cursor.h"
+#include "Physics.h"
 
 
 class SceneManager
@@ -24,6 +28,7 @@ private:
 	
 	/** iVars. */
 	Scene*	_scene;
+	Builder* _builder;
 public:
 	
 	/** Default constructor. */

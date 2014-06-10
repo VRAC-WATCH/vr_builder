@@ -47,6 +47,8 @@ public:
 	void init();
 	//Create the block
 	osg::Node* createBlock(SceneCommand sc);
+	//Create Projectile
+	osg::Node* createProjectile();
 };
 
 #endif	// End of BUILDER_H
