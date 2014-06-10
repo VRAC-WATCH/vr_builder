@@ -52,7 +52,7 @@ void InteractionManager::update()
 	_sceneCommandList.clear();
 	
 	// Fetch all new commands from each input
-	std::vector<SceneCommand> command_list;
+	std::vector<SceneCommand*> command_list;
 	for (unsigned int i=0; i<_inputs.size(); ++i) {
 		_inputs.at(i)->populateSceneCommand(command_list);
 	}

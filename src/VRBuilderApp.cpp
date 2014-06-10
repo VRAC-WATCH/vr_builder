@@ -89,7 +89,6 @@ void VRBuilderApp::update(float dt)
 	//profile results are printed to the console when the app exits
 
 //	__FUNCTION_HEADER__
-	vector<SceneCommand> cmds;
 	mTargetTime += dt;
 	while(mTotalTime < mTargetTime)
 	{
@@ -103,36 +102,20 @@ void VRBuilderApp::update(float dt)
 		//process shooting
 		if(mButtons[1] == ON){
 			std::cout<<"Button 1 Pressed"<<std::endl;
-
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::THROW_BLOCK;
-			mButtons[1] = OFF;
 		}
 
 		//Check if add is done right
 		if(mButtons[2] == ON){
 			std::cout<<"Button 2 Pressed"<<std::endl;
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::ADD_BLOCK;
-			cmd.textureFileName = "../resources/Metalic_texture.bmp";
-			cmd.color=osg::Vec4(0,1,0,1);
-			cmds.push_back(cmd);
-			mButtons[2] = OFF;
 		}
 		if(mButtons[3] == ON){
 			std::cout<<"Button 3 Pressed"<<std::endl;
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::MODE_CHANGE;
-			cmds.push_back(cmd);
-			mButtons[3] = OFF;
 		}
 		deToggleButtons();			//it's important that this be called every frame
 	}
 
 	interaction_manager->update();
 	_scenemanager->update(dt,interaction_manager->sceneCommands());
-	if(cmds.size()>0)
-		_scenemanager->update(dt,cmds);
 //	PROFILER.endCycle();		//needed for time profiling
 }
 

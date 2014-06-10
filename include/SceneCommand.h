@@ -18,36 +18,12 @@ typedef osg::Vec3 v3;
  * any input from the user to the system and eventually
  * to the graphical scene.
  */
-//struct SceneCommand {
-//	
-//	/** Enumeration of commands possible from the user. */
-//	enum CommandType {
-//		ADD_BLOCK,
-//		MODE_CHANGE,
-//		MOVE,
-//		THROW_BLOCK,
-//		NAVIGATION
-//	};
-//	
-//	/** Enumeration of game modes possible. */
-//	enum GameMode {
-//		CREATION,
-//		PHYSICS
-//	};
-//	
-//	/** Possible command arguments. */
-//	osg::Vec4		color;
-//	CommandType		commandType;
-//	GameMode		currentGameMode;
-//	osg::Vec3		direction;
-//	v3				position;
-//	std::string		textureFileName;
-//	osg::Matrix		navigationMatrix;
-//};
 
+//TODO: Add device id so we can easily handle collaboration
+//Add device command?
 class SceneCommand{
 public:
-	virtual const char* CommandType()=0;
+	virtual const char* CommandType(){ return "GENERIC"; }
 };
 
 class Add_Block: public SceneCommand{

@@ -34,7 +34,7 @@ void AppManager::update(void)
 	
     // Grab any interactions that have happened since the last update
     _interactionManager->update();
-    std::vector<SceneCommand> _sceneCommandList = _interactionManager->sceneCommands();
+    std::vector<SceneCommand*> _sceneCommandList = _interactionManager->sceneCommands();
     
     // Pass along the updates to the scene so that we can see them visually
     _sceneManager->update(1, _sceneCommandList);

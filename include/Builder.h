@@ -30,7 +30,7 @@
 class Builder{
 private:
 	//Create the block
-	osg::MatrixTransform* makeBlock(SceneCommand sc);
+	osg::MatrixTransform* makeBlock(Add_Block sc);
 	//Set the color of the block
 	void setColor(osg::Node* &,osg::Vec4);
 	//Set the texture of the block
@@ -46,9 +46,11 @@ public:
 	//Initialization
 	void init();
 	//Create the block
-	osg::Node* createBlock(SceneCommand sc);
+	osg::Node* createBlock(Add_Block sc);
 	//Create Projectile
 	osg::Node* createProjectile();
+	//Create Floor
+	osg::Node* createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize);
 };
 
 #endif	// End of BUILDER_H

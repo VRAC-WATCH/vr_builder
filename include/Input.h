@@ -36,7 +36,7 @@ public:
 	virtual ~Input();
 	
 	/** Populates the commandList with any addition input since the last update. */
-	virtual void populateSceneCommand(std::vector<SceneCommand>& commandList) = 0;
+	virtual void populateSceneCommand(std::vector<SceneCommand*>& commandList) = 0;
 	
 	/** Accessor for the input type of the current input. */
 	inline const InputType inputType() { return _inputType; }
@@ -45,7 +45,7 @@ public:
 protected:
 	
 	/** Protected iVars. */
-	std::vector<SceneCommand>	_sceneCommandList;
+	std::vector<SceneCommand*>	_sceneCommandList;
 	
 	
 private:

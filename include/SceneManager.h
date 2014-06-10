@@ -19,16 +19,23 @@
 #include "Grid.h"
 #include "Cursor.h"
 #include "Physics.h"
-
+#include <typeinfo>
+#include <map>
 
 class SceneManager
 {
 
 private:
-	
+	int grid_size;
+	float grid_block_size;
 	/** iVars. */
 	Scene*	_scene;
 	Builder* _builder;
+	Physics* _physics;
+	Grid* _grid;
+	Cursor* _cursor;
+
+	bool creationMode;
 public:
 	
 	/** Default constructor. */
@@ -39,7 +46,7 @@ public:
     
     // Takes updates in the form of SceneCommands and
 	// turns them into something visualized in the scene
-    void update(double t,const std::vector<SceneCommand> &commands);
+    void update(double t,std::vector<SceneCommand*> &commands);
 
 	//Return root
 	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
