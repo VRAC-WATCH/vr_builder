@@ -35,6 +35,7 @@ SceneManager::SceneManager()
 	_cursor = new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size);
 	_scene->add(_cursor->getCursor());
 
+	_head_matrix = new osg::Matrix;
 }
 
 SceneManager::~SceneManager()
@@ -86,7 +87,15 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		else{
 			if(!string(commands[i]->CommandType()).compare(tb.CommandType())){
 				osg::ref_ptr<osg::Node> n = Builder::instance().createProjectile();
-				_physics->add_projectile(n,osg::Vec3(0,grid_block_size,0),osg::Vec3(0,0,-0.05));
+				//Trying to get Head Position Will have to fixed in Juggler version
+				osg::Vec3 eye,center,up; 
+				_head_matrix->getLookAt(eye,center,up);
+				osg::Vec3 blah=_head_matrix->getTrans();
+				eye.set(eye.x(),eye.y(),-eye.z());
+				center.set(center.x(),center.y(),-center.z());
+				osg::Vec3 dir = eye - center;
+				dir.normalize();
+				_physics->add_projectile(n,blah,dir*0.5);
 				_scene->add(n);
 			}
 		}
@@ -95,9 +104,15 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	if(creationMode){
 		_cursor->update();
 		_physics->rebuild();
+		_scene->rebuild();
 	}
 	else{
 		_cursor->off();
 		_physics->update();
+		_scene->physicsmode();
 	}
+}
+
+void SceneManager::set_head_matrix(osg::Matrix m){
+	*_head_matrix = m;
 }

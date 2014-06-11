@@ -131,6 +131,7 @@ void VRBuilderApp::deToggleButtons()
 void VRBuilderApp::setHeadMatrix(osg::Matrixf mat)
 {
 	mHeadMatrix = mat*mNavigation->getInverseMatrix();
+	_scenemanager->set_head_matrix(mHeadMatrix);
 }
 
 void VRBuilderApp::setWandMatrix(osg::Matrixf mat)

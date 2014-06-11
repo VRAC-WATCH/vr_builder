@@ -54,14 +54,14 @@ void Physics::add(osg::Node* model, osg::Vec3 position, Type type){
 	switch(type){
 	case(FLOOR):
 		cr->_mass = 0.0f;
-		cr->_restitution = 0.f;
+		cr->_restitution = 0.3f;
 		break;
 	case(BOX):
 		cr->_mass = 1.f;
 		break;
 	case(BALL):
 		cr->_shapeType = SPHERE_SHAPE_PROXYTYPE;
-		cr->_mass = 0.01f;
+		cr->_mass = 0.05f;
 		break;
 	}
 		

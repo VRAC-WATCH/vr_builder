@@ -131,10 +131,10 @@ osg::Node* Builder::createProjectile(){
 	osg::MatrixTransform* root = new osg::MatrixTransform;
 	
 	osg::Sphere* ball = new osg::Sphere();
-    ball->setRadius(0.2);
+    ball->setRadius(0.1);
 
     osg::ShapeDrawable* shape = new osg::ShapeDrawable( ball );
-    shape->setColor( osg::Vec4( 1., 0., 0., 1. ) );
+    shape->setColor( osg::Vec4( 1., 1., 0., 1. ) );
     osg::Geode* geode = new osg::Geode();
     geode->addDrawable( shape );
 

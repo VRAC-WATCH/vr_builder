@@ -35,6 +35,7 @@ private:
 	Grid* _grid;
 	Cursor* _cursor;
 
+	osg::Matrix* _head_matrix;
 	bool creationMode;
 public:
 	
@@ -50,6 +51,8 @@ public:
 
 	//Return root
 	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
+	//Head Matrix
+	void set_head_matrix(osg::Matrix);
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */

@@ -39,7 +39,8 @@ class Scene{
 	osg::ref_ptr<osg::MatrixTransform> _model_matrix;
 	osg::ref_ptr<osg::LightSource> _lightsource;
 
-
+	int projno;
+	bool rebuilt;
 
 public:
 	/*Constructor  
@@ -50,7 +51,8 @@ public:
     Scene();
 	~Scene();
 	void add(osg::Node*);
-	//void rebuild();
+	void rebuild();
+	void physicsmode();
 
 	/* Get the root of the scenegraph*/
 	osg::Group* getRoot(){return _root;}

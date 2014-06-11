@@ -27,6 +27,8 @@ Scene::Scene(){
 	light->setAmbient(osg::Vec4(0.05f, 0.05f, 0.05f, 1.0f));
 	light->setPosition(osg::Vec4(0.0f, 100.0f, 0.0f, 0.0f));
 
+	projno=0;
+	rebuilt = true;
 	//add floor with configuration
 	//_model_matrix->addChild(createFloor(_gridsize*_gridblocksize,_gridsize*_gridblocksize,osg::Vec3(0,0,0)));
 }
@@ -39,11 +41,24 @@ void Scene::set_navigation_matrix(osg::Matrix mat){
 	_navigation_matrix->setMatrix(mat);
 }
 
-void Scene::add(osg::Node* node){
+void Scene::add(osg::Node* node){		
 	_model_matrix->addChild(node);
 }
 
+void Scene::rebuild(){
+	if(rebuilt)
+		return;
+	int num2remove = _model_matrix->getNumChildren() - projno;
+	if(num2remove)
+		_model_matrix->removeChildren(projno,num2remove);
+	rebuilt = true;
+}
 
+void Scene::physicsmode(){
+	if(rebuilt)
+		projno = _model_matrix->getNumChildren();
+	rebuilt = false;
+}
 
 //void Scene::moveHead(v3 direction)
 //{
