@@ -59,5 +59,5 @@ public:
 
 	/* Set and get the navigation matrix*/
 	void set_navigation_matrix(osg::Matrix);
-	osg::Matrix get_navigation_matrix(){_navigation_matrix->getMatrix();}
+	inline osg::Matrix get_navigation_matrix(){ return _navigation_matrix->getMatrix(); }
 };
