@@ -3,6 +3,7 @@
 
 // Local headers
 #include "InteractionManager.h"
+#include "JugglerGamepadInput.h"
 #include "GlutKeyboardInput.h"
 #include "SceneCommand.h"
 
@@ -13,10 +14,11 @@ InteractionManager::InteractionManager()
 
 InteractionManager::InteractionManager(InterfaceType type)
 {
-	if (JUGGLER_INTERFACE)
-		_setupGlutInputs();
-	else
+	_interfaceType = type;
+	if (_interfaceType == JUGGLER_INTERFACE)
 		_setupJugglerInputs();
+	else
+		_setupGlutInputs();
 }
 
 InteractionManager::~InteractionManager()
@@ -76,4 +78,8 @@ void InteractionManager::_setupGlutInputs()
 void InteractionManager::_setupJugglerInputs()
 {
 	std::cout << "Setting up juggler input" << std::endl;
+
+	// Setup the gamepad
+	Input* gamepad = new JugglerGamepadInput;
+	_inputs.push_back(gamepad);
 }

@@ -52,7 +52,7 @@ public:
 class Navigation: public SceneCommand{
 public:
 	const char* CommandType(){ return "NAVIGATION"; }
-	osg::Matrix		navigationMatrix;
+	osg::Matrix	navMatrixMultiplier;
 };
 
 #endif

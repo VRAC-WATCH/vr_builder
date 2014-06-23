@@ -50,7 +50,8 @@ public:
     void update(double t,std::vector<SceneCommand*> &commands);
 
 	//Return root
-	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
+	osg::ref_ptr<osg::Group> sceneRoot(){return _scene->getRoot();}
+
 	//Head Matrix
 	void set_head_matrix(osg::Matrix);
 };

@@ -49,6 +49,7 @@ SceneManager::~SceneManager()
 void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 {
 	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
+
 	static Add_Block ab;
 	static Mode_Change mc;
 	static Move m;
@@ -63,7 +64,9 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		}
 		//Navigation
 		if(!string(commands[i]->CommandType()).compare(nav.CommandType())){
-			_scene->set_navigation_matrix(dynamic_cast<Navigation*>(commands[i])->navigationMatrix);
+			osg::Matrix current_nav = _scene->get_navigation_matrix();
+			osg::Matrix nav_multiplier = dynamic_cast<Navigation*>(commands[i])->navMatrixMultiplier;
+			_scene->set_navigation_matrix(current_nav * nav_multiplier);
 		}
 		//In Creation Mode
 		if(creationMode){

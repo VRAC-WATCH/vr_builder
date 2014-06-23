@@ -16,14 +16,18 @@ precompiled_header = osg.h.gch
 # Specify the objects to be generated from source files
 objects =	AppManager.o\
 			Builder.o\
+			Cursor.o\
 			GlutKeyboardInput.o\
+			Grid.o\
 			Input.o\
 			InteractionManager.o\
+			JugglerGamepadInput.o\
 			JugglerInterface.o \
 			mainJuggler.o\
+			Physics.o\
 			Scene.o\
-			SceneManager.o\
-			VRBuilderApp.o
+			SceneManager.o
+			#VRBuilderApp.o
 			
 
 # Specify the application binary

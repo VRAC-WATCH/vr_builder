@@ -14,11 +14,20 @@
 #include "InteractionManager.h"
 #include "SceneManager.h"
 
+// Use this as a temporary solution for defining our current app type
+//#define GLUT
+#define JUGGLER
+
 AppManager::AppManager()
 {
 	std::cout << "AppManager constructor called" << std::endl;
 	
+#ifdef JUGGLER
+	_interactionManager = new InteractionManager(InteractionManager::JUGGLER_INTERFACE);
+#else
 	_interactionManager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
+#endif
+
 	_sceneManager = new SceneManager;
 }
 
