@@ -14,11 +14,20 @@
 #include "InteractionManager.h"
 #include "SceneManager.h"
 
+// Use this as a temporary solution for defining our current app type
+//#define GLUT
+#define JUGGLER
+
 AppManager::AppManager()
 {
 	std::cout << "AppManager constructor called" << std::endl;
 	
+#ifdef JUGGLER
 	_interactionManager = new InteractionManager(InteractionManager::JUGGLER_INTERFACE);
+#else
+	_interactionManager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
+#endif
+
 	_sceneManager = new SceneManager;
 }
 
@@ -34,7 +43,7 @@ void AppManager::update(void)
 	
     // Grab any interactions that have happened since the last update
     _interactionManager->update();
-    std::vector<SceneCommand> _sceneCommandList = _interactionManager->sceneCommands();
+    std::vector<SceneCommand*> _sceneCommandList = _interactionManager->sceneCommands();
     
     // Pass along the updates to the scene so that we can see them visually
     _sceneManager->update(1, _sceneCommandList);

@@ -14,7 +14,8 @@ InteractionManager::InteractionManager()
 
 InteractionManager::InteractionManager(InterfaceType type)
 {
-	if (JUGGLER_INTERFACE)
+	_interfaceType = type;
+	if (_interfaceType == JUGGLER_INTERFACE)
 		_setupJugglerInputs();
 	else
 		_setupGlutInputs();
@@ -53,7 +54,7 @@ void InteractionManager::update()
 	_sceneCommandList.clear();
 	
 	// Fetch all new commands from each input
-	std::vector<SceneCommand> command_list;
+	std::vector<SceneCommand*> command_list;
 	for (unsigned int i=0; i<_inputs.size(); ++i) {
 		_inputs.at(i)->populateSceneCommand(command_list);
 	}
@@ -78,7 +79,7 @@ void InteractionManager::_setupJugglerInputs()
 {
 	std::cout << "Setting up juggler input" << std::endl;
 
-	// Setup a gamepad
+	// Setup the gamepad
 	Input* gamepad = new JugglerGamepadInput;
 	_inputs.push_back(gamepad);
 }

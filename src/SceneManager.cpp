@@ -13,75 +13,108 @@
 SceneManager::SceneManager()
 {
 	// Setup an initial grid of size 40x40
-	int scene_grid_size = 20;
-	_scene = new Scene(scene_grid_size,1.0f);
+	grid_size = 20;
+	grid_block_size = 1.0f;
+	creationMode = true;
+
+	_scene = new Scene();
+
+	//Initialize Physics
+	_physics = new Physics;
+	//Initialize Builder
+	Builder::instance().init();
+	//Grid initialization
+	_grid = new Grid(grid_size, grid_block_size);
+	//Add floor from builder to physics world and scene world
+	osg::Node* floor=Builder::instance().createFloor(grid_block_size*grid_size,grid_block_size*grid_size,osg::Vec3(0,0,0),grid_size,grid_block_size);
+	_physics->add(floor,osg::Vec3(0,0,0),Physics::FLOOR);
+	_scene->add(floor);
+	//Cursor initialization with red
+	Add_Block ab;
+	ab.color = osg::Vec4(1,0,0,1);
+	_cursor = new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size);
+	_scene->add(_cursor->getCursor());
+
+	_head_matrix = new osg::Matrix;
 }
 
 SceneManager::~SceneManager()
 {
 	delete _scene;
+	delete _physics;
+	delete _grid;
+	delete _cursor;
 }
 
-void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
+void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 {
 	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
 
-	for(int i=0;i<commands.size();i++){
-		switch(commands[i].commandType)
-		{
-			case SceneCommand::ADD_BLOCK: {
-//				_scene->add_model_node(commands[i]);
+	static Add_Block ab;
+	static Mode_Change mc;
+	static Move m;
+	static Throw_Block tb;
+	static Navigation nav;
+	for(int i=0;i<commands.size();i++){		
+		//Commands in common mode
+		//Mode change
+		if(!string(commands[i]->CommandType()).compare(mc.CommandType())){
+			creationMode = !creationMode;
+		}
+		//Navigation
+		if(!string(commands[i]->CommandType()).compare(nav.CommandType())){
+			osg::Matrix current_nav = _scene->get_navigation_matrix();
+			osg::Matrix nav_multiplier = dynamic_cast<Navigation*>(commands[i])->navMatrixMultiplier;
+			_scene->set_navigation_matrix(current_nav * nav_multiplier);
+		}
+		//In Creation Mode
+		if(creationMode){
+			//Cursor Movements
+			if(!string(commands[i]->CommandType()).compare(m.CommandType())){
+				_cursor->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position
+				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(_cursor->getCursorCurrentPosition()));//update the y position
 			}
-			case SceneCommand::MODE_CHANGE: {
-				;
-			}
-			case SceneCommand::MOVE: {
-				if (_scene->gameMode() == SceneCommand::PHYSICS) {
-					_scene->moveHead(commands[i].direction);
-				}
-				else {
-					_scene->moveCursor(commands[i].direction);
-				}
-				break;
-			}
-			case SceneCommand::NAVIGATION: {
-				_scene->set_navigation_matrix(commands[i].navigationMatrix);
-				break;
-			}
-			case SceneCommand::THROW_BLOCK: {
-				std::cout << "Throwing block" << std::endl;
-				_scene->throwProjectile(v3(0,0,-5));
-				break;
-			}
-			default: {
-				std::cout << "SceneManager::update - Unhandled command type" << std::endl;
+
+			//Add Block
+			if(!string(commands[i]->CommandType()).compare(ab.CommandType())){
+				osg::Vec3 curr = _cursor->getCursorCurrentPosition();
+				osg::Node* n = Builder::instance().createBlock(*dynamic_cast<Add_Block*>(commands[i]));
+				_physics->add(n,curr);
+				_scene->add(n);
+				_grid->add(curr);
+				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(curr));//update the cursor y position
 			}
 		}
-
-		if(commands[i].commandType == SceneCommand::ADD_BLOCK)
-			_scene->add_model_node(commands[i],false);
-		if(commands[i].commandType == SceneCommand::MODE_CHANGE)
-			_scene->changemode();
+		//In Physics Mode
+		else{
+			if(!string(commands[i]->CommandType()).compare(tb.CommandType())){
+				osg::ref_ptr<osg::Node> n = Builder::instance().createProjectile();
+				//Trying to get Head Position Will have to fixed in Juggler version
+				osg::Vec3 eye,center,up; 
+				_head_matrix->getLookAt(eye,center,up);
+				osg::Vec3 blah=_head_matrix->getTrans();
+				eye.set(eye.x(),eye.y(),-eye.z());
+				center.set(center.x(),center.y(),-center.z());
+				osg::Vec3 dir = eye - center;
+				dir.normalize();
+				_physics->add_projectile(n,blah,dir*0.5);
+				_scene->add(n);
+			}
+		}
+		
 	}
-	_scene->update(t);
+	if(creationMode){
+		_cursor->update();
+		_physics->rebuild();
+		_scene->rebuild();
+	}
+	else{
+		_cursor->off();
+		_physics->update();
+		_scene->physicsmode();
+	}
 }
 
-void SceneManager::_updateNavigation(SceneCommand navigationCommand)
-{	
-	float* axis = &(*navigationCommand.joystickAxisValues);
-
-	osg::Matrix nav_matrix = _scene->get_navigation_matrix();
-
-	std::cout << "X: " << nav_matrix.getTrans().x() << " Y: " << nav_matrix.getTrans().y() << " Z: " << nav_matrix.getTrans().z() << std::endl;
-
-	//osg::Matrix nav_matrix = _scene->get_navigation_matrix() * osg::Matrix::translate(axis[0], axis[2], axis[1]);
-	osg::Matrix move_matrix = osg::Matrix::translate(v3(0.0f,0.0f,0.0f));
-	//nav_matrix.
-	//_scene->set_navigation_matrix(nav_matrix);
-	osg::Matrix mult_matrix = nav_matrix;
-
-	//std::cout << 
-
-	_scene->set_navigation_matrix(nav_matrix);
-//	++i;
+void SceneManager::set_head_matrix(osg::Matrix m){
+	*_head_matrix = m;
 }

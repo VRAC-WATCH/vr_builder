@@ -37,8 +37,8 @@ JugglerInterface::~JugglerInterface()
 
 void JugglerInterface::init()
 {
-/*
-	_head.init("VJHead");		
+
+/*	_head.init("VJHead");		
 	_wand.init("VJWand");
 	_wandButtons[0].init("VJButton0");
 	_wandButtons[1].init("VJButton1");
@@ -78,11 +78,12 @@ void JugglerInterface::initScene()
 	vpr::GUID new_guid("72bc5a7b-c28a-4fc3-8d04-384b847fff31");
     mMyData.init(new_guid);
 
+	// NOTE: need to check ismaster in final app
+
 	// Initialize the scene and audio
 /*	if (mMyData.isLocal())
 		VRBuilderApp::instance().setIsMaster(true);
 	VRBuilderApp::instance().init();
-	*/
 	// Initialize the navigation class
 /*	_osgNavigator.init();
 	_osgNavigator.setVelocity(gmtl::Vec3f(0,0,1000));
@@ -90,11 +91,11 @@ void JugglerInterface::initScene()
 	// Initialize the juggler serialized time
 	//_jugglerTime.init();
 	std::cout<<("______finished scene_______")<<std::endl;
-
 }
 
 void JugglerInterface::preFrame()
 {
+/*
 	//if (_jugglerTime.isLocal())
 	//{
 		// Get the initial time
@@ -211,8 +212,8 @@ void JugglerInterface::preFrame()
 				}
 				
 				
-			}*/
-/*			if (_navType == GAMEPAD || _navType == WAND_AND_GAMEPAD) // Update gamepad navigation
+			}
+			if (_navType == GAMEPAD || _navType == WAND_AND_GAMEPAD) // Update gamepad navigation
 			{
 				// User navigation with the joysticks
 				float axis0 = _axis0->getData();
@@ -265,7 +266,7 @@ void JugglerInterface::preFrame()
 
 void JugglerInterface::latePreFrame()
 {
-	static double tLast = _head->getTimeStamp().secd();
+/*	static double tLast = _head->getTimeStamp().secd();
 	double tNow = _head->getTimeStamp().secd();
 	double dt = tNow - tLast;
 	tLast = tNow;
@@ -284,16 +285,18 @@ void JugglerInterface::latePreFrame()
 	//std::cout<<axis4<<" "<<axis5<<std::endl;	
 	// Update VRBuilderApp to time delta
 	VRBuilderApp::instance().update(dt);
+
 	// Attach the wand's matrix to the wand
 	osg::Matrixf wandMatrix(_wand->getData().mData);
 	VRBuilderApp::instance().setWandMatrix(wandMatrix);
+
 	osg::Matrixf headMatrix	(_head->getData().mData);
 	VRBuilderApp::instance().setHeadMatrix(headMatrix);
-*/
+
 	//================== UPDATE NAVIGATION MATRIX ===============
 
 	// Notify the osgNavigator of a new matrix just incase KVO updated it
-/*
+
 	gmtl::Matrix44f world_transform2;
 	osg::Matrix currentOSGMatrix = VRBuilderApp::instance().getNavigationMatrix();
 	currentOSGMatrix.invert(currentOSGMatrix);
@@ -301,8 +304,7 @@ void JugglerInterface::latePreFrame()
 		for (int j=0; j <= 3; j++)
 			world_transform2[j][i] = currentOSGMatrix(i, j);
 	_osgNavigator.setCurPos(world_transform2);
-*/
-/*
+
 	// Invert the osg navigator matrix
 	gmtl::Matrix44f world_transform, currentPosition;
 	currentPosition = _osgNavigator.getCurPos();
@@ -347,5 +349,5 @@ void JugglerInterface::draw()
 
 osg::Group* JugglerInterface::getScene()
 {
-	return _appManager->sceneManager()->getRoot();
+	return _appManager->sceneManager()->sceneRoot();
 }

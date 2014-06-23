@@ -40,7 +40,7 @@ public:
 	 * Currently, for this to have any data, you must call update()
 	 * in order to populate the _sceneCommandList with commands.
 	 */
-	const std::vector<SceneCommand>& sceneCommands() const { return _sceneCommandList; }
+	std::vector<SceneCommand*>& sceneCommands() { return _sceneCommandList; }
 	
 	
 protected:
@@ -54,5 +54,5 @@ protected:
 	/** iVars. */
 	std::vector<Input*>			_inputs;
 	InterfaceType				_interfaceType;
-	std::vector<SceneCommand>	_sceneCommandList;
+	std::vector<SceneCommand*>	_sceneCommandList;
 };

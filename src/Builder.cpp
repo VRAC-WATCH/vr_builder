@@ -58,7 +58,7 @@ void Builder::setTexture(osg::Node*& node, std::string textureFileName=""){
 	node->asTransform()->getChild(0)->asGeode()->setStateSet(ss);
 	return;
 }
-osg::MatrixTransform* Builder::makeBlock(SceneCommand sc)
+osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 {
 	osg::MatrixTransform* root = new osg::MatrixTransform;
 	osg::Node* node = osgBox(osg::Vec3(1,1,1));
@@ -73,17 +73,74 @@ osg::MatrixTransform* Builder::makeBlock(SceneCommand sc)
 	return( root );
 }
 
-osg::Node* Builder::createBlock(SceneCommand sc){ 
-	/*blockproperty p;
-	p.pos=sc.position;
-	switch(sc.command){
-	case(SceneCommand::CommandType::ADD_BLOCK):
-		return makeBlock(sc,bulletWorld);
-		break;
-	case(SceneCommand::CommandType::TRANSPARENT_BLOCK):
-		return ;
-		break;
-	}*/
+osg::Node* Builder::createBlock(Add_Block sc){ 
 	return makeBlock(sc);
-	//return NULL;
+}
+
+osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize)
+{
+
+    osg::Transform* ground = osgBox( osg::Vec3( w, .05, h ) );
+
+	//Draw Grid lines
+	osg::ref_ptr<osg::Vec3Array> points = new osg::Vec3Array;
+	osg::ref_ptr<osg::Geometry> lines =  new osg::Geometry; 
+	int count=0;
+	for(double i=-_gridsize/2*_gridblocksize;i<_gridsize/2*_gridblocksize;i+=_gridblocksize,count+=2){
+		osg::Vec3 sp(i,0.05,-_gridsize/2*_gridblocksize); 
+		osg::Vec3 ep(i+_gridblocksize,0.05,_gridsize/2*_gridblocksize);
+		points->push_back(sp);
+		points->push_back(ep);
+		osg::DrawElementsUInt* line =  new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
+		line->push_back(count);
+		line->push_back(count+1);
+		lines->addPrimitiveSet(line);
+	}
+	for(double i=-_gridsize/2*_gridblocksize;i<_gridsize/2*_gridblocksize;i+=_gridblocksize,count+=2){
+		osg::Vec3 sp(-_gridsize/2*_gridblocksize,0.05,i); 
+		osg::Vec3 ep(_gridsize/2*_gridblocksize,0.05,i+_gridblocksize);
+		points->push_back(sp);
+		points->push_back(ep);
+		osg::DrawElementsUInt* line =  new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
+		line->push_back(count);
+		line->push_back(count+1);
+		lines->addPrimitiveSet(line);
+	}
+	
+	osg::ref_ptr<osg::Vec4Array> color = new osg::Vec4Array; 
+	color->push_back(osg::Vec4(1.0,0.0,0.0,1.0)); 
+	lines->setVertexArray(points); 
+	lines->setColorArray(color); 
+	lines->setColorBinding(osg::Geometry::BIND_OVERALL);
+
+	osg::Vec3Array* normals = new osg::Vec3Array;
+	normals->push_back(osg::Vec3(0.0f,1.0f,0.0f));
+	lines->setNormalArray(normals);
+	lines->setNormalBinding(osg::Geometry::BIND_OVERALL);
+
+	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+	geode->addDrawable(lines);
+
+	ground->addChild(geode);
+
+    return( ground );
+}
+
+osg::Node* Builder::createProjectile(){
+	osg::Vec3 initialposition(0,0,0);	
+	osg::MatrixTransform* root = new osg::MatrixTransform;
+	
+	osg::Sphere* ball = new osg::Sphere();
+    ball->setRadius(0.1);
+
+    osg::ShapeDrawable* shape = new osg::ShapeDrawable( ball );
+    shape->setColor( osg::Vec4( 1., 1., 0., 1. ) );
+    osg::Geode* geode = new osg::Geode();
+    geode->addDrawable( shape );
+
+    osg::MatrixTransform* mt = new osg::MatrixTransform();
+    mt->addChild( geode );
+	root->addChild(mt);
+	
+    return( root );
 }

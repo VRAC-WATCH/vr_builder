@@ -16,15 +16,6 @@
 #include <osg/io_utils>
 #include <osg/Texture2D>
 
-//OSGBULLET Header
-#include <osgbDynamics/MotionState.h>
-#include <osgbCollision/CollisionShapes.h>
-#include <osgbDynamics/RigidBody.h>
-#include <osgbCollision/Utils.h>
-
-//BULLET Headers
-#include <btBulletDynamicsCommon.h>
-
 //STD HEADERS
 #include <vector>
 using namespace std;
@@ -32,7 +23,7 @@ using namespace std;
 #include "SceneCommand.h"
 #include "Builder.h"
 
-#define BLINK_SPEED 20
+
 
 /*
 	This is the Scene class
@@ -46,36 +37,10 @@ class Scene{
     osg::ref_ptr<osg::Group> _root;
 	osg::ref_ptr<osg::MatrixTransform> _navigation_matrix;
 	osg::ref_ptr<osg::MatrixTransform> _model_matrix;
-	osg::ref_ptr<osg::MatrixTransform> _cursor_matrix;
-	osg::ref_ptr<osg::Switch> _cursor_switch;
 	osg::ref_ptr<osg::LightSource> _lightsource;
 
-	int _gridsize,_gridblocksize;
-	vector<vector<vector<SceneCommand> > > _grid;
-
-	SceneCommand::GameMode _gamemode;
-
-	btDynamicsWorld* bulletWorld; //The physics world
-	osgbDynamics::MotionState* _motion; //State of the object
-
-	/* Make cursor blink using this parameter*/
-	int blink;
-	//private functions
-	/*Create the floor with grid lines*/
-	osg::Node* createFloor( float w, float h, const osg::Vec3& center);
-	/* Setup the cursor*/
-	void set_cursor(osg::Node*);
-	
-	/*Move the cursor*/
-	void set_cursor_position(osg::Matrix);
-
-	/*Check cursor position according to the grid*/
-	void check_cursor_position();
-	/*Check cursor bounds*/
-	bool check_cursor_bounds(osg::Vec3);
-
-	/*Remake the whole scene as before*/
-	void remake_scene();
+	int projno;
+	bool rebuilt;
 
 public:
 	/*Constructor  
@@ -83,52 +48,16 @@ public:
 		e.g. if the grid is 20X20, GridSize = 20
 	
 	*/
-    Scene(int GridSize,float GridBlockSize);
-
-	/* Destructor */
+    Scene();
 	~Scene();
+	void add(osg::Node*);
+	void rebuild();
+	void physicsmode();
 
 	/* Get the root of the scenegraph*/
 	osg::Group* getRoot(){return _root;}
 
 	/* Set and get the navigation matrix*/
 	void set_navigation_matrix(osg::Matrix);
-	inline osg::Matrix get_navigation_matrix(){_navigation_matrix->getMatrix();}
-
-	/*Add model node
-	
-		model - Input is the regular model
-		
-		Output - As of now returns 1 
-		Future Work -  it will provide a node id which later can be used to remove the ids etc.
-
-	*/
-
-	/*Throw projectiles*/
-	osg::Node* throwProjectile(osg::Vec3 impulse);
-
-	int add_model_node(SceneCommand sc,bool remake);
-
-	/*Remove the model node based on id - does nothing now*/
-	void remove_model_node(int);
-
-	/*Update the scene
-	
-		In the future we will move the physics world from Builder to here so there is consistency
-		Other features such as blinking cursor can be added later here.
-
-	*/
-	void update(double);
-
-	/* Move the cursor*/
-	void moveCursor(v3 direction);
-	
-	/** Move the position of the head. */
-	void moveHead(v3 direction);
-
-	/*Change the mode*/
-	void changemode();
-	
-	/** Accessor for the current game mode. */
-	inline const SceneCommand::GameMode& gameMode() { return _gamemode; }
+	inline osg::Matrix get_navigation_matrix(){ return _navigation_matrix->getMatrix(); }
 };

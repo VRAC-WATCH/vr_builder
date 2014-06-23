@@ -15,15 +15,28 @@
 // Local headers
 #include "SceneCommand.h"
 #include "Scene.h"
-
+#include "Builder.h"
+#include "Grid.h"
+#include "Cursor.h"
+#include "Physics.h"
+#include <typeinfo>
+#include <map>
 
 class SceneManager
 {
 
 private:
-	
+	int grid_size;
+	float grid_block_size;
 	/** iVars. */
 	Scene*	_scene;
+	Builder* _builder;
+	Physics* _physics;
+	Grid* _grid;
+	Cursor* _cursor;
+
+	osg::Matrix* _head_matrix;
+	bool creationMode;
 public:
 	
 	/** Default constructor. */
@@ -34,15 +47,13 @@ public:
     
     // Takes updates in the form of SceneCommands and
 	// turns them into something visualized in the scene
-    void update(double t,const std::vector<SceneCommand> &commands);
+    void update(double t,std::vector<SceneCommand*> &commands);
 
 	//Return root
-	osg::ref_ptr<osg::Group> getRoot(){return _scene->getRoot();}
+	osg::ref_ptr<osg::Group> sceneRoot(){return _scene->getRoot();}
 
-protected:
-	
-	/** Calculates a navigation matrix and updates the scene. */
-	void _updateNavigation(SceneCommand navigationCommand);
+	//Head Matrix
+	void set_head_matrix(osg::Matrix);
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */

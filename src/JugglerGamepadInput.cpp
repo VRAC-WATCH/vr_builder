@@ -33,7 +33,7 @@ JugglerGamepadInput::~JugglerGamepadInput()
 	std::cout << "JugglerGamepadInput Destructor" << std::endl;
 }
 
-void JugglerGamepadInput::populateSceneCommand(std::vector<SceneCommand>& commandList)
+void JugglerGamepadInput::populateSceneCommand(std::vector<SceneCommand*>& commandList)
 {
 	_updateJugglerInput();
 
@@ -45,22 +45,7 @@ void JugglerGamepadInput::populateSceneCommand(std::vector<SceneCommand>& comman
 
 void JugglerGamepadInput::_updateJugglerInput()
 {
-	//Navigation speed modify		
-/*	if (_button[4]->getData() == gadget::Digital::TOGGLE_ON)
-	{
-		if (_navSpeed > 0.02)
-			_navSpeed -= 0.05;
-		if (_rotSpeed < 200)
-			_rotSpeed += 5;
-	}
-	else if (_button[5]->getData() == gadget::Digital::TOGGLE_ON)
-	{
-		_navSpeed += 0.1;
-		if (_rotSpeed >= 10)
-		_rotSpeed -= 5;
-	}*/
-	//================== UPDATE WAND NAVIGATION ==================
-	// User navigation with the joysticks
+	// Joystick hardware rotation values
 	float axis0 = _axis0->getData();
 	float axis1 = _axis1->getData();
 	float axis2 = _axis2->getData();
@@ -70,101 +55,29 @@ void JugglerGamepadInput::_updateJugglerInput()
 
 	// The gamepad provides 0.0 - 1.0, this makes the origin 0.0 instead of 0.5
 	axis0 -= 0.5; axis1 -= 0.5; axis2 -= 0.5; axis3 -= 0.5; axis4 -= 0.5; axis5 -= 0.5;
-	if (axis0 != 0.0 || axis1 != 0.0 || axis2 != 0.0 || axis3 != 0.0 || axis4 != 0.0 || axis5 != 0.0)
-	{			
-		SceneCommand nav_update;
-		nav_update.commandType = SceneCommand::NAVIGATION;
-		
-		nav_update.joystickAxisValues[0] = axis0;
-		nav_update.joystickAxisValues[1] = axis1;
-		nav_update.joystickAxisValues[2] = axis2;
-		nav_update.joystickAxisValues[3] = axis3;
-		nav_update.joystickAxisValues[4] = axis4;
-		nav_update.joystickAxisValues[5] = axis5;
 
+	// If user pressing joysticks, create nav command
+	if (axis0 != 0.0 || axis1 != 0.0 || axis2 != 0.0 || axis3 != 0.0)
+	{
+		Navigation* nav_update = new Navigation;
+
+		// Reduce rotation speed
+		axis3 /= 20.0;		
+
+		// Calculate movement based on gamepad joysticks
+		osg::Matrix gamepad_update;
+		gamepad_update.setTrans(-axis0, axis2, -axis1);
+		gamepad_update.setRotate(osg::Quat(0,axis3,0,1));
+		
+		// Finalize the nav command and add it to the list
+		nav_update->navMatrixMultiplier = gamepad_update;
 		_sceneCommandList.push_back(nav_update);
-		
-		// Only allow Yaw (rot y) for navigation
-		//gmtl::EulerAngleXYZf euler(0.0f, -axis3, 0.0f);
-		//_osgNavigator.setRotationalVelocity(gmtl::makeRot<gmtl::Matrix44f>(euler));
-		//_osgNavigator.setVelocity(gmtl::Vec3f(axis0, -axis2, axis1));
-
-		// Only allow Pitch (rot x) and Roll (rot z) for tilt
-		//gmtl::EulerAngleXYZf eulerTilt(-axis5, 0.0f, axis4);
-		//_osgNavigator.setTiltVelocity(gmtl::makeRot<gmtl::Matrix44f>(eulerTilt));
-	
 	}
-}
 
-/*
-void JugglerGamepadInput::_keyboardSpecial(int key, int x, int y)
-{
-	switch(key)
+	// If user pressing dpad, create block move command
+	if (axis4 != 0.0 || axis5 != 0.0)
 	{
-		//handle key input
-		case GLUT_KEY_UP: {
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::MOVE;
-			cmd.direction = v3(0,0,1);
-			s_keyboardSceneCommands.push_back(cmd);
-			break;
-		}
-		case GLUT_KEY_DOWN: {
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::MOVE;
-			cmd.direction = v3(0,0,-1);
-			s_keyboardSceneCommands.push_back(cmd);
-			break;
-		}
-		case GLUT_KEY_LEFT: {
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::MOVE;
-			cmd.direction = v3(-1,0,0);
-			s_keyboardSceneCommands.push_back(cmd);
-			break;
-		}
-		case GLUT_KEY_RIGHT: {
-			SceneCommand cmd;
-			cmd.commandType = SceneCommand::MOVE;
-			cmd.direction = v3(1,0,0);
-			s_keyboardSceneCommands.push_back(cmd);
-			break;
-		}
-		default:
-			printf("Unrecognized key.\n");
-            break;
-    }
-	glutPostRedisplay();
-}
-
-void JugglerGamepadInput::_keyboardNormal(unsigned char key, int x, int y)
-{
-	switch(key)
-	{
-	case('t'):{
-		SceneCommand cmd;
-		cmd.commandType = SceneCommand::MODE_CHANGE;
-		s_keyboardSceneCommands.push_back(cmd);
-		break;
+		;
 	}
-	case ' ': {
-		SceneCommand cmd;
-		cmd.commandType = SceneCommand::THROW_BLOCK;
-		s_keyboardSceneCommands.push_back(cmd);
-		break;
-	}
-	default:
-		printf("Unrecognized key \n");
-		break;
-	}
-	glutPostRedisplay();
 }
-
-JugglerGamepadInput::special_func_ptr JugglerGamepadInput::keyboardSpecial_ptr() {
-	return &_keyboardSpecial;
-}
-
-JugglerGamepadInput::normal_func_ptr JugglerGamepadInput::keyboardNormal_ptr() {
-	return &_keyboardNormal;
-}*/
 

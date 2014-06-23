@@ -17,7 +17,7 @@ public:
 	~JugglerGamepadInput();
 	
 	/** Add any commands we have stored to the list passed in. */
-	void populateSceneCommand(std::vector<SceneCommand>& commandList);
+	void populateSceneCommand(std::vector<SceneCommand*>& commandList);
 
 
 protected:
