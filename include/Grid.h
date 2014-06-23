@@ -7,7 +7,7 @@
  */
 
 //OSG HEADERS
-#include <osg\Array>
+#include <osg/Array>
 
 //STL Headers
 #include <string>
