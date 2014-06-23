@@ -45,7 +45,7 @@ void SceneManager::update(double t,const std::vector<SceneCommand> &commands )
 				break;
 			}
 			case SceneCommand::NAVIGATION: {
-				_updateNavigation(commands[i]);
+				_scene->set_navigation_matrix(commands[i].navigationMatrix);
 				break;
 			}
 			case SceneCommand::THROW_BLOCK: {

@@ -9,6 +9,8 @@
 # Deps
 deps/
 
+# Auto-Generated PCH file
+src/osg.h.gch
 
 ########################################
 ######### Defaults for github cpp ######

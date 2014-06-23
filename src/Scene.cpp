@@ -119,12 +119,12 @@ int Scene::add_model_node(SceneCommand cmd, bool remake){
 		return 0;
 
 	//Get the current cursor position
-	v3 cursor_position = _cursor_matrix->getMatrix().getTrans();
+	cmd.position = _cursor_matrix->getMatrix().getTrans();
 	
 	//Add to grid
 	if(!remake){
-		int gridx=(cursor_position.x()/_gridblocksize)+_gridsize/2;
-		int gridy=(cursor_position.z()/_gridblocksize)+_gridsize/2;
+		int gridx=(cmd.position.x()/_gridblocksize)+_gridsize/2;
+		int gridy=(cmd.position.z()/_gridblocksize)+_gridsize/2;
 		_grid[gridx][gridy].push_back(cmd);
 	}
 	//Create the block
@@ -143,7 +143,7 @@ int Scene::add_model_node(SceneCommand cmd, bool remake){
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
 
-	osg::Matrix m(osg::Matrix::translate(cursor_position) );
+	osg::Matrix m(osg::Matrix::translate(cmd.position) );
 
 	motion->setParentTransform( m );
 	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
@@ -207,7 +207,7 @@ bool Scene::check_cursor_bounds(osg::Vec3 trans){
 
 void Scene::moveCursor(v3 direction){
 	osg::Vec3d trans=_cursor_matrix->getMatrix().getTrans();
-	trans.set(trans.x()-_gridblocksize,trans.y(),trans.z());
+	trans.set(trans.x()+direction.x()*_gridblocksize,trans.y()+direction.y()*_gridblocksize,trans.z()+direction.z()*_gridblocksize);
 	if(check_cursor_bounds(trans))
 		_cursor_matrix->setMatrix(osg::Matrix::translate(trans));
 }
@@ -306,8 +306,9 @@ void Scene::changemode(){
 }
 
 osg::Node* Scene::throwProjectile(osg::Vec3 impulse){
+	osg::Vec3 initialposition(0,_gridblocksize/2,0);	
 	osg::MatrixTransform* root = new osg::MatrixTransform;
-
+	
 	osg::Sphere* ball = new osg::Sphere();
     ball->setRadius(0.1);
 
@@ -331,7 +332,7 @@ osg::Node* Scene::throwProjectile(osg::Vec3 impulse){
 	
 	//Move block to correct position in the physics world
 	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	motion->setParentTransform(root->getMatrix());
+	motion->setParentTransform(osg::Matrix::translate(initialposition));
 	body->setWorldTransform( osgbCollision::asBtTransform(root->getMatrix()));
 
 	bulletWorld->addRigidBody( body );

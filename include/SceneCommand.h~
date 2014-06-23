@@ -25,8 +25,8 @@ struct SceneCommand {
 		ADD_BLOCK,
 		MODE_CHANGE,
 		MOVE,
-		NAVIGATION,
-		THROW_BLOCK
+		THROW_BLOCK,
+		NAVIGATION
 	};
 	
 	/** Enumeration of game modes possible. */
@@ -36,14 +36,12 @@ struct SceneCommand {
 	};
 	
 	/** Possible command arguments. */
-	float			joystickAxisValues[6];
 	osg::Vec4		color;
 	CommandType		commandType;
 	GameMode		currentGameMode;
 	osg::Vec3		direction;
-	v3				position;	
+	v3				position;
 	std::string		textureFileName;
-	osg::Matrix		navigationMatrix;
 };
 
 #endif

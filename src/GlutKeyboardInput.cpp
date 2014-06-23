@@ -4,8 +4,10 @@
 // GL headers
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
-#else
+#elif __linux__
 #  include <GL/glut.h>
+#else
+#  include <glut.h>
 #endif
 
 // Local headers
@@ -86,6 +88,12 @@ void GlutKeyboardInput::_keyboardNormal(unsigned char key, int x, int y)
 	case('t'):{
 		SceneCommand cmd;
 		cmd.commandType = SceneCommand::MODE_CHANGE;
+		s_keyboardSceneCommands.push_back(cmd);
+		break;
+	}
+	case 'a': {
+		SceneCommand cmd;
+		cmd.commandType = SceneCommand::ADD_BLOCK;
 		s_keyboardSceneCommands.push_back(cmd);
 		break;
 	}
