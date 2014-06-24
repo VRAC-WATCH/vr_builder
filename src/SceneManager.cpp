@@ -13,7 +13,7 @@
 SceneManager::SceneManager()
 {
 	// Setup an initial grid of size 40x40
-	grid_size = 20;
+	grid_size = 300;
 	grid_block_size = 1.0f;
 	creationMode = true;
 
@@ -31,7 +31,7 @@ SceneManager::SceneManager()
 	_scene->add(floor);
 	//Cursor initialization with red
 	Add_Block ab;
-	ab.color = osg::Vec4(1,0,0,1);
+	ab.color = osg::Vec4(0,1.0,0,0.5);
 	_cursor = new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size);
 	_scene->add(_cursor->getCursor());
 

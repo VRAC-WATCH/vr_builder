@@ -108,7 +108,7 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 	}
 	
 	osg::ref_ptr<osg::Vec4Array> color = new osg::Vec4Array; 
-	color->push_back(osg::Vec4(1.0,0.0,0.0,1.0)); 
+	color->push_back(osg::Vec4(0.0,0.0,0.0,1.0)); 
 	lines->setVertexArray(points); 
 	lines->setColorArray(color); 
 	lines->setColorBinding(osg::Geometry::BIND_OVERALL);
