@@ -15,7 +15,6 @@ Scene::Scene(){
 	_model_matrix = new osg::MatrixTransform;
 	_navigation_matrix = new osg::MatrixTransform;
 	osg::Matrix mat = _navigation_matrix->getMatrix();
-	std::cout << "OrigX: " << mat.getTrans().x() << " OrigY: " << mat.getTrans().y() << " OrigZ: " << mat.getTrans().z() << std::endl;
 	_root->addChild(_navigation_matrix);
 	_navigation_matrix->addChild(_model_matrix);
 	
@@ -40,7 +39,6 @@ Scene::~Scene(){
 
 void Scene::set_navigation_matrix(osg::Matrix mat){
 	_navigation_matrix->setMatrix(mat);
-	std::cout << "x: " << mat.getTrans().x() << " y: " << mat.getTrans().y() << " z: " << mat.getTrans().z() << std::endl;
 }
 
 void Scene::add(osg::Node* node){		
