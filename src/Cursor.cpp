@@ -17,14 +17,14 @@ Cursor::Cursor(osg::Node* n,int gridsize,float gridblocksize){
 	_gridsize = gridsize;
 	_gridblocksize = gridblocksize;
 	blink=0;
-	move(osg::Vec3(0,0,0));
+	move(osg::Vec3(_gridblocksize/2.0,0,_gridblocksize/2.0));
 }
 
 bool Cursor::check_cursor_bounds(osg::Vec3 trans){
-	if(trans.x() <= -_gridsize/2*_gridblocksize ||
-		trans.z() <= -_gridsize/2*_gridblocksize ||
-		trans.x() >= _gridsize/2*_gridblocksize ||
-		trans.z() >= _gridsize/2*_gridblocksize)
+	if(trans.x() <= -(_gridsize+1)/2*_gridblocksize ||
+		trans.z() <= -(_gridsize+1)/2*_gridblocksize ||
+		trans.x() >= (_gridsize+1)/2*_gridblocksize ||
+		trans.z() >= (_gridsize+1)/2*_gridblocksize)
 		return false;
 	return true;
 }

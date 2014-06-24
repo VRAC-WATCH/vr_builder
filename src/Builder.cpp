@@ -79,16 +79,16 @@ osg::Node* Builder::createBlock(Add_Block sc){
 
 osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize)
 {
-
-    osg::Transform* ground = osgBox( osg::Vec3( w, .05, h ) );
+	float ground_size = (_gridsize+0.5) * _gridblocksize;
+    osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size));
 
 	//Draw Grid lines
 	osg::ref_ptr<osg::Vec3Array> points = new osg::Vec3Array;
 	osg::ref_ptr<osg::Geometry> lines =  new osg::Geometry; 
 	int count=0;
-	for(double i=-_gridsize/2*_gridblocksize;i<_gridsize/2*_gridblocksize;i+=_gridblocksize,count+=2){
-		osg::Vec3 sp(i,0.05,-_gridsize/2*_gridblocksize); 
-		osg::Vec3 ep(i+_gridblocksize,0.05,_gridsize/2*_gridblocksize);
+	for(double i=-(_gridsize+1)/2*_gridblocksize;i<=(_gridsize+1)/2*_gridblocksize;i+=_gridblocksize,count+=2){
+		osg::Vec3 sp(i,0.05,-(_gridsize+1)/2*_gridblocksize); 
+		osg::Vec3 ep(i,0.05,(_gridsize+1)/2*_gridblocksize);
 		points->push_back(sp);
 		points->push_back(ep);
 		osg::DrawElementsUInt* line =  new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
@@ -96,9 +96,9 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 		line->push_back(count+1);
 		lines->addPrimitiveSet(line);
 	}
-	for(double i=-_gridsize/2*_gridblocksize;i<_gridsize/2*_gridblocksize;i+=_gridblocksize,count+=2){
-		osg::Vec3 sp(-_gridsize/2*_gridblocksize,0.05,i); 
-		osg::Vec3 ep(_gridsize/2*_gridblocksize,0.05,i+_gridblocksize);
+	for(double i=-(_gridsize+1)/2*_gridblocksize;i<=(_gridsize+1)/2*_gridblocksize;i+=_gridblocksize,count+=2){
+		osg::Vec3 sp(-(_gridsize+1)/2*_gridblocksize,0.05,i); 
+		osg::Vec3 ep((_gridsize+1)/2*_gridblocksize,0.05,i);
 		points->push_back(sp);
 		points->push_back(ep);
 		osg::DrawElementsUInt* line =  new osg::DrawElementsUInt(osg::PrimitiveSet::LINES, 0);
