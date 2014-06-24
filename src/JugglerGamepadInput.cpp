@@ -74,10 +74,34 @@ void JugglerGamepadInput::_updateJugglerInput()
 		_sceneCommandList.push_back(nav_update);
 	}
 
+	// Make sure the user clicks rather than holds the cursor
+	// (only initializes the first pass because static)
+	static bool cursor_moving = false;
+
 	// If user pressing dpad, create block move command
-	if (axis4 != 0.0 || axis5 != 0.0)
+	if ((axis4 != 0.0 || axis5 != 0.0) && cursor_moving == false)
 	{
-		;
+		cursor_moving = true;
+
+		Move* cursor_move = new Move;
+
+		// Horizontal cursor movement
+		if (axis4 > 0.0)
+			cursor_move->direction[0] = 1;
+		else if (axis4 < 0.0)
+			cursor_move->direction[0] = -1;
+		
+		// Vertical cursor movement
+		if (axis5 > 0.0)
+			cursor_move->direction[2] = 1;
+		else if (axis5 < 0.0)
+			cursor_move->direction[2] = -1;
+
+		_sceneCommandList.push_back(cursor_move);
+	}
+	else if (axis4 == 0.0 && axis5 == 0.0) 
+	{
+		cursor_moving = false;
 	}
 }
 
