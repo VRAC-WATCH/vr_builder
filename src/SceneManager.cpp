@@ -31,11 +31,11 @@ SceneManager::SceneManager()
 	_scene->add(floor);
 	//Cursor initialization with red
 	Add_Block ab;
-	ab.color = osg::Vec4(0,1.0,0,0.5);
+	ab.color = osg::Vec4(1.0,1.0,1.0,0.5);
 	_cursor = new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size);
 	_scene->add(_cursor->getCursor());
 
-	_head_matrix = new osg::Matrix;
+	//_head_matrix = osg::Matrix();
 }
 
 SceneManager::~SceneManager()
@@ -51,12 +51,20 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
 
 	static Add_Block ab;
+	static HeadTrackChangeCommand head_track_command;
 	static Mode_Change mc;
 	static Move m;
 	static Throw_Block tb;
 	static Navigation nav;
 	for(int i=0;i<commands.size();i++){		
+		
 		//Commands in common mode
+		
+		// Head tracking change
+		if(!string(commands[i]->CommandType()).compare(head_track_command.CommandType())){
+			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix;
+		}
+
 		//Mode change
 		if(!string(commands[i]->CommandType()).compare(mc.CommandType())){
 			creationMode = !creationMode;
@@ -88,11 +96,13 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		//In Physics Mode
 		else{
 			if(!string(commands[i]->CommandType()).compare(tb.CommandType())){
+				
 				osg::ref_ptr<osg::Node> n = Builder::instance().createProjectile();
+				
 				//Trying to get Head Position Will have to fixed in Juggler version
 				osg::Vec3 eye,center,up; 
-				_head_matrix->getLookAt(eye,center,up);
-				osg::Vec3 blah=_head_matrix->getTrans();
+				_head_matrix.getLookAt(eye,center,up);
+				osg::Vec3 blah=_head_matrix.getTrans();
 				eye.set(eye.x(),eye.y(),-eye.z());
 				center.set(center.x(),center.y(),-center.z());
 				osg::Vec3 dir = eye - center;
@@ -116,5 +126,5 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 }
 
 void SceneManager::set_head_matrix(osg::Matrix m){
-	*_head_matrix = m;
+	_head_matrix = m;
 }

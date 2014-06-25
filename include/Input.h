@@ -21,6 +21,7 @@ public:
 	enum InputType {
 		KEYBOARD,
 		GAMEPAD,
+		HEAD_TRACK,
 		MOUSE,
 		WAND,
 		OTHER = 0

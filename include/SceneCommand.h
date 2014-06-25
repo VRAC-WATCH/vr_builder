@@ -32,6 +32,12 @@ public:
 	std::string		textureFileName;
 };
 
+class HeadTrackChangeCommand : public SceneCommand {
+public:
+	const char* CommandType(){ return "HEAD_TRACK"; }
+	osg::Matrix headMatrix;
+};
+
 class Mode_Change: public SceneCommand{
 public:
 	const char* CommandType(){ return "MODE_CHANGE"; }

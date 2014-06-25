@@ -35,7 +35,7 @@ private:
 	Grid* _grid;
 	Cursor* _cursor;
 
-	osg::Matrix* _head_matrix;
+	osg::Matrix _head_matrix;
 	bool creationMode;
 public:
 	
