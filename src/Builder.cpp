@@ -93,7 +93,7 @@ osg::Node* Builder::createBlock(Add_Block sc){
 osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize)
 {
 	float ground_size = (_gridsize+0.5) * _gridblocksize;
-    osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size));
+    osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size), osg::Vec4(1,1,1,0.5));
 
 	// Make the ground transparent
 	osg::ref_ptr<osg::StateSet> ss = ground->getOrCreateStateSet();
@@ -130,7 +130,7 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 	}
 	
 	osg::ref_ptr<osg::Vec4Array> color = new osg::Vec4Array; 
-	color->push_back(osg::Vec4(0.0,0.0,0.0,1.0)); 
+	color->push_back(osg::Vec4(0.0,0.0,0.0,0.2)); 
 	lines->setVertexArray(points); 
 	lines->setColorArray(color); 
 	lines->setColorBinding(osg::Geometry::BIND_OVERALL);
