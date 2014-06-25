@@ -134,6 +134,7 @@ void JugglerGamepadInput::_updateJugglerInput()
 	if (_button[BLOCK_ADD]->getData() == gadget::Digital::ON)
 	{
 		Add_Block* add_block = new Add_Block;
+		add_block->color = osg::Vec4(0.7, 0.7, 0.7, 1.0);
 		_sceneCommandList.push_back(add_block);
 	}
 
