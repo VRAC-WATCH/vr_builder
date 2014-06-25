@@ -24,19 +24,6 @@
 
 class SceneManager
 {
-
-private:
-	int grid_size;
-	float grid_block_size;
-	/** iVars. */
-	Scene*	_scene;
-	Builder* _builder;
-	Physics* _physics;
-	Grid* _grid;
-	Cursor* _cursor;
-
-	osg::Matrix _head_matrix;
-	bool creationMode;
 public:
 	
 	/** Default constructor. */
@@ -54,6 +41,21 @@ public:
 
 	//Head Matrix
 	void set_head_matrix(osg::Matrix);
+
+
+protected:
+	
+	/** iVars. */
+	Builder* 					_builder;
+	bool 						creationMode;
+	Cursor* 					_cursor;
+	osg::ref_ptr<osg::Node> 	_floor;
+	Grid* 						_grid;
+	float 						grid_block_size;
+	int 						grid_size;
+	osg::Matrix 				_head_matrix;
+	Physics* 					_physics;
+	Scene*						_scene;
 };
 
 #endif /* defined(__VRBuilder__sceneMgr__) */
