@@ -37,12 +37,7 @@ Physics::~Physics(){
 	list.clear();
 	delete bulletWorld;
 }
-void Physics::setRigidBodyPosition(btRigidBody*& body, osg::Vec3 pos){
-	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
-	osg::Matrix m( osg::Matrix::translate(pos) );
-	motion->setParentTransform( m );
-	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
-}
+
 void Physics::add(osg::Node* model, osg::Vec3 position, Type type){
 
 	//Place in the Physics world
@@ -99,6 +94,13 @@ void Physics::rebuild(){
 			break;
 		}
 	}
+}
+
+void Physics::setRigidBodyPosition(btRigidBody*& body, osg::Vec3 pos){
+	osgbDynamics::MotionState* motion = static_cast< osgbDynamics::MotionState* >( body->getMotionState() );
+	osg::Matrix m( osg::Matrix::translate(pos) );
+	motion->setParentTransform( m );
+	body->setWorldTransform( osgbCollision::asBtTransform( m ) );
 }
 
 void Physics::update(){
