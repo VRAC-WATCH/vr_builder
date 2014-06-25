@@ -25,5 +25,7 @@ public:
 	~Grid();
 	void add(osg::Vec3 );
 	int cursor_height(osg::Vec3);
-	
+
+	/** Resets all retained heights back to 0. */
+	void reset();	
 };

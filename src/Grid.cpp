@@ -35,3 +35,10 @@ int Grid::cursor_height(osg::Vec3 position){
 	int gridy=(position.z()/_gridblocksize)+_gridsize/2;
 	return (_grid[gridx][gridy]);
 }
+
+void Grid::reset()
+{
+	for(int i=0;i<_gridsize;i++)
+		for(int j=0;j<_gridsize;j++)
+			_grid[i][j] = 0;
+}
