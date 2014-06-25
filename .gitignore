@@ -4,7 +4,7 @@
 isense.log
 nodeid
 state
-vrBuilderApp
+build/vrBuilderApp
 
 # DS_Store files
 *.DS_Store
