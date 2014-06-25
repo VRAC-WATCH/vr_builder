@@ -81,6 +81,22 @@ void Physics::add_projectile(osg::Node* n, osg::Vec3 p, osg::Vec3 impulse){
 	list[list.size()-1].ebody->applyCentralImpulse(btVector3(impulse.x(),impulse.y(),impulse.z()));
 }
 
+void Physics::clearBoxes()
+{
+	std::vector<int> remove_elements;
+	for(int i=0;i<list.size();i++){
+		switch(list[i].etype){
+			case(BOX):
+				remove_elements.push_back(i);
+				bulletWorld->removeRigidBody(list[i].ebody);
+				delete list[i].ebody;
+				list.erase(list.begin()+i);
+				--i;
+				break;
+		}
+	}
+}
+
 void Physics::rebuild(){
 	for(int i=0;i<list.size();i++){
 		switch(list[i].etype){

@@ -42,5 +42,9 @@ public:
 	void add(osg::Node*, osg::Vec3, Type type = BOX);
 	void rebuild();
 	void add_projectile(osg::Node*, osg::Vec3, osg::Vec3 );
+
+	/** Clears all simulated box objects. */
+	void clearBoxes();	
+
 	void update();
 };
