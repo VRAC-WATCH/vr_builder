@@ -12,10 +12,10 @@
 osg::Transform* osgBox( osg::Vec3 blocksize )
 {
 	osg::Box* box = new osg::Box();
-    box->setHalfLengths( blocksize/2 );
+    box->setHalfLengths( blocksize/2 );	
 
     osg::ShapeDrawable* shape = new osg::ShapeDrawable( box );
-    shape->setColor( osg::Vec4( 1., 1., 1., 1. ) );
+    shape->setColor( osg::Vec4( 1.0, 1.0, 1.0, 1.0) );
     osg::Geode* geode = new osg::Geode();
     geode->addDrawable( shape );
 
@@ -68,7 +68,20 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 		exit( 0 );
 	}
 	setColor(node,sc.color);
-	setTexture(node,sc.textureFileName);
+	
+	// If we had transparency, set its stateset to allow it
+	if (sc.color[3] < 1.0)
+	{
+		osg::ref_ptr<osg::StateSet> ss = node->getOrCreateStateSet();
+		ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+		osg::ref_ptr<osg::Depth> depth = new osg::Depth;
+		depth->setWriteMask(false);
+		ss->setAttributeAndModes(depth, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+		ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+		ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+	}
+
+	//setTexture(node,sc.textureFileName);
 	root->addChild( node );
 	return( root );
 }
@@ -81,6 +94,15 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 {
 	float ground_size = (_gridsize+0.5) * _gridblocksize;
     osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size));
+
+	// Make the ground transparent
+	osg::ref_ptr<osg::StateSet> ss = ground->getOrCreateStateSet();
+	ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+	osg::ref_ptr<osg::Depth> depth = new osg::Depth;
+	depth->setWriteMask(false);
+	ss->setAttributeAndModes(depth, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+	ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+	ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 
 	//Draw Grid lines
 	osg::ref_ptr<osg::Vec3Array> points = new osg::Vec3Array;
