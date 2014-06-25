@@ -21,14 +21,18 @@ SceneManager::SceneManager()
 
 	//Initialize Physics
 	_physics = new Physics;
+
 	//Initialize Builder
 	Builder::instance().init();
+
 	//Grid initialization
 	_grid = new Grid(grid_size, grid_block_size);
+	
 	//Add floor from builder to physics world and scene world
-	osg::Node* floor=Builder::instance().createFloor(grid_block_size*grid_size,grid_block_size*grid_size,osg::Vec3(0,0,0),grid_size,grid_block_size);
-	_physics->add(floor,osg::Vec3(0,0,0),Physics::FLOOR);
-	_scene->add(floor);
+	_floor = Builder::instance().createFloor(grid_block_size*grid_size,grid_block_size*grid_size,osg::Vec3(0,0,0),grid_size,grid_block_size);
+	_physics->add(_floor,osg::Vec3(0,0,0),Physics::FLOOR);
+	_scene->add(_floor);
+	
 	//Cursor initialization with red
 	Add_Block ab;
 	ab.color = osg::Vec4(1.0,1.0,1.0,0.5);
@@ -40,10 +44,22 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-	delete _scene;
-	delete _physics;
-	delete _grid;
 	delete _cursor;
+	delete _grid;
+	delete _physics;
+	delete _scene;
+}
+
+void SceneManager::clearScene()
+{
+	// Clear and repopulate the scene
+	_scene->clear();
+	_scene->add(_floor);
+	_scene->add(_cursor->getCursor());
+	_cursor->move(osg::Vec3(0,0,0), 0);
+
+	_grid->reset();
+	_physics->clearBoxes();
 }
 
 void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
@@ -51,17 +67,18 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
 
 	static Add_Block ab;
-	static HeadTrackChangeCommand head_track_command;
+	static ClearSceneCommand clear_scene_cmd;
+	static HeadTrackChangeCommand head_track_cmd;
 	static Mode_Change mc;
 	static Move m;
-	static Throw_Block tb;
 	static Navigation nav;
+	static Throw_Block tb;
 	for(int i=0;i<commands.size();i++){		
 		
 		//Commands in common mode
 		
 		// Head tracking change
-		if(!string(commands[i]->CommandType()).compare(head_track_command.CommandType())){
+		if(!string(commands[i]->CommandType()).compare(head_track_cmd.CommandType())){
 			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix;
 		}
 
@@ -77,6 +94,12 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		}
 		//In Creation Mode
 		if(creationMode){
+
+			// Clear scene
+			if(!string(commands[i]->CommandType()).compare(clear_scene_cmd.CommandType())){
+				clearScene();
+			}
+			
 			//Cursor Movements
 			if(!string(commands[i]->CommandType()).compare(m.CommandType())){
 				_cursor->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position

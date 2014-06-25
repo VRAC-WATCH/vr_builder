@@ -32,6 +32,11 @@ public:
 	std::string		textureFileName;
 };
 
+class ClearSceneCommand: public SceneCommand{
+public:
+	const char* CommandType(){ return "CLEAR_SCENE"; }
+};
+
 class HeadTrackChangeCommand : public SceneCommand {
 public:
 	const char* CommandType(){ return "HEAD_TRACK"; }

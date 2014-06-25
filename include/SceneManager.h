@@ -32,6 +32,9 @@ public:
 	/** Destructor. */
 	~SceneManager();
     
+	/** Clears out all visuals in the scene. */
+	void clearScene();
+
     // Takes updates in the form of SceneCommands and
 	// turns them into something visualized in the scene
     void update(double t,std::vector<SceneCommand*> &commands);

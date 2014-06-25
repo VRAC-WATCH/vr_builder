@@ -120,7 +120,7 @@ void JugglerGamepadInput::_updateJugglerInput()
 	
 
 	// This helps so we don't have to keep updating hard coded numbers each time config changes
-	enum BUTTON_NUM { MODE_CHANGE, BLOCK_ADD, BLOCK_THROW };
+	enum BUTTON_NUM { MODE_CHANGE=0, BLOCK_ADD=1, BLOCK_THROW=3, CLEAR_SCENE=9 };
 
 	// Mode change
 	if (_button[MODE_CHANGE]->getData() == gadget::Digital::TOGGLE_ON)
@@ -143,6 +143,13 @@ void JugglerGamepadInput::_updateJugglerInput()
 	{
 		Throw_Block* throw_block = new Throw_Block;
 		_sceneCommandList.push_back(throw_block);
+	}
+
+	// Clear Scene
+	if (_button[CLEAR_SCENE]->getData() == gadget::Digital::TOGGLE_ON)
+	{
+		ClearSceneCommand* clear_scene_cmd = new ClearSceneCommand;
+		_sceneCommandList.push_back(clear_scene_cmd);
 	}
 }
 
