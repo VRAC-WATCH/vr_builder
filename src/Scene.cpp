@@ -37,12 +37,25 @@ Scene::~Scene(){
 	_root->removeChildren(0,_root->getNumChildren());
 }
 
-void Scene::set_navigation_matrix(osg::Matrix mat){
-	_navigation_matrix->setMatrix(mat);
-}
-
 void Scene::add(osg::Node* node){		
 	_model_matrix->addChild(node);
+}
+
+void Scene::clear()
+{
+	// Clear out the old model scene
+	bool removed = _navigation_matrix->removeChild(_model_matrix);	
+	if (!removed) {
+		std::cout << "Scene::clear() - Unable to properly clear model matrix." << std::endl;
+		return;
+	}
+
+	_model_matrix = new osg::MatrixTransform;
+	_navigation_matrix->addChild(_model_matrix);
+}
+
+void Scene::set_navigation_matrix(osg::Matrix mat){
+	_navigation_matrix->setMatrix(mat);
 }
 
 void Scene::rebuild(){

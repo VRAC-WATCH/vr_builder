@@ -51,6 +51,10 @@ public:
     Scene();
 	~Scene();
 	void add(osg::Node*);
+
+	/** Removes all visible blocks from the scene. */
+	void clear();
+
 	void rebuild();
 	void physicsmode();
 
