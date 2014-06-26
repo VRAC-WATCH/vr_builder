@@ -10,6 +10,8 @@
 #include "Scene.h"
 #include "SceneManager.h"
 
+#define PRINTVECTOR(v) cout<<v.x()<<" "<<v.y()<<" "<<v.z()<<endl;
+
 SceneManager::SceneManager()
 {
 	// Setup an initial grid of size 40x40
@@ -73,13 +75,22 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	static Move m;
 	static Navigation nav;
 	static Throw_Block tb;
+	if(commands.size())
+		cout<<"CSIZE "<<commands.size()<<endl;
 	for(int i=0;i<commands.size();i++){		
 		
 		//Commands in common mode
 		
 		// Head tracking change
 		if(!string(commands[i]->CommandType()).compare(head_track_cmd.CommandType())){
-			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix;
+			osg::Matrix temp = _scene->get_navigation_matrix();
+			temp.invert(temp);
+			osg::Vec3 eye,center,up;
+			temp.getLookAt(eye,center,up);
+			PRINTVECTOR(eye);
+			PRINTVECTOR(center);
+			PRINTVECTOR(up);
+			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * temp;
 		}
 
 		//Mode change
@@ -128,6 +139,8 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				osg::Vec3 blah=_head_matrix.getTrans();
 				eye.set(eye.x(),eye.y(),-eye.z());
 				center.set(center.x(),center.y(),-center.z());
+				//PRINTVECTOR(eye);
+				//PRINTVECTOR(center);
 				osg::Vec3 dir = eye - center;
 				dir.normalize();
 				_physics->add_projectile(n,blah,dir*0.5);

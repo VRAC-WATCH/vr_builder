@@ -6,6 +6,7 @@
 #include "InteractionManager.h"
 #include "JugglerGamepadInput.h"
 #include "SceneCommand.h"
+#include "JugglerHeadTrackInput.h"
 
 InteractionManager::InteractionManager()
 {
@@ -82,4 +83,7 @@ void InteractionManager::_setupJugglerInputs()
 	// Setup the gamepad
 	Input* gamepad = new JugglerGamepadInput;
 	_inputs.push_back(gamepad);
+
+	Input* headtrack = new JugglerHeadTrackInput;
+	_inputs.push_back(headtrack);
 }

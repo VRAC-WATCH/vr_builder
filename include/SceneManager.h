@@ -52,11 +52,11 @@ protected:
 	Builder* 					_builder;
 	bool 						creationMode;
 	Cursor* 					_cursor;
-	osg::ref_ptr<osg::Node> 	_floor;
+	osg::ref_ptr<osg::Node> 			_floor;
 	Grid* 						_grid;
 	float 						grid_block_size;
 	int 						grid_size;
-	osg::Matrix 				_head_matrix;
+	osg::Matrix 					_head_matrix;
 	Physics* 					_physics;
 	Scene*						_scene;
 };

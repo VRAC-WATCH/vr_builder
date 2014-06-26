@@ -7,6 +7,8 @@
  */
 #include "Grid.h"
 
+int _counter = 0;
+
 Grid::Grid(int GridSize,float GridBlockSize){
 	_gridsize = GridSize;
 	_gridblocksize = GridBlockSize;
@@ -28,6 +30,8 @@ void Grid::add(osg::Vec3 position){
 	int gridx=(position.x()/_gridblocksize)+_gridsize/2;
 	int gridy=(position.z()/_gridblocksize)+_gridsize/2;
 	_grid[gridx][gridy]++;
+	_counter++;
+	std::cout<<"New Number is "<<_counter<<std::endl;
 }
 
 int Grid::cursor_height(osg::Vec3 position){

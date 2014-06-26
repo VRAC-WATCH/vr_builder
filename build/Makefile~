@@ -14,10 +14,21 @@ SHELL = /bin/sh
 precompiled_header = osg.h.gch
 
 # Specify the objects to be generated from source files
-objects =	Builder.o\
-		VRBuilderApp.o \
-		JugglerInterface.o \
-		mainJuggler.o
+objects =	AppManager.o\
+			Builder.o\
+			Cursor.o\
+			GlutKeyboardInput.o\
+			Grid.o\
+			Input.o\
+			InteractionManager.o\
+			JugglerGamepadInput.o\
+			JugglerInterface.o \
+			mainJuggler.o\
+			Physics.o\
+			Scene.o\
+			SceneManager.o
+			#VRBuilderApp.o
+			
 
 # Specify the application binary
 application = vrBuilderApp
@@ -36,29 +47,28 @@ include $(DZR_BASE_DIR)/ext/vrjuggler/dzr.vrjuggler.glapp.mk
 
 # Setup the OSG and FMOD includes and libs
 EXTRA_INCLUDES += -I$(OSG_HOME)/include $(VRJ_CXX_FLAGS) -I$(src_dir)
-EXTRA_INCLUDES += -I$(OPENCV_ROOT)/include
 EXTRA_INCLUDES += -I/home/vr/apps/watch-libs/rhel6/gmtl-0.6.1/include/gmtl-0.6.1
 EXTRA_INCLUDES += -I$(OSGBULLET_ROOT)/include
 EXTRA_INCLUDES += -I$(OSGWORKS_ROOT)/include
 EXTRA_INCLUDES += -I$(BULLET_ROOT)/include/bullet
 EXTRA_INCLUDES += -I../include
 EXTRA_LIBS += -L$(OSG_HOME)/lib64 -lOpenThreads -losgAnimation -losgDB -losgFX -losgGA -losgManipulator -losgParticle -losgShadow -losgSim -losg -losgTerrain -losgText -losgUtil -losgViewer -losgVolume -losgWidget
-EXTRA_LIBS += -L$(OPENCV_ROOT)/lib -lopencv_core -lopencv_highgui -lopencv_imgproc
 EXTRA_LIBS += -L$(BULLET_ROOT)/lib -lBulletCollision -lBulletDynamics -lBulletSoftBody -LinearMath
 EXTRA_LIBS += -L$(OSGWORKS_ROOT)/lib64 -losgwControls -losgwMx -losgwTools -losgwQuery
 EXTRA_LIBS += -L$(OSGBULLET_ROOT)/lib -losgbCollision -losgbDynamics -losgbInteraction
+EXTRA_LIBS += -lglut
 
 # Generate the gch for the precompiled header
-#$(precompiled_header): $(src_dir)/osg.h
-#	g++ $(EXTRA_INCLUDES) -c $<
+$(precompiled_header): $(src_dir)/osg.h
+	g++ $(EXTRA_INCLUDES) -c $<
 
 # Generate all the object files for all the source files
 $(objects): %.o: $(src_dir)/%.cpp
-	g++ -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+	g++ -g -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
 
 # Link the application together
 $(application): $(objects)
-	g++ $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+	g++ -g $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
 
 # Methods for cleanup
 # - Use clean_all when you need to regenerate the gch for the pre-compiled header
