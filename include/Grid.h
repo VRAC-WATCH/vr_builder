@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  *  Grid.h
  *  VRBuilder
