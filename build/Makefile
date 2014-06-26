@@ -24,6 +24,7 @@ objects =	AppManager.o\
 			JugglerGamepadInput.o\
 			JugglerHeadTrackInput.o\
 			JugglerInterface.o \
+			JugglerWandInput.o\
 			mainJuggler.o\
 			Physics.o\
 			Scene.o\

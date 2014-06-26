@@ -35,6 +35,10 @@ public:
 	Cursor(osg::Node*,int gridsize = 20 ,float gridblocksize = 1.0f);
 	osg::Node* getCursor(){ return _cursor; }
 	void move(osg::Vec3,int gridheight = 0);
+	
+	/** Set cursor to specific position. */
+	void setPosition(osg::Vec3 newPosition);
+
 	void update();
 
 	osg::Vec3 getCursorCurrentPosition(){ return _cursorpat->getPosition(); }

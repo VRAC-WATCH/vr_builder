@@ -64,6 +64,41 @@ void SceneManager::clearScene()
 	_physics->clearBoxes();
 }
 
+osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
+{
+	// Get the direction pointing
+    osg::Vec3 direction(mat.ptr()[8], mat.ptr()[9], mat.ptr()[10]);
+    
+    // Grab the position
+    osg::Vec3d start_pos(mat.ptr()[12], mat.ptr()[13],mat.ptr()[14]);
+
+    // Approximate the end position using the direction pointing
+    float line_length = 100.0;
+    osg::Vec3d end_pos = start_pos + direction * line_length;
+
+
+	// Create the line segment shooting out to intersect the grid
+    osg::ref_ptr<osg::LineSegment> intersector = new osg::LineSegment(start_pos, end_pos);
+    
+    // Continue to increase the segment length until it runs entirely through the grid
+	float grid_world_size = grid_size * grid_block_size;
+	osg::BoundingBox bounding_box(-grid_world_size/2.0,-0.05,-grid_world_size/2.0,
+									grid_world_size/2.0,0.05,grid_world_size/2.0);
+    while (!intersector->intersect(bounding_box))
+    {
+        if(line_length > grid_size * 10)
+		{
+			std::cout << "never found one" << std::endl;
+            break;
+		}
+        end_pos = end_pos + direction * (-line_length);
+        intersector->set(start_pos, end_pos);
+        line_length *= 2.0;
+    }
+
+	return intersector->start();
+}
+
 void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 {
 	//std::cout << "Updating: " << commands.size() << " elements" << std::endl;
@@ -77,6 +112,7 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	static Throw_Block tb;
 	if(commands.size())
 		cout<<"CSIZE "<<commands.size()<<endl;
+	static WandTrackChangeCommand wand_track_cmd;
 	for(int i=0;i<commands.size();i++){		
 		
 		//Commands in common mode
@@ -90,11 +126,21 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 			PRINTVECTOR(eye);
 			PRINTVECTOR(center);
 			PRINTVECTOR(up);
-			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * temp;
+			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * temp;			
+		}
+
+		// Wand tracking change
+		if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType())){
+			osg::Matrix nav_mat = _scene->get_navigation_matrix();
+			nav_mat.invert(nav_mat);
+			osg::Vec3 eye,center,up;
+			//nav_mat.getLookAt(eye,center,up);
+			_wandMatrix = dynamic_cast<WandTrackChangeCommand*>(commands[i])->wandMatrix * nav_mat;
 		}
 
 		//Mode change
 		if(!string(commands[i]->CommandType()).compare(mc.CommandType())){
+			std::cout << "SceneManager - Changing interaction mode" << std::endl;
 			creationMode = !creationMode;
 		}
 		//Navigation
@@ -108,17 +154,29 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 
 			// Clear scene
 			if(!string(commands[i]->CommandType()).compare(clear_scene_cmd.CommandType())){
+				std::cout << "SceneManager - Clearing scene" << std::endl;
 				clearScene();
 			}
 			
-			//Cursor Movements
+			// d-Pad Cursor Movements
 			if(!string(commands[i]->CommandType()).compare(m.CommandType())){
+				//std::cout << "SceneManager - Moving cursor" << std::endl;
 				_cursor->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position
 				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(_cursor->getCursorCurrentPosition()));//update the y position
+			}
+			
+			// Wand cursor movements
+			if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType())){
+				// Set the position of the cursor using the intersection point
+				osg::Vec3 intersection_point = computeGridIntersection(_wandMatrix);
+				osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
+				std::cout << "x: " << intersection_point.x() << std::endl;
+				_cursor->setPosition(grid_point);
 			}
 
 			//Add Block
 			if(!string(commands[i]->CommandType()).compare(ab.CommandType())){
+				//std::cout << "SceneManager - Adding block" << std::endl;
 				osg::Vec3 curr = _cursor->getCursorCurrentPosition();
 				osg::Node* n = Builder::instance().createBlock(*dynamic_cast<Add_Block*>(commands[i]));
 				_physics->add(n,curr);
@@ -129,25 +187,27 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		}
 		//In Physics Mode
 		else{
-			if(!string(commands[i]->CommandType()).compare(tb.CommandType())){
-				
+			if(!string(commands[i]->CommandType()).compare(tb.CommandType())){				
+				//std::cout << "SceneManager - Throwing projectile" << std::endl;
 				osg::ref_ptr<osg::Node> n = Builder::instance().createProjectile();
-				
+
 				//Trying to get Head Position Will have to fixed in Juggler version
 				osg::Vec3 eye,center,up; 
 				_head_matrix.getLookAt(eye,center,up);
-				osg::Vec3 blah=_head_matrix.getTrans();
+				osg::Vec3 head=_head_matrix.getTrans();
 				eye.set(eye.x(),eye.y(),-eye.z());
 				center.set(center.x(),center.y(),-center.z());
 				//PRINTVECTOR(eye);
 				//PRINTVECTOR(center);
 				osg::Vec3 dir = eye - center;
 				dir.normalize();
-				_physics->add_projectile(n,blah,dir*0.5);
+				_physics->add_projectile(n,center,dir*0.5);
 				_scene->add(n);
 			}
 		}
-		
+
+		// Clean up the command
+		delete commands[i];		
 	}
 	if(creationMode){
 		_cursor->update();

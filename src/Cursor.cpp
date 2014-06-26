@@ -38,6 +38,12 @@ void Cursor::move(osg::Vec3 direction,int gridheight){
 		_cursorpat->setPosition(trans);
 }
 
+void Cursor::setPosition(osg::Vec3 position)
+{
+	if(check_cursor_bounds(position))
+		_cursorpat->setPosition(position);
+}
+
 void Cursor::update(){
 
 	if(blink==0){

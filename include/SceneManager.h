@@ -35,6 +35,12 @@ public:
 	/** Clears out all visuals in the scene. */
 	void clearScene();
 
+	/** 
+	 * Computes an intersection of a ray cast from the matrix
+	 * to the grid plane.
+	 */ 
+	osg::Vec3 computeGridIntersection(osg::Matrix mat);
+
     // Takes updates in the form of SceneCommands and
 	// turns them into something visualized in the scene
     void update(double t,std::vector<SceneCommand*> &commands);
@@ -56,7 +62,8 @@ protected:
 	Grid* 						_grid;
 	float 						grid_block_size;
 	int 						grid_size;
-	osg::Matrix 					_head_matrix;
+	osg::Matrix 				_head_matrix;
+	osg::Matrix 				_wandMatrix;
 	Physics* 					_physics;
 	Scene*						_scene;
 };

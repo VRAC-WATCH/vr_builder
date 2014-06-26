@@ -34,10 +34,28 @@ void Grid::add(osg::Vec3 position){
 	std::cout<<"New Number is "<<_counter<<std::endl;
 }
 
+osg::Vec3 Grid::computeNearestGridPoint(osg::Vec3 position)
+{
+	// This is a bit of a hack right now as a quick way to
+	// find valid positions of all of the highest points
+	// on the grid when passed a point. We need something like
+	// this in order to place the cursor with devices like
+	// the wand.
+	int gridx=(position.x()/_gridblocksize);
+	float x_pos = gridx * _gridblocksize + _gridblocksize/2.0;
+	int gridy=(position.z()/_gridblocksize);
+	float z_pos = gridy * _gridblocksize + _gridblocksize/2.0;
+	float height = cursor_height(position) * _gridblocksize + (float)_gridblocksize/2.0;
+
+	return osg::Vec3(x_pos, height, z_pos);
+}
+
 int Grid::cursor_height(osg::Vec3 position){
 	int gridx=(position.x()/_gridblocksize)+_gridsize/2;
 	int gridy=(position.z()/_gridblocksize)+_gridsize/2;
-	return (_grid[gridx][gridy]);
+	int height = _grid[gridx][gridy];
+	//std::cout << "Height: " << height << std::endl;
+	return height;
 }
 
 void Grid::reset()

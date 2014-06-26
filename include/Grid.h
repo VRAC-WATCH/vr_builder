@@ -24,6 +24,13 @@ public:
 	Grid(int GridSize = 20 ,float GridBlockSize = 1.0f);
 	~Grid();
 	void add(osg::Vec3 );
+
+	/** 
+	 * Finds the closest grid point and height for the given position. 
+	 * This just helps us stick to a grid instead of placing continuously.
+	 */
+	osg::Vec3 computeNearestGridPoint(osg::Vec3 position);
+
 	int cursor_height(osg::Vec3);
 
 	/** Resets all retained heights back to 0. */

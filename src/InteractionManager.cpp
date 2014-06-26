@@ -5,6 +5,8 @@
 #include "GlutKeyboardInput.h"
 #include "InteractionManager.h"
 #include "JugglerGamepadInput.h"
+#include "JugglerHeadTrackInput.h"
+#include "JugglerWandInput.h"
 #include "SceneCommand.h"
 #include "JugglerHeadTrackInput.h"
 
@@ -84,6 +86,11 @@ void InteractionManager::_setupJugglerInputs()
 	Input* gamepad = new JugglerGamepadInput;
 	_inputs.push_back(gamepad);
 
-	Input* headtrack = new JugglerHeadTrackInput;
-	_inputs.push_back(headtrack);
+	// Setup the head tracking
+	Input* head_tracker = new JugglerHeadTrackInput;
+	_inputs.push_back(head_tracker);
+
+	// Setup the wand input
+	Input* wand_input = new JugglerWandInput;
+	_inputs.push_back(wand_input);
 }

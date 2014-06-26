@@ -54,15 +54,21 @@ public:
 	osg::Vec3	direction;
 };
 
+class Navigation: public SceneCommand{
+public:
+	const char* CommandType(){ return "NAVIGATION"; }
+	osg::Matrix	navMatrixMultiplier;
+};
+
 class Throw_Block: public SceneCommand{
 public:
 	const char* CommandType(){ return "THROW_BLOCK"; }
 };
 
-class Navigation: public SceneCommand{
+class WandTrackChangeCommand : public SceneCommand {
 public:
-	const char* CommandType(){ return "NAVIGATION"; }
-	osg::Matrix	navMatrixMultiplier;
+	const char* CommandType(){ return "WAND_TRACK"; }
+	osg::Matrix wandMatrix;
 };
 
 #endif
