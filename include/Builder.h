@@ -26,31 +26,43 @@
 
 //Scene Command Header
 #include <SceneCommand.h>
+/**
+ * The Builder class is used to create each individual 
+ * scenegraph node
+ */
+
 
 class Builder{
 private:
-	//Create the block
+	/** Makes the block node*/
 	osg::MatrixTransform* makeBlock(Add_Block sc);
-	//Set the color of the block
-	void setColor(osg::Node* &,osg::Vec4);
-	//Set the texture of the block
-	void setTexture(osg::Node* &,std::string);
+	
+	/** Sets color of the node otherwise default green color is used*/
+	void setColor(osg::Node* &node,osg::Vec4 color);
+
+	/** Texture is applied if it doesnt exist then default color is applied*/
+	void setTexture(osg::Node* &node,std::string textureFile);
 
 protected:
-	//Constructor - not allow object creation
+	/** Constructor*/
 	Builder();
 public:
-	//Builder is a singleton
+	/** Singletone Instance*/
 	static Builder& instance() { static Builder builder;  return builder; }
 
-	//Initialization
+	/**Initialization (doesn't do anything now)*/
 	void init();
-	//Create the block
-	osg::Node* createBlock(Add_Block sc);
-	//Create Projectile
+
+	/** Creates the block with any additional properties*/
+	osg::Node* createBlock(Add_Block block);
+
+
+	/** Create the sphere for each projectile*/
 	osg::Node* createProjectile();
-	//Create Floor
-	osg::Node* createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize);
+
+
+	/** Create the Floor node*/
+	osg::Node* createFloor( float width, float height, const osg::Vec3& center, int _gridsize, float _gridblocksize);
 };
 
 #endif	// End of BUILDER_H
