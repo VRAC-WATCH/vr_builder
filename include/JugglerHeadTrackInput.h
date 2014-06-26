@@ -1,3 +1,5 @@
+#pragma once
+
 // Juggler headers
 #include <gadget/Type/PositionInterface.h>
 

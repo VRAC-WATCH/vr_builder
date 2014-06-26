@@ -1,3 +1,5 @@
+#pragma once
+
 // Juggler headers
 #include <gadget/Type/AnalogInterface.h>
 #include <gadget/Type/DigitalInterface.h>
