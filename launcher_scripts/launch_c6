@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Edited on Sept, 2013 - Bhaskar
+export APP_NAME=vrBuilderApp
+export CONFIGFILE_LOCATION=/home/vr/vjconfig/3.0
+export BIN_DIR=/home/users/trevorr/Development/VRBuilder/build
+export CONFIG=C6_tracked_swaplock.jconf
+#export CONFIG=C6_tracked_swaplock_mono.jconf
+export MASTERNODE="zion.vrac.iastate.edu"
+
+# Set the osg notify level
+#export OSGNOTIFYLEVEL=DEBUG
+#export OSGNOTIFYLEVEL=NOTIFY
+export OSGNOTIFYLEVEL=INFO
+#export OSGNOTIFYLEVEL=DEBUG
+
+export VPR_DEBUG_NFY_LEVEL=2
+
+# Set the LD_LIBRARY_PATH environment variable
+export LIB_HOME=/home/vr/apps/watch-libs/rhel6
+export BOOST_HOME=${LIB_HOME}/boost-1.45.0
+export CPPDOM_HOME=${LIB_HOME}/cppdom-1.0.3
+export OSG_HOME=${LIB_HOME}/openscenegraph-3.0.1
+export FMOD_HOME=${LIB_HOME}/fmod-4.36.03/api
+export VJ_BASE_DIR=${LIB_HOME}/vrjuggler-3.0.1-1
+#export VJ_BASE_DIR=${LIB_HOME}/vrjuggler
+export ALUT_HOME=${LIB_HOME}/alut-1.1.0
+export OPENCV_ROOT=${LIB_HOME}/opencv-2.3.1
+export OSGWORKS_ROOT=${LIB_HOME}/osgWorks_3_00_00
+export BULLET_ROOT=${LIB_HOME}/bullet-2.82-r2704
+export OSGBULLET_ROOT=${LIB_HOME}/osgBullet_3_00_00
+export LD_LIBRARY_PATH=${VJ_BASE_DIR}/lib64:${OSG_HOME}/lib64:${BOOST_HOME}/lib:${FMOD_HOME}/lib:${CPPDOM_HOME}/lib64:${ALUT_HOME}/lib:${OPENCV_ROOT}/lib:${OSGWORKS_ROOT}/lib64:${OSGBULLET_ROOT}/lib:${BULLET_ROOT}/lib
+# Set the current working directory
+cd ${BIN_DIR}
+
+# Launch on all the nodes
+if [ $HOSTNAME = ${MASTERNODE} ]
+then
+	#${BIN_DIR}/carrier --vrjmaster ${CONFIGFILE_LOCATION}/C6_tracked.jconf ${CONFIGFILE_LOCATION}/Logitech_rumblepad_2.jconf
+	${BIN_DIR}/${APP_NAME} --vrjmaster ${CONFIGFILE_LOCATION}/${CONFIG} ${CONFIGFILE_LOCATION}/Logitech_rumblepad_2.jconf
+else
+	${BIN_DIR}/${APP_NAME} --vrjslave > /home/users/trevorr/vrj_output/${HOSTNAME}.txt
+fi
+

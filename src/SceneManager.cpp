@@ -73,7 +73,7 @@ osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
     osg::Vec3d start_pos(mat.ptr()[12], mat.ptr()[13],mat.ptr()[14]);
 
     // Approximate the end position using the direction pointing
-    float line_length = 100.0;
+    float line_length = 1.0;
     osg::Vec3d end_pos = start_pos + direction * line_length;
 
 
@@ -82,13 +82,15 @@ osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
     
     // Continue to increase the segment length until it runs entirely through the grid
 	float grid_world_size = grid_size * grid_block_size;
-	osg::BoundingBox bounding_box(-grid_world_size/2.0,-0.05,-grid_world_size/2.0,
-									grid_world_size/2.0,0.05,grid_world_size/2.0);
-    while (!intersector->intersect(bounding_box))
+	osg::BoundingBox bounding_box(-grid_world_size/2.0,-0.005,-grid_world_size/2.0,
+									grid_world_size/2.0,0.005,grid_world_size/2.0);
+	float r1, r2;
+    while (!intersector->intersect(bounding_box, r1, r2))
     {
-        if(line_length > grid_size * 10)
+		//std::cout << "Intersecting" << std::endl;
+        if(line_length > grid_world_size * 10)
 		{
-			std::cout << "never found one" << std::endl;
+			//std::cout << "never found one" << std::endl;
             break;
 		}
         end_pos = end_pos + direction * (-line_length);
@@ -96,7 +98,14 @@ osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
         line_length *= 2.0;
     }
 
-	return intersector->start();
+	if (!intersector->intersect(bounding_box))
+		std::cout << "Never intersected" << std::endl;
+	else
+		std::cout << "R1: " << r1 << std::endl;
+
+	osg::Vec3 intersection = start_pos + (end_pos-start_pos)  * r1;
+
+	return intersection;
 }
 
 void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
@@ -133,8 +142,7 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType())){
 			osg::Matrix nav_mat = _scene->get_navigation_matrix();
 			nav_mat.invert(nav_mat);
-			osg::Vec3 eye,center,up;
-			//nav_mat.getLookAt(eye,center,up);
+			std::cout << "Updating wand" << std::endl;			
 			_wandMatrix = dynamic_cast<WandTrackChangeCommand*>(commands[i])->wandMatrix * nav_mat;
 		}
 
@@ -170,7 +178,8 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				// Set the position of the cursor using the intersection point
 				osg::Vec3 intersection_point = computeGridIntersection(_wandMatrix);
 				osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
-				std::cout << "x: " << intersection_point.x() << std::endl;
+				//std::cout << "x: " << intersection_point.x() << " z: " << intersection_point.z() << std::endl;
+				//PRINTVECTOR(intersection_point);
 				_cursor->setPosition(grid_point);
 			}
 

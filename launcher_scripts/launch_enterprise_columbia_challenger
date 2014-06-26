@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Edited on Nov 29, 2012 - Vijay
+export APP_NAME=vrBuilderApp
+export CONFIGFILE_LOCATION=/home/vr/vjconfig/3.0
+#export BIN_DIR=/home/vr/apps/watch-apps/rhel6/${APP_NAME}-1.1/app-rhel6
+export BIN_DIR=/home/users/trevorr/Development/VRBuilder/build
+
+# Set the osg notify level
+export OSGNOTIFYLEVEL=FATAL
+
+# Set the LD_LIBRARY_PATH environment variable
+export LIB_HOME=/home/vr/apps/watch-libs/rhel6
+export BOOST_HOME=${LIB_HOME}/boost-1.45.0
+export CPPDOM_HOME=${LIB_HOME}/cppdom-1.0.3
+export OSG_HOME=${LIB_HOME}/openscenegraph-3.0.1
+export FMOD_HOME=${LIB_HOME}/fmod-4.36.03/api
+export VJ_BASE_DIR=${LIB_HOME}/vrjuggler-3.0.1-1
+#export VJ_BASE_DIR=${LIB_HOME}/vrjuggler
+export ALUT_HOME=${LIB_HOME}/alut-1.1.0
+export OPENCV_ROOT=${LIB_HOME}/opencv-2.3.1
+export OSGWORKS_ROOT=${LIB_HOME}/osgWorks_3_00_00
+export BULLET_ROOT=${LIB_HOME}/bullet-2.82-r2704
+export OSGBULLET_ROOT=${LIB_HOME}/osgBullet_3_00_00
+export LD_LIBRARY_PATH=${VJ_BASE_DIR}/lib64:${OSG_HOME}/lib64:${BOOST_HOME}/lib:${FMOD_HOME}/lib:${CPPDOM_HOME}/lib64:${ALUT_HOME}/lib:${OPENCV_ROOT}/lib:${OSGWORKS_ROOT}/lib64:${OSGBULLET_ROOT}/lib:${BULLET_ROOT}/lib
+
+# Set the current working directory
+cd ${BIN_DIR}
+
+${BIN_DIR}/${APP_NAME} ${CONFIGFILE_LOCATION}/standalone.jconf ${CONFIGFILE_LOCATION}/Logitech_rumblepad_2.jconf
