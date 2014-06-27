@@ -22,6 +22,12 @@
 #include <typeinfo>
 #include <map>
 
+/** 	SceneManager is the brains which handles all the inputs
+	and required outputs
+	1. Handles all commands
+	2. Translates the commands to the various classes and reflects the changes in the scene
+
+*/
 class SceneManager
 {
 public:
@@ -39,16 +45,18 @@ public:
 	 * Computes an intersection of a ray cast from the matrix
 	 * to the grid plane.
 	 */ 
-	osg::Vec3 computeGridIntersection(osg::Matrix mat);
+	bool computeGridIntersection(osg::Matrix mat, osg::Vec3 &intersection);
 
-    // Takes updates in the form of SceneCommands and
-	// turns them into something visualized in the scene
-    void update(double t,std::vector<SceneCommand*> &commands);
+	/** 	Update with commands
+		Takes updates in the form of SceneCommands and
+		turns them into something visualized in the scene
+	*/
+	void update(double t,std::vector<SceneCommand*> &commands);
 
-	//Return root
+	/** Return the root of the scene*/
 	osg::ref_ptr<osg::Group> sceneRoot(){return _scene->getRoot();}
 
-	//Head Matrix
+	/** Set the Head Matrix*/
 	void set_head_matrix(osg::Matrix);
 
 

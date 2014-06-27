@@ -19,13 +19,14 @@ using namespace std;
 class Grid{
 
 private:
+	/** Private Variables*/
 	int _gridsize;
 	float _gridblocksize;
 	int** _grid;
 public:
+	/** Constructor with default grid information*/
 	Grid(int GridSize = 20 ,float GridBlockSize = 1.0f);
 	~Grid();
-	void add(osg::Vec3 );
 
 	/** 
 	 * Finds the closest grid point and height for the given position. 
@@ -33,7 +34,11 @@ public:
 	 */
 	osg::Vec3 computeNearestGridPoint(osg::Vec3 position);
 
-	int cursor_height(osg::Vec3);
+	/** Add to grid using absolute positions*/
+	void add(osg::Vec3 absposition);
+
+	/** Return the cursor height for proper visualization*/
+	int cursor_height(osg::Vec3 absposition);
 
 	/** Resets all retained heights back to 0. */
 	void reset();	

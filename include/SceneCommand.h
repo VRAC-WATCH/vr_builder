@@ -18,12 +18,20 @@ typedef osg::Vec3 v3;
  * any input from the user to the system and eventually
  * to the graphical scene.
  */
+
+
 //TODO: Add device id so we can easily handle collaboration
 //Add device command?
+
+/** 	Base class which needs to be inherited for any new command
+    	If not inherited SceneManager will not be able to properly handle it
+*/
 class SceneCommand{
 public:
 	virtual const char* CommandType(){ return "GENERIC"; }
 };
+
+/** Add the Block Command*/
 
 class Add_Block: public SceneCommand{
 public:
@@ -32,10 +40,15 @@ public:
 	std::string		textureFileName;
 };
 
+
+/** Clear the Scene Command*/
+
 class ClearSceneCommand: public SceneCommand{
 public:
 	const char* CommandType(){ return "CLEAR_SCENE"; }
 };
+
+/** Head Tracking Command*/
 
 class HeadTrackChangeCommand : public SceneCommand {
 public:
@@ -43,28 +56,34 @@ public:
 	osg::Matrix headMatrix;
 };
 
+/** Mode Change Command*/
+
 class Mode_Change: public SceneCommand{
 public:
 	const char* CommandType(){ return "MODE_CHANGE"; }
 };
 
+/** Move the Cursor Command*/
 class Move: public SceneCommand{
 public:
 	const char* CommandType(){ return "MOVE"; }
 	osg::Vec3	direction;
 };
 
+/** Update the Navigation Matrix Command*/
 class Navigation: public SceneCommand{
 public:
 	const char* CommandType(){ return "NAVIGATION"; }
 	osg::Matrix	navMatrixMultiplier;
 };
 
+/** Throw Projectile Command*/
 class Throw_Block: public SceneCommand{
 public:
 	const char* CommandType(){ return "THROW_BLOCK"; }
 };
 
+/** Update the wand matrix. */
 class WandTrackChangeCommand : public SceneCommand {
 public:
 	const char* CommandType(){ return "WAND_TRACK"; }

@@ -64,7 +64,7 @@ void SceneManager::clearScene()
 	_physics->clearBoxes();
 }
 
-osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
+bool SceneManager::computeGridIntersection(osg::Matrix mat, osg::Vec3 &intersection)
 {
 	// Get the direction pointing
     osg::Vec3 direction(mat.ptr()[8], mat.ptr()[9], mat.ptr()[10]);
@@ -98,14 +98,13 @@ osg::Vec3 SceneManager::computeGridIntersection(osg::Matrix mat)
         line_length *= 2.0;
     }
 
+	// Set intersection point if we intersected and return intersection truth
 	if (!intersector->intersect(bounding_box))
-		std::cout << "Never intersected" << std::endl;
-	else
-		std::cout << "R1: " << r1 << std::endl;
-
-	osg::Vec3 intersection = start_pos + (end_pos-start_pos)  * r1;
-
-	return intersection;
+		return false;
+	else {
+		intersection = start_pos + (end_pos-start_pos)  * r1;
+		return true;
+	}
 }
 
 void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
@@ -119,30 +118,23 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 	static Move m;
 	static Navigation nav;
 	static Throw_Block tb;
-	if(commands.size())
-		cout<<"CSIZE "<<commands.size()<<endl;
 	static WandTrackChangeCommand wand_track_cmd;
+
 	for(int i=0;i<commands.size();i++){		
 		
 		//Commands in common mode
 		
 		// Head tracking change
 		if(!string(commands[i]->CommandType()).compare(head_track_cmd.CommandType())){
-			osg::Matrix temp = _scene->get_navigation_matrix();
-			temp.invert(temp);
-			osg::Vec3 eye,center,up;
-			temp.getLookAt(eye,center,up);
-			PRINTVECTOR(eye);
-			PRINTVECTOR(center);
-			PRINTVECTOR(up);
-			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * temp;			
+			osg::Matrix nav_mat = _scene->get_navigation_matrix();
+			nav_mat.invert(nav_mat);
+			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * nav_mat;			
 		}
 
 		// Wand tracking change
 		if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType())){
 			osg::Matrix nav_mat = _scene->get_navigation_matrix();
 			nav_mat.invert(nav_mat);
-			std::cout << "Updating wand" << std::endl;			
 			_wandMatrix = dynamic_cast<WandTrackChangeCommand*>(commands[i])->wandMatrix * nav_mat;
 		}
 
@@ -168,19 +160,22 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 			
 			// d-Pad Cursor Movements
 			if(!string(commands[i]->CommandType()).compare(m.CommandType())){
-				//std::cout << "SceneManager - Moving cursor" << std::endl;
+				std::cout << "d-Pad moving cursor" << std::endl;
 				_cursor->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position
 				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(_cursor->getCursorCurrentPosition()));//update the y position
 			}
 			
 			// Wand cursor movements
-			if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType())){
+			if(!string(commands[i]->CommandType()).compare(wand_track_cmd.CommandType()))
+			{
 				// Set the position of the cursor using the intersection point
-				osg::Vec3 intersection_point = computeGridIntersection(_wandMatrix);
-				osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
-				//std::cout << "x: " << intersection_point.x() << " z: " << intersection_point.z() << std::endl;
-				//PRINTVECTOR(intersection_point);
-				_cursor->setPosition(grid_point);
+				osg::Vec3 intersection_point;
+				bool did_intersect = computeGridIntersection(_wandMatrix, intersection_point);
+				if (did_intersect)
+				{
+					osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
+					_cursor->setPosition(grid_point);
+				}
 			}
 
 			//Add Block
@@ -206,8 +201,6 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				osg::Vec3 head=_head_matrix.getTrans();
 				eye.set(eye.x(),eye.y(),-eye.z());
 				center.set(center.x(),center.y(),-center.z());
-				//PRINTVECTOR(eye);
-				//PRINTVECTOR(center);
 				osg::Vec3 dir = eye - center;
 				dir.normalize();
 				_physics->add_projectile(n,center,dir*0.5);
@@ -218,8 +211,9 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		// Clean up the command
 		delete commands[i];		
 	}
-	if(creationMode){
-		_cursor->update();
+
+	if(creationMode){		
+		_cursor->update();	
 		_physics->rebuild();
 		_scene->rebuild();
 	}

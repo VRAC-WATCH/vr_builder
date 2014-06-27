@@ -33,12 +33,12 @@ using namespace std;
 	You can update the various navigation matrices
 */
 class Scene{
-    //private members
-    osg::ref_ptr<osg::Group> _root;
+    
+	/** iVars*/
+	osg::ref_ptr<osg::Group> _root;
 	osg::ref_ptr<osg::MatrixTransform> _navigation_matrix;
 	osg::ref_ptr<osg::MatrixTransform> _model_matrix;
 	osg::ref_ptr<osg::LightSource> _lightsource;
-
 	int projno;
 	bool rebuilt;
 
@@ -48,20 +48,31 @@ public:
 		e.g. if the grid is 20X20, GridSize = 20
 	
 	*/
-    Scene();
+	Scene();
+
+	/** Destructor*/
 	~Scene();
+
+	/** Add a node into the scene
+	    This is dumb addition (doesn't know what its adding, just does it)
+	*/
 	void add(osg::Node*);
 
 	/** Removes all visible blocks from the scene. */
 	void clear();
 
+	/** Rebuild the scene (removes projectiles only)*/
 	void rebuild();
+
+	/** Mark the beginning of the physics mode so that we can remove any stray projectiles*/
 	void physicsmode();
 
 	/* Get the root of the scenegraph*/
 	osg::Group* getRoot(){return _root;}
 
-	/* Set and get the navigation matrix*/
+	/* Set the navigation matrix*/
 	void set_navigation_matrix(osg::Matrix);
+
+	/** Get the navigation matrix*/
 	inline osg::Matrix get_navigation_matrix(){ return _navigation_matrix->getMatrix(); }
 };

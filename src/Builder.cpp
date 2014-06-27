@@ -68,7 +68,7 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 		exit( 0 );
 	}
 	setColor(node,sc.color);
-	
+	setTexture(node,sc.textureFileName);
 	// If we had transparency, set its stateset to allow it
 	if (sc.color[3] < 1.0)
 	{

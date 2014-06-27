@@ -23,28 +23,50 @@ using namespace std;
 
 class Physics{
 public:
+	/** Enum to ID the different types of nodes
+	    Note that: Properties of each node changes accordingly
+	*/
 	enum Type{FLOOR,BOX,BALL};
 
 private:
+
+	/** Physics element structure to keep track of all that we pass to the Physics World*/
 	struct Physicselement{
 		btRigidBody* ebody;
 		osg::Vec3 epos;
 		Type etype;
 	};
 
+	/** The Physics World*/
 	btDynamicsWorld* bulletWorld;
+
+	/** List of Physics elements*/
 	vector<Physicselement> list;
 
-	void setRigidBodyPosition(btRigidBody*& , osg::Vec3);
+	/** Set the Position of the body*/
+	void setRigidBodyPosition(btRigidBody*& rBody, osg::Vec3 position);
 public:
+	
+	/** Constructor*/
 	Physics();
+
+	/** Destructor*/
 	~Physics();
-	void add(osg::Node*, osg::Vec3, Type type = BOX);
+
+	/** Add a node to the Physics World of a certain type and positon*/
+	void add(osg::Node* node, osg::Vec3 position, Type type = BOX);
+
+	/** Rebuild the Physics scene as it was in the Creation Mode*/
 	void rebuild();
-	void add_projectile(osg::Node*, osg::Vec3, osg::Vec3 );
+
+	/** Add a projectile in the Physics world from a certain point 
+	    with a certain Impulse
+	*/
+	void add_projectile(osg::Node* node, osg::Vec3 startPosition, osg::Vec3 directionImpulse);
 
 	/** Clears all simulated box objects. */
 	void clearBoxes();	
 
+	/** Update the Physics World (Simulation of physics begins)*/
 	void update();
 };

@@ -135,6 +135,7 @@ void JugglerGamepadInput::_updateJugglerInput()
 	{
 		Add_Block* add_block = new Add_Block;
 		add_block->color = osg::Vec4(0.7, 0.7, 0.7, 1.0);
+		add_block->textureFileName = "../resources/Metalic_texture.bmp";
 		_sceneCommandList.push_back(add_block);
 	}
 
