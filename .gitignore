@@ -24,6 +24,9 @@ src/osg.h.gch
 *.o
 *.obj
 
+# Other auto-gens
+*~
+
 # Executables
 *.exe
 *.out
