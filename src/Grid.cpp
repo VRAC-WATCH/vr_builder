@@ -31,7 +31,7 @@ void Grid::add(osg::Vec3 position){
 	int gridy=(position.z()/_gridblocksize)+_gridsize/2;
 	_grid[gridx][gridy]++;
 	_counter++;
-	std::cout<<"New Number is "<<_counter<<std::endl;
+	//std::cout<<"New Number is "<<_counter<<std::endl;
 }
 
 osg::Vec3 Grid::computeNearestGridPoint(osg::Vec3 position)
@@ -41,20 +41,24 @@ osg::Vec3 Grid::computeNearestGridPoint(osg::Vec3 position)
 	// on the grid when passed a point. We need something like
 	// this in order to place the cursor with devices like
 	// the wand.
-	int gridx=(position.x()/_gridblocksize);
-	float x_pos = gridx * _gridblocksize + _gridblocksize/2.0;
-	int gridy=(position.z()/_gridblocksize);
-	float z_pos = gridy * _gridblocksize + _gridblocksize/2.0;
-	float height = cursor_height(position) * _gridblocksize + (float)_gridblocksize/2.0;
+	int gridx=(float)(position.x()/_gridblocksize) + _gridsize/2.0;
+	float x_pos = (double)gridx * _gridblocksize + _gridblocksize/2.0;
+	x_pos -= _gridblocksize * _gridsize/2.0;
+	
+	int gridz=(float)(position.z()/_gridblocksize) + _gridsize/2.0;
+	float z_pos = (double)gridz * _gridblocksize + _gridblocksize/2.0;
+	z_pos -= _gridblocksize * _gridsize/2.0;
+
+	float height = (float)cursor_height(position) * _gridblocksize + (float)_gridblocksize/2.0;
 
 	return osg::Vec3(x_pos, height, z_pos);
 }
 
 int Grid::cursor_height(osg::Vec3 position){
-	int gridx=(position.x()/_gridblocksize)+_gridsize/2;
-	int gridy=(position.z()/_gridblocksize)+_gridsize/2;
-	int height = _grid[gridx][gridy];
-	//std::cout << "Height: " << height << std::endl;
+	int gridx=(float)(position.x()/_gridblocksize)+_gridsize/2.0;
+	int gridz=(float)(position.z()/_gridblocksize)+_gridsize/2.0;
+	int height = _grid[gridx][gridz];
+
 	return height;
 }
 
