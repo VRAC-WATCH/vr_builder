@@ -32,8 +32,8 @@ bool Cursor::check_cursor_bounds(osg::Vec3 trans){
 void Cursor::move(osg::Vec3 direction,int gridheight){
 	osg::Vec3d trans=_cursorpat->getPosition();
 	trans.set(trans.x()+direction.x()*_gridblocksize,
-		double(gridheight)*_gridblocksize + double(_gridblocksize)/2,
-		trans.z()+direction.z()*_gridblocksize);
+				double(gridheight)*_gridblocksize + double(_gridblocksize)/2,
+				trans.z()+direction.z()*_gridblocksize);
 	if(check_cursor_bounds(trans))
 		_cursorpat->setPosition(trans);
 }
