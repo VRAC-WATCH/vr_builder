@@ -67,8 +67,9 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 		osg::notify( osg::FATAL ) << "Node generation failed" << std::endl;
 		exit( 0 );
 	}
-	setColor(node,sc.color);
+	setColor(node,sc.color);	
 	setTexture(node,sc.textureFileName);
+	
 	// If we had transparency, set its stateset to allow it
 	if (sc.color[3] < 1.0)
 	{
@@ -81,7 +82,6 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 		ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 	}
 
-	//setTexture(node,sc.textureFileName);
 	root->addChild( node );
 	return( root );
 }
