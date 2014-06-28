@@ -41,7 +41,15 @@ public:
 	
 	/** Accessor for the input type of the current input. */
 	inline const InputType inputType() { return _inputType; }
+	
+	/** Accessor for the input to be able to control the  cursor */
+	bool wantCursor;
 
+	/**Set the ID of the Input */
+	void setID(int inputid){_id = inputid;}
+
+	/**Get the ID of the Input */
+	int getID(){return _id;}
 
 protected:
 	
@@ -53,6 +61,7 @@ private:
 	
 	/** Private iVars. */
 	InputType					_inputType;
+	int 						_id;
 };
 
 #endif /* defined(__VRBuilder__Input__) */

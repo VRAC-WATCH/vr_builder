@@ -41,6 +41,8 @@ public:
 	 * in order to populate the _sceneCommandList with commands.
 	 */
 	std::vector<SceneCommand*>& sceneCommands() { return _sceneCommandList; }
+
+	int howManyWantCursor();
 	
 	
 protected:
@@ -51,8 +53,12 @@ protected:
 	/** Sets up user interaction hanlders for Juggler. */
 	void _setupJugglerInputs();
 	
+	/** Checks the input device if it wants a cursor */	
+	void checkNeedForCursor(Input*& input);
+	
 	/** iVars. */
 	std::vector<Input*>			_inputs;
 	InterfaceType				_interfaceType;
 	std::vector<SceneCommand*>	_sceneCommandList;
+	int 					ids;
 };

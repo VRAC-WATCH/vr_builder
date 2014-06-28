@@ -17,6 +17,7 @@ InteractionManager::InteractionManager()
 
 InteractionManager::InteractionManager(InterfaceType type)
 {
+	ids = 0;
 	_interfaceType = type;
 	if (_interfaceType == JUGGLER_INTERFACE)
 		_setupJugglerInputs();
@@ -78,19 +79,38 @@ void InteractionManager::_setupGlutInputs()
 	
 }
 
+void InteractionManager::checkNeedForCursor(Input*& input){
+	if(input->wantCursor){
+		input->setID(ids);
+		ids++;
+	}
+}
+
 void InteractionManager::_setupJugglerInputs()
 {
 	std::cout << "Setting up juggler input" << std::endl;
 
 	// Setup the gamepad
 	Input* gamepad = new JugglerGamepadInput;
+	checkNeedForCursor(gamepad);
 	_inputs.push_back(gamepad);
 
 	// Setup the head tracking
 	Input* head_tracker = new JugglerHeadTrackInput;
+	checkNeedForCursor(head_tracker);
 	_inputs.push_back(head_tracker);
 
 	// Setup the wand input
 	Input* wand_input = new JugglerWandInput;
+	checkNeedForCursor(wand_input);
 	_inputs.push_back(wand_input);
+}
+
+int InteractionManager::howManyWantCursor(){
+	int cursors=0;
+	for(int i=0;i<_inputs.size();i++){
+		if(_inputs[i]->wantCursor)
+			cursors++;
+	}
+	return cursors;
 }

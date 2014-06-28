@@ -11,6 +11,8 @@ JugglerHeadTrackInput::JugglerHeadTrackInput() : Input(Input::HEAD_TRACK)
 
 	// Initialize the head track gadget interface
 	_head.init("VJHead");
+
+	wantCursor = false;
 }
 
 JugglerHeadTrackInput::~JugglerHeadTrackInput()
@@ -21,6 +23,10 @@ JugglerHeadTrackInput::~JugglerHeadTrackInput()
 void JugglerHeadTrackInput::populateSceneCommand(std::vector<SceneCommand*>& commandList)
 {
 	_updateJugglerInput();
+
+	for(int i=0;i<_sceneCommandList.size();i++){
+		_sceneCommandList[i]->id = getID();
+	}
 
 	// Append all of our latest scene commands to the list requested then clear it
 	commandList.insert(commandList.end(),

@@ -17,6 +17,8 @@ JugglerWandInput::JugglerWandInput() : Input(Input::WAND)
 	_button[4].init("VJButton4");
 	_button[5].init("VJButton5");
 	_wand.init("VJWand");
+
+	wantCursor = true;
 }
 
 JugglerWandInput::~JugglerWandInput()
@@ -27,7 +29,10 @@ JugglerWandInput::~JugglerWandInput()
 void JugglerWandInput::populateSceneCommand(std::vector<SceneCommand*>& commandList)
 {
 	_updateJugglerInput();
-
+	
+	for(int i=0;i<_sceneCommandList.size();i++){
+		_sceneCommandList[i]->id = getID();
+	}
 	// Append all of our latest scene commands to the list requested then clear it
 	commandList.insert(commandList.end(),
 					   _sceneCommandList.begin(), _sceneCommandList.end());
@@ -67,11 +72,12 @@ void JugglerWandInput::_updateJugglerInput()
 
 	// Add block - note: we allow this button to be held down so that we can add 
 	// blocks very quickly to the scene hence we don't check button switch state
-	if (_button[TRIGGER]->getData() == gadget::Digital::ON)
+	if (_button[BUTTON3]->getData() == gadget::Digital::ON)
 	{
 		std::cout << "add block" << std::endl;
 		Add_Block* add_block = new Add_Block;
-		add_block->color = osg::Vec4(0.7, 0.7, 0.7, 1.0);
+		add_block->color = osg::Vec4(1.0, 1.0, 0.0, 1.0);
+		add_block->textureFileName = "../resources/Metalic_texture.bmp";
 		_sceneCommandList.push_back(add_block);
 	}
 

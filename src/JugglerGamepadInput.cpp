@@ -26,6 +26,8 @@ JugglerGamepadInput::JugglerGamepadInput() : Input(Input::GAMEPAD)
 	_axis3.init("Right Joystick Horizontal Axis");
 	_axis4.init("DirectionPad Horizontal Axis");
 	_axis5.init("DirectionPad Vertical Axis");
+
+	wantCursor = true;
 }
 
 JugglerGamepadInput::~JugglerGamepadInput()
@@ -36,7 +38,10 @@ JugglerGamepadInput::~JugglerGamepadInput()
 void JugglerGamepadInput::populateSceneCommand(std::vector<SceneCommand*>& commandList)
 {
 	_updateJugglerInput();
-
+	
+	for(int i=0;i<_sceneCommandList.size();i++){
+		_sceneCommandList[i]->id = getID();
+	}
 	// Append all of our latest scene commands to the list requested then clear it
 	commandList.insert(commandList.end(),
 					   _sceneCommandList.begin(), _sceneCommandList.end());
@@ -134,7 +139,7 @@ void JugglerGamepadInput::_updateJugglerInput()
 	if (_button[BLOCK_ADD]->getData() == gadget::Digital::ON)
 	{
 		Add_Block* add_block = new Add_Block;
-		add_block->color = osg::Vec4(0.7, 0.7, 0.7, 1.0);
+		add_block->color = osg::Vec4(1.0, 0.0, 1.0, 1.0);
 		add_block->textureFileName = "../resources/Metalic_texture.bmp";
 		_sceneCommandList.push_back(add_block);
 	}

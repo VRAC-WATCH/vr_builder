@@ -32,8 +32,8 @@ class SceneManager
 {
 public:
 	
-	/** Default constructor. */
-	SceneManager();
+	/** Default constructor with no of cursors as input */
+	SceneManager(int cursors);
 	
 	/** Destructor. */
 	~SceneManager();
@@ -65,13 +65,13 @@ protected:
 	/** iVars. */
 	Builder* 					_builder;
 	bool 						creationMode;
-	Cursor* 					_cursor;
+	std::vector<Cursor*> 				_cursor;
 	osg::ref_ptr<osg::Node> 			_floor;
 	Grid* 						_grid;
 	float 						grid_block_size;
 	int 						grid_size;
-	osg::Matrix 				_head_matrix;
-	osg::Matrix 				_wandMatrix;
+	osg::Matrix 					_head_matrix;
+	osg::Matrix 					_wandMatrix;
 	Physics* 					_physics;
 	Scene*						_scene;
 };

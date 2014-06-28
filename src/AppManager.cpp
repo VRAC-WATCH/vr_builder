@@ -28,7 +28,7 @@ AppManager::AppManager()
 	_interactionManager = new InteractionManager(InteractionManager::GLUT_INTERFACE);
 #endif
 
-	_sceneManager = new SceneManager;
+	_sceneManager = new SceneManager(_interactionManager->howManyWantCursor());
 }
 
 AppManager::~AppManager()

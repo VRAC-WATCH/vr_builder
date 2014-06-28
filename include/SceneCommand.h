@@ -28,6 +28,7 @@ typedef osg::Vec3 v3;
 */
 class SceneCommand{
 public:
+	int id;
 	virtual const char* CommandType(){ return "GENERIC"; }
 };
 

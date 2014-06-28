@@ -12,8 +12,9 @@
 
 #define PRINTVECTOR(v) cout<<v.x()<<" "<<v.y()<<" "<<v.z()<<endl;
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(int cursors)
 {
+	std::cout<<"Scene Manager constructor begin"<<std::endl;
 	// Setup an initial grid of size 40x40
 	grid_size = 300;
 	grid_block_size = 1.0f;
@@ -35,18 +36,27 @@ SceneManager::SceneManager()
 	_physics->add(_floor,osg::Vec3(0,0,0),Physics::FLOOR);
 	_scene->add(_floor);
 	
-	//Cursor initialization with red
-	Add_Block ab;
-	ab.color = osg::Vec4(1.0,1.0,1.0,0.5);
-	_cursor = new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size);
-	_scene->add(_cursor->getCursor());
-
+	//Cursor initialization
+	for(int i=0;i<cursors;i++){
+		double c1 = ((double) rand() / (RAND_MAX));
+		double c2 = ((double) rand() / (RAND_MAX));
+		double c3 = ((double) rand() / (RAND_MAX));
+		Add_Block ab;
+		ab.color = osg::Vec4(c1,c2,c3,0.5);
+		_cursor.push_back(new Cursor(Builder::instance().createBlock(ab),grid_size, grid_block_size));
+		_scene->add(_cursor[i]->getCursor());
+	}
 	//_head_matrix = osg::Matrix();
+
+	std::cout<<"No of cursors "<<cursors<<std::endl;
+	std::cout<<"Scene Manager constructor end"<<std::endl;
 }
 
 SceneManager::~SceneManager()
 {
-	delete _cursor;
+	for(int i=0;i<_cursor.size();i++)		
+		delete _cursor[i];
+	_cursor.clear();
 	delete _grid;
 	delete _physics;
 	delete _scene;
@@ -57,9 +67,10 @@ void SceneManager::clearScene()
 	// Clear and repopulate the scene
 	_scene->clear();
 	_scene->add(_floor);
-	_scene->add(_cursor->getCursor());
-	_cursor->move(osg::Vec3(0,0,0), 0);
-
+	for(int i=0;i<_cursor.size();i++){		
+		_scene->add(_cursor[i]->getCursor());
+		_cursor[i]->move(osg::Vec3(0,0,0), 0);
+	}
 	_grid->reset();
 	_physics->clearBoxes();
 }
@@ -161,8 +172,8 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 			// d-Pad Cursor Movements
 			if(!string(commands[i]->CommandType()).compare(m.CommandType())){
 				std::cout << "d-Pad moving cursor" << std::endl;
-				_cursor->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position
-				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(_cursor->getCursorCurrentPosition()));//update the y position
+				_cursor[commands[i]->id]->move(dynamic_cast<Move*>(commands[i])->direction,0);//update the xz position
+				_cursor[commands[i]->id]->move(osg::Vec3(0,0,0),_grid->cursor_height(_cursor[commands[i]->id]->getCursorCurrentPosition()));//update the y position
 			}
 			
 			// Wand cursor movements
@@ -174,19 +185,19 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				if (did_intersect)
 				{
 					osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
-					_cursor->setPosition(grid_point);
+					_cursor[commands[i]->id]->setPosition(grid_point);
 				}
 			}
 
 			//Add Block
 			if(!string(commands[i]->CommandType()).compare(ab.CommandType())){
 				//std::cout << "SceneManager - Adding block" << std::endl;
-				osg::Vec3 curr = _cursor->getCursorCurrentPosition();
+				osg::Vec3 curr = _cursor[commands[i]->id]->getCursorCurrentPosition();
 				osg::Node* n = Builder::instance().createBlock(*dynamic_cast<Add_Block*>(commands[i]));
 				_physics->add(n,curr);
 				_scene->add(n);
 				_grid->add(curr);
-				_cursor->move(osg::Vec3(0,0,0),_grid->cursor_height(curr));//update the cursor y position
+				_cursor[commands[i]->id]->move(osg::Vec3(0,0,0),_grid->cursor_height(curr));//update the cursor y position
 			}
 		}
 		//In Physics Mode
@@ -212,13 +223,15 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		delete commands[i];		
 	}
 
-	if(creationMode){		
-		_cursor->update();	
+	if(creationMode){
+		for(int i=0;i<_cursor.size();i++)		
+			_cursor[i]->update();	
 		_physics->rebuild();
 		_scene->rebuild();
 	}
 	else{
-		_cursor->off();
+		for(int i=0;i<_cursor.size();i++)		
+			_cursor[i]->off();
 		_physics->update();
 		_scene->physicsmode();
 	}
