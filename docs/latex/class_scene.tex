@@ -1,0 +1,70 @@
+\hypertarget{class_scene}{
+\section{Scene Class Reference}
+\label{class_scene}\index{Scene@{Scene}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scene_a3b8cec2e32546713915f8c6303c951f1}{$\sim$Scene} ()
+\item 
+void \hyperlink{class_scene_a894ec82f29999e3a24231d64196eb579}{add} (osg::Node $\ast$)
+\item 
+void \hyperlink{class_scene_a70e5b1218abb729d70d9f41b107017f9}{clear} ()
+\item 
+void \hyperlink{class_scene_a14255fd5c923aa081dfe4e32db589404}{rebuild} ()
+\item 
+void \hyperlink{class_scene_a28fba12cc43c64e3216f463984f5ff7f}{physicsmode} ()
+\item 
+\hypertarget{class_scene_abb3b547f9ca635c617f0dfe64ced8b0b}{
+osg::Group $\ast$ {\bfseries getRoot} ()}
+\label{class_scene_abb3b547f9ca635c617f0dfe64ced8b0b}
+
+\item 
+\hypertarget{class_scene_aa1c94c27c567711b9a9d477c22dba124}{
+void {\bfseries set\_\-navigation\_\-matrix} (osg::Matrix)}
+\label{class_scene_aa1c94c27c567711b9a9d477c22dba124}
+
+\item 
+osg::Matrix \hyperlink{class_scene_ada1eae6ca9a770ef9d3b492403719893}{get\_\-navigation\_\-matrix} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scene_a3b8cec2e32546713915f8c6303c951f1}{
+\index{Scene@{Scene}!$\sim$Scene@{$\sim$Scene}}
+\index{$\sim$Scene@{$\sim$Scene}!Scene@{Scene}}
+\subsubsection[{$\sim$Scene}]{\setlength{\rightskip}{0pt plus 5cm}Scene::$\sim$Scene ()}}
+\label{class_scene_a3b8cec2e32546713915f8c6303c951f1}
+Destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scene_a894ec82f29999e3a24231d64196eb579}{
+\index{Scene@{Scene}!add@{add}}
+\index{add@{add}!Scene@{Scene}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::add (osg::Node $\ast$)}}
+\label{class_scene_a894ec82f29999e3a24231d64196eb579}
+Add a node into the scene This is dumb addition (doesn't know what its adding, just does it) \hypertarget{class_scene_a70e5b1218abb729d70d9f41b107017f9}{
+\index{Scene@{Scene}!clear@{clear}}
+\index{clear@{clear}!Scene@{Scene}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::clear ()}}
+\label{class_scene_a70e5b1218abb729d70d9f41b107017f9}
+Removes all visible blocks from the scene. \hypertarget{class_scene_ada1eae6ca9a770ef9d3b492403719893}{
+\index{Scene@{Scene}!get\_\-navigation\_\-matrix@{get\_\-navigation\_\-matrix}}
+\index{get\_\-navigation\_\-matrix@{get\_\-navigation\_\-matrix}!Scene@{Scene}}
+\subsubsection[{get\_\-navigation\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}osg::Matrix Scene::get\_\-navigation\_\-matrix ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_scene_ada1eae6ca9a770ef9d3b492403719893}
+Get the navigation matrix \hypertarget{class_scene_a28fba12cc43c64e3216f463984f5ff7f}{
+\index{Scene@{Scene}!physicsmode@{physicsmode}}
+\index{physicsmode@{physicsmode}!Scene@{Scene}}
+\subsubsection[{physicsmode}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::physicsmode ()}}
+\label{class_scene_a28fba12cc43c64e3216f463984f5ff7f}
+Mark the beginning of the physics mode so that we can remove any stray projectiles \hypertarget{class_scene_a14255fd5c923aa081dfe4e32db589404}{
+\index{Scene@{Scene}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!Scene@{Scene}}
+\subsubsection[{rebuild}]{\setlength{\rightskip}{0pt plus 5cm}void Scene::rebuild ()}}
+\label{class_scene_a14255fd5c923aa081dfe4e32db589404}
+Rebuild the scene (removes projectiles only) 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/Scene.h\end{DoxyCompactItemize}

@@ -1,0 +1,191 @@
+\hypertarget{class_ti_xml_attribute}{
+\section{TiXmlAttribute Class Reference}
+\label{class_ti_xml_attribute}\index{TiXmlAttribute@{TiXmlAttribute}}
+}
+
+
+{\ttfamily \#include $<$tinyxml.h$>$}Inheritance diagram for TiXmlAttribute::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_ti_xml_attribute}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_attribute_a9cfa3c8179873fd485d83003b114f8e1}{
+\hyperlink{class_ti_xml_attribute_a9cfa3c8179873fd485d83003b114f8e1}{TiXmlAttribute} ()}
+\label{class_ti_xml_attribute_a9cfa3c8179873fd485d83003b114f8e1}
+
+\begin{DoxyCompactList}\small\item\em Construct an empty attribute. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a052213522caac3979960e0714063861d}{
+\hyperlink{class_ti_xml_attribute_a052213522caac3979960e0714063861d}{TiXmlAttribute} (const std::string \&\_\-name, const std::string \&\_\-value)}
+\label{class_ti_xml_attribute_a052213522caac3979960e0714063861d}
+
+\begin{DoxyCompactList}\small\item\em std::string constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a759d0b76fb8fcf765ecab243bc14f05e}{
+\hyperlink{class_ti_xml_attribute_a759d0b76fb8fcf765ecab243bc14f05e}{TiXmlAttribute} (const char $\ast$\_\-name, const char $\ast$\_\-value)}
+\label{class_ti_xml_attribute_a759d0b76fb8fcf765ecab243bc14f05e}
+
+\begin{DoxyCompactList}\small\item\em Construct an attribute with a name and value. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a298a57287d305904ba6bd96ae6f78d3d}{
+const char $\ast$ \hyperlink{class_ti_xml_attribute_a298a57287d305904ba6bd96ae6f78d3d}{Name} () const }
+\label{class_ti_xml_attribute_a298a57287d305904ba6bd96ae6f78d3d}
+
+\begin{DoxyCompactList}\small\item\em Return the name of this attribute. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a0f874490eac8ca00ee0070765d0e97e3}{
+const char $\ast$ \hyperlink{class_ti_xml_attribute_a0f874490eac8ca00ee0070765d0e97e3}{Value} () const }
+\label{class_ti_xml_attribute_a0f874490eac8ca00ee0070765d0e97e3}
+
+\begin{DoxyCompactList}\small\item\em Return the value of this attribute. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a87705c3ccf9ee9417beb4f7cbacd4d33}{
+const std::string \& \hyperlink{class_ti_xml_attribute_a87705c3ccf9ee9417beb4f7cbacd4d33}{ValueStr} () const }
+\label{class_ti_xml_attribute_a87705c3ccf9ee9417beb4f7cbacd4d33}
+
+\begin{DoxyCompactList}\small\item\em Return the value of this attribute. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_aa1a20ad59dc7e89a0ab265396360d50f}{
+int \hyperlink{class_ti_xml_attribute_aa1a20ad59dc7e89a0ab265396360d50f}{IntValue} () const }
+\label{class_ti_xml_attribute_aa1a20ad59dc7e89a0ab265396360d50f}
+
+\begin{DoxyCompactList}\small\item\em Return the value of this attribute, converted to an integer. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a2880ddef53fc7522c99535273954d230}{
+double \hyperlink{class_ti_xml_attribute_a2880ddef53fc7522c99535273954d230}{DoubleValue} () const }
+\label{class_ti_xml_attribute_a2880ddef53fc7522c99535273954d230}
+
+\begin{DoxyCompactList}\small\item\em Return the value of this attribute, converted to a double. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a64cee17bceb8232eb0736d26dd082d79}{
+const TIXML\_\-STRING \& {\bfseries NameTStr} () const }
+\label{class_ti_xml_attribute_a64cee17bceb8232eb0736d26dd082d79}
+
+\item 
+int \hyperlink{class_ti_xml_attribute_ad6c93088ee21af41a107931223339344}{QueryIntValue} (int $\ast$\_\-value) const 
+\item 
+\hypertarget{class_ti_xml_attribute_ac87b2a8489906a5d7aa2875f20be3513}{
+int \hyperlink{class_ti_xml_attribute_ac87b2a8489906a5d7aa2875f20be3513}{QueryDoubleValue} (double $\ast$\_\-value) const }
+\label{class_ti_xml_attribute_ac87b2a8489906a5d7aa2875f20be3513}
+
+\begin{DoxyCompactList}\small\item\em QueryDoubleValue examines the value string. See \hyperlink{class_ti_xml_attribute_ad6c93088ee21af41a107931223339344}{QueryIntValue()}. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_ab7fa3d21ff8d7c5764cf9af15b667a99}{
+void \hyperlink{class_ti_xml_attribute_ab7fa3d21ff8d7c5764cf9af15b667a99}{SetName} (const char $\ast$\_\-name)}
+\label{class_ti_xml_attribute_ab7fa3d21ff8d7c5764cf9af15b667a99}
+
+\begin{DoxyCompactList}\small\item\em Set the name of this attribute. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a2dae44178f668b3cb48101be4f2236a0}{
+void \hyperlink{class_ti_xml_attribute_a2dae44178f668b3cb48101be4f2236a0}{SetValue} (const char $\ast$\_\-value)}
+\label{class_ti_xml_attribute_a2dae44178f668b3cb48101be4f2236a0}
+
+\begin{DoxyCompactList}\small\item\em Set the value. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a7e065df640116a62ea4f4b7da5449cc8}{
+void \hyperlink{class_ti_xml_attribute_a7e065df640116a62ea4f4b7da5449cc8}{SetIntValue} (int \_\-value)}
+\label{class_ti_xml_attribute_a7e065df640116a62ea4f4b7da5449cc8}
+
+\begin{DoxyCompactList}\small\item\em Set the value from an integer. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a0316da31373496c4368ad549bf711394}{
+void \hyperlink{class_ti_xml_attribute_a0316da31373496c4368ad549bf711394}{SetDoubleValue} (double \_\-value)}
+\label{class_ti_xml_attribute_a0316da31373496c4368ad549bf711394}
+
+\begin{DoxyCompactList}\small\item\em Set the value from a double. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_ab296ff0c9a8c701055cd257a8a976e57}{
+void \hyperlink{class_ti_xml_attribute_ab296ff0c9a8c701055cd257a8a976e57}{SetName} (const std::string \&\_\-name)}
+\label{class_ti_xml_attribute_ab296ff0c9a8c701055cd257a8a976e57}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_ab43f67a0cc3ec1d80e62606500f0925f}{
+void \hyperlink{class_ti_xml_attribute_ab43f67a0cc3ec1d80e62606500f0925f}{SetValue} (const std::string \&\_\-value)}
+\label{class_ti_xml_attribute_ab43f67a0cc3ec1d80e62606500f0925f}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a1c78e92e223a40843f644ba48ef69f67}{
+const \hyperlink{class_ti_xml_attribute}{TiXmlAttribute} $\ast$ \hyperlink{class_ti_xml_attribute_a1c78e92e223a40843f644ba48ef69f67}{Next} () const }
+\label{class_ti_xml_attribute_a1c78e92e223a40843f644ba48ef69f67}
+
+\begin{DoxyCompactList}\small\item\em Get the next sibling attribute in the DOM. Returns null at end. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_a138320aa7793b148ba7e5bd0a0ea4db6}{
+\hyperlink{class_ti_xml_attribute}{TiXmlAttribute} $\ast$ {\bfseries Next} ()}
+\label{class_ti_xml_attribute_a138320aa7793b148ba7e5bd0a0ea4db6}
+
+\item 
+\hypertarget{class_ti_xml_attribute_a6ebbfe333fe76cd834bd6cbcca3130cf}{
+const \hyperlink{class_ti_xml_attribute}{TiXmlAttribute} $\ast$ \hyperlink{class_ti_xml_attribute_a6ebbfe333fe76cd834bd6cbcca3130cf}{Previous} () const }
+\label{class_ti_xml_attribute_a6ebbfe333fe76cd834bd6cbcca3130cf}
+
+\begin{DoxyCompactList}\small\item\em Get the previous sibling attribute in the DOM. Returns null at beginning. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_attribute_ae4dabc932cba945ed1e92fec5f121193}{
+\hyperlink{class_ti_xml_attribute}{TiXmlAttribute} $\ast$ {\bfseries Previous} ()}
+\label{class_ti_xml_attribute_ae4dabc932cba945ed1e92fec5f121193}
+
+\item 
+\hypertarget{class_ti_xml_attribute_ae48c2a65b520d453914ce4e845d607cf}{
+bool {\bfseries operator==} (const \hyperlink{class_ti_xml_attribute}{TiXmlAttribute} \&rhs) const }
+\label{class_ti_xml_attribute_ae48c2a65b520d453914ce4e845d607cf}
+
+\item 
+\hypertarget{class_ti_xml_attribute_adb8b6f2cad5948e73e383182e7ce10de}{
+bool {\bfseries operator$<$} (const \hyperlink{class_ti_xml_attribute}{TiXmlAttribute} \&rhs) const }
+\label{class_ti_xml_attribute_adb8b6f2cad5948e73e383182e7ce10de}
+
+\item 
+\hypertarget{class_ti_xml_attribute_a867562769ef9778c1690cd373246b05b}{
+bool {\bfseries operator$>$} (const \hyperlink{class_ti_xml_attribute}{TiXmlAttribute} \&rhs) const }
+\label{class_ti_xml_attribute_a867562769ef9778c1690cd373246b05b}
+
+\item 
+\hypertarget{class_ti_xml_attribute_a1437efc74bb8d49da5290772202b5e68}{
+virtual const char $\ast$ {\bfseries Parse} (const char $\ast$p, TiXmlParsingData $\ast$data, TiXmlEncoding encoding)}
+\label{class_ti_xml_attribute_a1437efc74bb8d49da5290772202b5e68}
+
+\item 
+virtual void \hyperlink{class_ti_xml_attribute_acc04956c1d5c4c31fe74f7a7528d109a}{Print} (FILE $\ast$cfile, int depth) const 
+\item 
+\hypertarget{class_ti_xml_attribute_a19e6b6862a80b188571c47947e88d030}{
+void {\bfseries Print} (FILE $\ast$cfile, int depth, TIXML\_\-STRING $\ast$str) const }
+\label{class_ti_xml_attribute_a19e6b6862a80b188571c47947e88d030}
+
+\item 
+\hypertarget{class_ti_xml_attribute_ac12a94d4548302afb12f488ba101f7d1}{
+void {\bfseries SetDocument} (\hyperlink{class_ti_xml_document}{TiXmlDocument} $\ast$doc)}
+\label{class_ti_xml_attribute_ac12a94d4548302afb12f488ba101f7d1}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_attribute_a35a7b7f89f708527677d5078d41ce0bf}{
+class \hyperlink{class_ti_xml_attribute_a35a7b7f89f708527677d5078d41ce0bf}{TiXmlAttributeSet}}
+\label{class_ti_xml_attribute_a35a7b7f89f708527677d5078d41ce0bf}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An attribute is a name-\/value pair. Elements have an arbitrary number of attributes, each with a unique name.
+
+\begin{DoxyNote}{Note}
+The attributes are not TiXmlNodes, since they are not part of the tinyXML document object model. There are other suggested ways to look at this problem. 
+\end{DoxyNote}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ti_xml_attribute_acc04956c1d5c4c31fe74f7a7528d109a}{
+\index{TiXmlAttribute@{TiXmlAttribute}!Print@{Print}}
+\index{Print@{Print}!TiXmlAttribute@{TiXmlAttribute}}
+\subsubsection[{Print}]{\setlength{\rightskip}{0pt plus 5cm}virtual void TiXmlAttribute::Print (FILE $\ast$ {\em cfile}, \/  int {\em depth}) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_ti_xml_attribute_acc04956c1d5c4c31fe74f7a7528d109a}
+All TinyXml classes can print themselves to a filestream or the string class (\hyperlink{class_ti_xml_string}{TiXmlString} in non-\/STL mode, std::string in STL mode.) Either or both cfile and str can be null.
+
+This is a formatted print, and will insert tabs and newlines.
+
+(For an unformatted stream, use the $<$$<$ operator.) 
+
+Implements \hyperlink{class_ti_xml_base_a0de56b3f2ef14c65091a3b916437b512}{TiXmlBase}.\hypertarget{class_ti_xml_attribute_ad6c93088ee21af41a107931223339344}{
+\index{TiXmlAttribute@{TiXmlAttribute}!QueryIntValue@{QueryIntValue}}
+\index{QueryIntValue@{QueryIntValue}!TiXmlAttribute@{TiXmlAttribute}}
+\subsubsection[{QueryIntValue}]{\setlength{\rightskip}{0pt plus 5cm}int TiXmlAttribute::QueryIntValue (int $\ast$ {\em \_\-value}) const}}
+\label{class_ti_xml_attribute_ad6c93088ee21af41a107931223339344}
+QueryIntValue examines the value string. It is an alternative to the \hyperlink{class_ti_xml_attribute_aa1a20ad59dc7e89a0ab265396360d50f}{IntValue()} method with richer error checking. If the value is an integer, it is stored in 'value' and the call returns TIXML\_\-SUCCESS. If it is not an integer, it returns TIXML\_\-WRONG\_\-TYPE.
+
+A specialized but useful call. Note that for success it returns 0, which is the opposite of almost all other TinyXml calls. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/XML/tinyxml.h\end{DoxyCompactItemize}

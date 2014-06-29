@@ -1,0 +1,90 @@
+\hypertarget{class_glut_keyboard_input}{
+\section{GlutKeyboardInput Class Reference}
+\label{class_glut_keyboard_input}\index{GlutKeyboardInput@{GlutKeyboardInput}}
+}
+Inheritance diagram for GlutKeyboardInput::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_glut_keyboard_input}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{class_glut_keyboard_input_aec1d7be46aca658f1fc7303e32ff4b62}{special\_\-func\_\-ptr} )(int, int, int)
+\item 
+\hypertarget{class_glut_keyboard_input_a528018e634a90de0eb525f997c147511}{
+typedef void($\ast$ {\bfseries normal\_\-func\_\-ptr} )(unsigned char, int, int)}
+\label{class_glut_keyboard_input_a528018e634a90de0eb525f997c147511}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_glut_keyboard_input_a68f755baae4426cb2004686918499d0a}{GlutKeyboardInput} ()
+\item 
+\hyperlink{class_glut_keyboard_input_ada68b75e8cf17723f1515fb7b996622e}{$\sim$GlutKeyboardInput} ()
+\item 
+void \hyperlink{class_glut_keyboard_input_a820e8803532b4fa2257a44c4ece6701a}{populateSceneCommand} (std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ \&commandList)
+\item 
+\hypertarget{class_glut_keyboard_input_aed6aaccb7d8a9a0ed511d6b620c99893}{
+\hyperlink{class_glut_keyboard_input_aec1d7be46aca658f1fc7303e32ff4b62}{special\_\-func\_\-ptr} {\bfseries keyboardSpecial\_\-ptr} ()}
+\label{class_glut_keyboard_input_aed6aaccb7d8a9a0ed511d6b620c99893}
+
+\item 
+\hypertarget{class_glut_keyboard_input_ac1467d3f12d32201d245dde228688348}{
+normal\_\-func\_\-ptr {\bfseries keyboardNormal\_\-ptr} ()}
+\label{class_glut_keyboard_input_ac1467d3f12d32201d245dde228688348}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_glut_keyboard_input_ad76b2ea4c7f06c3a20f3a7f950869d3d}{\_\-keyboardSpecial} (int key, int x, int y)
+\item 
+\hypertarget{class_glut_keyboard_input_a972e8d68734dcc5010430ce5b2e67beb}{
+static void {\bfseries \_\-keyboardNormal} (unsigned char key, int x, int y)}
+\label{class_glut_keyboard_input_a972e8d68734dcc5010430ce5b2e67beb}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{class_glut_keyboard_input_aec1d7be46aca658f1fc7303e32ff4b62}{
+\index{GlutKeyboardInput@{GlutKeyboardInput}!special\_\-func\_\-ptr@{special\_\-func\_\-ptr}}
+\index{special\_\-func\_\-ptr@{special\_\-func\_\-ptr}!GlutKeyboardInput@{GlutKeyboardInput}}
+\subsubsection[{special\_\-func\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf GlutKeyboardInput::special\_\-func\_\-ptr})(int, int, int)}}
+\label{class_glut_keyboard_input_aec1d7be46aca658f1fc7303e32ff4b62}
+Accessors for glut function pointers. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_glut_keyboard_input_a68f755baae4426cb2004686918499d0a}{
+\index{GlutKeyboardInput@{GlutKeyboardInput}!GlutKeyboardInput@{GlutKeyboardInput}}
+\index{GlutKeyboardInput@{GlutKeyboardInput}!GlutKeyboardInput@{GlutKeyboardInput}}
+\subsubsection[{GlutKeyboardInput}]{\setlength{\rightskip}{0pt plus 5cm}GlutKeyboardInput::GlutKeyboardInput ()}}
+\label{class_glut_keyboard_input_a68f755baae4426cb2004686918499d0a}
+Default Constructor. \hypertarget{class_glut_keyboard_input_ada68b75e8cf17723f1515fb7b996622e}{
+\index{GlutKeyboardInput@{GlutKeyboardInput}!$\sim$GlutKeyboardInput@{$\sim$GlutKeyboardInput}}
+\index{$\sim$GlutKeyboardInput@{$\sim$GlutKeyboardInput}!GlutKeyboardInput@{GlutKeyboardInput}}
+\subsubsection[{$\sim$GlutKeyboardInput}]{\setlength{\rightskip}{0pt plus 5cm}GlutKeyboardInput::$\sim$GlutKeyboardInput ()}}
+\label{class_glut_keyboard_input_ada68b75e8cf17723f1515fb7b996622e}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_glut_keyboard_input_ad76b2ea4c7f06c3a20f3a7f950869d3d}{
+\index{GlutKeyboardInput@{GlutKeyboardInput}!\_\-keyboardSpecial@{\_\-keyboardSpecial}}
+\index{\_\-keyboardSpecial@{\_\-keyboardSpecial}!GlutKeyboardInput@{GlutKeyboardInput}}
+\subsubsection[{\_\-keyboardSpecial}]{\setlength{\rightskip}{0pt plus 5cm}static void GlutKeyboardInput::\_\-keyboardSpecial (int {\em key}, \/  int {\em x}, \/  int {\em y})\hspace{0.3cm}{\ttfamily  \mbox{[}static, protected\mbox{]}}}}
+\label{class_glut_keyboard_input_ad76b2ea4c7f06c3a20f3a7f950869d3d}
+Glut keyboardDownFunc. \hypertarget{class_glut_keyboard_input_a820e8803532b4fa2257a44c4ece6701a}{
+\index{GlutKeyboardInput@{GlutKeyboardInput}!populateSceneCommand@{populateSceneCommand}}
+\index{populateSceneCommand@{populateSceneCommand}!GlutKeyboardInput@{GlutKeyboardInput}}
+\subsubsection[{populateSceneCommand}]{\setlength{\rightskip}{0pt plus 5cm}void GlutKeyboardInput::populateSceneCommand (std::vector$<$ {\bf SceneCommand} $\ast$ $>$ \& {\em commandList})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_glut_keyboard_input_a820e8803532b4fa2257a44c4ece6701a}
+Add any commands we have stored to the list passed in. 
+
+Implements \hyperlink{class_input_ab927e3b2f1735052f6f1ef3f3bf7b29c}{Input}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/GlutKeyboardInput.h\end{DoxyCompactItemize}

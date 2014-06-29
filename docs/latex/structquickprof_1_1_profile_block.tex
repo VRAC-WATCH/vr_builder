@@ -1,0 +1,54 @@
+\hypertarget{structquickprof_1_1_profile_block}{
+\section{quickprof::ProfileBlock Struct Reference}
+\label{structquickprof_1_1_profile_block}\index{quickprof::ProfileBlock@{quickprof::ProfileBlock}}
+}
+
+
+{\ttfamily \#include $<$quickprof.h$>$}\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structquickprof_1_1_profile_block_ac46539e1b87378b4b70d9c05862516c6}{
+unsigned long int \hyperlink{structquickprof_1_1_profile_block_ac46539e1b87378b4b70d9c05862516c6}{currentBlockStartMicroseconds}}
+\label{structquickprof_1_1_profile_block_ac46539e1b87378b4b70d9c05862516c6}
+
+\begin{DoxyCompactList}\small\item\em The starting time (in us) of the current block update. \item\end{DoxyCompactList}\item 
+unsigned long int \hyperlink{structquickprof_1_1_profile_block_a21889706502a703740df63f41c1a0cfb}{currentCycleTotalMicroseconds}
+\item 
+double \hyperlink{structquickprof_1_1_profile_block_a2f49cdcc0d7e85432cd75a3471b8944f}{avgCycleTotalMicroseconds}
+\item 
+\hypertarget{structquickprof_1_1_profile_block_a799a13d5b5365910a6d71b4a1fa00e74}{
+unsigned long int \hyperlink{structquickprof_1_1_profile_block_a799a13d5b5365910a6d71b4a1fa00e74}{totalMicroseconds}}
+\label{structquickprof_1_1_profile_block_a799a13d5b5365910a6d71b4a1fa00e74}
+
+\begin{DoxyCompactList}\small\item\em The total accumulated time (in us) spent in this block. \item\end{DoxyCompactList}\item 
+\hypertarget{structquickprof_1_1_profile_block_a5c29329ecc5b9ec252160e5d3efaad6c}{
+int {\bfseries calls}}
+\label{structquickprof_1_1_profile_block_a5c29329ecc5b9ec252160e5d3efaad6c}
+
+\item 
+\hypertarget{structquickprof_1_1_profile_block_a8ac02ff4dc86a620289437610bd4d50e}{
+std::string {\bfseries name}}
+\label{structquickprof_1_1_profile_block_a8ac02ff4dc86a620289437610bd4d50e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A simple data structure representing a single timed block of code. 
+
+\subsection{Member Data Documentation}
+\hypertarget{structquickprof_1_1_profile_block_a2f49cdcc0d7e85432cd75a3471b8944f}{
+\index{quickprof::ProfileBlock@{quickprof::ProfileBlock}!avgCycleTotalMicroseconds@{avgCycleTotalMicroseconds}}
+\index{avgCycleTotalMicroseconds@{avgCycleTotalMicroseconds}!quickprof::ProfileBlock@{quickprof::ProfileBlock}}
+\subsubsection[{avgCycleTotalMicroseconds}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf quickprof::ProfileBlock::avgCycleTotalMicroseconds}}}
+\label{structquickprof_1_1_profile_block_a2f49cdcc0d7e85432cd75a3471b8944f}
+The accumulated time (in us) spent in this block during the past profiling cycle. \hypertarget{structquickprof_1_1_profile_block_a21889706502a703740df63f41c1a0cfb}{
+\index{quickprof::ProfileBlock@{quickprof::ProfileBlock}!currentCycleTotalMicroseconds@{currentCycleTotalMicroseconds}}
+\index{currentCycleTotalMicroseconds@{currentCycleTotalMicroseconds}!quickprof::ProfileBlock@{quickprof::ProfileBlock}}
+\subsubsection[{currentCycleTotalMicroseconds}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int {\bf quickprof::ProfileBlock::currentCycleTotalMicroseconds}}}
+\label{structquickprof_1_1_profile_block_a21889706502a703740df63f41c1a0cfb}
+The accumulated time (in us) spent in this block during the current profiling cycle. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/quickprof.h\end{DoxyCompactItemize}

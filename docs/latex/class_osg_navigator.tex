@@ -1,0 +1,101 @@
+\hypertarget{class_osg_navigator}{
+\section{OsgNavigator Class Reference}
+\label{class_osg_navigator}\index{OsgNavigator@{OsgNavigator}}
+}
+
+
+{\ttfamily \#include $<$nav.h$>$}\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_osg_navigator_af7e369e107a95154084e59e0a85aa18f}{NavMode} \{ \hyperlink{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fa6edd2fe6c30ecc32e3c6b77859995aa9}{WALK}, 
+\hyperlink{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fae4421b45468d2b0612d2b33eed264f64}{FLY}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_osg_navigator_a69d88ec484a106499df853997e35871f}{
+void {\bfseries init} ()}
+\label{class_osg_navigator_a69d88ec484a106499df853997e35871f}
+
+\item 
+\hypertarget{class_osg_navigator_a976ff8bbf7a5dd18335109ebb47af5bb}{
+void {\bfseries setWalkMode} (bool walk\_\-mode)}
+\label{class_osg_navigator_a976ff8bbf7a5dd18335109ebb47af5bb}
+
+\item 
+\hypertarget{class_osg_navigator_a0a7f62dd07aa60a70267d078123cce51}{
+\hyperlink{class_osg_navigator_af7e369e107a95154084e59e0a85aa18f}{NavMode} {\bfseries getWalkMode} ()}
+\label{class_osg_navigator_a0a7f62dd07aa60a70267d078123cce51}
+
+\item 
+\hypertarget{class_osg_navigator_ad7d7ef685cf1d228f2bc78429dd59cd3}{
+void {\bfseries setVelocity} (const gmtl::Vec3f \&vel)}
+\label{class_osg_navigator_ad7d7ef685cf1d228f2bc78429dd59cd3}
+
+\item 
+\hypertarget{class_osg_navigator_a0c5e66bf67b018a382ca58b96a111a40}{
+void {\bfseries setRotationalVelocity} (const gmtl::Matrix44f \&rot\_\-vel)}
+\label{class_osg_navigator_a0c5e66bf67b018a382ca58b96a111a40}
+
+\item 
+\hypertarget{class_osg_navigator_a8deba34ea812ac54e25f835d7053967e}{
+void {\bfseries setTiltVelocity} (const gmtl::Matrix44f \&tilt\_\-vel)}
+\label{class_osg_navigator_a8deba34ea812ac54e25f835d7053967e}
+
+\item 
+\hypertarget{class_osg_navigator_ae249d2ee76ed909d09ee806a0ceb2844}{
+void {\bfseries update} ()}
+\label{class_osg_navigator_ae249d2ee76ed909d09ee806a0ceb2844}
+
+\item 
+\hypertarget{class_osg_navigator_a3f815c0542764b5f2e4d91d56bc79c83}{
+gmtl::Matrix44f {\bfseries getCurPos} ()}
+\label{class_osg_navigator_a3f815c0542764b5f2e4d91d56bc79c83}
+
+\item 
+\hypertarget{class_osg_navigator_a76d7c7f19c8341cef3f7da9f07589890}{
+void {\bfseries setCurPos} (const gmtl::Matrix44f pos)}
+\label{class_osg_navigator_a76d7c7f19c8341cef3f7da9f07589890}
+
+\item 
+\hypertarget{class_osg_navigator_ae638bfd8aa567a671f9b712e1adf79b9}{
+gmtl::Matrix44f {\bfseries getTiltMatrix} ()}
+\label{class_osg_navigator_ae638bfd8aa567a671f9b712e1adf79b9}
+
+\item 
+\hypertarget{class_osg_navigator_a26b2ede1e2371e7da4dbc2217c73426e}{
+void {\bfseries setTiltMatrix} ()}
+\label{class_osg_navigator_a26b2ede1e2371e7da4dbc2217c73426e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to control all navigation. 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_osg_navigator_af7e369e107a95154084e59e0a85aa18f}{
+\index{OsgNavigator@{OsgNavigator}!NavMode@{NavMode}}
+\index{NavMode@{NavMode}!OsgNavigator@{OsgNavigator}}
+\subsubsection[{NavMode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf OsgNavigator::NavMode}}}
+\label{class_osg_navigator_af7e369e107a95154084e59e0a85aa18f}
+\hyperlink{class_navigation}{Navigation} mode \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{WALK@{WALK}!OsgNavigator@{OsgNavigator}}\index{OsgNavigator@{OsgNavigator}!WALK@{WALK}}\item[{\em 
+\hypertarget{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fa6edd2fe6c30ecc32e3c6b77859995aa9}{
+WALK}
+\label{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fa6edd2fe6c30ecc32e3c6b77859995aa9}
+}]Constrain to x,y trans and y rotations. \index{FLY@{FLY}!OsgNavigator@{OsgNavigator}}\index{OsgNavigator@{OsgNavigator}!FLY@{FLY}}\item[{\em 
+\hypertarget{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fae4421b45468d2b0612d2b33eed264f64}{
+FLY}
+\label{class_osg_navigator_af7e369e107a95154084e59e0a85aa18fae4421b45468d2b0612d2b33eed264f64}
+}]No restrictions \end{description}
+\end{Desc}
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/nav.h\end{DoxyCompactItemize}

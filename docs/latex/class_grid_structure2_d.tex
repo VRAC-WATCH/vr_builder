@@ -1,0 +1,174 @@
+\hypertarget{class_grid_structure2_d}{
+\section{GridStructure2D Class Reference}
+\label{class_grid_structure2_d}\index{GridStructure2D@{GridStructure2D}}
+}
+
+
+{\ttfamily \#include $<$GridStructure2D.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_structure2_d_ad7665e25b03615d26437a6d2d7a6ab13}{GridStructure2D} ()
+\item 
+\hyperlink{class_grid_structure2_d_a6e85d262f6e5c6a8be7aad82e4c0eb8b}{GridStructure2D} (const unsigned int \&gridWidth, const unsigned int \&gridHeight, const float \&horizontalSpacing, const float \&verticalSpacing, const float \&alternateRowSpacingPercentage=0.0, const bool \&automateSpacing=false, const osg::ref\_\-ptr$<$ ModelNode $>$ model=NULL)
+\item 
+\hyperlink{class_grid_structure2_d_a90ac22e05a7e1bf2737d3fa51d158b61}{$\sim$GridStructure2D} ()
+\item 
+void \hyperlink{class_grid_structure2_d_a35f694a9b0e064bfaebff7c382ba2ecb}{buildGrid} ()
+\item 
+const char $\ast$ \hyperlink{class_grid_structure2_d_af994372e96543559c040b40bb6969bfa}{nodeType} () const 
+\item 
+void \hyperlink{class_grid_structure2_d_acbf816d7cb1750c2084c09db385f2db3}{setAutomatedSpacing} (bool isAutomated)
+\item 
+void \hyperlink{class_grid_structure2_d_a42560f8eba785035b818caa98ac0b638}{setGridColor} (v4 color)
+\item 
+void \hyperlink{class_grid_structure2_d_a8e7ab4852eb1565ee2853e38d13fecd0}{setElementColors} (std::vector$<$ v4 $>$ colors)
+\item 
+void \hyperlink{class_grid_structure2_d_a29faefdc28cc26500d55ee8b440d9e14}{setElementIds} (std::vector$<$ bump::String $>$ nodeIds)
+\item 
+void \hyperlink{class_grid_structure2_d_a88998a17969451df48250f98ad2b406d}{setId} (const bump::String \&id)
+\item 
+\hypertarget{class_grid_structure2_d_aea20f472b6b5766fd0a6ca5cd08ce557}{
+const bump::String \& {\bfseries id} () const }
+\label{class_grid_structure2_d_aea20f472b6b5766fd0a6ca5cd08ce557}
+
+\item 
+void \hyperlink{class_grid_structure2_d_a59ae6f160f10f31c33f01677c2efaa3b}{setTextLabels} (std::vector$<$ bump::String $>$ labels)
+\item 
+const int \hyperlink{class_grid_structure2_d_aab843adb6bb6ba3e2b884591ba6738fe}{elementCount} () const 
+\item 
+std::vector$<$ osg::ref\_\-ptr$<$ \hyperlink{class_grid_element}{GridElement} $>$ $>$ \hyperlink{class_grid_structure2_d_a5faabe450979fc40d520b7237e3be6d7}{elements} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_grid_structure2_d_ab63375bf820bbe676613711abd32d3a6}{\_\-alternateRowSpacingPercentage}
+\item 
+\hypertarget{class_grid_structure2_d_a194f84ee5f0e7c8f26b6946619081446}{
+unsigned int {\bfseries \_\-gridHeight}}
+\label{class_grid_structure2_d_a194f84ee5f0e7c8f26b6946619081446}
+
+\item 
+\hypertarget{class_grid_structure2_d_a08fbce78819239608efd9914085866a5}{
+unsigned int {\bfseries \_\-gridWidth}}
+\label{class_grid_structure2_d_a08fbce78819239608efd9914085866a5}
+
+\item 
+\hypertarget{class_grid_structure2_d_a49a98552cc7a258ec6cbfa9490bd3b5d}{
+float {\bfseries \_\-horizontalSpacing}}
+\label{class_grid_structure2_d_a49a98552cc7a258ec6cbfa9490bd3b5d}
+
+\item 
+\hypertarget{class_grid_structure2_d_ab73f9956dd1b2ab3d6f92e0dc6f9026d}{
+bool {\bfseries \_\-isSpacingAutomated}}
+\label{class_grid_structure2_d_ab73f9956dd1b2ab3d6f92e0dc6f9026d}
+
+\item 
+\hypertarget{class_grid_structure2_d_a66de8707f1c8e16935c653823ace127c}{
+float {\bfseries \_\-verticalSpacing}}
+\label{class_grid_structure2_d_a66de8707f1c8e16935c653823ace127c}
+
+\item 
+osg::ref\_\-ptr$<$ ModelNode $>$ \hyperlink{class_grid_structure2_d_a06190b1d1ab65bbc6dfcfa09f3d30c66}{\_\-elementModel}
+\item 
+\hypertarget{class_grid_structure2_d_aee640da755b48d0f5493afe1fca37365}{
+std::vector$<$ osg::ref\_\-ptr$<$ \hyperlink{class_grid_element}{GridElement} $>$ $>$ {\bfseries \_\-elements}}
+\label{class_grid_structure2_d_aee640da755b48d0f5493afe1fca37365}
+
+\item 
+\hypertarget{class_grid_structure2_d_a9e09946900085b2c9de42727f8aac93a}{
+bump::String {\bfseries \_\-gridId}}
+\label{class_grid_structure2_d_a9e09946900085b2c9de42727f8aac93a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A group base node which can contains other groups and parts. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_grid_structure2_d_ad7665e25b03615d26437a6d2d7a6ab13}{
+\index{GridStructure2D@{GridStructure2D}!GridStructure2D@{GridStructure2D}}
+\index{GridStructure2D@{GridStructure2D}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{GridStructure2D}]{\setlength{\rightskip}{0pt plus 5cm}GridStructure2D::GridStructure2D ()}}
+\label{class_grid_structure2_d_ad7665e25b03615d26437a6d2d7a6ab13}
+Constructor. \hypertarget{class_grid_structure2_d_a6e85d262f6e5c6a8be7aad82e4c0eb8b}{
+\index{GridStructure2D@{GridStructure2D}!GridStructure2D@{GridStructure2D}}
+\index{GridStructure2D@{GridStructure2D}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{GridStructure2D}]{\setlength{\rightskip}{0pt plus 5cm}GridStructure2D::GridStructure2D (const unsigned int \& {\em gridWidth}, \/  const unsigned int \& {\em gridHeight}, \/  const float \& {\em horizontalSpacing}, \/  const float \& {\em verticalSpacing}, \/  const float \& {\em alternateRowSpacingPercentage} = {\ttfamily 0.0}, \/  const bool \& {\em automateSpacing} = {\ttfamily false}, \/  const osg::ref\_\-ptr$<$ ModelNode $>$ {\em model} = {\ttfamily NULL})}}
+\label{class_grid_structure2_d_a6e85d262f6e5c6a8be7aad82e4c0eb8b}
+Constructor with manual setup. \hypertarget{class_grid_structure2_d_a90ac22e05a7e1bf2737d3fa51d158b61}{
+\index{GridStructure2D@{GridStructure2D}!$\sim$GridStructure2D@{$\sim$GridStructure2D}}
+\index{$\sim$GridStructure2D@{$\sim$GridStructure2D}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{$\sim$GridStructure2D}]{\setlength{\rightskip}{0pt plus 5cm}GridStructure2D::$\sim$GridStructure2D ()}}
+\label{class_grid_structure2_d_a90ac22e05a7e1bf2737d3fa51d158b61}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_grid_structure2_d_a35f694a9b0e064bfaebff7c382ba2ecb}{
+\index{GridStructure2D@{GridStructure2D}!buildGrid@{buildGrid}}
+\index{buildGrid@{buildGrid}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{buildGrid}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::buildGrid ()}}
+\label{class_grid_structure2_d_a35f694a9b0e064bfaebff7c382ba2ecb}
+Intializes the grid structure. \hypertarget{class_grid_structure2_d_aab843adb6bb6ba3e2b884591ba6738fe}{
+\index{GridStructure2D@{GridStructure2D}!elementCount@{elementCount}}
+\index{elementCount@{elementCount}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{elementCount}]{\setlength{\rightskip}{0pt plus 5cm}const int GridStructure2D::elementCount () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_structure2_d_aab843adb6bb6ba3e2b884591ba6738fe}
+Accessor for the total number of elements in the grid. \hypertarget{class_grid_structure2_d_a5faabe450979fc40d520b7237e3be6d7}{
+\index{GridStructure2D@{GridStructure2D}!elements@{elements}}
+\index{elements@{elements}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{elements}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$osg::ref\_\-ptr$<${\bf GridElement}$>$ $>$ GridStructure2D::elements ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_structure2_d_a5faabe450979fc40d520b7237e3be6d7}
+Accessor for the grid element objects. \hypertarget{class_grid_structure2_d_af994372e96543559c040b40bb6969bfa}{
+\index{GridStructure2D@{GridStructure2D}!nodeType@{nodeType}}
+\index{nodeType@{nodeType}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{nodeType}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ GridStructure2D::nodeType () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_structure2_d_af994372e96543559c040b40bb6969bfa}
+Override the BaseNode node type. \hypertarget{class_grid_structure2_d_acbf816d7cb1750c2084c09db385f2db3}{
+\index{GridStructure2D@{GridStructure2D}!setAutomatedSpacing@{setAutomatedSpacing}}
+\index{setAutomatedSpacing@{setAutomatedSpacing}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setAutomatedSpacing}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setAutomatedSpacing (bool {\em isAutomated})}}
+\label{class_grid_structure2_d_acbf816d7cb1750c2084c09db385f2db3}
+Accessor for whether to automate the spacing of the grid using the model's bounds \hypertarget{class_grid_structure2_d_a8e7ab4852eb1565ee2853e38d13fecd0}{
+\index{GridStructure2D@{GridStructure2D}!setElementColors@{setElementColors}}
+\index{setElementColors@{setElementColors}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setElementColors}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setElementColors (std::vector$<$ v4 $>$ {\em colors})}}
+\label{class_grid_structure2_d_a8e7ab4852eb1565ee2853e38d13fecd0}
+Set a separate color for each grid element. \hypertarget{class_grid_structure2_d_a29faefdc28cc26500d55ee8b440d9e14}{
+\index{GridStructure2D@{GridStructure2D}!setElementIds@{setElementIds}}
+\index{setElementIds@{setElementIds}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setElementIds}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setElementIds (std::vector$<$ bump::String $>$ {\em nodeIds})}}
+\label{class_grid_structure2_d_a29faefdc28cc26500d55ee8b440d9e14}
+Set a separate id for each grid element. \hypertarget{class_grid_structure2_d_a42560f8eba785035b818caa98ac0b638}{
+\index{GridStructure2D@{GridStructure2D}!setGridColor@{setGridColor}}
+\index{setGridColor@{setGridColor}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setGridColor}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setGridColor (v4 {\em color})}}
+\label{class_grid_structure2_d_a42560f8eba785035b818caa98ac0b638}
+Set a single color for each grid element. \hypertarget{class_grid_structure2_d_a88998a17969451df48250f98ad2b406d}{
+\index{GridStructure2D@{GridStructure2D}!setId@{setId}}
+\index{setId@{setId}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setId}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setId (const bump::String \& {\em id})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_structure2_d_a88998a17969451df48250f98ad2b406d}
+Set the name of the grid. \hypertarget{class_grid_structure2_d_a59ae6f160f10f31c33f01677c2efaa3b}{
+\index{GridStructure2D@{GridStructure2D}!setTextLabels@{setTextLabels}}
+\index{setTextLabels@{setTextLabels}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{setTextLabels}]{\setlength{\rightskip}{0pt plus 5cm}void GridStructure2D::setTextLabels (std::vector$<$ bump::String $>$ {\em labels})}}
+\label{class_grid_structure2_d_a59ae6f160f10f31c33f01677c2efaa3b}
+Set the text label for each grid element. 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_grid_structure2_d_ab63375bf820bbe676613711abd32d3a6}{
+\index{GridStructure2D@{GridStructure2D}!\_\-alternateRowSpacingPercentage@{\_\-alternateRowSpacingPercentage}}
+\index{\_\-alternateRowSpacingPercentage@{\_\-alternateRowSpacingPercentage}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{\_\-alternateRowSpacingPercentage}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GridStructure2D::\_\-alternateRowSpacingPercentage}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_grid_structure2_d_ab63375bf820bbe676613711abd32d3a6}
+\hyperlink{class_grid}{Grid} iVars. \hypertarget{class_grid_structure2_d_a06190b1d1ab65bbc6dfcfa09f3d30c66}{
+\index{GridStructure2D@{GridStructure2D}!\_\-elementModel@{\_\-elementModel}}
+\index{\_\-elementModel@{\_\-elementModel}!GridStructure2D@{GridStructure2D}}
+\subsubsection[{\_\-elementModel}]{\setlength{\rightskip}{0pt plus 5cm}osg::ref\_\-ptr$<$ModelNode$>$ {\bf GridStructure2D::\_\-elementModel}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_grid_structure2_d_a06190b1d1ab65bbc6dfcfa09f3d30c66}
+General iVars. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/GridStructure2D.h\end{DoxyCompactItemize}

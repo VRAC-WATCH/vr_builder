@@ -1,0 +1,88 @@
+\hypertarget{class_physics}{
+\section{Physics Class Reference}
+\label{class_physics}\index{Physics@{Physics}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries Physicselement}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_physics_abd2a93b7674376b592308c70a4d0722a}{Type} \{ {\bfseries FLOOR}, 
+{\bfseries BOX}, 
+{\bfseries BALL}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_physics_a4b2ebc0a344f04f48d227c72f0d0fbda}{Physics} ()
+\item 
+\hyperlink{class_physics_a045c3788e28059d3920136499942490f}{$\sim$Physics} ()
+\item 
+void \hyperlink{class_physics_a9bf392c23a2e01bbd0fa99804e06d3ba}{add} (osg::Node $\ast$node, osg::Vec3 position, \hyperlink{class_physics_abd2a93b7674376b592308c70a4d0722a}{Type} type=BOX)
+\item 
+void \hyperlink{class_physics_afe2651aeeb5fcb01189f42d04c79692e}{rebuild} ()
+\item 
+void \hyperlink{class_physics_a4b834cb27b02c73026d8c45da29a193e}{add\_\-projectile} (osg::Node $\ast$node, osg::Vec3 startPosition, osg::Vec3 directionImpulse)
+\item 
+void \hyperlink{class_physics_acd1a87f8356086e412b3be849860a687}{clearBoxes} ()
+\item 
+void \hyperlink{class_physics_a309579d8a466dbcc36c6b4db136b1e9b}{update} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_physics_abd2a93b7674376b592308c70a4d0722a}{
+\index{Physics@{Physics}!Type@{Type}}
+\index{Type@{Type}!Physics@{Physics}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Physics::Type}}}
+\label{class_physics_abd2a93b7674376b592308c70a4d0722a}
+Enum to ID the different types of nodes Note that: Properties of each node changes accordingly 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_physics_a4b2ebc0a344f04f48d227c72f0d0fbda}{
+\index{Physics@{Physics}!Physics@{Physics}}
+\index{Physics@{Physics}!Physics@{Physics}}
+\subsubsection[{Physics}]{\setlength{\rightskip}{0pt plus 5cm}Physics::Physics ()}}
+\label{class_physics_a4b2ebc0a344f04f48d227c72f0d0fbda}
+Constructor \hypertarget{class_physics_a045c3788e28059d3920136499942490f}{
+\index{Physics@{Physics}!$\sim$Physics@{$\sim$Physics}}
+\index{$\sim$Physics@{$\sim$Physics}!Physics@{Physics}}
+\subsubsection[{$\sim$Physics}]{\setlength{\rightskip}{0pt plus 5cm}Physics::$\sim$Physics ()}}
+\label{class_physics_a045c3788e28059d3920136499942490f}
+Destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_physics_a9bf392c23a2e01bbd0fa99804e06d3ba}{
+\index{Physics@{Physics}!add@{add}}
+\index{add@{add}!Physics@{Physics}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Physics::add (osg::Node $\ast$ {\em node}, \/  osg::Vec3 {\em position}, \/  {\bf Type} {\em type} = {\ttfamily BOX})}}
+\label{class_physics_a9bf392c23a2e01bbd0fa99804e06d3ba}
+Add a node to the \hyperlink{class_physics}{Physics} World of a certain type and positon \hypertarget{class_physics_a4b834cb27b02c73026d8c45da29a193e}{
+\index{Physics@{Physics}!add\_\-projectile@{add\_\-projectile}}
+\index{add\_\-projectile@{add\_\-projectile}!Physics@{Physics}}
+\subsubsection[{add\_\-projectile}]{\setlength{\rightskip}{0pt plus 5cm}void Physics::add\_\-projectile (osg::Node $\ast$ {\em node}, \/  osg::Vec3 {\em startPosition}, \/  osg::Vec3 {\em directionImpulse})}}
+\label{class_physics_a4b834cb27b02c73026d8c45da29a193e}
+Add a projectile in the \hyperlink{class_physics}{Physics} world from a certain point with a certain Impulse \hypertarget{class_physics_acd1a87f8356086e412b3be849860a687}{
+\index{Physics@{Physics}!clearBoxes@{clearBoxes}}
+\index{clearBoxes@{clearBoxes}!Physics@{Physics}}
+\subsubsection[{clearBoxes}]{\setlength{\rightskip}{0pt plus 5cm}void Physics::clearBoxes ()}}
+\label{class_physics_acd1a87f8356086e412b3be849860a687}
+Clears all simulated box objects. \hypertarget{class_physics_afe2651aeeb5fcb01189f42d04c79692e}{
+\index{Physics@{Physics}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!Physics@{Physics}}
+\subsubsection[{rebuild}]{\setlength{\rightskip}{0pt plus 5cm}void Physics::rebuild ()}}
+\label{class_physics_afe2651aeeb5fcb01189f42d04c79692e}
+Rebuild the \hyperlink{class_physics}{Physics} scene as it was in the Creation Mode \hypertarget{class_physics_a309579d8a466dbcc36c6b4db136b1e9b}{
+\index{Physics@{Physics}!update@{update}}
+\index{update@{update}!Physics@{Physics}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Physics::update ()}}
+\label{class_physics_a309579d8a466dbcc36c6b4db136b1e9b}
+Update the \hyperlink{class_physics}{Physics} World (Simulation of physics begins) 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/Physics.h\end{DoxyCompactItemize}

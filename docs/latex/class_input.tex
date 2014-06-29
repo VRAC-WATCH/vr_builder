@@ -1,0 +1,112 @@
+\hypertarget{class_input}{
+\section{Input Class Reference}
+\label{class_input}\index{Input@{Input}}
+}
+Inheritance diagram for Input::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.84211cm]{class_input}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_input_a5b3edc71e8f4aec47e2f44a492297cab}{InputType} \{ \par
+{\bfseries KEYBOARD}, 
+{\bfseries GAMEPAD}, 
+{\bfseries HEAD\_\-TRACK}, 
+{\bfseries MOUSE}, 
+\par
+{\bfseries WAND}, 
+{\bfseries OTHER} =  0
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_input_a7bdc5c67dff8a595f91ccb10da4cc4c2}{Input} (\hyperlink{class_input_a5b3edc71e8f4aec47e2f44a492297cab}{InputType} type)
+\item 
+virtual \hyperlink{class_input_a230646fa6e6433b4d9ac3535b7d52087}{$\sim$Input} ()
+\item 
+virtual void \hyperlink{class_input_ab927e3b2f1735052f6f1ef3f3bf7b29c}{populateSceneCommand} (std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ \&commandList)=0
+\item 
+const \hyperlink{class_input_a5b3edc71e8f4aec47e2f44a492297cab}{InputType} \hyperlink{class_input_a50aabbed0136edcf6c3eae963e2d9a55}{inputType} ()
+\item 
+void \hyperlink{class_input_aa1402943d600a2a5d9238204803c0eda}{setID} (int inputid)
+\item 
+int \hyperlink{class_input_a64afe40706be8b09168100a7aeee26e2}{getID} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_input_a4578b3d751dd43e66e3623e69d0f45fc}{wantCursor}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ \hyperlink{class_input_a560f0340c51d4c939c873be86ae8a963}{\_\-sceneCommandList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_input_a5b3edc71e8f4aec47e2f44a492297cab}{
+\index{Input@{Input}!InputType@{InputType}}
+\index{InputType@{InputType}!Input@{Input}}
+\subsubsection[{InputType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Input::InputType}}}
+\label{class_input_a5b3edc71e8f4aec47e2f44a492297cab}
+Enum for declaring input types. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_input_a7bdc5c67dff8a595f91ccb10da4cc4c2}{
+\index{Input@{Input}!Input@{Input}}
+\index{Input@{Input}!Input@{Input}}
+\subsubsection[{Input}]{\setlength{\rightskip}{0pt plus 5cm}Input::Input ({\bf InputType} {\em type})}}
+\label{class_input_a7bdc5c67dff8a595f91ccb10da4cc4c2}
+Default Constructor. Any derived classes should call this constructor to initialize the type. \hypertarget{class_input_a230646fa6e6433b4d9ac3535b7d52087}{
+\index{Input@{Input}!$\sim$Input@{$\sim$Input}}
+\index{$\sim$Input@{$\sim$Input}!Input@{Input}}
+\subsubsection[{$\sim$Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual Input::$\sim$Input ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_input_a230646fa6e6433b4d9ac3535b7d52087}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_input_a64afe40706be8b09168100a7aeee26e2}{
+\index{Input@{Input}!getID@{getID}}
+\index{getID@{getID}!Input@{Input}}
+\subsubsection[{getID}]{\setlength{\rightskip}{0pt plus 5cm}int Input::getID ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_input_a64afe40706be8b09168100a7aeee26e2}
+Get the ID of the \hyperlink{class_input}{Input} \hypertarget{class_input_a50aabbed0136edcf6c3eae963e2d9a55}{
+\index{Input@{Input}!inputType@{inputType}}
+\index{inputType@{inputType}!Input@{Input}}
+\subsubsection[{inputType}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf InputType} Input::inputType ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_input_a50aabbed0136edcf6c3eae963e2d9a55}
+Accessor for the input type of the current input. \hypertarget{class_input_ab927e3b2f1735052f6f1ef3f3bf7b29c}{
+\index{Input@{Input}!populateSceneCommand@{populateSceneCommand}}
+\index{populateSceneCommand@{populateSceneCommand}!Input@{Input}}
+\subsubsection[{populateSceneCommand}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Input::populateSceneCommand (std::vector$<$ {\bf SceneCommand} $\ast$ $>$ \& {\em commandList})\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_input_ab927e3b2f1735052f6f1ef3f3bf7b29c}
+Populates the commandList with any addition input since the last update. 
+
+Implemented in \hyperlink{class_glut_keyboard_input_a820e8803532b4fa2257a44c4ece6701a}{GlutKeyboardInput}, \hyperlink{class_juggler_gamepad_input_aa2ead837a9d4ba9d94701e675b6d61d4}{JugglerGamepadInput}, \hyperlink{class_juggler_head_track_input_abb40712fe1e84f4172e883645bd0f1b8}{JugglerHeadTrackInput}, and \hyperlink{class_juggler_wand_input_a189d0680740c8755abc38b841de34130}{JugglerWandInput}.\hypertarget{class_input_aa1402943d600a2a5d9238204803c0eda}{
+\index{Input@{Input}!setID@{setID}}
+\index{setID@{setID}!Input@{Input}}
+\subsubsection[{setID}]{\setlength{\rightskip}{0pt plus 5cm}void Input::setID (int {\em inputid})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_input_aa1402943d600a2a5d9238204803c0eda}
+Set the ID of the \hyperlink{class_input}{Input} 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_input_a560f0340c51d4c939c873be86ae8a963}{
+\index{Input@{Input}!\_\-sceneCommandList@{\_\-sceneCommandList}}
+\index{\_\-sceneCommandList@{\_\-sceneCommandList}!Input@{Input}}
+\subsubsection[{\_\-sceneCommandList}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf SceneCommand}$\ast$$>$ {\bf Input::\_\-sceneCommandList}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_input_a560f0340c51d4c939c873be86ae8a963}
+Protected iVars. \hypertarget{class_input_a4578b3d751dd43e66e3623e69d0f45fc}{
+\index{Input@{Input}!wantCursor@{wantCursor}}
+\index{wantCursor@{wantCursor}!Input@{Input}}
+\subsubsection[{wantCursor}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Input::wantCursor}}}
+\label{class_input_a4578b3d751dd43e66e3623e69d0f45fc}
+Accessor for the input to be able to control the cursor 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/Input.h\end{DoxyCompactItemize}

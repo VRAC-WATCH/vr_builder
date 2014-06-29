@@ -1,0 +1,134 @@
+\hypertarget{class_interaction_manager}{
+\section{InteractionManager Class Reference}
+\label{class_interaction_manager}\index{InteractionManager@{InteractionManager}}
+}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_interaction_manager_a8d6641e1266e7178e41427d3c266ec0a}{InterfaceType} \{ {\bfseries GLUT\_\-INTERFACE}, 
+{\bfseries JUGGLER\_\-INTERFACE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_interaction_manager_ad97c4651ffc8d746b7b99ee5cdc37d1d}{InteractionManager} ()
+\item 
+\hyperlink{class_interaction_manager_a2c0393088c9ac7d6f572acfe7b6c3fb9}{InteractionManager} (\hyperlink{class_interaction_manager_a8d6641e1266e7178e41427d3c266ec0a}{InterfaceType} type)
+\item 
+\hyperlink{class_interaction_manager_a362e8a2f2fba538df9c33a54ec49c2ef}{$\sim$InteractionManager} ()
+\item 
+\hyperlink{class_input}{Input} $\ast$ \hyperlink{class_interaction_manager_a5ea548125f01bdc57405680aed37a3c5}{inputForType} (\hyperlink{class_input_a5b3edc71e8f4aec47e2f44a492297cab}{Input::InputType} type)
+\item 
+void \hyperlink{class_interaction_manager_a5bcaa27707844164bc1ff79733b85055}{update} ()
+\item 
+std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ \& \hyperlink{class_interaction_manager_a8476cf4690ddfabcf2cdc47dbde8c58a}{sceneCommands} ()
+\item 
+int \hyperlink{class_interaction_manager_a3ce3de15f8503235dbd7ee3b911e2c96}{howManyWantCursor} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_interaction_manager_ab20cc9048a4e327c482d5fad992670f6}{\_\-setupGlutInputs} ()
+\item 
+void \hyperlink{class_interaction_manager_ab3fae56ad6a2c3a09e5113271e7c7939}{\_\-setupJugglerInputs} ()
+\item 
+void \hyperlink{class_interaction_manager_a6cfbd6e78234b8bfd34fc88bd333fb3b}{checkNeedForCursor} (\hyperlink{class_input}{Input} $\ast$\&input)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::vector$<$ \hyperlink{class_input}{Input} $\ast$ $>$ \hyperlink{class_interaction_manager_ac53841738a009ffa19f735afe32ccec0}{\_\-inputs}
+\item 
+\hypertarget{class_interaction_manager_a9176c360d83f96ee0c64cc46bfe1bad4}{
+\hyperlink{class_interaction_manager_a8d6641e1266e7178e41427d3c266ec0a}{InterfaceType} {\bfseries \_\-interfaceType}}
+\label{class_interaction_manager_a9176c360d83f96ee0c64cc46bfe1bad4}
+
+\item 
+\hypertarget{class_interaction_manager_acfbb8fe91da55cb0669b67891dbaeba0}{
+std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ {\bfseries \_\-sceneCommandList}}
+\label{class_interaction_manager_acfbb8fe91da55cb0669b67891dbaeba0}
+
+\item 
+\hypertarget{class_interaction_manager_a1618f3e6da71b728dd12a6dffc0c895b}{
+int {\bfseries ids}}
+\label{class_interaction_manager_a1618f3e6da71b728dd12a6dffc0c895b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_interaction_manager_a8d6641e1266e7178e41427d3c266ec0a}{
+\index{InteractionManager@{InteractionManager}!InterfaceType@{InterfaceType}}
+\index{InterfaceType@{InterfaceType}!InteractionManager@{InteractionManager}}
+\subsubsection[{InterfaceType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf InteractionManager::InterfaceType}}}
+\label{class_interaction_manager_a8d6641e1266e7178e41427d3c266ec0a}
+Enum for declaring the Interface type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_interaction_manager_ad97c4651ffc8d746b7b99ee5cdc37d1d}{
+\index{InteractionManager@{InteractionManager}!InteractionManager@{InteractionManager}}
+\index{InteractionManager@{InteractionManager}!InteractionManager@{InteractionManager}}
+\subsubsection[{InteractionManager}]{\setlength{\rightskip}{0pt plus 5cm}InteractionManager::InteractionManager ()}}
+\label{class_interaction_manager_ad97c4651ffc8d746b7b99ee5cdc37d1d}
+Default Constructor -\/ Sets up the glut interface. \hypertarget{class_interaction_manager_a2c0393088c9ac7d6f572acfe7b6c3fb9}{
+\index{InteractionManager@{InteractionManager}!InteractionManager@{InteractionManager}}
+\index{InteractionManager@{InteractionManager}!InteractionManager@{InteractionManager}}
+\subsubsection[{InteractionManager}]{\setlength{\rightskip}{0pt plus 5cm}InteractionManager::InteractionManager ({\bf InterfaceType} {\em type})}}
+\label{class_interaction_manager_a2c0393088c9ac7d6f572acfe7b6c3fb9}
+Constructor declaring interface. \hypertarget{class_interaction_manager_a362e8a2f2fba538df9c33a54ec49c2ef}{
+\index{InteractionManager@{InteractionManager}!$\sim$InteractionManager@{$\sim$InteractionManager}}
+\index{$\sim$InteractionManager@{$\sim$InteractionManager}!InteractionManager@{InteractionManager}}
+\subsubsection[{$\sim$InteractionManager}]{\setlength{\rightskip}{0pt plus 5cm}InteractionManager::$\sim$InteractionManager ()}}
+\label{class_interaction_manager_a362e8a2f2fba538df9c33a54ec49c2ef}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_interaction_manager_ab20cc9048a4e327c482d5fad992670f6}{
+\index{InteractionManager@{InteractionManager}!\_\-setupGlutInputs@{\_\-setupGlutInputs}}
+\index{\_\-setupGlutInputs@{\_\-setupGlutInputs}!InteractionManager@{InteractionManager}}
+\subsubsection[{\_\-setupGlutInputs}]{\setlength{\rightskip}{0pt plus 5cm}void InteractionManager::\_\-setupGlutInputs ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_interaction_manager_ab20cc9048a4e327c482d5fad992670f6}
+Sets up user interaction handlers for Glut. \hypertarget{class_interaction_manager_ab3fae56ad6a2c3a09e5113271e7c7939}{
+\index{InteractionManager@{InteractionManager}!\_\-setupJugglerInputs@{\_\-setupJugglerInputs}}
+\index{\_\-setupJugglerInputs@{\_\-setupJugglerInputs}!InteractionManager@{InteractionManager}}
+\subsubsection[{\_\-setupJugglerInputs}]{\setlength{\rightskip}{0pt plus 5cm}void InteractionManager::\_\-setupJugglerInputs ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_interaction_manager_ab3fae56ad6a2c3a09e5113271e7c7939}
+Sets up user interaction hanlders for Juggler. \hypertarget{class_interaction_manager_a6cfbd6e78234b8bfd34fc88bd333fb3b}{
+\index{InteractionManager@{InteractionManager}!checkNeedForCursor@{checkNeedForCursor}}
+\index{checkNeedForCursor@{checkNeedForCursor}!InteractionManager@{InteractionManager}}
+\subsubsection[{checkNeedForCursor}]{\setlength{\rightskip}{0pt plus 5cm}void InteractionManager::checkNeedForCursor ({\bf Input} $\ast$\& {\em input})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_interaction_manager_a6cfbd6e78234b8bfd34fc88bd333fb3b}
+Checks the input device if it wants a cursor \hypertarget{class_interaction_manager_a3ce3de15f8503235dbd7ee3b911e2c96}{
+\index{InteractionManager@{InteractionManager}!howManyWantCursor@{howManyWantCursor}}
+\index{howManyWantCursor@{howManyWantCursor}!InteractionManager@{InteractionManager}}
+\subsubsection[{howManyWantCursor}]{\setlength{\rightskip}{0pt plus 5cm}int InteractionManager::howManyWantCursor ()}}
+\label{class_interaction_manager_a3ce3de15f8503235dbd7ee3b911e2c96}
+Ask the interaction manager how many devices connected need cursor control \hypertarget{class_interaction_manager_a5ea548125f01bdc57405680aed37a3c5}{
+\index{InteractionManager@{InteractionManager}!inputForType@{inputForType}}
+\index{inputForType@{inputForType}!InteractionManager@{InteractionManager}}
+\subsubsection[{inputForType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Input}$\ast$ InteractionManager::inputForType ({\bf Input::InputType} {\em type})}}
+\label{class_interaction_manager_a5ea548125f01bdc57405680aed37a3c5}
+Accessors for the specified input type. \hypertarget{class_interaction_manager_a8476cf4690ddfabcf2cdc47dbde8c58a}{
+\index{InteractionManager@{InteractionManager}!sceneCommands@{sceneCommands}}
+\index{sceneCommands@{sceneCommands}!InteractionManager@{InteractionManager}}
+\subsubsection[{sceneCommands}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf SceneCommand}$\ast$$>$\& InteractionManager::sceneCommands ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_interaction_manager_a8476cf4690ddfabcf2cdc47dbde8c58a}
+Accessor for the current scene commands. Currently, for this to have any data, you must call \hyperlink{class_interaction_manager_a5bcaa27707844164bc1ff79733b85055}{update()} in order to populate the \_\-sceneCommandList with commands. \hypertarget{class_interaction_manager_a5bcaa27707844164bc1ff79733b85055}{
+\index{InteractionManager@{InteractionManager}!update@{update}}
+\index{update@{update}!InteractionManager@{InteractionManager}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void InteractionManager::update ()}}
+\label{class_interaction_manager_a5bcaa27707844164bc1ff79733b85055}
+Builds a list of commands that have been executed from any input. This needs to be done every frame before trying to use commands. 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_interaction_manager_ac53841738a009ffa19f735afe32ccec0}{
+\index{InteractionManager@{InteractionManager}!\_\-inputs@{\_\-inputs}}
+\index{\_\-inputs@{\_\-inputs}!InteractionManager@{InteractionManager}}
+\subsubsection[{\_\-inputs}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Input}$\ast$$>$ {\bf InteractionManager::\_\-inputs}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_interaction_manager_ac53841738a009ffa19f735afe32ccec0}
+iVars. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/InteractionManager.h\end{DoxyCompactItemize}

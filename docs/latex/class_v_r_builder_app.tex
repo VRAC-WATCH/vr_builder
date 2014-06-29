@@ -1,0 +1,223 @@
+\hypertarget{class_v_r_builder_app}{
+\section{VRBuilderApp Class Reference}
+\label{class_v_r_builder_app}\index{VRBuilderApp@{VRBuilderApp}}
+}
+
+
+{\ttfamily \#include $<$VRBuilderApp.h$>$}\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries ButtonState} \{ {\bfseries OFF}, 
+{\bfseries ON}, 
+{\bfseries TOGGLE\_\-OFF}, 
+{\bfseries TOGGLE\_\-ON}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_r_builder_app_a92aeff396418df3eb1ab0dd7416b725e}{
+void {\bfseries init} ()}
+\label{class_v_r_builder_app_a92aeff396418df3eb1ab0dd7416b725e}
+
+\item 
+\hypertarget{class_v_r_builder_app_acafad12e7a7764c9061b3fc79054533c}{
+void {\bfseries setHeadMatrix} (osg::Matrixf m)}
+\label{class_v_r_builder_app_acafad12e7a7764c9061b3fc79054533c}
+
+\item 
+\hypertarget{class_v_r_builder_app_a49e055893446481df93e5e5a1cd33aa7}{
+void {\bfseries setWandMatrix} (osg::Matrixf m)}
+\label{class_v_r_builder_app_a49e055893446481df93e5e5a1cd33aa7}
+
+\item 
+\hypertarget{class_v_r_builder_app_a3156d6cfbf45907805ee5a4337e9280b}{
+void {\bfseries setNavigationMatrix} (osg::Matrixf matrix)}
+\label{class_v_r_builder_app_a3156d6cfbf45907805ee5a4337e9280b}
+
+\item 
+\hypertarget{class_v_r_builder_app_a487d37a3da0613779cfdade515fe0e4d}{
+osg::Matrixf {\bfseries getHeadMatrix} ()}
+\label{class_v_r_builder_app_a487d37a3da0613779cfdade515fe0e4d}
+
+\item 
+\hypertarget{class_v_r_builder_app_a28dbfe8bea089179ad51241b36c8a009}{
+osg::Matrixf {\bfseries getWandMatrix} ()}
+\label{class_v_r_builder_app_a28dbfe8bea089179ad51241b36c8a009}
+
+\item 
+\hypertarget{class_v_r_builder_app_a7835252363057d0842197f9fd6da1d39}{
+osg::Matrixf {\bfseries getNavigationMatrix} ()}
+\label{class_v_r_builder_app_a7835252363057d0842197f9fd6da1d39}
+
+\item 
+\hypertarget{class_v_r_builder_app_a53a012a868cd168faadeb0af9153f10d}{
+void {\bfseries update} (float dt)}
+\label{class_v_r_builder_app_a53a012a868cd168faadeb0af9153f10d}
+
+\item 
+\hypertarget{class_v_r_builder_app_a16d97dd55cd57a7bb938ec7082710778}{
+osg::Group $\ast$ {\bfseries getRoot} ()}
+\label{class_v_r_builder_app_a16d97dd55cd57a7bb938ec7082710778}
+
+\item 
+\hypertarget{class_v_r_builder_app_ac74ca164d67bddf4c61f462e743f625d}{
+osg::Group $\ast$ {\bfseries getModelGroup} ()}
+\label{class_v_r_builder_app_ac74ca164d67bddf4c61f462e743f625d}
+
+\item 
+\hypertarget{class_v_r_builder_app_acbf1bb61528ecd10e3effe088ba8f58e}{
+void {\bfseries buttonInput} (unsigned int button, bool pressed)}
+\label{class_v_r_builder_app_acbf1bb61528ecd10e3effe088ba8f58e}
+
+\item 
+\hypertarget{class_v_r_builder_app_a955bed81a32f3c4f5bca2103cb3b6061}{
+void {\bfseries setIsMaster} (bool m)}
+\label{class_v_r_builder_app_a955bed81a32f3c4f5bca2103cb3b6061}
+
+\item 
+\hypertarget{class_v_r_builder_app_af7c072246ba51ae157ec2d66dc96dffd}{
+bool {\bfseries isMaster} ()}
+\label{class_v_r_builder_app_af7c072246ba51ae157ec2d66dc96dffd}
+
+\item 
+\hypertarget{class_v_r_builder_app_af685370f62068646d2442c2bc4c0e049}{
+void {\bfseries drawStatus} ()}
+\label{class_v_r_builder_app_af685370f62068646d2442c2bc4c0e049}
+
+\item 
+\hypertarget{class_v_r_builder_app_a71bbc105d07a73d67316011084211b60}{
+void {\bfseries handleArguments} (int $\ast$argc, char $\ast$$\ast$argv)}
+\label{class_v_r_builder_app_a71bbc105d07a73d67316011084211b60}
+
+\item 
+\hypertarget{class_v_r_builder_app_aaabc841cdd3869c5bdf7bec9e11cb8a2}{
+void {\bfseries shutdown} ()}
+\label{class_v_r_builder_app_aaabc841cdd3869c5bdf7bec9e11cb8a2}
+
+\item 
+\hypertarget{class_v_r_builder_app_a1cb0bbd4e2fcd193c0cf54d8200e383a}{
+\hyperlink{class_input}{Input} $\ast$ {\bfseries pass\_\-keyboard\_\-input} ()}
+\label{class_v_r_builder_app_a1cb0bbd4e2fcd193c0cf54d8200e383a}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_r_builder_app_aaae6ee013256eb3faea430df6e4d74a0}{
+static \hyperlink{class_v_r_builder_app}{VRBuilderApp} \& {\bfseries instance} ()}
+\label{class_v_r_builder_app_aaae6ee013256eb3faea430df6e4d74a0}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_r_builder_app_a3509900bfeff561562680b4e4f6049db}{
+void {\bfseries updateFrameRate} (float dt)}
+\label{class_v_r_builder_app_a3509900bfeff561562680b4e4f6049db}
+
+\item 
+\hypertarget{class_v_r_builder_app_ae239d3f22072bb352450c1f581e3c509}{
+void {\bfseries deToggleButtons} ()}
+\label{class_v_r_builder_app_ae239d3f22072bb352450c1f581e3c509}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_r_builder_app_abd0115f9b56ec2254534081464382544}{
+osg::ref\_\-ptr$<$ osg::Group $>$ {\bfseries mRoot}}
+\label{class_v_r_builder_app_abd0115f9b56ec2254534081464382544}
+
+\item 
+\hypertarget{class_v_r_builder_app_a5e6a5af7b4125c5295b74d5782680e1d}{
+osg::ref\_\-ptr$<$ osg::MatrixTransform $>$ {\bfseries mNavigation}}
+\label{class_v_r_builder_app_a5e6a5af7b4125c5295b74d5782680e1d}
+
+\item 
+\hypertarget{class_v_r_builder_app_a0923b127900ca055371269d2bd711fd9}{
+osg::ref\_\-ptr$<$ osg::Group $>$ {\bfseries mModelGroup}}
+\label{class_v_r_builder_app_a0923b127900ca055371269d2bd711fd9}
+
+\item 
+\hypertarget{class_v_r_builder_app_a768effa6fe58ab060f8fd33d3d946ec0}{
+osg::Matrixf {\bfseries mWandMatrix}}
+\label{class_v_r_builder_app_a768effa6fe58ab060f8fd33d3d946ec0}
+
+\item 
+\hypertarget{class_v_r_builder_app_af8e87e8319e2fdcff8ae936855ea0fa8}{
+osg::Matrixf {\bfseries mHeadMatrix}}
+\label{class_v_r_builder_app_af8e87e8319e2fdcff8ae936855ea0fa8}
+
+\item 
+\hypertarget{class_v_r_builder_app_afb81e17988802983720979841a5d44c2}{
+osg::ref\_\-ptr$<$ osg::LightSource $>$ {\bfseries mLightSource}}
+\label{class_v_r_builder_app_afb81e17988802983720979841a5d44c2}
+
+\item 
+\hypertarget{class_v_r_builder_app_a56e73a52b58e36b544c4bbb4ab242f2f}{
+int {\bfseries mButtons} \mbox{[}NUMBUTTONS\mbox{]}}
+\label{class_v_r_builder_app_a56e73a52b58e36b544c4bbb4ab242f2f}
+
+\item 
+\hypertarget{class_v_r_builder_app_a319da0184f5cecb1b178a076b883bf59}{
+osg::MatrixTransform $\ast$ {\bfseries mWandXForm}}
+\label{class_v_r_builder_app_a319da0184f5cecb1b178a076b883bf59}
+
+\item 
+\hypertarget{class_v_r_builder_app_abf6666f32f67ff4b6606948355590fcb}{
+\hyperlink{class_scene_manager}{SceneManager} $\ast$ {\bfseries \_\-scenemanager}}
+\label{class_v_r_builder_app_abf6666f32f67ff4b6606948355590fcb}
+
+\item 
+\hypertarget{class_v_r_builder_app_a2e43e7eebb5aa2659dd86f55a25e1e31}{
+float {\bfseries mTargetTime}}
+\label{class_v_r_builder_app_a2e43e7eebb5aa2659dd86f55a25e1e31}
+
+\item 
+\hypertarget{class_v_r_builder_app_a0b1a36989bcf1a376e7c84a67240ec85}{
+float {\bfseries mTotalTime}}
+\label{class_v_r_builder_app_a0b1a36989bcf1a376e7c84a67240ec85}
+
+\item 
+\hypertarget{class_v_r_builder_app_afe9a0850c147d49a6dd9eaef407a5259}{
+float {\bfseries mTimeStep}}
+\label{class_v_r_builder_app_afe9a0850c147d49a6dd9eaef407a5259}
+
+\item 
+\hypertarget{class_v_r_builder_app_a33381110ddc99c17935900f216a60451}{
+float {\bfseries mAvgFrameRate}}
+\label{class_v_r_builder_app_a33381110ddc99c17935900f216a60451}
+
+\item 
+\hypertarget{class_v_r_builder_app_a9ca4a08d097d717d540bc044700a1bca}{
+bool {\bfseries mIsMaster}}
+\label{class_v_r_builder_app_a9ca4a08d097d717d540bc044700a1bca}
+
+\item 
+\hyperlink{class_interaction_manager}{InteractionManager} $\ast$ \hyperlink{class_v_r_builder_app_a3ab03c777303af6cb7f163ec861a10c6}{interaction\_\-manager}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_r_builder_app_ac9d45f8ac228a2215944307571a165af}{
+static const int {\bfseries NUMBUTTONS} = 6}
+\label{class_v_r_builder_app_ac9d45f8ac228a2215944307571a165af}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class description here. 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_v_r_builder_app_a3ab03c777303af6cb7f163ec861a10c6}{
+\index{VRBuilderApp@{VRBuilderApp}!interaction\_\-manager@{interaction\_\-manager}}
+\index{interaction\_\-manager@{interaction\_\-manager}!VRBuilderApp@{VRBuilderApp}}
+\subsubsection[{interaction\_\-manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf InteractionManager}$\ast$ {\bf VRBuilderApp::interaction\_\-manager}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_v_r_builder_app_a3ab03c777303af6cb7f163ec861a10c6}
+TODO: Change when we add the \hyperlink{class_app_manager}{AppManager}. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/VRBuilderApp.h\end{DoxyCompactItemize}

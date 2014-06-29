@@ -1,0 +1,609 @@
+\hypertarget{class_ti_xml_node}{
+\section{TiXmlNode Class Reference}
+\label{class_ti_xml_node}\index{TiXmlNode@{TiXmlNode}}
+}
+
+
+{\ttfamily \#include $<$tinyxml.h$>$}Inheritance diagram for TiXmlNode::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.41379cm]{class_ti_xml_node}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_ti_xml_node_a836eded4920ab9e9ef28496f48cd95a2}{NodeType} \{ \par
+{\bfseries DOCUMENT}, 
+{\bfseries ELEMENT}, 
+{\bfseries COMMENT}, 
+{\bfseries UNKNOWN}, 
+\par
+{\bfseries TEXT}, 
+{\bfseries DECLARATION}, 
+{\bfseries TYPECOUNT}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_ti_xml_node_a77943eb90d12c2892b1337a9f5918b41}{Value} () const 
+\item 
+const std::string \& \hyperlink{class_ti_xml_node_a6d9e505619d39bf50bfd9609c9169ea5}{ValueStr} () const 
+\item 
+\hypertarget{class_ti_xml_node_a83ece13d2ea66dac66e0b21332229239}{
+const TIXML\_\-STRING \& {\bfseries ValueTStr} () const }
+\label{class_ti_xml_node_a83ece13d2ea66dac66e0b21332229239}
+
+\item 
+void \hyperlink{class_ti_xml_node_a2a38329ca5d3f28f98ce932b8299ae90}{SetValue} (const char $\ast$\_\-value)
+\item 
+\hypertarget{class_ti_xml_node_a2598d5f448042c1abbeae4503dd45ff2}{
+void \hyperlink{class_ti_xml_node_a2598d5f448042c1abbeae4503dd45ff2}{SetValue} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a2598d5f448042c1abbeae4503dd45ff2}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a708e7f953df61d4d2d12f73171550a4b}{
+void \hyperlink{class_ti_xml_node_a708e7f953df61d4d2d12f73171550a4b}{Clear} ()}
+\label{class_ti_xml_node_a708e7f953df61d4d2d12f73171550a4b}
+
+\begin{DoxyCompactList}\small\item\em Delete all the children of this node. Does not affect 'this'. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_ab643043132ffd794f8602685d34a982e}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_ab643043132ffd794f8602685d34a982e}{Parent} ()}
+\label{class_ti_xml_node_ab643043132ffd794f8602685d34a982e}
+
+\begin{DoxyCompactList}\small\item\em One step up the DOM. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a78878709e53066f06eb4fcbcdd3a5260}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries Parent} () const }
+\label{class_ti_xml_node_a78878709e53066f06eb4fcbcdd3a5260}
+
+\item 
+\hypertarget{class_ti_xml_node_a44c8eee26bbe2d1b2762038df9dde2f0}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a44c8eee26bbe2d1b2762038df9dde2f0}{FirstChild} () const }
+\label{class_ti_xml_node_a44c8eee26bbe2d1b2762038df9dde2f0}
+
+\begin{DoxyCompactList}\small\item\em The first child of this node. Will be null if there are no children. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a5e97d69b7c0ebd27fb7286be56559b77}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries FirstChild} ()}
+\label{class_ti_xml_node_a5e97d69b7c0ebd27fb7286be56559b77}
+
+\item 
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a1f05828d023150706eeb16d6fb3f6355}{FirstChild} (const char $\ast$value) const 
+\item 
+\hypertarget{class_ti_xml_node_abc8bf32be6419ec453a731868de19554}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_abc8bf32be6419ec453a731868de19554}{FirstChild} (const char $\ast$\_\-value)}
+\label{class_ti_xml_node_abc8bf32be6419ec453a731868de19554}
+
+\begin{DoxyCompactList}\small\item\em The first child of this node with the matching 'value'. Will be null if none found. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a6d671107e00cca1d28cb2d7f3a87a21e}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries LastChild} () const }
+\label{class_ti_xml_node_a6d671107e00cca1d28cb2d7f3a87a21e}
+
+\item 
+\hypertarget{class_ti_xml_node_a6432d2b2495f6caf9cb4278df706a031}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a6432d2b2495f6caf9cb4278df706a031}{LastChild} ()}
+\label{class_ti_xml_node_a6432d2b2495f6caf9cb4278df706a031}
+
+\begin{DoxyCompactList}\small\item\em The last child of this node. Will be null if there are no children. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_ae9e2a400ef5156155df3eff16d88bf37}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries LastChild} (const char $\ast$value) const }
+\label{class_ti_xml_node_ae9e2a400ef5156155df3eff16d88bf37}
+
+\item 
+\hypertarget{class_ti_xml_node_abad5bf1059c48127b958711ef89e8e5d}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_abad5bf1059c48127b958711ef89e8e5d}{LastChild} (const char $\ast$\_\-value)}
+\label{class_ti_xml_node_abad5bf1059c48127b958711ef89e8e5d}
+
+\begin{DoxyCompactList}\small\item\em The last child of this node matching 'value'. Will be null if there are no children. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a07f6200a5956c723c5b52d70f29c46f6}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a07f6200a5956c723c5b52d70f29c46f6}{FirstChild} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a07f6200a5956c723c5b52d70f29c46f6}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a10d2669ccb5e29e02fcb0e4408685ef6}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a10d2669ccb5e29e02fcb0e4408685ef6}{FirstChild} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a10d2669ccb5e29e02fcb0e4408685ef6}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a256d0cdbfcfeccae83f3a1c9747a8b63}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a256d0cdbfcfeccae83f3a1c9747a8b63}{LastChild} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a256d0cdbfcfeccae83f3a1c9747a8b63}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a69772c9202f70553f940b15c06b07be3}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a69772c9202f70553f940b15c06b07be3}{LastChild} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a69772c9202f70553f940b15c06b07be3}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a8621196ba3705fa226bef4a761cc51b6}{IterateChildren} (const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous) const 
+\item 
+\hypertarget{class_ti_xml_node_a2358e747118fdbf0e467b1e4f7d03de1}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries IterateChildren} (const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous)}
+\label{class_ti_xml_node_a2358e747118fdbf0e467b1e4f7d03de1}
+
+\item 
+\hypertarget{class_ti_xml_node_adfaef35a076b9343adc1420757376c39}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_adfaef35a076b9343adc1420757376c39}{IterateChildren} (const char $\ast$value, const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous) const }
+\label{class_ti_xml_node_adfaef35a076b9343adc1420757376c39}
+
+\begin{DoxyCompactList}\small\item\em This flavor of IterateChildren searches for children with a particular 'value'. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a67ba8275e533e6f76340236c42ea0aea}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries IterateChildren} (const char $\ast$\_\-value, const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous)}
+\label{class_ti_xml_node_a67ba8275e533e6f76340236c42ea0aea}
+
+\item 
+\hypertarget{class_ti_xml_node_a1cbaaf8e82c09ad763d52616d75724df}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a1cbaaf8e82c09ad763d52616d75724df}{IterateChildren} (const std::string \&\_\-value, const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous) const }
+\label{class_ti_xml_node_a1cbaaf8e82c09ad763d52616d75724df}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a16e9ad53e2f5445b14bf325c90aa862c}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a16e9ad53e2f5445b14bf325c90aa862c}{IterateChildren} (const std::string \&\_\-value, const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$previous)}
+\label{class_ti_xml_node_a16e9ad53e2f5445b14bf325c90aa862c}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_ad7d4630e1a2a916edda16be22448a8ba}{InsertEndChild} (const \hyperlink{class_ti_xml_node}{TiXmlNode} \&addThis)
+\item 
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a5d29442ae46de6d0168429156197bfc6}{LinkEndChild} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$addThis)
+\item 
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a0c146fa2fff0157b681594102f48cbc7}{InsertBeforeChild} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$beforeThis, const \hyperlink{class_ti_xml_node}{TiXmlNode} \&addThis)
+\item 
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_ad9b75e54ec19301c8b4d5ff583d0b3d5}{InsertAfterChild} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$afterThis, const \hyperlink{class_ti_xml_node}{TiXmlNode} \&addThis)
+\item 
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a0c49e739a17b9938050c22cd89617fbd}{ReplaceChild} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$replaceThis, const \hyperlink{class_ti_xml_node}{TiXmlNode} \&withThis)
+\item 
+\hypertarget{class_ti_xml_node_ae19d8510efc90596552f4feeac9a8fbf}{
+bool \hyperlink{class_ti_xml_node_ae19d8510efc90596552f4feeac9a8fbf}{RemoveChild} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$removeThis)}
+\label{class_ti_xml_node_ae19d8510efc90596552f4feeac9a8fbf}
+
+\begin{DoxyCompactList}\small\item\em Delete a child of this node. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_ac2cd892768726270e511b2ab32de4d10}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_ac2cd892768726270e511b2ab32de4d10}{PreviousSibling} () const }
+\label{class_ti_xml_node_ac2cd892768726270e511b2ab32de4d10}
+
+\begin{DoxyCompactList}\small\item\em Navigate to a sibling node. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_af8c0642ad6ecc03f62953e68896ed1cc}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries PreviousSibling} ()}
+\label{class_ti_xml_node_af8c0642ad6ecc03f62953e68896ed1cc}
+
+\item 
+\hypertarget{class_ti_xml_node_a5bdd49327eec1e609b7d22af706b8316}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a5bdd49327eec1e609b7d22af706b8316}{PreviousSibling} (const char $\ast$) const }
+\label{class_ti_xml_node_a5bdd49327eec1e609b7d22af706b8316}
+
+\begin{DoxyCompactList}\small\item\em Navigate to a sibling node. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a6c977049207177ef21b51972315c2053}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries PreviousSibling} (const char $\ast$\_\-prev)}
+\label{class_ti_xml_node_a6c977049207177ef21b51972315c2053}
+
+\item 
+\hypertarget{class_ti_xml_node_a658276f57d35d5d4256d1dc1a2c398ab}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a658276f57d35d5d4256d1dc1a2c398ab}{PreviousSibling} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a658276f57d35d5d4256d1dc1a2c398ab}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_acc8a0434c7f401d4a3b6dee77c1a5912}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_acc8a0434c7f401d4a3b6dee77c1a5912}{PreviousSibling} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_acc8a0434c7f401d4a3b6dee77c1a5912}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a1b94d2f7fa7ab25a5a8e8d4340c449c9}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a1b94d2f7fa7ab25a5a8e8d4340c449c9}{NextSibling} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a1b94d2f7fa7ab25a5a8e8d4340c449c9}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a1757c1f4d01e8c9596ffdbd561c76aea}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a1757c1f4d01e8c9596ffdbd561c76aea}{NextSibling} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a1757c1f4d01e8c9596ffdbd561c76aea}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_af854baeba384f5fe9859f5aee03b548e}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_af854baeba384f5fe9859f5aee03b548e}{NextSibling} () const }
+\label{class_ti_xml_node_af854baeba384f5fe9859f5aee03b548e}
+
+\begin{DoxyCompactList}\small\item\em Navigate to a sibling node. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a4d05f7b1d7b470ac6887edd072d4892a}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries NextSibling} ()}
+\label{class_ti_xml_node_a4d05f7b1d7b470ac6887edd072d4892a}
+
+\item 
+\hypertarget{class_ti_xml_node_a2e61c0b89a77e36a0e8c60490003cb46}{
+const \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a2e61c0b89a77e36a0e8c60490003cb46}{NextSibling} (const char $\ast$) const }
+\label{class_ti_xml_node_a2e61c0b89a77e36a0e8c60490003cb46}
+
+\begin{DoxyCompactList}\small\item\em Navigate to a sibling node with the given 'value'. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a4080bc5cc8a5c139e7cf308669e850fc}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries NextSibling} (const char $\ast$\_\-next)}
+\label{class_ti_xml_node_a4080bc5cc8a5c139e7cf308669e850fc}
+
+\item 
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a73acf929d49d10bd0e5fb3d31b0372d1}{NextSiblingElement} () const 
+\item 
+\hypertarget{class_ti_xml_node_a1b211cb5034655a04358e0e2f6fc5010}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ {\bfseries NextSiblingElement} ()}
+\label{class_ti_xml_node_a1b211cb5034655a04358e0e2f6fc5010}
+
+\item 
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a071ba77fd7ab79402fa84b7e9b8607b3}{NextSiblingElement} (const char $\ast$) const 
+\item 
+\hypertarget{class_ti_xml_node_a6e1ac6b800e18049bc75e9f8e63a8e5f}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ {\bfseries NextSiblingElement} (const char $\ast$\_\-next)}
+\label{class_ti_xml_node_a6e1ac6b800e18049bc75e9f8e63a8e5f}
+
+\item 
+\hypertarget{class_ti_xml_node_a7572d0af9d1e696ee3f05d8bb5ebb463}{
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a7572d0af9d1e696ee3f05d8bb5ebb463}{NextSiblingElement} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a7572d0af9d1e696ee3f05d8bb5ebb463}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a506958e34406729a4e4c5326ea39d081}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a506958e34406729a4e4c5326ea39d081}{NextSiblingElement} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a506958e34406729a4e4c5326ea39d081}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_af4fb652f6bd79ae0d5ce7d0f7d3c0fba}{
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_af4fb652f6bd79ae0d5ce7d0f7d3c0fba}{FirstChildElement} () const }
+\label{class_ti_xml_node_af4fb652f6bd79ae0d5ce7d0f7d3c0fba}
+
+\begin{DoxyCompactList}\small\item\em Convenience function to get through elements. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_aa0fecff1f3866ab33a8a25506e95db1d}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ {\bfseries FirstChildElement} ()}
+\label{class_ti_xml_node_aa0fecff1f3866ab33a8a25506e95db1d}
+
+\item 
+\hypertarget{class_ti_xml_node_accda2c6b45c25bb5a6f9c3407a644e61}{
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_accda2c6b45c25bb5a6f9c3407a644e61}{FirstChildElement} (const char $\ast$\_\-value) const }
+\label{class_ti_xml_node_accda2c6b45c25bb5a6f9c3407a644e61}
+
+\begin{DoxyCompactList}\small\item\em Convenience function to get through elements. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a6936ae323675071808ac4840379e57f5}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ {\bfseries FirstChildElement} (const char $\ast$\_\-value)}
+\label{class_ti_xml_node_a6936ae323675071808ac4840379e57f5}
+
+\item 
+\hypertarget{class_ti_xml_node_a327ad4bbd90073c5dfc931b07314f5f7}{
+const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a327ad4bbd90073c5dfc931b07314f5f7}{FirstChildElement} (const std::string \&\_\-value) const }
+\label{class_ti_xml_node_a327ad4bbd90073c5dfc931b07314f5f7}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a7f1d7291880534c1e5cdeb392d8c1f45}{
+\hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a7f1d7291880534c1e5cdeb392d8c1f45}{FirstChildElement} (const std::string \&\_\-value)}
+\label{class_ti_xml_node_a7f1d7291880534c1e5cdeb392d8c1f45}
+
+\begin{DoxyCompactList}\small\item\em STL std::string form. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_ti_xml_node_a57b99d5c97d67a42b9752f5210a1ba5e}{Type} () const 
+\item 
+const \hyperlink{class_ti_xml_document}{TiXmlDocument} $\ast$ \hyperlink{class_ti_xml_node_a80e397fa973cf5323e33b07154b024f3}{GetDocument} () const 
+\item 
+\hypertarget{class_ti_xml_node_a7b2372c0e7adfb32f5b6902fe49a39b2}{
+\hyperlink{class_ti_xml_document}{TiXmlDocument} $\ast$ {\bfseries GetDocument} ()}
+\label{class_ti_xml_node_a7b2372c0e7adfb32f5b6902fe49a39b2}
+
+\item 
+\hypertarget{class_ti_xml_node_aeed21ad30630ef6e7faf096127edc9f3}{
+bool \hyperlink{class_ti_xml_node_aeed21ad30630ef6e7faf096127edc9f3}{NoChildren} () const }
+\label{class_ti_xml_node_aeed21ad30630ef6e7faf096127edc9f3}
+
+\begin{DoxyCompactList}\small\item\em Returns true if this node has no children. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a8a4cda4b15c29f64cff419309aebed08}{
+virtual const \hyperlink{class_ti_xml_document}{TiXmlDocument} $\ast$ \hyperlink{class_ti_xml_node_a8a4cda4b15c29f64cff419309aebed08}{ToDocument} () const }
+\label{class_ti_xml_node_a8a4cda4b15c29f64cff419309aebed08}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a72abed96dc9667ab9e0a2a275301bb1c}{
+virtual const \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_a72abed96dc9667ab9e0a2a275301bb1c}{ToElement} () const }
+\label{class_ti_xml_node_a72abed96dc9667ab9e0a2a275301bb1c}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_aa0a5086f9eaee910bbfdc7f975e26574}{
+virtual const \hyperlink{class_ti_xml_comment}{TiXmlComment} $\ast$ \hyperlink{class_ti_xml_node_aa0a5086f9eaee910bbfdc7f975e26574}{ToComment} () const }
+\label{class_ti_xml_node_aa0a5086f9eaee910bbfdc7f975e26574}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_afd7205cf31d7a376929f8a36930627a2}{
+virtual const \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} $\ast$ \hyperlink{class_ti_xml_node_afd7205cf31d7a376929f8a36930627a2}{ToUnknown} () const }
+\label{class_ti_xml_node_afd7205cf31d7a376929f8a36930627a2}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a95a46a52c525992d6b4ee08beb14cd69}{
+virtual const \hyperlink{class_ti_xml_text}{TiXmlText} $\ast$ \hyperlink{class_ti_xml_node_a95a46a52c525992d6b4ee08beb14cd69}{ToText} () const }
+\label{class_ti_xml_node_a95a46a52c525992d6b4ee08beb14cd69}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a9f43e6984fc7d4afd6eb32714c6b7b72}{
+virtual const \hyperlink{class_ti_xml_declaration}{TiXmlDeclaration} $\ast$ \hyperlink{class_ti_xml_node_a9f43e6984fc7d4afd6eb32714c6b7b72}{ToDeclaration} () const }
+\label{class_ti_xml_node_a9f43e6984fc7d4afd6eb32714c6b7b72}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a6a4c8ac28ee7a745d059db6691e03bae}{
+virtual \hyperlink{class_ti_xml_document}{TiXmlDocument} $\ast$ \hyperlink{class_ti_xml_node_a6a4c8ac28ee7a745d059db6691e03bae}{ToDocument} ()}
+\label{class_ti_xml_node_a6a4c8ac28ee7a745d059db6691e03bae}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_aa65d000223187d22a4dcebd7479e9ebc}{
+virtual \hyperlink{class_ti_xml_element}{TiXmlElement} $\ast$ \hyperlink{class_ti_xml_node_aa65d000223187d22a4dcebd7479e9ebc}{ToElement} ()}
+\label{class_ti_xml_node_aa65d000223187d22a4dcebd7479e9ebc}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a383e06a0787f7063953934867990f849}{
+virtual \hyperlink{class_ti_xml_comment}{TiXmlComment} $\ast$ \hyperlink{class_ti_xml_node_a383e06a0787f7063953934867990f849}{ToComment} ()}
+\label{class_ti_xml_node_a383e06a0787f7063953934867990f849}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a06de5af852668c7e4af0d09c205f0b0d}{
+virtual \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} $\ast$ \hyperlink{class_ti_xml_node_a06de5af852668c7e4af0d09c205f0b0d}{ToUnknown} ()}
+\label{class_ti_xml_node_a06de5af852668c7e4af0d09c205f0b0d}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a3ddfbcac78fbea041fad57e5c6d60a03}{
+virtual \hyperlink{class_ti_xml_text}{TiXmlText} $\ast$ \hyperlink{class_ti_xml_node_a3ddfbcac78fbea041fad57e5c6d60a03}{ToText} ()}
+\label{class_ti_xml_node_a3ddfbcac78fbea041fad57e5c6d60a03}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_node_a4027136ca820ff4a636b607231b6a6df}{
+virtual \hyperlink{class_ti_xml_declaration}{TiXmlDeclaration} $\ast$ \hyperlink{class_ti_xml_node_a4027136ca820ff4a636b607231b6a6df}{ToDeclaration} ()}
+\label{class_ti_xml_node_a4027136ca820ff4a636b607231b6a6df}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null if not of the requested type. \item\end{DoxyCompactList}\item 
+virtual \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_node_a4508cc3a2d7a98e96a54cc09c37a78a4}{Clone} () const =0
+\item 
+virtual bool \hyperlink{class_ti_xml_node_acc0f88b7462c6cb73809d410a4f5bb86}{Accept} (\hyperlink{class_ti_xml_visitor}{TiXmlVisitor} $\ast$visitor) const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_node_a3f46721695868667113c7487ff123f20}{
+{\bfseries TiXmlNode} (\hyperlink{class_ti_xml_node_a836eded4920ab9e9ef28496f48cd95a2}{NodeType} \_\-type)}
+\label{class_ti_xml_node_a3f46721695868667113c7487ff123f20}
+
+\item 
+\hypertarget{class_ti_xml_node_ab6056978923ad8350fb5164af32d8038}{
+void {\bfseries CopyTo} (\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$target) const }
+\label{class_ti_xml_node_ab6056978923ad8350fb5164af32d8038}
+
+\item 
+\hypertarget{class_ti_xml_node_ab4b4af1a6b486dcbc0e327cf291270af}{
+virtual void {\bfseries StreamIn} (std::istream $\ast$in, TIXML\_\-STRING $\ast$tag)=0}
+\label{class_ti_xml_node_ab4b4af1a6b486dcbc0e327cf291270af}
+
+\item 
+\hypertarget{class_ti_xml_node_a0c9ec7050419887bf84dcad64f7537bd}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries Identify} (const char $\ast$start, TiXmlEncoding encoding)}
+\label{class_ti_xml_node_a0c9ec7050419887bf84dcad64f7537bd}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_node_a662c4de61244e4fa5bd4e2d8c63143a5}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries parent}}
+\label{class_ti_xml_node_a662c4de61244e4fa5bd4e2d8c63143a5}
+
+\item 
+\hypertarget{class_ti_xml_node_a2619c6379181c16ba95ae6922e2ca839}{
+\hyperlink{class_ti_xml_node_a836eded4920ab9e9ef28496f48cd95a2}{NodeType} {\bfseries type}}
+\label{class_ti_xml_node_a2619c6379181c16ba95ae6922e2ca839}
+
+\item 
+\hypertarget{class_ti_xml_node_af749fb7f22010b80e8f904c32653d50e}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries firstChild}}
+\label{class_ti_xml_node_af749fb7f22010b80e8f904c32653d50e}
+
+\item 
+\hypertarget{class_ti_xml_node_a5b30756d21b304580d22a841ec9d61f8}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries lastChild}}
+\label{class_ti_xml_node_a5b30756d21b304580d22a841ec9d61f8}
+
+\item 
+\hypertarget{class_ti_xml_node_aead528b3cedc33c16a6c539872c7cc8b}{
+TIXML\_\-STRING {\bfseries value}}
+\label{class_ti_xml_node_aead528b3cedc33c16a6c539872c7cc8b}
+
+\item 
+\hypertarget{class_ti_xml_node_a9c5370ea2cbfd9f0e0f7b30a57fd68f5}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries prev}}
+\label{class_ti_xml_node_a9c5370ea2cbfd9f0e0f7b30a57fd68f5}
+
+\item 
+\hypertarget{class_ti_xml_node_a2f329cc993d2d34df76e17dcbb776b45}{
+\hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ {\bfseries next}}
+\label{class_ti_xml_node_a2f329cc993d2d34df76e17dcbb776b45}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_node_a173617f6dfe902cf484ce5552b950475}{
+class \hyperlink{class_ti_xml_node_a173617f6dfe902cf484ce5552b950475}{TiXmlDocument}}
+\label{class_ti_xml_node_a173617f6dfe902cf484ce5552b950475}
+
+\item 
+\hypertarget{class_ti_xml_node_ab6592e32cb9132be517cc12a70564c4b}{
+class \hyperlink{class_ti_xml_node_ab6592e32cb9132be517cc12a70564c4b}{TiXmlElement}}
+\label{class_ti_xml_node_ab6592e32cb9132be517cc12a70564c4b}
+
+\item 
+std::istream \& \hyperlink{class_ti_xml_node_ab57bd426563c926844f65a78412e18b9}{operator$>$$>$} (std::istream \&in, \hyperlink{class_ti_xml_node}{TiXmlNode} \&base)
+\item 
+std::ostream \& \hyperlink{class_ti_xml_node_a86cd49cfb17a844c0010b3136ac966c7}{operator$<$$<$} (std::ostream \&out, const \hyperlink{class_ti_xml_node}{TiXmlNode} \&base)
+\item 
+\hypertarget{class_ti_xml_node_a52ef17e7080df2490cf87bde380685ab}{
+std::string \& \hyperlink{class_ti_xml_node_a52ef17e7080df2490cf87bde380685ab}{operator$<$$<$} (std::string \&out, const \hyperlink{class_ti_xml_node}{TiXmlNode} \&base)}
+\label{class_ti_xml_node_a52ef17e7080df2490cf87bde380685ab}
+
+\begin{DoxyCompactList}\small\item\em Appends the XML node or attribute to a std::string. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The parent class for everything in the Document Object Model. (Except for attributes). Nodes have siblings, a parent, and children. A node can be in a document, or stand on its own. The type of a \hyperlink{class_ti_xml_node}{TiXmlNode} can be queried, and it can be cast to its more defined type. 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_ti_xml_node_a836eded4920ab9e9ef28496f48cd95a2}{
+\index{TiXmlNode@{TiXmlNode}!NodeType@{NodeType}}
+\index{NodeType@{NodeType}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{NodeType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf TiXmlNode::NodeType}}}
+\label{class_ti_xml_node_a836eded4920ab9e9ef28496f48cd95a2}
+The types of XML nodes supported by TinyXml. (All the unsupported types are picked up by UNKNOWN.) 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ti_xml_node_acc0f88b7462c6cb73809d410a4f5bb86}{
+\index{TiXmlNode@{TiXmlNode}!Accept@{Accept}}
+\index{Accept@{Accept}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{Accept}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool TiXmlNode::Accept ({\bf TiXmlVisitor} $\ast$ {\em visitor}) const\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_ti_xml_node_acc0f88b7462c6cb73809d410a4f5bb86}
+Accept a hierchical visit the nodes in the TinyXML DOM. Every node in the XML tree will be conditionally visited and the host will be called back via the \hyperlink{class_ti_xml_visitor}{TiXmlVisitor} interface.
+
+This is essentially a SAX interface for TinyXML. (Note however it doesn't re-\/parse the XML for the callbacks, so the performance of TinyXML is unchanged by using this interface versus any other.)
+
+The interface has been based on ideas from:
+
+
+\begin{DoxyItemize}
+\item \href{http://www.saxproject.org/}{\tt http://www.saxproject.org/}
+\item \href{http://c2.com/cgi/wiki?HierarchicalVisitorPattern}{\tt http://c2.com/cgi/wiki?HierarchicalVisitorPattern}
+\end{DoxyItemize}
+
+Which are both good references for \char`\"{}visiting\char`\"{}.
+
+An example of using \hyperlink{class_ti_xml_node_acc0f88b7462c6cb73809d410a4f5bb86}{Accept()}: \begin{DoxyVerb}
+		TiXmlPrinter printer;
+		tinyxmlDoc.Accept( &printer );
+		const char* xmlcstr = printer.CStr();
+		\end{DoxyVerb}
+ 
+
+Implemented in \hyperlink{class_ti_xml_element_a71a81b2afb0d42be1543d1c404dee6f5}{TiXmlElement}, \hyperlink{class_ti_xml_comment_af3ac1b99fbbe9ea4fb6e14146156e43e}{TiXmlComment}, \hyperlink{class_ti_xml_text_a8483d4415ce9de6c4fa8f63d067d5de6}{TiXmlText}, \hyperlink{class_ti_xml_declaration_a22315a535983b86535cdba3458669e3e}{TiXmlDeclaration}, \hyperlink{class_ti_xml_unknown_ad7122e5135581b3c832a1a3217760a93}{TiXmlUnknown}, and \hyperlink{class_ti_xml_document_aa545aae325d9752ad64120bc4ecf939a}{TiXmlDocument}.\hypertarget{class_ti_xml_node_a4508cc3a2d7a98e96a54cc09c37a78a4}{
+\index{TiXmlNode@{TiXmlNode}!Clone@{Clone}}
+\index{Clone@{Clone}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{Clone}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf TiXmlNode}$\ast$ TiXmlNode::Clone () const\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_ti_xml_node_a4508cc3a2d7a98e96a54cc09c37a78a4}
+Create an exact duplicate of this node and return it. The memory must be deleted by the caller. 
+
+Implemented in \hyperlink{class_ti_xml_element_aa464535ea1994db337cb6a8ce4b588b5}{TiXmlElement}, \hyperlink{class_ti_xml_comment_a0d6662bdc52488b9e12b3c7a0453d028}{TiXmlComment}, \hyperlink{class_ti_xml_text_a0c411e93a27537369479d034cc82da3b}{TiXmlText}, \hyperlink{class_ti_xml_declaration_a7cf459186040141cda7a180a6585ce2e}{TiXmlDeclaration}, \hyperlink{class_ti_xml_unknown_a0960bb7428b3f341da46244229604d73}{TiXmlUnknown}, and \hyperlink{class_ti_xml_document_a4968661cab4a1f44a23329c6f8db1907}{TiXmlDocument}.\hypertarget{class_ti_xml_node_a1f05828d023150706eeb16d6fb3f6355}{
+\index{TiXmlNode@{TiXmlNode}!FirstChild@{FirstChild}}
+\index{FirstChild@{FirstChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{FirstChild}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf TiXmlNode}$\ast$ TiXmlNode::FirstChild (const char $\ast$ {\em value}) const}}
+\label{class_ti_xml_node_a1f05828d023150706eeb16d6fb3f6355}
+The first child of this node with the matching 'value'. Will be null if none found. \hypertarget{class_ti_xml_node_a80e397fa973cf5323e33b07154b024f3}{
+\index{TiXmlNode@{TiXmlNode}!GetDocument@{GetDocument}}
+\index{GetDocument@{GetDocument}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{GetDocument}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf TiXmlDocument}$\ast$ TiXmlNode::GetDocument () const}}
+\label{class_ti_xml_node_a80e397fa973cf5323e33b07154b024f3}
+Return a pointer to the Document this node lives in. Returns null if not in a document. \hypertarget{class_ti_xml_node_ad9b75e54ec19301c8b4d5ff583d0b3d5}{
+\index{TiXmlNode@{TiXmlNode}!InsertAfterChild@{InsertAfterChild}}
+\index{InsertAfterChild@{InsertAfterChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{InsertAfterChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TiXmlNode}$\ast$ TiXmlNode::InsertAfterChild ({\bf TiXmlNode} $\ast$ {\em afterThis}, \/  const {\bf TiXmlNode} \& {\em addThis})}}
+\label{class_ti_xml_node_ad9b75e54ec19301c8b4d5ff583d0b3d5}
+Add a new node related to this. Adds a child after the specified child. Returns a pointer to the new object or NULL if an error occured. \hypertarget{class_ti_xml_node_a0c146fa2fff0157b681594102f48cbc7}{
+\index{TiXmlNode@{TiXmlNode}!InsertBeforeChild@{InsertBeforeChild}}
+\index{InsertBeforeChild@{InsertBeforeChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{InsertBeforeChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TiXmlNode}$\ast$ TiXmlNode::InsertBeforeChild ({\bf TiXmlNode} $\ast$ {\em beforeThis}, \/  const {\bf TiXmlNode} \& {\em addThis})}}
+\label{class_ti_xml_node_a0c146fa2fff0157b681594102f48cbc7}
+Add a new node related to this. Adds a child before the specified child. Returns a pointer to the new object or NULL if an error occured. \hypertarget{class_ti_xml_node_ad7d4630e1a2a916edda16be22448a8ba}{
+\index{TiXmlNode@{TiXmlNode}!InsertEndChild@{InsertEndChild}}
+\index{InsertEndChild@{InsertEndChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{InsertEndChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TiXmlNode}$\ast$ TiXmlNode::InsertEndChild (const {\bf TiXmlNode} \& {\em addThis})}}
+\label{class_ti_xml_node_ad7d4630e1a2a916edda16be22448a8ba}
+Add a new node related to this. Adds a child past the LastChild. Returns a pointer to the new object or NULL if an error occured. \hypertarget{class_ti_xml_node_a8621196ba3705fa226bef4a761cc51b6}{
+\index{TiXmlNode@{TiXmlNode}!IterateChildren@{IterateChildren}}
+\index{IterateChildren@{IterateChildren}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{IterateChildren}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf TiXmlNode}$\ast$ TiXmlNode::IterateChildren (const {\bf TiXmlNode} $\ast$ {\em previous}) const}}
+\label{class_ti_xml_node_a8621196ba3705fa226bef4a761cc51b6}
+An alternate way to walk the children of a node. One way to iterate over nodes is: \begin{DoxyVerb}
+			for( child = parent->FirstChild(); child; child = child->NextSibling() )
+		\end{DoxyVerb}
+
+
+IterateChildren does the same thing with the syntax: \begin{DoxyVerb}
+			child = 0;
+			while( child = parent->IterateChildren( child ) )
+		\end{DoxyVerb}
+
+
+IterateChildren takes the previous child as input and finds the next one. If the previous child is null, it returns the first. IterateChildren will return null when done. \hypertarget{class_ti_xml_node_a5d29442ae46de6d0168429156197bfc6}{
+\index{TiXmlNode@{TiXmlNode}!LinkEndChild@{LinkEndChild}}
+\index{LinkEndChild@{LinkEndChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{LinkEndChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TiXmlNode}$\ast$ TiXmlNode::LinkEndChild ({\bf TiXmlNode} $\ast$ {\em addThis})}}
+\label{class_ti_xml_node_a5d29442ae46de6d0168429156197bfc6}
+Add a new node related to this. Adds a child past the LastChild.
+
+NOTE: the node to be added is passed by pointer, and will be henceforth owned (and deleted) by tinyXml. This method is efficient and avoids an extra copy, but should be used with care as it uses a different memory model than the other insert functions.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_ti_xml_node_ad7d4630e1a2a916edda16be22448a8ba}{InsertEndChild} 
+\end{DoxySeeAlso}
+\hypertarget{class_ti_xml_node_a071ba77fd7ab79402fa84b7e9b8607b3}{
+\index{TiXmlNode@{TiXmlNode}!NextSiblingElement@{NextSiblingElement}}
+\index{NextSiblingElement@{NextSiblingElement}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{NextSiblingElement}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf TiXmlElement}$\ast$ TiXmlNode::NextSiblingElement (const char $\ast$) const}}
+\label{class_ti_xml_node_a071ba77fd7ab79402fa84b7e9b8607b3}
+Convenience function to get through elements. Calls NextSibling and ToElement. Will skip all non-\/Element nodes. Returns 0 if there is not another element. \hypertarget{class_ti_xml_node_a73acf929d49d10bd0e5fb3d31b0372d1}{
+\index{TiXmlNode@{TiXmlNode}!NextSiblingElement@{NextSiblingElement}}
+\index{NextSiblingElement@{NextSiblingElement}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{NextSiblingElement}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf TiXmlElement}$\ast$ TiXmlNode::NextSiblingElement () const}}
+\label{class_ti_xml_node_a73acf929d49d10bd0e5fb3d31b0372d1}
+Convenience function to get through elements. Calls NextSibling and ToElement. Will skip all non-\/Element nodes. Returns 0 if there is not another element. \hypertarget{class_ti_xml_node_a0c49e739a17b9938050c22cd89617fbd}{
+\index{TiXmlNode@{TiXmlNode}!ReplaceChild@{ReplaceChild}}
+\index{ReplaceChild@{ReplaceChild}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{ReplaceChild}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TiXmlNode}$\ast$ TiXmlNode::ReplaceChild ({\bf TiXmlNode} $\ast$ {\em replaceThis}, \/  const {\bf TiXmlNode} \& {\em withThis})}}
+\label{class_ti_xml_node_a0c49e739a17b9938050c22cd89617fbd}
+Replace a child of this node. Returns a pointer to the new object or NULL if an error occured. \hypertarget{class_ti_xml_node_a2a38329ca5d3f28f98ce932b8299ae90}{
+\index{TiXmlNode@{TiXmlNode}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{SetValue}]{\setlength{\rightskip}{0pt plus 5cm}void TiXmlNode::SetValue (const char $\ast$ {\em \_\-value})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_ti_xml_node_a2a38329ca5d3f28f98ce932b8299ae90}
+Changes the value of the node. Defined as: \begin{DoxyVerb}
+		Document:	filename of the xml file
+		Element:	name of the element
+		Comment:	the comment text
+		Unknown:	the tag contents
+		Text:		the text string
+		\end{DoxyVerb}
+ \hypertarget{class_ti_xml_node_a57b99d5c97d67a42b9752f5210a1ba5e}{
+\index{TiXmlNode@{TiXmlNode}!Type@{Type}}
+\index{Type@{Type}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}int TiXmlNode::Type () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_ti_xml_node_a57b99d5c97d67a42b9752f5210a1ba5e}
+Query the type (as an enumerated value, above) of this node. The possible types are: DOCUMENT, ELEMENT, COMMENT, UNKNOWN, TEXT, and DECLARATION. \hypertarget{class_ti_xml_node_a77943eb90d12c2892b1337a9f5918b41}{
+\index{TiXmlNode@{TiXmlNode}!Value@{Value}}
+\index{Value@{Value}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{Value}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ TiXmlNode::Value () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_ti_xml_node_a77943eb90d12c2892b1337a9f5918b41}
+The meaning of 'value' changes for the specific type of \hyperlink{class_ti_xml_node}{TiXmlNode}. \begin{DoxyVerb}
+		Document:	filename of the xml file
+		Element:	name of the element
+		Comment:	the comment text
+		Unknown:	the tag contents
+		Text:		the text string
+		\end{DoxyVerb}
+
+
+The subclasses will wrap this function. \hypertarget{class_ti_xml_node_a6d9e505619d39bf50bfd9609c9169ea5}{
+\index{TiXmlNode@{TiXmlNode}!ValueStr@{ValueStr}}
+\index{ValueStr@{ValueStr}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{ValueStr}]{\setlength{\rightskip}{0pt plus 5cm}const std::string\& TiXmlNode::ValueStr () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_ti_xml_node_a6d9e505619d39bf50bfd9609c9169ea5}
+Return \hyperlink{class_ti_xml_node_a77943eb90d12c2892b1337a9f5918b41}{Value()} as a std::string. If you only use STL, this is more efficient than calling \hyperlink{class_ti_xml_node_a77943eb90d12c2892b1337a9f5918b41}{Value()}. Only available in STL mode. 
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_ti_xml_node_a86cd49cfb17a844c0010b3136ac966c7}{
+\index{TiXmlNode@{TiXmlNode}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std::ostream\& operator$<$$<$ (std::ostream \& {\em out}, \/  const {\bf TiXmlNode} \& {\em base})\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{class_ti_xml_node_a86cd49cfb17a844c0010b3136ac966c7}
+An output stream operator, for every class. Note that this outputs without any newlines or formatting, as opposed to \hyperlink{class_ti_xml_base_a0de56b3f2ef14c65091a3b916437b512}{Print()}, which includes tabs and new lines.
+
+The operator$<$$<$ and operator$>$$>$ are not completely symmetric. Writing a node to a stream is very well defined. You'll get a nice stream of output, without any extra whitespace or newlines.
+
+But reading is not as well defined. (As it always is.) If you create a \hyperlink{class_ti_xml_element}{TiXmlElement} (for example) and read that from an input stream, the text needs to define an element or junk will result. This is true of all input streams, but it's worth keeping in mind.
+
+A \hyperlink{class_ti_xml_document}{TiXmlDocument} will read nodes until it reads a root element, and all the children of that root element. \hypertarget{class_ti_xml_node_ab57bd426563c926844f65a78412e18b9}{
+\index{TiXmlNode@{TiXmlNode}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!TiXmlNode@{TiXmlNode}}
+\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}std::istream\& operator$>$$>$ (std::istream \& {\em in}, \/  {\bf TiXmlNode} \& {\em base})\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}
+\label{class_ti_xml_node_ab57bd426563c926844f65a78412e18b9}
+An input stream operator, for every class. Tolerant of newlines and formatting, but doesn't expect them. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/XML/tinyxml.h\end{DoxyCompactItemize}

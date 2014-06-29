@@ -1,0 +1,53 @@
+\hypertarget{class_grid}{
+\section{Grid Class Reference}
+\label{class_grid}\index{Grid@{Grid}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_abb5708a164dcc1154f1bcee5cdd21897}{Grid} (int GridSize=20, float GridBlockSize=1.0f)
+\item 
+osg::Vec3 \hyperlink{class_grid_a0a159364e4833a4e655017e77ed30ebf}{computeNearestGridPoint} (osg::Vec3 position)
+\item 
+void \hyperlink{class_grid_ae92442413550b0859309d434508dc506}{add} (osg::Vec3 absposition)
+\item 
+int \hyperlink{class_grid_ab8a99641727faeb81c162f06ac56a915}{cursor\_\-height} (osg::Vec3 absposition)
+\item 
+void \hyperlink{class_grid_a153095310e11b93d349d12f218b5e73e}{reset} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_grid_abb5708a164dcc1154f1bcee5cdd21897}{
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection[{Grid}]{\setlength{\rightskip}{0pt plus 5cm}Grid::Grid (int {\em GridSize} = {\ttfamily 20}, \/  float {\em GridBlockSize} = {\ttfamily 1.0f})}}
+\label{class_grid_abb5708a164dcc1154f1bcee5cdd21897}
+Constructor with default grid information 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_grid_ae92442413550b0859309d434508dc506}{
+\index{Grid@{Grid}!add@{add}}
+\index{add@{add}!Grid@{Grid}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Grid::add (osg::Vec3 {\em absposition})}}
+\label{class_grid_ae92442413550b0859309d434508dc506}
+Add to grid using absolute positions \hypertarget{class_grid_a0a159364e4833a4e655017e77ed30ebf}{
+\index{Grid@{Grid}!computeNearestGridPoint@{computeNearestGridPoint}}
+\index{computeNearestGridPoint@{computeNearestGridPoint}!Grid@{Grid}}
+\subsubsection[{computeNearestGridPoint}]{\setlength{\rightskip}{0pt plus 5cm}osg::Vec3 Grid::computeNearestGridPoint (osg::Vec3 {\em position})}}
+\label{class_grid_a0a159364e4833a4e655017e77ed30ebf}
+Finds the closest grid point and height for the given position. This just helps us stick to a grid instead of placing continuously. \hypertarget{class_grid_ab8a99641727faeb81c162f06ac56a915}{
+\index{Grid@{Grid}!cursor\_\-height@{cursor\_\-height}}
+\index{cursor\_\-height@{cursor\_\-height}!Grid@{Grid}}
+\subsubsection[{cursor\_\-height}]{\setlength{\rightskip}{0pt plus 5cm}int Grid::cursor\_\-height (osg::Vec3 {\em absposition})}}
+\label{class_grid_ab8a99641727faeb81c162f06ac56a915}
+Return the cursor height for proper visualization \hypertarget{class_grid_a153095310e11b93d349d12f218b5e73e}{
+\index{Grid@{Grid}!reset@{reset}}
+\index{reset@{reset}!Grid@{Grid}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Grid::reset ()}}
+\label{class_grid_a153095310e11b93d349d12f218b5e73e}
+Resets all retained heights back to 0. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/Grid.h\end{DoxyCompactItemize}

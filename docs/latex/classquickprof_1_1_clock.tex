@@ -1,0 +1,51 @@
+\hypertarget{classquickprof_1_1_clock}{
+\section{quickprof::Clock Class Reference}
+\label{classquickprof_1_1_clock}\index{quickprof::Clock@{quickprof::Clock}}
+}
+
+
+{\ttfamily \#include $<$quickprof.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classquickprof_1_1_clock_a22b4d38f4562efd7f624a70efdb1add4}{reset} ()
+\item 
+unsigned long int \hyperlink{classquickprof_1_1_clock_a0b751b8c42d2c86e82b3199b6039794a}{getTimeMilliseconds} ()
+\item 
+unsigned long int \hyperlink{classquickprof_1_1_clock_aa39085e044671d67653d5e1b444c5642}{getTimeMicroseconds} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A cross-\/platform clock class inspired by the Timer classes in Ogre (\href{http://www.ogre3d.org}{\tt http://www.ogre3d.org}). 
+
+\subsection{Member Function Documentation}
+\hypertarget{classquickprof_1_1_clock_aa39085e044671d67653d5e1b444c5642}{
+\index{quickprof::Clock@{quickprof::Clock}!getTimeMicroseconds@{getTimeMicroseconds}}
+\index{getTimeMicroseconds@{getTimeMicroseconds}!quickprof::Clock@{quickprof::Clock}}
+\subsubsection[{getTimeMicroseconds}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int quickprof::Clock::getTimeMicroseconds ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_clock_aa39085e044671d67653d5e1b444c5642}
+Returns the time in us since the last call to reset or since the \hyperlink{classquickprof_1_1_clock}{Clock} was created.
+
+\begin{DoxyReturn}{Returns}
+The requested time in microseconds. 
+\end{DoxyReturn}
+\hypertarget{classquickprof_1_1_clock_a0b751b8c42d2c86e82b3199b6039794a}{
+\index{quickprof::Clock@{quickprof::Clock}!getTimeMilliseconds@{getTimeMilliseconds}}
+\index{getTimeMilliseconds@{getTimeMilliseconds}!quickprof::Clock@{quickprof::Clock}}
+\subsubsection[{getTimeMilliseconds}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long int quickprof::Clock::getTimeMilliseconds ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_clock_a0b751b8c42d2c86e82b3199b6039794a}
+Returns the time in us since the last call to reset or since the \hyperlink{classquickprof_1_1_clock}{Clock} was created.
+
+\begin{DoxyReturn}{Returns}
+The requested time in milliseconds. 
+\end{DoxyReturn}
+\hypertarget{classquickprof_1_1_clock_a22b4d38f4562efd7f624a70efdb1add4}{
+\index{quickprof::Clock@{quickprof::Clock}!reset@{reset}}
+\index{reset@{reset}!quickprof::Clock@{quickprof::Clock}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void quickprof::Clock::reset ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_clock_a22b4d38f4562efd7f624a70efdb1add4}
+Resets the initial reference time. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/quickprof.h\end{DoxyCompactItemize}

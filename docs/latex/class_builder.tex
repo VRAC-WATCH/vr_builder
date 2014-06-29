@@ -1,0 +1,71 @@
+\hypertarget{class_builder}{
+\section{Builder Class Reference}
+\label{class_builder}\index{Builder@{Builder}}
+}
+
+
+{\ttfamily \#include $<$Builder.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_builder_ae10ac2d3acc2011587c48bc06ad33984}{init} ()
+\item 
+osg::Node $\ast$ \hyperlink{class_builder_acdb4f87505ee535c01b7df7a1ee2755b}{createBlock} (\hyperlink{class_add___block}{Add\_\-Block} block)
+\item 
+osg::Node $\ast$ \hyperlink{class_builder_a24f7e21014e2bb924abd4e2a519a1688}{createProjectile} ()
+\item 
+osg::Node $\ast$ \hyperlink{class_builder_a7c5d028d6996f58b2c45f948bfc6b5ab}{createFloor} (float width, float height, const osg::Vec3 \&center, int \_\-gridsize, float \_\-gridblocksize)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_builder}{Builder} \& \hyperlink{class_builder_a260f9354517188703f594305928e50a2}{instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_builder_af8e018e77879c6136e6dabbd5eab0634}{Builder} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_builder}{Builder} class is used to create each individual scenegraph node 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_builder_af8e018e77879c6136e6dabbd5eab0634}{
+\index{Builder@{Builder}!Builder@{Builder}}
+\index{Builder@{Builder}!Builder@{Builder}}
+\subsubsection[{Builder}]{\setlength{\rightskip}{0pt plus 5cm}Builder::Builder ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_builder_af8e018e77879c6136e6dabbd5eab0634}
+Constructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_builder_acdb4f87505ee535c01b7df7a1ee2755b}{
+\index{Builder@{Builder}!createBlock@{createBlock}}
+\index{createBlock@{createBlock}!Builder@{Builder}}
+\subsubsection[{createBlock}]{\setlength{\rightskip}{0pt plus 5cm}osg::Node$\ast$ Builder::createBlock ({\bf Add\_\-Block} {\em block})}}
+\label{class_builder_acdb4f87505ee535c01b7df7a1ee2755b}
+Creates the block with any additional properties \hypertarget{class_builder_a7c5d028d6996f58b2c45f948bfc6b5ab}{
+\index{Builder@{Builder}!createFloor@{createFloor}}
+\index{createFloor@{createFloor}!Builder@{Builder}}
+\subsubsection[{createFloor}]{\setlength{\rightskip}{0pt plus 5cm}osg::Node$\ast$ Builder::createFloor (float {\em width}, \/  float {\em height}, \/  const osg::Vec3 \& {\em center}, \/  int {\em \_\-gridsize}, \/  float {\em \_\-gridblocksize})}}
+\label{class_builder_a7c5d028d6996f58b2c45f948bfc6b5ab}
+Create the Floor node \hypertarget{class_builder_a24f7e21014e2bb924abd4e2a519a1688}{
+\index{Builder@{Builder}!createProjectile@{createProjectile}}
+\index{createProjectile@{createProjectile}!Builder@{Builder}}
+\subsubsection[{createProjectile}]{\setlength{\rightskip}{0pt plus 5cm}osg::Node$\ast$ Builder::createProjectile ()}}
+\label{class_builder_a24f7e21014e2bb924abd4e2a519a1688}
+Create the sphere for each projectile \hypertarget{class_builder_ae10ac2d3acc2011587c48bc06ad33984}{
+\index{Builder@{Builder}!init@{init}}
+\index{init@{init}!Builder@{Builder}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Builder::init ()}}
+\label{class_builder_ae10ac2d3acc2011587c48bc06ad33984}
+Initialization (doesn't do anything now) \hypertarget{class_builder_a260f9354517188703f594305928e50a2}{
+\index{Builder@{Builder}!instance@{instance}}
+\index{instance@{instance}!Builder@{Builder}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Builder}\& Builder::instance ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static\mbox{]}}}}
+\label{class_builder_a260f9354517188703f594305928e50a2}
+Singletone Instance 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/Builder.h\end{DoxyCompactItemize}

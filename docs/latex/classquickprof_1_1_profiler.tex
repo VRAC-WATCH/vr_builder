@@ -1,0 +1,132 @@
+\hypertarget{classquickprof_1_1_profiler}{
+\section{quickprof::Profiler Class Reference}
+\label{classquickprof_1_1_profiler}\index{quickprof::Profiler@{quickprof::Profiler}}
+}
+
+
+A singleton class that manages timing for a set of profiling blocks.  
+
+
+{\ttfamily \#include $<$quickprof.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classquickprof_1_1_profiler_a53b1240186436954cabca9b492f0ab61}{init} (double smoothing=0.0, const std::string outputFilename=\char`\"{}\char`\"{}, size\_\-t printPeriod=1, \hyperlink{namespacequickprof_a9bd89a54bb92c3d77f445ca65cb4684f}{TimeFormat} printFormat=MILLISECONDS)
+\item 
+void \hyperlink{classquickprof_1_1_profiler_a7606c62bd3c384bfdbce1ff9413693dd}{beginBlock} (const std::string \&name)
+\item 
+\hypertarget{classquickprof_1_1_profiler_aae93f88872fce78aa5e718c5ac315e68}{
+double {\bfseries getTime} ()}
+\label{classquickprof_1_1_profiler_aae93f88872fce78aa5e718c5ac315e68}
+
+\item 
+void \hyperlink{classquickprof_1_1_profiler_ae122d033874481835099e7b7f9989642}{endBlock} (const std::string \&name)
+\item 
+void \hyperlink{classquickprof_1_1_profiler_a158610937cac5c9efcb36534c1c47f76}{endCycle} ()
+\item 
+double \hyperlink{classquickprof_1_1_profiler_aeac4d5f0f3c8aab4ca1c51b4ddf7601d}{getAvgDuration} (const std::string \&name, \hyperlink{namespacequickprof_a9bd89a54bb92c3d77f445ca65cb4684f}{TimeFormat} format)
+\item 
+std::string \hyperlink{classquickprof_1_1_profiler_aa05f7c66bdaa565267235dc76671bf1e}{getSummary} (\hyperlink{namespacequickprof_a9bd89a54bb92c3d77f445ca65cb4684f}{TimeFormat} format=PERCENT)
+\item 
+\hypertarget{classquickprof_1_1_profiler_aacba1a5bb0e4f400035ee93ba7df7fd8}{
+std::string {\bfseries getSortedSummary} (\hyperlink{namespacequickprof_a9bd89a54bb92c3d77f445ca65cb4684f}{TimeFormat} format=PERCENT)}
+\label{classquickprof_1_1_profiler_aacba1a5bb0e4f400035ee93ba7df7fd8}
+
+\item 
+\hypertarget{classquickprof_1_1_profiler_a28c54ae3897dd8c68ee12c9007166e48}{
+\hyperlink{classquickprof_1_1_clock}{Clock} \& {\bfseries getClock} ()}
+\label{classquickprof_1_1_profiler_a28c54ae3897dd8c68ee12c9007166e48}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classquickprof_1_1_profiler}{Profiler} \& \hyperlink{classquickprof_1_1_profiler_a9d221771f0638595966bda3585ebe3fa}{instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A singleton class that manages timing for a set of profiling blocks. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classquickprof_1_1_profiler_a7606c62bd3c384bfdbce1ff9413693dd}{
+\index{quickprof::Profiler@{quickprof::Profiler}!beginBlock@{beginBlock}}
+\index{beginBlock@{beginBlock}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{beginBlock}]{\setlength{\rightskip}{0pt plus 5cm}void quickprof::Profiler::beginBlock (const std::string \& {\em name})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_a7606c62bd3c384bfdbce1ff9413693dd}
+Begins timing the named block of code.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]The name of the block. \end{DoxyParams}
+\hypertarget{classquickprof_1_1_profiler_ae122d033874481835099e7b7f9989642}{
+\index{quickprof::Profiler@{quickprof::Profiler}!endBlock@{endBlock}}
+\index{endBlock@{endBlock}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{endBlock}]{\setlength{\rightskip}{0pt plus 5cm}void quickprof::Profiler::endBlock (const std::string \& {\em name})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_ae122d033874481835099e7b7f9989642}
+Defines the end of the named timing block.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]The name of the block. \end{DoxyParams}
+\hypertarget{classquickprof_1_1_profiler_a158610937cac5c9efcb36534c1c47f76}{
+\index{quickprof::Profiler@{quickprof::Profiler}!endCycle@{endCycle}}
+\index{endCycle@{endCycle}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{endCycle}]{\setlength{\rightskip}{0pt plus 5cm}void quickprof::Profiler::endCycle ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_a158610937cac5c9efcb36534c1c47f76}
+Defines the end of a profiling cycle.
+
+Use this regularly by calling it at the end of all timing blocks. This is necessary for smoothing and for file output, but not if you just want a total summary at the end of execution (i.e. from getSummary). This must not be called within a timing block. \hypertarget{classquickprof_1_1_profiler_aeac4d5f0f3c8aab4ca1c51b4ddf7601d}{
+\index{quickprof::Profiler@{quickprof::Profiler}!getAvgDuration@{getAvgDuration}}
+\index{getAvgDuration@{getAvgDuration}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{getAvgDuration}]{\setlength{\rightskip}{0pt plus 5cm}double quickprof::Profiler::getAvgDuration (const std::string \& {\em name}, \/  {\bf TimeFormat} {\em format})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_aeac4d5f0f3c8aab4ca1c51b4ddf7601d}
+Returns the average time used in the named block per profiling cycle.
+
+If smoothing is disabled (see init), this returns the most recent duration measurement.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]The name of the block. \item[{\em format}]The desired time format to use for the result. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block's average duration per cycle. 
+\end{DoxyReturn}
+\hypertarget{classquickprof_1_1_profiler_aa05f7c66bdaa565267235dc76671bf1e}{
+\index{quickprof::Profiler@{quickprof::Profiler}!getSummary@{getSummary}}
+\index{getSummary@{getSummary}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{getSummary}]{\setlength{\rightskip}{0pt plus 5cm}std::string quickprof::Profiler::getSummary ({\bf TimeFormat} {\em format} = {\ttfamily PERCENT})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_aa05f7c66bdaa565267235dc76671bf1e}
+Returns a summary of total times in each block.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em format}]The desired time format to use for the results. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The timing summary as a string. 
+\end{DoxyReturn}
+\hypertarget{classquickprof_1_1_profiler_a53b1240186436954cabca9b492f0ab61}{
+\index{quickprof::Profiler@{quickprof::Profiler}!init@{init}}
+\index{init@{init}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void quickprof::Profiler::init (double {\em smoothing} = {\ttfamily 0.0}, \/  const std::string {\em outputFilename} = {\ttfamily \char`\"{}\char`\"{}}, \/  size\_\-t {\em printPeriod} = {\ttfamily 1}, \/  {\bf TimeFormat} {\em printFormat} = {\ttfamily MILLISECONDS})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classquickprof_1_1_profiler_a53b1240186436954cabca9b492f0ab61}
+Initializes the profiler.
+
+This must be called first. If this is never called, the profiler is effectively disabled, and all other functions will return immediately.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em smoothing}]The measured duration for each profile block can be averaged across multiple cycles, and this parameter defines the smoothness of this averaging process. The higher the value, the smoother the resulting average durations will appear. Leaving it at zero will essentially disable the smoothing effect. More specifically, this parameter is a time constant (defined in terms of cycles) that defines an exponentially-\/weighted moving average. For example, a value of 4.0 means the past four cycles will contribute 63\% of the current weighted average. This value must be $>$= 0. \item[{\em outputFilename}]If defined, enables timing data to be printed to a data file for later analysis. \item[{\em printPeriod}]Defines how often data is printed to the file, in number of profiling cycles. For example, set this to 1 if you want data printed after each cycle, or 5 if you want it printed every 5 cycles. It is a good idea to increase this if you don't want huge data files. Keep in mind, however, that when you increase this, you might want to increase the smoothing parameter. (A good heuristic is to set the smoothing parameter equal to the print period.) This value must be $>$= 1. \item[{\em printFormat}]Defines the format used when printing data to a file. \end{DoxyParams}
+\hypertarget{classquickprof_1_1_profiler_a9d221771f0638595966bda3585ebe3fa}{
+\index{quickprof::Profiler@{quickprof::Profiler}!instance@{instance}}
+\index{instance@{instance}!quickprof::Profiler@{quickprof::Profiler}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Profiler} \& quickprof::Profiler::instance ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static\mbox{]}}}}
+\label{classquickprof_1_1_profiler_a9d221771f0638595966bda3585ebe3fa}
+Accesses the singleton instance.
+
+\begin{DoxyReturn}{Returns}
+The \hyperlink{classquickprof_1_1_profiler}{Profiler} instance. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/quickprof.h\end{DoxyCompactItemize}

@@ -1,0 +1,135 @@
+\hypertarget{class_scene_manager}{
+\section{SceneManager Class Reference}
+\label{class_scene_manager}\index{SceneManager@{SceneManager}}
+}
+
+
+{\ttfamily \#include $<$SceneManager.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scene_manager_ad12a7ec5b2fa034bc4462e27d86439c0}{SceneManager} (int cursors)
+\item 
+\hyperlink{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}{$\sim$SceneManager} ()
+\item 
+void \hyperlink{class_scene_manager_ad6525bc44ad7ce3cd05f8569806cc826}{clearScene} ()
+\item 
+bool \hyperlink{class_scene_manager_a4bc5637a92002e8152964bde00eef4bc}{computeGridIntersection} (osg::Matrix mat, osg::Vec3 \&intersection)
+\item 
+void \hyperlink{class_scene_manager_a9d9313b526dfc9c901cd22c98432bdd0}{update} (double t, std::vector$<$ \hyperlink{class_scene_command}{SceneCommand} $\ast$ $>$ \&commands)
+\item 
+osg::ref\_\-ptr$<$ osg::Group $>$ \hyperlink{class_scene_manager_a7e94d848584c338244f3be28964de339}{sceneRoot} ()
+\item 
+void \hyperlink{class_scene_manager_a7e94ed11f1b76b95189c13cdf70a4e6b}{set\_\-head\_\-matrix} (osg::Matrix)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_builder}{Builder} $\ast$ \hyperlink{class_scene_manager_acb4ad5602b925a2c35f1e46c85a20daa}{\_\-builder}
+\item 
+\hypertarget{class_scene_manager_ab07cbeb3d57da5d655cce9a4b6c8387c}{
+bool {\bfseries creationMode}}
+\label{class_scene_manager_ab07cbeb3d57da5d655cce9a4b6c8387c}
+
+\item 
+\hypertarget{class_scene_manager_aa7befb85ebad589a71ffb9ddb29c7f8b}{
+std::vector$<$ \hyperlink{class_cursor}{Cursor} $\ast$ $>$ {\bfseries \_\-cursor}}
+\label{class_scene_manager_aa7befb85ebad589a71ffb9ddb29c7f8b}
+
+\item 
+\hypertarget{class_scene_manager_ac53362a783c70233f0187590c601c39a}{
+osg::ref\_\-ptr$<$ osg::Node $>$ {\bfseries \_\-floor}}
+\label{class_scene_manager_ac53362a783c70233f0187590c601c39a}
+
+\item 
+\hypertarget{class_scene_manager_aa245c4faccdb0db414c0349265e9ce32}{
+\hyperlink{class_grid}{Grid} $\ast$ {\bfseries \_\-grid}}
+\label{class_scene_manager_aa245c4faccdb0db414c0349265e9ce32}
+
+\item 
+\hypertarget{class_scene_manager_aadb6755ef26818dbaa11f7ae99e50664}{
+float {\bfseries grid\_\-block\_\-size}}
+\label{class_scene_manager_aadb6755ef26818dbaa11f7ae99e50664}
+
+\item 
+\hypertarget{class_scene_manager_af8d5a406ab576b9c88250eda8e0a63fe}{
+int {\bfseries grid\_\-size}}
+\label{class_scene_manager_af8d5a406ab576b9c88250eda8e0a63fe}
+
+\item 
+\hypertarget{class_scene_manager_af4e51f0d7e74ad776491743043f1fc7b}{
+osg::Matrix {\bfseries \_\-head\_\-matrix}}
+\label{class_scene_manager_af4e51f0d7e74ad776491743043f1fc7b}
+
+\item 
+\hypertarget{class_scene_manager_aa8ad311a20c82b04d3a0c9a391c99a55}{
+osg::Matrix {\bfseries \_\-wandMatrix}}
+\label{class_scene_manager_aa8ad311a20c82b04d3a0c9a391c99a55}
+
+\item 
+\hypertarget{class_scene_manager_ad973406aaa493b02f6d8e829d55f6b3e}{
+\hyperlink{class_physics}{Physics} $\ast$ {\bfseries \_\-physics}}
+\label{class_scene_manager_ad973406aaa493b02f6d8e829d55f6b3e}
+
+\item 
+\hypertarget{class_scene_manager_a2f9612924ec0bec2b3a64fa590321e07}{
+\hyperlink{class_scene}{Scene} $\ast$ {\bfseries \_\-scene}}
+\label{class_scene_manager_a2f9612924ec0bec2b3a64fa590321e07}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_scene_manager}{SceneManager} is the brains which handles all the inputs and required outputs 1. Handles all commands 2. Translates the commands to the various classes and reflects the changes in the scene 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scene_manager_ad12a7ec5b2fa034bc4462e27d86439c0}{
+\index{SceneManager@{SceneManager}!SceneManager@{SceneManager}}
+\index{SceneManager@{SceneManager}!SceneManager@{SceneManager}}
+\subsubsection[{SceneManager}]{\setlength{\rightskip}{0pt plus 5cm}SceneManager::SceneManager (int {\em cursors})}}
+\label{class_scene_manager_ad12a7ec5b2fa034bc4462e27d86439c0}
+Default constructor with no of cursors as input \hypertarget{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}{
+\index{SceneManager@{SceneManager}!$\sim$SceneManager@{$\sim$SceneManager}}
+\index{$\sim$SceneManager@{$\sim$SceneManager}!SceneManager@{SceneManager}}
+\subsubsection[{$\sim$SceneManager}]{\setlength{\rightskip}{0pt plus 5cm}SceneManager::$\sim$SceneManager ()}}
+\label{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scene_manager_ad6525bc44ad7ce3cd05f8569806cc826}{
+\index{SceneManager@{SceneManager}!clearScene@{clearScene}}
+\index{clearScene@{clearScene}!SceneManager@{SceneManager}}
+\subsubsection[{clearScene}]{\setlength{\rightskip}{0pt plus 5cm}void SceneManager::clearScene ()}}
+\label{class_scene_manager_ad6525bc44ad7ce3cd05f8569806cc826}
+Clears out all visuals in the scene. \hypertarget{class_scene_manager_a4bc5637a92002e8152964bde00eef4bc}{
+\index{SceneManager@{SceneManager}!computeGridIntersection@{computeGridIntersection}}
+\index{computeGridIntersection@{computeGridIntersection}!SceneManager@{SceneManager}}
+\subsubsection[{computeGridIntersection}]{\setlength{\rightskip}{0pt plus 5cm}bool SceneManager::computeGridIntersection (osg::Matrix {\em mat}, \/  osg::Vec3 \& {\em intersection})}}
+\label{class_scene_manager_a4bc5637a92002e8152964bde00eef4bc}
+Computes an intersection of a ray cast from the matrix to the grid plane. \hypertarget{class_scene_manager_a7e94d848584c338244f3be28964de339}{
+\index{SceneManager@{SceneManager}!sceneRoot@{sceneRoot}}
+\index{sceneRoot@{sceneRoot}!SceneManager@{SceneManager}}
+\subsubsection[{sceneRoot}]{\setlength{\rightskip}{0pt plus 5cm}osg::ref\_\-ptr$<$osg::Group$>$ SceneManager::sceneRoot ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_scene_manager_a7e94d848584c338244f3be28964de339}
+Return the root of the scene \hypertarget{class_scene_manager_a7e94ed11f1b76b95189c13cdf70a4e6b}{
+\index{SceneManager@{SceneManager}!set\_\-head\_\-matrix@{set\_\-head\_\-matrix}}
+\index{set\_\-head\_\-matrix@{set\_\-head\_\-matrix}!SceneManager@{SceneManager}}
+\subsubsection[{set\_\-head\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}void SceneManager::set\_\-head\_\-matrix (osg::Matrix)}}
+\label{class_scene_manager_a7e94ed11f1b76b95189c13cdf70a4e6b}
+Set the Head Matrix \hypertarget{class_scene_manager_a9d9313b526dfc9c901cd22c98432bdd0}{
+\index{SceneManager@{SceneManager}!update@{update}}
+\index{update@{update}!SceneManager@{SceneManager}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void SceneManager::update (double {\em t}, \/  std::vector$<$ {\bf SceneCommand} $\ast$ $>$ \& {\em commands})}}
+\label{class_scene_manager_a9d9313b526dfc9c901cd22c98432bdd0}
+Update with commands Takes updates in the form of SceneCommands and turns them into something visualized in the scene 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_scene_manager_acb4ad5602b925a2c35f1e46c85a20daa}{
+\index{SceneManager@{SceneManager}!\_\-builder@{\_\-builder}}
+\index{\_\-builder@{\_\-builder}!SceneManager@{SceneManager}}
+\subsubsection[{\_\-builder}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Builder}$\ast$ {\bf SceneManager::\_\-builder}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_scene_manager_acb4ad5602b925a2c35f1e46c85a20daa}
+iVars. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/SceneManager.h\end{DoxyCompactItemize}

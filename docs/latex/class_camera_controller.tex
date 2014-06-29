@@ -1,0 +1,281 @@
+\hypertarget{class_camera_controller}{
+\section{CameraController Class Reference}
+\label{class_camera_controller}\index{CameraController@{CameraController}}
+}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries ViewMode} \{ {\bfseries FPS\_\-VIEW}, 
+{\bfseries ORBIT\_\-VIEW}, 
+{\bfseries NUM\_\-VIEW\_\-MODES}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_camera_controller_abf6fc6f47970b43fb27d8328c9cd79a8}{
+void {\bfseries update} (float dt)}
+\label{class_camera_controller_abf6fc6f47970b43fb27d8328c9cd79a8}
+
+\item 
+\hypertarget{class_camera_controller_a8b02f505367d3c88e947188859797195}{
+\hyperlink{class_k_matrix}{KMatrix} {\bfseries getViewMatrix} (int mode=CURRENT\_\-VIEW)}
+\label{class_camera_controller_a8b02f505367d3c88e947188859797195}
+
+\item 
+\hypertarget{class_camera_controller_abcb87066b7993ec625c1c4e3a98913d5}{
+void {\bfseries mouseMotion} (int x, int y)}
+\label{class_camera_controller_abcb87066b7993ec625c1c4e3a98913d5}
+
+\item 
+\hypertarget{class_camera_controller_a1015cfc5e03931341d3d360ea6bf66c9}{
+void {\bfseries passiveMouse} (int x, int y)}
+\label{class_camera_controller_a1015cfc5e03931341d3d360ea6bf66c9}
+
+\item 
+\hypertarget{class_camera_controller_a68b1ecbebfe385e7559692289ba0dd34}{
+void {\bfseries mouseClick} (int button, int state, int x, int y)}
+\label{class_camera_controller_a68b1ecbebfe385e7559692289ba0dd34}
+
+\item 
+\hypertarget{class_camera_controller_a644665a5212de05ec2e6c3a9408a7ee7}{
+\hyperlink{class_k_matrix}{KMatrix} {\bfseries getWandMatrix} (\hyperlink{class_k_vec3}{KVec3} offset)}
+\label{class_camera_controller_a644665a5212de05ec2e6c3a9408a7ee7}
+
+\item 
+\hypertarget{class_camera_controller_adbe1299029819c804a490a318a009c3c}{
+void {\bfseries cycleViewMode} ()}
+\label{class_camera_controller_adbe1299029819c804a490a318a009c3c}
+
+\item 
+\hypertarget{class_camera_controller_aa40e4569c5c788f06b2e1515d2603de9}{
+int {\bfseries getViewMode} ()}
+\label{class_camera_controller_aa40e4569c5c788f06b2e1515d2603de9}
+
+\item 
+\hypertarget{class_camera_controller_a79316729f2fa99f3ab8ad4bf85fbb2c0}{
+void {\bfseries setUp} (float up)}
+\label{class_camera_controller_a79316729f2fa99f3ab8ad4bf85fbb2c0}
+
+\item 
+\hypertarget{class_camera_controller_a74fd8afff48204bf7a57baf197d7ba7e}{
+void {\bfseries setDown} (float down)}
+\label{class_camera_controller_a74fd8afff48204bf7a57baf197d7ba7e}
+
+\item 
+\hypertarget{class_camera_controller_a9a334798a563146b61c6ee7deb30b0b3}{
+void {\bfseries setLeft} (float left)}
+\label{class_camera_controller_a9a334798a563146b61c6ee7deb30b0b3}
+
+\item 
+\hypertarget{class_camera_controller_a0ea5219d3ffb947687497ae2c09c1af4}{
+void {\bfseries setRight} (float r)}
+\label{class_camera_controller_a0ea5219d3ffb947687497ae2c09c1af4}
+
+\item 
+\hypertarget{class_camera_controller_aa3cec8219c26da69ef40b0f05e0f6048}{
+void {\bfseries setRaise} (float r)}
+\label{class_camera_controller_aa3cec8219c26da69ef40b0f05e0f6048}
+
+\item 
+\hypertarget{class_camera_controller_a36d83fbe752dd0a2031e37240e2e42ae}{
+void {\bfseries setLower} (float l)}
+\label{class_camera_controller_a36d83fbe752dd0a2031e37240e2e42ae}
+
+\item 
+\hypertarget{class_camera_controller_a09e275e900d228243d57e8aeddd8a06c}{
+void {\bfseries setStrafeLeft} (float l)}
+\label{class_camera_controller_a09e275e900d228243d57e8aeddd8a06c}
+
+\item 
+\hypertarget{class_camera_controller_afd97522edb6dbb1d4fed46f0b20c68de}{
+void {\bfseries setStrafeRight} (float r)}
+\label{class_camera_controller_afd97522edb6dbb1d4fed46f0b20c68de}
+
+\item 
+\hypertarget{class_camera_controller_aa35a16e45e2bc8be772ee58ab6b70946}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries getFPForward} ()}
+\label{class_camera_controller_aa35a16e45e2bc8be772ee58ab6b70946}
+
+\item 
+\hypertarget{class_camera_controller_a0ae222cf2f72b9745cbc03822b33874f}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries getFPRight} ()}
+\label{class_camera_controller_a0ae222cf2f72b9745cbc03822b33874f}
+
+\item 
+\hypertarget{class_camera_controller_a578617ff3e7e69fd6e6fa40545d8dcdf}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries getFPUp} ()}
+\label{class_camera_controller_a578617ff3e7e69fd6e6fa40545d8dcdf}
+
+\item 
+\hypertarget{class_camera_controller_aa016da4be32b13b51e1cc91b9bcc1137}{
+void {\bfseries setPeekAngles} (float x, float y)}
+\label{class_camera_controller_aa016da4be32b13b51e1cc91b9bcc1137}
+
+\item 
+\hypertarget{class_camera_controller_af3c944b3c14afb9b275566616e7a889f}{
+float {\bfseries getPeekX} ()}
+\label{class_camera_controller_af3c944b3c14afb9b275566616e7a889f}
+
+\item 
+\hypertarget{class_camera_controller_a2d6cc0c02d519fc7c0a77eead8bd0cb7}{
+float {\bfseries getPeekY} ()}
+\label{class_camera_controller_a2d6cc0c02d519fc7c0a77eead8bd0cb7}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_camera_controller_a25dd37c04e24b834b31fd77e5b2d9039}{
+int {\bfseries mViewMode}}
+\label{class_camera_controller_a25dd37c04e24b834b31fd77e5b2d9039}
+
+\item 
+\hypertarget{class_camera_controller_a940db0ad2963b75a47cd010911beb91a}{
+\hyperlink{class_k_matrix}{KMatrix} {\bfseries oculusMatrix}}
+\label{class_camera_controller_a940db0ad2963b75a47cd010911beb91a}
+
+\item 
+\hypertarget{class_camera_controller_ad40e4446d8daaf692fde2776fb0c6c50}{
+float {\bfseries mOrbitYaw}}
+\label{class_camera_controller_ad40e4446d8daaf692fde2776fb0c6c50}
+
+\item 
+\hypertarget{class_camera_controller_a51647d95ecf8724e58c12c14dce3d69b}{
+float {\bfseries mOrbitPitch}}
+\label{class_camera_controller_a51647d95ecf8724e58c12c14dce3d69b}
+
+\item 
+\hypertarget{class_camera_controller_a9b448c24e245cef1720cadea60d4e0cb}{
+float {\bfseries mOrbitZoom}}
+\label{class_camera_controller_a9b448c24e245cef1720cadea60d4e0cb}
+
+\item 
+\hypertarget{class_camera_controller_aa88ab103763e84fe6e2f398b313443f0}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries mOrbitCenter}}
+\label{class_camera_controller_aa88ab103763e84fe6e2f398b313443f0}
+
+\item 
+\hypertarget{class_camera_controller_a209bb702e058661a4c1699c148b62a6b}{
+float {\bfseries mFPYaw}}
+\label{class_camera_controller_a209bb702e058661a4c1699c148b62a6b}
+
+\item 
+\hypertarget{class_camera_controller_a67c0f23cd7e4b030c745a5cd39a6214c}{
+float {\bfseries mFPPitch}}
+\label{class_camera_controller_a67c0f23cd7e4b030c745a5cd39a6214c}
+
+\item 
+\hypertarget{class_camera_controller_a325e3425fe779de195c4d95132993815}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries mFPPos}}
+\label{class_camera_controller_a325e3425fe779de195c4d95132993815}
+
+\item 
+\hypertarget{class_camera_controller_af05a9e1f2d4e81f04777b7c4d15f7402}{
+\hyperlink{class_k_vec3}{KVec3} {\bfseries mFPVelocity}}
+\label{class_camera_controller_af05a9e1f2d4e81f04777b7c4d15f7402}
+
+\item 
+\hypertarget{class_camera_controller_a8d36916c3e663e11739bd16ddfefaa66}{
+float {\bfseries mFPMaxSpeed}}
+\label{class_camera_controller_a8d36916c3e663e11739bd16ddfefaa66}
+
+\item 
+\hypertarget{class_camera_controller_ae4780eda706e4ed9ec1fda9daa77ae70}{
+float {\bfseries mFPPeekX}}
+\label{class_camera_controller_ae4780eda706e4ed9ec1fda9daa77ae70}
+
+\item 
+\hypertarget{class_camera_controller_a700a730250e91e848d9e858a1a8b966d}{
+float {\bfseries mFPPeekY}}
+\label{class_camera_controller_a700a730250e91e848d9e858a1a8b966d}
+
+\item 
+\hypertarget{class_camera_controller_afbd328e7ef9a5e4370d17239ccce8b42}{
+float {\bfseries JSX}}
+\label{class_camera_controller_afbd328e7ef9a5e4370d17239ccce8b42}
+
+\item 
+\hypertarget{class_camera_controller_af9dd94a0c9e72a6a9c68f9c42d94f833}{
+float {\bfseries JSY}}
+\label{class_camera_controller_af9dd94a0c9e72a6a9c68f9c42d94f833}
+
+\item 
+\hypertarget{class_camera_controller_a348259eb49ae9df9bc87b31b829cb934}{
+int {\bfseries mLastMouseX}}
+\label{class_camera_controller_a348259eb49ae9df9bc87b31b829cb934}
+
+\item 
+\hypertarget{class_camera_controller_ac12de6237869cd8674375535c64a7684}{
+int {\bfseries mLastMouseY}}
+\label{class_camera_controller_ac12de6237869cd8674375535c64a7684}
+
+\item 
+\hypertarget{class_camera_controller_abc9d49116a60bdbbce4dac6f23a2bcf8}{
+bool {\bfseries mRightClick}}
+\label{class_camera_controller_abc9d49116a60bdbbce4dac6f23a2bcf8}
+
+\item 
+\hypertarget{class_camera_controller_a5a72122a84059881c8111d7c72a64b14}{
+bool {\bfseries mMiddleClick}}
+\label{class_camera_controller_a5a72122a84059881c8111d7c72a64b14}
+
+\item 
+\hypertarget{class_camera_controller_ab9bcb34a77ec58d8a557479f91f7c2a0}{
+bool {\bfseries mLeftClick}}
+\label{class_camera_controller_ab9bcb34a77ec58d8a557479f91f7c2a0}
+
+\item 
+\hypertarget{class_camera_controller_a40ba2ed8973ca683ba6121f0824d0e4e}{
+float {\bfseries mUp}}
+\label{class_camera_controller_a40ba2ed8973ca683ba6121f0824d0e4e}
+
+\item 
+\hypertarget{class_camera_controller_a8677b055ef9a773d4dae4b688bbbaa51}{
+float {\bfseries mDown}}
+\label{class_camera_controller_a8677b055ef9a773d4dae4b688bbbaa51}
+
+\item 
+\hypertarget{class_camera_controller_a4734d5ada8a0ea6431b588b0b233c866}{
+float {\bfseries mLeft}}
+\label{class_camera_controller_a4734d5ada8a0ea6431b588b0b233c866}
+
+\item 
+\hypertarget{class_camera_controller_a68f3e624a3219c884a62667652fb7ee1}{
+float {\bfseries mRight}}
+\label{class_camera_controller_a68f3e624a3219c884a62667652fb7ee1}
+
+\item 
+\hypertarget{class_camera_controller_a93b3c5f42b79984db26fa06f19888d09}{
+float {\bfseries mStrafeLeft}}
+\label{class_camera_controller_a93b3c5f42b79984db26fa06f19888d09}
+
+\item 
+\hypertarget{class_camera_controller_af90637e0f3dbfe0c01bdaea064cf3510}{
+float {\bfseries mStrafeRight}}
+\label{class_camera_controller_af90637e0f3dbfe0c01bdaea064cf3510}
+
+\item 
+\hypertarget{class_camera_controller_adaf051573f75ada6202a2345e104694f}{
+float {\bfseries mRaise}}
+\label{class_camera_controller_adaf051573f75ada6202a2345e104694f}
+
+\item 
+\hypertarget{class_camera_controller_a5df04281679c5df5fbc054920b932f9d}{
+float {\bfseries mLower}}
+\label{class_camera_controller_a5df04281679c5df5fbc054920b932f9d}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_camera_controller_a99cd8a250c84f5b93b32c8285d02aff1}{
+static const int {\bfseries CURRENT\_\-VIEW} = -\/1}
+\label{class_camera_controller_a99cd8a250c84f5b93b32c8285d02aff1}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/CameraController.h\end{DoxyCompactItemize}

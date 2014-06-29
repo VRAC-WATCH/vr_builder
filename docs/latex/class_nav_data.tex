@@ -1,0 +1,63 @@
+\hypertarget{class_nav_data}{
+\section{NavData Class Reference}
+\label{class_nav_data}\index{NavData@{NavData}}
+}
+
+
+{\ttfamily \#include $<$nav.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_nav_data_a1197ced287f73897760661b891467363}{readObject} (vpr::ObjectReader $\ast$reader)
+\item 
+virtual void \hyperlink{class_nav_data_a1b45f76f37dccac58ecbe51b601dbfc2}{writeObject} (vpr::ObjectWriter $\ast$writer)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+gmtl::Matrix44f \hyperlink{class_nav_data_a7ca13f1fcc20a97259c3e6f9a44e758f}{mCurPos}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to wrap the navigation matrix to share across cluster. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_nav_data_a1197ced287f73897760661b891467363}{
+\index{NavData@{NavData}!readObject@{readObject}}
+\index{readObject@{readObject}!NavData@{NavData}}
+\subsubsection[{readObject}]{\setlength{\rightskip}{0pt plus 5cm}virtual void NavData::readObject (vpr::ObjectReader $\ast$ {\em reader})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_nav_data_a1197ced287f73897760661b891467363}
+De-\/serializes this object using the data in the given object reader.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em reader}]The object reader used for de-\/serializing this object.\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+\item[{\em vpr::IOException}]is thrown if object de-\/serialization fails. \end{DoxyExceptions}
+\hypertarget{class_nav_data_a1b45f76f37dccac58ecbe51b601dbfc2}{
+\index{NavData@{NavData}!writeObject@{writeObject}}
+\index{writeObject@{writeObject}!NavData@{NavData}}
+\subsubsection[{writeObject}]{\setlength{\rightskip}{0pt plus 5cm}virtual void NavData::writeObject (vpr::ObjectWriter $\ast$ {\em writer})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{class_nav_data_a1b45f76f37dccac58ecbe51b601dbfc2}
+Serializes this object into the given object writer.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em writer}]The object reader used for serializing this object.\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+\item[{\em vpr::IOException}]is thrown if object serialization fails. \end{DoxyExceptions}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_nav_data_a7ca13f1fcc20a97259c3e6f9a44e758f}{
+\index{NavData@{NavData}!mCurPos@{mCurPos}}
+\index{mCurPos@{mCurPos}!NavData@{NavData}}
+\subsubsection[{mCurPos}]{\setlength{\rightskip}{0pt plus 5cm}gmtl::Matrix44f {\bf NavData::mCurPos}}}
+\label{class_nav_data_a7ca13f1fcc20a97259c3e6f9a44e758f}
+Current position 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/nav.h\end{DoxyCompactItemize}

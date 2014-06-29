@@ -1,0 +1,93 @@
+\hypertarget{class_ti_xml_unknown}{
+\section{TiXmlUnknown Class Reference}
+\label{class_ti_xml_unknown}\index{TiXmlUnknown@{TiXmlUnknown}}
+}
+
+
+{\ttfamily \#include $<$tinyxml.h$>$}Inheritance diagram for TiXmlUnknown::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{class_ti_xml_unknown}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_unknown_abe798ff4feea31474850c7f0de6bdf5e}{
+{\bfseries TiXmlUnknown} (const \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} \&copy)}
+\label{class_ti_xml_unknown_abe798ff4feea31474850c7f0de6bdf5e}
+
+\item 
+\hypertarget{class_ti_xml_unknown_a5097fe228cd5ad4edcdddf02c334fd83}{
+void {\bfseries operator=} (const \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} \&copy)}
+\label{class_ti_xml_unknown_a5097fe228cd5ad4edcdddf02c334fd83}
+
+\item 
+\hypertarget{class_ti_xml_unknown_a0960bb7428b3f341da46244229604d73}{
+virtual \hyperlink{class_ti_xml_node}{TiXmlNode} $\ast$ \hyperlink{class_ti_xml_unknown_a0960bb7428b3f341da46244229604d73}{Clone} () const }
+\label{class_ti_xml_unknown_a0960bb7428b3f341da46244229604d73}
+
+\begin{DoxyCompactList}\small\item\em Creates a copy of this Unknown and returns it. \item\end{DoxyCompactList}\item 
+virtual void \hyperlink{class_ti_xml_unknown_a31ba089a40fb5a1869750fce09b0bacb}{Print} (FILE $\ast$cfile, int depth) const 
+\item 
+\hypertarget{class_ti_xml_unknown_a0d0a0f8ec748f12bd1dc3ef6d64d7c87}{
+virtual const char $\ast$ {\bfseries Parse} (const char $\ast$p, TiXmlParsingData $\ast$data, TiXmlEncoding encoding)}
+\label{class_ti_xml_unknown_a0d0a0f8ec748f12bd1dc3ef6d64d7c87}
+
+\item 
+\hypertarget{class_ti_xml_unknown_ab0313e5fe77987d746ac1a97a254419d}{
+virtual const \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} $\ast$ \hyperlink{class_ti_xml_unknown_ab0313e5fe77987d746ac1a97a254419d}{ToUnknown} () const }
+\label{class_ti_xml_unknown_ab0313e5fe77987d746ac1a97a254419d}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null not of the requested type. \item\end{DoxyCompactList}\item 
+\hypertarget{class_ti_xml_unknown_a67c9fd22940e8c47f706a72cdd2e332c}{
+virtual \hyperlink{class_ti_xml_unknown}{TiXmlUnknown} $\ast$ \hyperlink{class_ti_xml_unknown_a67c9fd22940e8c47f706a72cdd2e332c}{ToUnknown} ()}
+\label{class_ti_xml_unknown_a67c9fd22940e8c47f706a72cdd2e332c}
+
+\begin{DoxyCompactList}\small\item\em Cast to a more defined type. Will return null not of the requested type. \item\end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_ti_xml_unknown_ad7122e5135581b3c832a1a3217760a93}{Accept} (\hyperlink{class_ti_xml_visitor}{TiXmlVisitor} $\ast$content) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ti_xml_unknown_a08ca7b225a2bcb604d3c72e199d33408}{
+void {\bfseries CopyTo} (\hyperlink{class_ti_xml_unknown}{TiXmlUnknown} $\ast$target) const }
+\label{class_ti_xml_unknown_a08ca7b225a2bcb604d3c72e199d33408}
+
+\item 
+\hypertarget{class_ti_xml_unknown_ad3f8fcc1efe364ddd8f43ef9a1046300}{
+virtual void {\bfseries StreamIn} (std::istream $\ast$in, TIXML\_\-STRING $\ast$tag)}
+\label{class_ti_xml_unknown_ad3f8fcc1efe364ddd8f43ef9a1046300}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Any tag that tinyXml doesn't recognize is saved as an unknown. It is a tag of text, but should not be modified. It will be written back to the XML, unchanged, when the file is saved.
+
+DTD tags get thrown into TiXmlUnknowns. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ti_xml_unknown_ad7122e5135581b3c832a1a3217760a93}{
+\index{TiXmlUnknown@{TiXmlUnknown}!Accept@{Accept}}
+\index{Accept@{Accept}!TiXmlUnknown@{TiXmlUnknown}}
+\subsubsection[{Accept}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool TiXmlUnknown::Accept ({\bf TiXmlVisitor} $\ast$ {\em content}) const\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_ti_xml_unknown_ad7122e5135581b3c832a1a3217760a93}
+Walk the XML tree visiting this node and all of its children. 
+
+Implements \hyperlink{class_ti_xml_node_acc0f88b7462c6cb73809d410a4f5bb86}{TiXmlNode}.\hypertarget{class_ti_xml_unknown_a31ba089a40fb5a1869750fce09b0bacb}{
+\index{TiXmlUnknown@{TiXmlUnknown}!Print@{Print}}
+\index{Print@{Print}!TiXmlUnknown@{TiXmlUnknown}}
+\subsubsection[{Print}]{\setlength{\rightskip}{0pt plus 5cm}virtual void TiXmlUnknown::Print (FILE $\ast$ {\em cfile}, \/  int {\em depth}) const\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_ti_xml_unknown_a31ba089a40fb5a1869750fce09b0bacb}
+All TinyXml classes can print themselves to a filestream or the string class (\hyperlink{class_ti_xml_string}{TiXmlString} in non-\/STL mode, std::string in STL mode.) Either or both cfile and str can be null.
+
+This is a formatted print, and will insert tabs and newlines.
+
+(For an unformatted stream, use the $<$$<$ operator.) 
+
+Implements \hyperlink{class_ti_xml_base_a0de56b3f2ef14c65091a3b916437b512}{TiXmlBase}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/XML/tinyxml.h\end{DoxyCompactItemize}

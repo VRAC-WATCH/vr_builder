@@ -1,0 +1,165 @@
+\hypertarget{class_grid_element}{
+\section{GridElement Class Reference}
+\label{class_grid_element}\index{GridElement@{GridElement}}
+}
+
+
+{\ttfamily \#include $<$GridElement.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_element_a87417c3c1fc9ff31fc96e402421937b6}{GridElement} (bump::String nodeID=\char`\"{}\char`\"{})
+\item 
+\hyperlink{class_grid_element_a265cf8c55be6ebb01f8c56e092008504}{GridElement} (ModelNode $\ast$node, bump::String nodeID=\char`\"{}\char`\"{})
+\item 
+\hyperlink{class_grid_element_ae6cc4885751f3372bf96c4a4568e79fb}{$\sim$GridElement} ()
+\item 
+void \hyperlink{class_grid_element_aaebf902834ef49b534433d7385fc398d}{attachModel} (ModelNode $\ast$modelNode)
+\item 
+void \hyperlink{class_grid_element_ab75d977fe8ea590a8fbf89d39beb3adb}{highlight} ()
+\item 
+const char $\ast$ \hyperlink{class_grid_element_a291030a5523dc79f73da322507f3c9ca}{nodeType} () const 
+\item 
+void \hyperlink{class_grid_element_a3c12632d21165343b41400939d633cb6}{setColor} (const v4 color)
+\item 
+\hypertarget{class_grid_element_a11fcac40b2f05a170c1d5236890ac842}{
+const v4 {\bfseries color} () const }
+\label{class_grid_element_a11fcac40b2f05a170c1d5236890ac842}
+
+\item 
+void \hyperlink{class_grid_element_a95cecc04d842554c8c4b74c6576c0a60}{setTransparent} (float value)
+\item 
+void \hyperlink{class_grid_element_a859628091b3d5076a4442d50f2ab2f10}{setId} (const bump::String id)
+\item 
+\hypertarget{class_grid_element_a431f61819a383a1d70b2499d7aca5263}{
+const bump::String \& {\bfseries id} () const }
+\label{class_grid_element_a431f61819a383a1d70b2499d7aca5263}
+
+\item 
+void \hyperlink{class_grid_element_a0d09f75799f8050ba3bbcee33913898c}{setLabel} (const bump::String label)
+\item 
+\hypertarget{class_grid_element_a76e70ad2be17d3cbd3edb546b1544fbc}{
+const bump::String {\bfseries label} () const }
+\label{class_grid_element_a76e70ad2be17d3cbd3edb546b1544fbc}
+
+\item 
+virtual void \hyperlink{class_grid_element_a31b297b76d790e467e6052a7b12cea7f}{setSelected} (bool isSelected)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_grid_element_af853d66404412c70cd56c39969ab2564}{\_\-initializeLabel} ()
+\item 
+void \hyperlink{class_grid_element_ab9c419150dfaca5b2947da452edd558e}{\_\-setupMaterial} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+v4 \hyperlink{class_grid_element_a071f85c15b3a75f56d9537f94ed354c8}{\_\-color}
+\item 
+\hypertarget{class_grid_element_a16821662d3c13958cee02e9df74e64d2}{
+bump::String {\bfseries \_\-nodeID}}
+\label{class_grid_element_a16821662d3c13958cee02e9df74e64d2}
+
+\item 
+\hypertarget{class_grid_element_acde398075dde1c50415f380fb8314796}{
+osg::ref\_\-ptr$<$ osgText::Text $>$ {\bfseries \_\-label}}
+\label{class_grid_element_acde398075dde1c50415f380fb8314796}
+
+\item 
+\hypertarget{class_grid_element_aea1862c2293ed7fc943916dd969f90ad}{
+osg::ref\_\-ptr$<$ osg::Geode $>$ {\bfseries \_\-labelGeode}}
+\label{class_grid_element_aea1862c2293ed7fc943916dd969f90ad}
+
+\item 
+\hypertarget{class_grid_element_a8fb3e20f47572d113ad496c89ec4004b}{
+ModelNode $\ast$ {\bfseries \_\-modelNode}}
+\label{class_grid_element_a8fb3e20f47572d113ad496c89ec4004b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_grid_element}{GridElement} class is used as the graphical display of each grid element. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_grid_element_a87417c3c1fc9ff31fc96e402421937b6}{
+\index{GridElement@{GridElement}!GridElement@{GridElement}}
+\index{GridElement@{GridElement}!GridElement@{GridElement}}
+\subsubsection[{GridElement}]{\setlength{\rightskip}{0pt plus 5cm}GridElement::GridElement (bump::String {\em nodeID} = {\ttfamily \char`\"{}\char`\"{}})}}
+\label{class_grid_element_a87417c3c1fc9ff31fc96e402421937b6}
+Default Constructor. \hypertarget{class_grid_element_a265cf8c55be6ebb01f8c56e092008504}{
+\index{GridElement@{GridElement}!GridElement@{GridElement}}
+\index{GridElement@{GridElement}!GridElement@{GridElement}}
+\subsubsection[{GridElement}]{\setlength{\rightskip}{0pt plus 5cm}GridElement::GridElement (ModelNode $\ast$ {\em node}, \/  bump::String {\em nodeID} = {\ttfamily \char`\"{}\char`\"{}})}}
+\label{class_grid_element_a265cf8c55be6ebb01f8c56e092008504}
+Constructor taking weak ref to a default \hyperlink{class_grid_element}{GridElement} geometry. \hypertarget{class_grid_element_ae6cc4885751f3372bf96c4a4568e79fb}{
+\index{GridElement@{GridElement}!$\sim$GridElement@{$\sim$GridElement}}
+\index{$\sim$GridElement@{$\sim$GridElement}!GridElement@{GridElement}}
+\subsubsection[{$\sim$GridElement}]{\setlength{\rightskip}{0pt plus 5cm}GridElement::$\sim$GridElement ()}}
+\label{class_grid_element_ae6cc4885751f3372bf96c4a4568e79fb}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_grid_element_af853d66404412c70cd56c39969ab2564}{
+\index{GridElement@{GridElement}!\_\-initializeLabel@{\_\-initializeLabel}}
+\index{\_\-initializeLabel@{\_\-initializeLabel}!GridElement@{GridElement}}
+\subsubsection[{\_\-initializeLabel}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::\_\-initializeLabel ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_grid_element_af853d66404412c70cd56c39969ab2564}
+Sets up the textual label for the element. \hypertarget{class_grid_element_ab9c419150dfaca5b2947da452edd558e}{
+\index{GridElement@{GridElement}!\_\-setupMaterial@{\_\-setupMaterial}}
+\index{\_\-setupMaterial@{\_\-setupMaterial}!GridElement@{GridElement}}
+\subsubsection[{\_\-setupMaterial}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::\_\-setupMaterial ()\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_grid_element_ab9c419150dfaca5b2947da452edd558e}
+Sets up the material of the element. \hypertarget{class_grid_element_aaebf902834ef49b534433d7385fc398d}{
+\index{GridElement@{GridElement}!attachModel@{attachModel}}
+\index{attachModel@{attachModel}!GridElement@{GridElement}}
+\subsubsection[{attachModel}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::attachModel (ModelNode $\ast$ {\em modelNode})}}
+\label{class_grid_element_aaebf902834ef49b534433d7385fc398d}
+Sets the model geometry for this \hyperlink{class_grid_element}{GridElement}. \hypertarget{class_grid_element_ab75d977fe8ea590a8fbf89d39beb3adb}{
+\index{GridElement@{GridElement}!highlight@{highlight}}
+\index{highlight@{highlight}!GridElement@{GridElement}}
+\subsubsection[{highlight}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::highlight ()}}
+\label{class_grid_element_ab75d977fe8ea590a8fbf89d39beb3adb}
+Highlights the node. \hypertarget{class_grid_element_a291030a5523dc79f73da322507f3c9ca}{
+\index{GridElement@{GridElement}!nodeType@{nodeType}}
+\index{nodeType@{nodeType}!GridElement@{GridElement}}
+\subsubsection[{nodeType}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ GridElement::nodeType () const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_element_a291030a5523dc79f73da322507f3c9ca}
+Override the BaseNode node type. \hypertarget{class_grid_element_a3c12632d21165343b41400939d633cb6}{
+\index{GridElement@{GridElement}!setColor@{setColor}}
+\index{setColor@{setColor}!GridElement@{GridElement}}
+\subsubsection[{setColor}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::setColor (const v4 {\em color})}}
+\label{class_grid_element_a3c12632d21165343b41400939d633cb6}
+Set the nodes color decoration. \hypertarget{class_grid_element_a859628091b3d5076a4442d50f2ab2f10}{
+\index{GridElement@{GridElement}!setId@{setId}}
+\index{setId@{setId}!GridElement@{GridElement}}
+\subsubsection[{setId}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::setId (const bump::String {\em id})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_grid_element_a859628091b3d5076a4442d50f2ab2f10}
+Set the nodes color decoration. \hypertarget{class_grid_element_a0d09f75799f8050ba3bbcee33913898c}{
+\index{GridElement@{GridElement}!setLabel@{setLabel}}
+\index{setLabel@{setLabel}!GridElement@{GridElement}}
+\subsubsection[{setLabel}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::setLabel (const bump::String {\em label})}}
+\label{class_grid_element_a0d09f75799f8050ba3bbcee33913898c}
+Set the nodes text label. \hypertarget{class_grid_element_a31b297b76d790e467e6052a7b12cea7f}{
+\index{GridElement@{GridElement}!setSelected@{setSelected}}
+\index{setSelected@{setSelected}!GridElement@{GridElement}}
+\subsubsection[{setSelected}]{\setlength{\rightskip}{0pt plus 5cm}virtual void GridElement::setSelected (bool {\em isSelected})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{class_grid_element_a31b297b76d790e467e6052a7b12cea7f}
+Override the setSelected method to handle decorating the element. \hypertarget{class_grid_element_a95cecc04d842554c8c4b74c6576c0a60}{
+\index{GridElement@{GridElement}!setTransparent@{setTransparent}}
+\index{setTransparent@{setTransparent}!GridElement@{GridElement}}
+\subsubsection[{setTransparent}]{\setlength{\rightskip}{0pt plus 5cm}void GridElement::setTransparent (float {\em value})}}
+\label{class_grid_element_a95cecc04d842554c8c4b74c6576c0a60}
+Sets the transparency level of the node. 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_grid_element_a071f85c15b3a75f56d9537f94ed354c8}{
+\index{GridElement@{GridElement}!\_\-color@{\_\-color}}
+\index{\_\-color@{\_\-color}!GridElement@{GridElement}}
+\subsubsection[{\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}v4 {\bf GridElement::\_\-color}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_grid_element_a071f85c15b3a75f56d9537f94ed354c8}
+iVars. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/GridElement.h\end{DoxyCompactItemize}
