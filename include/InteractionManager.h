@@ -42,6 +42,7 @@ public:
 	 */
 	std::vector<SceneCommand*>& sceneCommands() { return _sceneCommandList; }
 
+	/** Ask the interaction manager how many devices connected need cursor control*/
 	int howManyWantCursor();
 	
 	
