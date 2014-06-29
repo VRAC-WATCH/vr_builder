@@ -139,7 +139,14 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 		if(!string(commands[i]->CommandType()).compare(head_track_cmd.CommandType())){
 			osg::Matrix nav_mat = _scene->get_navigation_matrix();
 			nav_mat.invert(nav_mat);
-			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * nav_mat;			
+			_head_matrix = dynamic_cast<HeadTrackChangeCommand*>(commands[i])->headMatrix * nav_mat;
+
+/* Check to see if there is head movement/updating
+			osg::Vec3 eye,center,up;
+			_head_matrix.getLookAt(eye,center,up);
+			PRINTVECTOR(eye);
+			PRINTVECTOR(center);			
+*/
 		}
 
 		// Wand tracking change
@@ -207,14 +214,11 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				osg::ref_ptr<osg::Node> n = Builder::instance().createProjectile();
 
 				//Trying to get Head Position Will have to fixed in Juggler version
-				osg::Vec3 eye,center,up; 
-				_head_matrix.getLookAt(eye,center,up);
 				osg::Vec3 head=_head_matrix.getTrans();
-				eye.set(eye.x(),eye.y(),-eye.z());
-				center.set(center.x(),center.y(),-center.z());
-				osg::Vec3 dir = eye - center;
+				osg::Quat rot = _head_matrix.getRotate();
+				osg::Vec3 dir = rot * osg::Vec3(0,0,-1);
 				dir.normalize();
-				_physics->add_projectile(n,center,dir*0.5);
+				_physics->add_projectile(n,head,dir*0.5);
 				_scene->add(n);
 			}
 		}
