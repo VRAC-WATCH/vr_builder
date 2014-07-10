@@ -64,13 +64,21 @@ EXTRA_LIBS += -lglut
 $(precompiled_header): $(src_dir)/osg.h
 	g++ $(EXTRA_INCLUDES) -c $<
 
-# Generate all the object files for all the source files
+# Generate all the object files for all the source files wityh debug option
 $(objects): %.o: $(src_dir)/%.cpp
+ifeq ($(DEBUG),true)
 	g++ -g -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+else
+	g++ -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+endif
 
 # Link the application together
 $(application): $(objects)
+ifeq ($(DEBUG),true)
 	g++ -g $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+else
+	g++ $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+endif
 
 # Methods for cleanup
 # - Use clean_all when you need to regenerate the gch for the pre-compiled header

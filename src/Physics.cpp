@@ -56,7 +56,7 @@ void Physics::add(osg::Node* model, osg::Vec3 position, Type type){
 		break;
 	case(BALL):
 		cr->_shapeType = SPHERE_SHAPE_PROXYTYPE;
-		cr->_mass = 0.05f;
+		cr->_mass = 5.0f;
 		break;
 	}
 		

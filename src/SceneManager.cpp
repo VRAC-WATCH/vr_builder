@@ -218,7 +218,7 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 				osg::Quat rot = _head_matrix.getRotate();
 				osg::Vec3 dir = rot * osg::Vec3(0,0,-1);
 				dir.normalize();
-				_physics->add_projectile(n,head,dir*0.5);
+				_physics->add_projectile(n,head,dir*20);
 				_scene->add(n);
 			}
 		}
