@@ -66,11 +66,19 @@ $(precompiled_header): $(src_dir)/osg.h
 
 # Generate all the object files for all the source files
 $(objects): %.o: $(src_dir)/%.cpp
-	g++ -g -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+ifeq ($(DEBUG),true)
+	g++ -Og -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+else
+	g++ -include $(src_dir)/osg.h $(EXTRA_INCLUDES) -c $< -o $@
+endif
 
 # Link the application together
 $(application): $(objects)
-	g++ -g $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+ifeq ($(DEBUG),true)
+	g++ -Og $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+else
+	g++ $(objects) $(EXTRA_LIBS) $(LIBS) -o $@ 
+endif
 
 # Methods for cleanup
 # - Use clean_all when you need to regenerate the gch for the pre-compiled header

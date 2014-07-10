@@ -20,12 +20,12 @@ JugglerGamepadInput::JugglerGamepadInput() : Input(Input::GAMEPAD)
 	_button[7].init("Button 8");
 	_button[8].init("Button 9");
 	_button[9].init("Button 10");
-	_axis0.init("Left Joystick Horizontal Axis");
-	_axis1.init("Left Joystick Vertical Axis");
+	_axis4.init("Left Joystick Horizontal Axis");
+	_axis5.init("Left Joystick Vertical Axis");
 	_axis2.init("Right Joystick Vertical Axis");
 	_axis3.init("Right Joystick Horizontal Axis");
-	_axis4.init("DirectionPad Horizontal Axis");
-	_axis5.init("DirectionPad Vertical Axis");
+	_axis0.init("DirectionPad Horizontal Axis");
+	_axis1.init("DirectionPad Vertical Axis");
 
 	wantCursor = true;
 }
@@ -65,7 +65,8 @@ void JugglerGamepadInput::_updateJugglerInput()
 
 	// The gamepad provides 0.0 - 1.0, this makes the origin 0.0 instead of 0.5
 	axis0 -= 0.5; axis1 -= 0.5; axis2 -= 0.5; axis3 -= 0.5; axis4 -= 0.5; axis5 -= 0.5;
-
+	
+	//std::cout<<axis0<<" "<<axis1<<" "<<axis2<<" "<<axis3<<" "<<axis4<<" "<<axis5<<" "<<std::endl;
 	// If user pressing joysticks, create nav command
 	if (axis0 != 0.0 || axis1 != 0.0 || axis2 != 0.0 || axis3 != 0.0)
 	{
