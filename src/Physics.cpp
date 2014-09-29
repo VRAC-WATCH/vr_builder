@@ -16,7 +16,7 @@ btDynamicsWorld* initPhysics()
 
 	btVector3 worldAabbMin( -10000, -10000, -10000 );
 	btVector3 worldAabbMax( 10000, 10000, 10000 );
-	btBroadphaseInterface * inter = new btAxisSweep3( worldAabbMin, worldAabbMax, 1000 );
+	btBroadphaseInterface * inter = new btAxisSweep3( worldAabbMin, worldAabbMax);
 
 	btDynamicsWorld * dynamicsWorld = new btDiscreteDynamicsWorld( dispatcher, inter, solver, collisionConfiguration );
 
