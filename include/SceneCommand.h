@@ -36,6 +36,9 @@ public:
 
 class Add_Block: public SceneCommand{
 public:
+	Add_Block() { 
+		color = osg::Vec4(0.5, 0.5, 0.5, 1.0); 
+	}
 	const char* CommandType(){ return "ADD_BLOCK"; }
 	osg::Vec4		color;
 	std::string		textureFileName;
