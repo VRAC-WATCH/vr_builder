@@ -1,0 +1,5 @@
+build/isense.log
+build/nodeid
+build/state
+build/vrBuilderApp
+*.o
