@@ -3,7 +3,6 @@
 
 // Local headers
 #include "JugglerGamepadInput.h"
-#include "SceneCommand.h"
 
 JugglerGamepadInput::JugglerGamepadInput() : Input(Input::GAMEPAD)
 {
@@ -20,12 +19,12 @@ JugglerGamepadInput::JugglerGamepadInput() : Input(Input::GAMEPAD)
 	_button[7].init("Button 8");
 	_button[8].init("Button 9");
 	_button[9].init("Button 10");
-	_axis4.init("Left Joystick Horizontal Axis");
-	_axis5.init("Left Joystick Vertical Axis");
+	_axis0.init("Left Joystick Horizontal Axis");
+	_axis1.init("Left Joystick Vertical Axis");
 	_axis2.init("Right Joystick Vertical Axis");
 	_axis3.init("Right Joystick Horizontal Axis");
-	_axis0.init("DirectionPad Horizontal Axis");
-	_axis1.init("DirectionPad Vertical Axis");
+	_axis4.init("DirectionPad Horizontal Axis");
+	_axis5.init("DirectionPad Vertical Axis");
 
 	wantCursor = true;
 }
@@ -139,7 +138,7 @@ void JugglerGamepadInput::_updateJugglerInput()
 	// blocks very quickly to the scene hence we don't check button switch state
 	if (_button[BLOCK_ADD]->getData() == gadget::Digital::ON)
 	{
-		Add_Block* add_block = new Add_Block;
+		Add_Block* add_block = new Add_Block;		
 		//add_block->textureFileName = "../resources/Metalic_texture.bmp";
 		_sceneCommandList.push_back(add_block);
 	}
