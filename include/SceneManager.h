@@ -40,7 +40,12 @@ public:
     
 	/** Clears out all visuals in the scene. */
 	void clearScene();
-
+	
+	/** 
+	 * Computes an intersection of a ray cast from the matrix
+	 * to the scene geometry.
+	 */ 
+	bool computeBoxIntersection(osg::Matrix mat, osg::Vec3 &intersection);
 	/** 
 	 * Computes an intersection of a ray cast from the matrix
 	 * to the grid plane.

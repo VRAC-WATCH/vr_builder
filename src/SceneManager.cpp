@@ -6,6 +6,10 @@
 //
 //
 
+// OSG headers
+#include <osgUtil/LineSegmentIntersector>
+#include <osgUtil/IntersectVisitor>
+
 // Local headers
 #include "Scene.h"
 #include "SceneManager.h"
@@ -73,6 +77,38 @@ void SceneManager::clearScene()
 	}
 	_grid->reset();
 	_physics->clearBoxes();
+}
+
+bool SceneManager::computeBoxIntersection(osg::Matrix mat, osg::Vec3 &intersection)
+{
+	// Get the direction pointing
+    osg::Vec3 direction(mat.ptr()[8], mat.ptr()[9], mat.ptr()[10]);
+    
+    // Grab the position
+    osg::Vec3d start_pos(mat.ptr()[12], mat.ptr()[13],mat.ptr()[14]);
+
+    // Approximate the end position using the direction pointing
+	float grid_world_size = grid_size * grid_block_size;
+    float line_length = grid_world_size * 10.0;
+    osg::Vec3d end_pos = start_pos + direction * -line_length;
+
+	// Build an intersector for our geometry
+	osg::ref_ptr<osg::LineSegment> intersector = new osg::LineSegment(start_pos, end_pos);
+	osgUtil::IntersectVisitor iv;
+	iv.addLineSegment(intersector);
+	_scene->modelMatrix()->accept(iv);
+
+	// Grab the first intersection if there are any found
+	osgUtil::IntersectVisitor::HitList intersections = iv.getHitList(intersector);
+	if (!intersections.empty()) {		
+		intersection = intersections.front().getWorldIntersectPoint();
+		
+		// Add a half block to make sure we select the block we intersect with, not the one in front
+		intersection += direction * -(grid_block_size / 2.0);
+		return true;
+	}
+
+	return false;
 }
 
 bool SceneManager::computeGridIntersection(osg::Matrix mat, osg::Vec3 &intersection)
@@ -188,7 +224,7 @@ void SceneManager::update(double t,std::vector<SceneCommand*> &commands )
 			{
 				// Set the position of the cursor using the intersection point
 				osg::Vec3 intersection_point;
-				bool did_intersect = computeGridIntersection(_wandMatrix, intersection_point);
+				bool did_intersect = computeBoxIntersection(_wandMatrix, intersection_point);
 				if (did_intersect)
 				{
 					osg::Vec3 grid_point = _grid->computeNearestGridPoint(intersection_point);
