@@ -19,8 +19,61 @@ osg::Transform* osgBox( osg::Vec3 blocksize, osg::Vec4 color = osg::Vec4( 1.0, 1
     osg::Geode* geode = new osg::Geode();
     geode->addDrawable( shape );
 
+	// Build the border
+	osg::ref_ptr<osg::Geode> border_geode(new osg::Geode);
+	osg::ref_ptr<osg::Geometry> border_geom(new osg::Geometry);
+	osg::ref_ptr<osg::Vec3Array> border_verts(new osg::Vec3Array);
+
+	// Bottom
+    border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0) );
+    border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0) );
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0) );
+    border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0));
+    border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0));
+
+	// Top
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+    border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0) );
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0) );
+    border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0));
+    border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+
+	// Sides
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0) );
+	border_verts->push_back( osg::Vec3(-blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0) );
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, -blocksize.y()/2.0, -blocksize.z()/2.0));
+	border_verts->push_back( osg::Vec3(blocksize.x()/2.0, blocksize.y()/2.0, -blocksize.z()/2.0));
+
+	// Attach to geometry
+	osg::ref_ptr<osg::Vec4Array> color_array = new osg::Vec4Array;
+	color_array->push_back(osg::Vec4(0.5,0.5,0.5,1.0));
+	border_geom->setVertexArray(border_verts.get());
+	border_geom->setColorArray(color_array.get());
+	border_geom->setColorBinding(osg::Geometry::BIND_OVERALL);
+	border_geom->addPrimitiveSet(new osg::DrawArrays(GL_LINES,0,24));
+	border_geode->addDrawable(border_geom);
+
+	// StateSet
+	osg::StateSet* border_ss = border_geode->getOrCreateStateSet();
+	osg::ref_ptr<osg::LineWidth> line_width(new osg::LineWidth());
+	line_width->setWidth(1.0f);
+	border_ss->setAttributeAndModes(line_width,osg::StateAttribute::ON);
+	border_ss->setMode(GL_LINE_SMOOTH, osg::StateAttribute::ON);
+	border_ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+
     osg::MatrixTransform* mt = new osg::MatrixTransform();
-    mt->addChild( geode );
+    mt->addChild(geode);
+	mt->addChild(border_geode);
 
     return( mt );
 }
@@ -75,9 +128,6 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 	{
 		osg::ref_ptr<osg::StateSet> ss = node->getOrCreateStateSet();
 		ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
-		osg::ref_ptr<osg::Depth> depth = new osg::Depth;
-		depth->setWriteMask(false);
-		ss->setAttributeAndModes(depth, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
 		ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
 		ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 	}
@@ -93,16 +143,13 @@ osg::Node* Builder::createBlock(Add_Block sc){
 osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int _gridsize, float _gridblocksize)
 {
 	float ground_size = (_gridsize+0.5) * _gridblocksize;
-    osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size), osg::Vec4(1,1,1,0.5));
+    osg::Transform* ground = osgBox(osg::Vec3(ground_size, .05, ground_size), osg::Vec4(1,1,1,0.7));
 
 	// Make the ground transparent
-	osg::ref_ptr<osg::StateSet> ss = ground->getOrCreateStateSet();
-	ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
-	osg::ref_ptr<osg::Depth> depth = new osg::Depth;
-	depth->setWriteMask(false);
-	ss->setAttributeAndModes(depth, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
-	ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-	ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+	osg::ref_ptr<osg::StateSet> ground_ss = ground->getOrCreateStateSet();
+	ground_ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+	ground_ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+	ground_ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 
 	//Draw Grid lines
 	osg::ref_ptr<osg::Vec3Array> points = new osg::Vec3Array;
@@ -134,11 +181,6 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 	lines->setVertexArray(points); 
 	lines->setColorArray(color); 
 	lines->setColorBinding(osg::Geometry::BIND_OVERALL);
-
-	osg::Vec3Array* normals = new osg::Vec3Array;
-	normals->push_back(osg::Vec3(0.0f,1.0f,0.0f));
-	lines->setNormalArray(normals);
-	lines->setNormalBinding(osg::Geometry::BIND_OVERALL);
 
 	osg::ref_ptr<osg::Geode> geode = new osg::Geode;
 	geode->addDrawable(lines);
