@@ -12,7 +12,7 @@
 osg::Transform* osgBox( osg::Vec3 blocksize, osg::Vec4 color = osg::Vec4( 1.0, 1.0, 1.0, 1.0) )
 {
 	osg::Box* box = new osg::Box();
-    box->setHalfLengths( blocksize/2 );	
+    box->setHalfLengths( blocksize/2.0 );	
 
     osg::ShapeDrawable* shape = new osg::ShapeDrawable( box );
     shape->setColor( color );
