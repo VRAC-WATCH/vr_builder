@@ -76,7 +76,6 @@ void JugglerWandInput::_updateJugglerInput()
 	{
 		std::cout << "add block" << std::endl;
 		Add_Block* add_block = new Add_Block;
-		//add_block->textureFileName = "../resources/Metalic_texture.bmp";
 		_sceneCommandList.push_back(add_block);
 	}
 
