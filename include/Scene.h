@@ -67,6 +67,9 @@ public:
 	/** Mark the beginning of the physics mode so that we can remove any stray projectiles*/
 	void physicsmode();
 
+	/** Accessor for the model matrix. */
+	inline osg::ref_ptr<osg::MatrixTransform> modelMatrix() { return _model_matrix; }
+
 	/* Get the root of the scenegraph*/
 	osg::Group* getRoot(){return _root;}
 
