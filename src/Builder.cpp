@@ -56,7 +56,7 @@ osg::Transform* osgBox( osg::Vec3 blocksize, osg::Vec4 color = osg::Vec4( 1.0, 1
 
 	// Attach to geometry
 	osg::ref_ptr<osg::Vec4Array> color_array = new osg::Vec4Array;
-	color_array->push_back(osg::Vec4(0.5,0.5,0.5,1.0));
+	color_array->push_back(osg::Vec4(0.3,0.3,0.3,1.0));
 	border_geom->setVertexArray(border_verts.get());
 	border_geom->setColorArray(color_array.get());
 	border_geom->setColorBinding(osg::Geometry::BIND_OVERALL);
@@ -74,6 +74,12 @@ osg::Transform* osgBox( osg::Vec3 blocksize, osg::Vec4 color = osg::Vec4( 1.0, 1
     osg::MatrixTransform* mt = new osg::MatrixTransform();
     mt->addChild(geode);
 	mt->addChild(border_geode);
+	
+	// Add support for transparency
+	osg::ref_ptr<osg::StateSet> ss = mt->getOrCreateStateSet();
+	//ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+	ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+	ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
 
     return( mt );
 }
@@ -122,15 +128,6 @@ osg::MatrixTransform* Builder::makeBlock(Add_Block sc)
 	}
 	setColor(node,sc.color);	
 	setTexture(node,sc.textureFileName);
-	
-	// If we had transparency, set its stateset to allow it
-	if (sc.color[3] < 1.0)
-	{
-		osg::ref_ptr<osg::StateSet> ss = node->getOrCreateStateSet();
-		ss->setMode(GL_BLEND, osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
-		ss->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-		ss->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
-	}
 
 	root->addChild( node );
 	return( root );
@@ -186,6 +183,12 @@ osg::Node* Builder::createFloor( float w, float h, const osg::Vec3& center, int 
 	geode->addDrawable(lines);
 
 	ground->addChild(geode);
+
+	osg::MatrixTransform* mt = ground->asMatrixTransform();
+	osg::Matrix mat;
+	mat.setTrans(0.0,-20.0, 0.0);
+	mt->setMatrix(mat);
+	//mt->setPosition();
 
     return( ground );
 }
