@@ -5,3 +5,4 @@ build/vrBuilderApp
 
 *.gch
 *.o
+build/
